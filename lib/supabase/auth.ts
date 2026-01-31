@@ -2,126 +2,173 @@
 
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { authSchema } from "@/lib/validations/auth";
+import { authSchema, signUpSchema } from "@/lib/validations/auth";
 
 export type AuthState = {
-    error?: string;
-    success?: string;
-    fieldErrors?: {
-        email?: string[];
-        password?: string[];
-    };
+	error?: string;
+	success?: string;
+	fieldErrors?: {
+		name?: string[];
+		email?: string[];
+		password?: string[];
+	};
 };
 
-export async function signUp(_prevState: AuthState, formData: FormData): Promise<AuthState> {
-    const rawData = {
-        email: formData.get("email"),
-        password: formData.get("password"),
-    };
+export async function signUp(
+	_prevState: AuthState,
+	formData: FormData,
+): Promise<AuthState> {
+	const rawData = {
+		name: formData.get("name"),
+		email: formData.get("email"),
+		password: formData.get("password"),
+	};
 
-    const result = authSchema.safeParse(rawData);
+	const result = signUpSchema.safeParse(rawData);
 
-    if (!result.success) {
-        return { fieldErrors: result.error.flatten().fieldErrors };
-    }
+	if (!result.success) {
+		return { fieldErrors: result.error.flatten().fieldErrors };
+	}
 
-    const supabase = await createClient();
-    const { data, error } = await supabase.auth.signUp({
-        email: result.data.email,
-        password: result.data.password,
-    });
+	const supabase = await createClient();
+	const { data, error } = await supabase.auth.signUp({
+		email: result.data.email,
+		password: result.data.password,
+		options: {
+			data: {
+				name: result.data.name,
+			},
+		},
+	});
 
-    if (error) {
-        return { error: error.message };
-    }
+	if (error) {
+		return { error: error.message };
+	}
 
-    // If email confirmation is required, user won't have a session
-    if (data.user && !data.session) {
-        return { success: "Check your email for the confirmation link" };
-    }
+	// If email confirmation is required, user won't have a session
+	if (data.user && !data.session) {
+		return { success: "Check your email for the confirmation link" };
+	}
 
-    redirect("/dashboard");
+	redirect("/dashboard");
 }
 
-export async function signIn(_prevState: AuthState, formData: FormData): Promise<AuthState> {
-    const rawData = {
-        email: formData.get("email"),
-        password: formData.get("password"),
-    };
+export async function signIn(
+	_prevState: AuthState,
+	formData: FormData,
+): Promise<AuthState> {
+	const rawData = {
+		email: formData.get("email"),
+		password: formData.get("password"),
+	};
 
-    const result = authSchema.safeParse(rawData);
+	const result = authSchema.safeParse(rawData);
 
-    if (!result.success) {
-        return { fieldErrors: result.error.flatten().fieldErrors };
-    }
+	if (!result.success) {
+		return { fieldErrors: result.error.flatten().fieldErrors };
+	}
 
-    const supabase = await createClient();
-    const { error } = await supabase.auth.signInWithPassword({
-        email: result.data.email,
-        password: result.data.password,
-    });
+	const supabase = await createClient();
+	const { error } = await supabase.auth.signInWithPassword({
+		email: result.data.email,
+		password: result.data.password,
+	});
 
-    if (error) {
-        return { error: error.message };
-    }
+	if (error) {
+		return { error: error.message };
+	}
 
-    redirect("/dashboard");
+	redirect("/dashboard");
 }
 
 export async function signOut() {
-    const supabase = await createClient();
-    await supabase.auth.signOut();
-    redirect("/login");
+	const supabase = await createClient();
+	await supabase.auth.signOut();
+	redirect("/login");
 }
 
 export async function getUser() {
-    const supabase = await createClient();
-    const { data: { user } } = await supabase.auth.getUser();
-    return user;
+	const supabase = await createClient();
+	const {
+		data: { user },
+	} = await supabase.auth.getUser();
+	return user;
 }
 
-export async function forgotPassword(_prevState: AuthState, formData: FormData): Promise<AuthState> {
-    const email = formData.get("email") as string;
+export async function forgotPassword(
+	_prevState: AuthState,
+	formData: FormData,
+): Promise<AuthState> {
+	const email = formData.get("email") as string;
 
-    if (!email) {
-        return { error: "Email is required" };
-    }
+	if (!email) {
+		return { error: "Email is required" };
+	}
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        return { error: "Please enter a valid email address" };
-    }
+	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+	if (!emailRegex.test(email)) {
+		return { error: "Please enter a valid email address" };
+	}
 
-    const supabase = await createClient();
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/api/auth/callback?type=recovery`,
-    });
+	const supabase = await createClient();
+	const { error } = await supabase.auth.resetPasswordForEmail(email, {
+		redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/api/auth/callback?type=recovery`,
+	});
 
-    if (error) {
-        return { error: error.message };
-    }
+	if (error) {
+		return { error: error.message };
+	}
 
-    return { success: "Check your email for the password reset link" };
+	return { success: "Check your email for the password reset link" };
 }
 
-export async function resetPassword(_prevState: AuthState, formData: FormData): Promise<AuthState> {
-    const password = formData.get("password") as string;
-    const confirmPassword = formData.get("confirmPassword") as string;
+export async function resetPassword(
+	_prevState: AuthState,
+	formData: FormData,
+): Promise<AuthState> {
+	const password = formData.get("password") as string;
+	const confirmPassword = formData.get("confirmPassword") as string;
 
-    if (!password || password.length < 6) {
-        return { error: "Password must be at least 6 characters" };
-    }
+	if (!password || password.length < 6) {
+		return { error: "Password must be at least 6 characters" };
+	}
 
-    if (password !== confirmPassword) {
-        return { error: "Passwords do not match" };
-    }
+	if (password !== confirmPassword) {
+		return { error: "Passwords do not match" };
+	}
 
-    const supabase = await createClient();
-    const { error } = await supabase.auth.updateUser({ password });
+	const supabase = await createClient();
+	const { error } = await supabase.auth.updateUser({ password });
 
-    if (error) {
-        return { error: error.message };
-    }
+	if (error) {
+		return { error: error.message };
+	}
 
-    redirect("/login");
+	redirect("/login");
+}
+
+export async function updateUserName(
+	_prevState: AuthState,
+	formData: FormData,
+): Promise<AuthState> {
+	const name = formData.get("name") as string;
+
+	if (!name || name.trim().length < 2) {
+		return { error: "Name must be at least 2 characters" };
+	}
+
+	if (name.trim().length > 50) {
+		return { error: "Name must be less than 50 characters" };
+	}
+
+	const supabase = await createClient();
+	const { error } = await supabase.auth.updateUser({
+		data: { name: name.trim() },
+	});
+
+	if (error) {
+		return { error: error.message };
+	}
+
+	return { success: "Name updated successfully" };
 }

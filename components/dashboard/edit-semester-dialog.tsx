@@ -57,14 +57,14 @@ export function EditSemesterDialog({
 
 	return (
 		<Dialog open={open} onOpenChange={onOpenChange}>
-			<DialogContent className="bg-[#1a1a1a] border-[#2a2a2a] sm:max-w-[425px] rounded-2xl">
+			<DialogContent className="bg-white border-gray-200 sm:max-w-[425px] rounded-2xl">
 				<DialogHeader>
 					<div className="flex items-center gap-3">
-						<div className="h-10 w-10 rounded-xl bg-[#252525] border border-[#333333] flex items-center justify-center">
-							<Pencil className="h-5 w-5 text-gray-400" />
+						<div className="h-10 w-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center">
+							<Pencil className="h-5 w-5 text-blue-500" />
 						</div>
 						<div>
-							<DialogTitle className="text-xl font-semibold text-white">
+							<DialogTitle className="text-xl font-semibold text-gray-900">
 								Edit Semester
 							</DialogTitle>
 							<DialogDescription className="text-gray-500 text-sm">
@@ -75,14 +75,14 @@ export function EditSemesterDialog({
 				</DialogHeader>
 				<form onSubmit={handleSubmit} className="space-y-5 pt-4">
 					<Field>
-						<FieldLabel className="text-gray-400 text-sm font-medium mb-2 block">
+						<FieldLabel className="text-gray-600 text-sm font-medium mb-2 block">
 							Semester Name
 						</FieldLabel>
 						<Input
 							placeholder="e.g. Semester 1, Fall 2024"
 							value={name}
 							onChange={(e) => setName(e.target.value)}
-							className="bg-[#252525] border-[#333333] h-11 rounded-xl text-white placeholder:text-gray-600 focus:border-orange-500/50 focus:ring-2 focus:ring-orange-500/20 transition-all"
+							className="bg-gray-50 border-gray-200 h-11 rounded-xl text-gray-900 placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
 							disabled={loading}
 						/>
 						<AnimatePresence>
@@ -92,7 +92,7 @@ export function EditSemesterDialog({
 									animate={{ opacity: 1, height: "auto" }}
 									exit={{ opacity: 0, height: 0 }}
 								>
-									<FieldError className="mt-2 text-red-400 text-sm">
+									<FieldError className="mt-2 text-red-500 text-sm">
 										{error}
 									</FieldError>
 								</motion.div>
@@ -105,14 +105,14 @@ export function EditSemesterDialog({
 							variant="ghost"
 							onClick={() => onOpenChange(false)}
 							disabled={loading}
-							className="text-gray-400 hover:text-white hover:bg-[#252525] h-11 px-5"
+							className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 h-11 px-5 rounded-xl"
 						>
 							Cancel
 						</Button>
 						<Button
 							type="submit"
 							disabled={loading || !name.trim() || name === currentName}
-							className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-400 hover:to-red-400 text-white font-medium h-11 px-6 rounded-xl transition-all disabled:opacity-50"
+							className="bg-blue-500 hover:bg-blue-600 text-white font-medium h-11 px-6 rounded-xl transition-all disabled:opacity-50"
 						>
 							{loading ? "Saving..." : "Save Changes"}
 						</Button>

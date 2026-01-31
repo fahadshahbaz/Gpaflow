@@ -46,14 +46,14 @@ export function AddSemesterDialog() {
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
-				<Button className="bg-orange-500 hover:bg-orange-600 text-white font-medium px-4 h-9 rounded-lg">
+				<Button className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-4 h-9 rounded-xl">
 					<Plus className="mr-1.5 h-4 w-4" />
 					New Semester
 				</Button>
 			</DialogTrigger>
-			<DialogContent className="bg-[#141414] border-[#262626] sm:max-w-[400px] rounded-xl">
+			<DialogContent className="bg-white border-gray-200 sm:max-w-[420px] rounded-2xl shadow-xl">
 				<DialogHeader>
-					<DialogTitle className="text-lg font-semibold text-white">
+					<DialogTitle className="text-lg font-semibold text-gray-900">
 						Create Semester
 					</DialogTitle>
 					<DialogDescription className="text-gray-500 text-sm">
@@ -62,14 +62,14 @@ export function AddSemesterDialog() {
 				</DialogHeader>
 				<form onSubmit={handleSubmit} className="space-y-4 pt-2">
 					<Field>
-						<FieldLabel className="text-gray-400 text-sm mb-1.5 block">
+						<FieldLabel className="text-gray-600 text-sm mb-2 block font-medium">
 							Semester Name
 						</FieldLabel>
 						<Input
 							placeholder="e.g. Semester 1, Fall 2024"
 							value={name}
 							onChange={(e) => setName(e.target.value)}
-							className="bg-[#1a1a1a] border-[#2a2a2a] h-10 rounded-lg text-white placeholder:text-gray-600 focus:border-orange-500/50 focus:ring-1 focus:ring-orange-500/20"
+							className="bg-gray-50 border-gray-200 h-11 rounded-xl text-gray-900 placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
 							disabled={loading}
 						/>
 						<AnimatePresence>
@@ -79,7 +79,7 @@ export function AddSemesterDialog() {
 									animate={{ opacity: 1, height: "auto" }}
 									exit={{ opacity: 0, height: 0 }}
 								>
-									<FieldError className="mt-1.5 text-red-400 text-sm">
+									<FieldError className="mt-2 text-red-500 text-sm">
 										{error}
 									</FieldError>
 								</motion.div>
@@ -92,22 +92,22 @@ export function AddSemesterDialog() {
 							variant="ghost"
 							onClick={() => setOpen(false)}
 							disabled={loading}
-							className="text-gray-400 hover:text-white hover:bg-[#1a1a1a] h-9 px-4"
+							className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 h-10 px-4 rounded-xl"
 						>
 							Cancel
 						</Button>
 						<Button
 							type="submit"
 							disabled={loading || !name.trim()}
-							className="bg-orange-500 hover:bg-orange-600 text-white font-medium h-9 px-4 rounded-lg disabled:opacity-50"
+							className="bg-blue-500 hover:bg-blue-600 text-white font-medium h-10 px-5 rounded-xl disabled:opacity-50"
 						>
 							{loading ? (
 								<span className="flex items-center gap-2">
-									<span className="h-3.5 w-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+									<span className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
 									Creating...
 								</span>
 							) : (
-								"Create"
+								"Create Semester"
 							)}
 						</Button>
 					</DialogFooter>

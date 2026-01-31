@@ -36,10 +36,11 @@ const navItems = [
 ];
 
 interface AppSidebarProps {
+	userName?: string;
 	userEmail?: string;
 }
 
-export function AppSidebar({ userEmail }: AppSidebarProps) {
+export function AppSidebar({ userName, userEmail }: AppSidebarProps) {
 	const pathname = usePathname();
 
 	return (
@@ -141,11 +142,12 @@ export function AppSidebar({ userEmail }: AppSidebarProps) {
 				<div className="rounded-2xl bg-[#1a1a1a] border border-[#2a2a2a] p-4">
 					<div className="flex items-center gap-3 mb-4">
 						<div className="h-9 w-9 rounded-full bg-gradient-to-br from-gray-700 to-gray-600 flex items-center justify-center text-xs font-bold text-white">
-							{userEmail?.charAt(0).toUpperCase()}
+							{userName?.charAt(0).toUpperCase() ||
+								userEmail?.charAt(0).toUpperCase()}
 						</div>
 						<div className="flex-1 min-w-0">
 							<p className="text-xs font-semibold text-white truncate">
-								{userEmail?.split("@")[0]}
+								{userName || userEmail?.split("@")[0]}
 							</p>
 							<p className="text-[10px] text-gray-500 truncate">{userEmail}</p>
 						</div>

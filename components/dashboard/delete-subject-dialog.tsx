@@ -48,9 +48,9 @@ export function DeleteSubjectDialog({
 
 	return (
 		<AlertDialog open={open} onOpenChange={onOpenChange}>
-			<AlertDialogContent className="bg-[#1a1a1a] border-[#2a2a2a]">
+			<AlertDialogContent className="bg-white border-gray-200 rounded-2xl">
 				<AlertDialogHeader className="space-y-1">
-					<AlertDialogTitle className="text-lg font-semibold text-white">
+					<AlertDialogTitle className="text-lg font-semibold text-gray-900">
 						Delete Subject
 					</AlertDialogTitle>
 					<AlertDialogDescription className="text-gray-500 text-sm">
@@ -59,11 +59,11 @@ export function DeleteSubjectDialog({
 				</AlertDialogHeader>
 
 				<div className="py-3">
-					<p className="text-gray-300 text-sm">
+					<p className="text-gray-600 text-sm">
 						Are you sure you want to delete{" "}
-						<span className="font-medium text-white">{subjectName}</span>? This
-						will permanently remove this subject and recalculate your semester
-						GPA.
+						<span className="font-medium text-gray-900">{subjectName}</span>?
+						This will permanently remove this subject and recalculate your
+						semester GPA.
 					</p>
 
 					<AnimatePresence>
@@ -72,7 +72,7 @@ export function DeleteSubjectDialog({
 								initial={{ opacity: 0, height: 0 }}
 								animate={{ opacity: 1, height: "auto" }}
 								exit={{ opacity: 0, height: 0 }}
-								className="mt-3 text-red-400 text-sm"
+								className="mt-3 text-red-500 text-sm"
 							>
 								{error}
 							</motion.p>
@@ -83,14 +83,14 @@ export function DeleteSubjectDialog({
 				<AlertDialogFooter className="gap-2">
 					<AlertDialogCancel
 						disabled={loading}
-						className="bg-transparent border-[#333333] text-gray-400 hover:text-white hover:bg-[#252525] h-9 px-4"
+						className="bg-white border-gray-200 text-gray-600 hover:text-gray-900 hover:bg-gray-100 h-9 px-4 rounded-xl"
 					>
 						Cancel
 					</AlertDialogCancel>
 					<AlertDialogAction
 						onClick={handleDelete}
 						disabled={loading}
-						className="bg-red-500 hover:bg-red-600 text-white font-medium h-9 px-4 disabled:opacity-50"
+						className="bg-red-500 hover:bg-red-600 text-white font-medium h-9 px-4 rounded-xl disabled:opacity-50"
 					>
 						{loading ? (
 							<span className="flex items-center gap-2">

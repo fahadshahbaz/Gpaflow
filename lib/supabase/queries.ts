@@ -4,6 +4,7 @@ import {
 	calculateCGPA,
 	calculateGradePoint,
 	calculateSGPA,
+	getLetterGrade,
 } from "@/lib/grading/numl";
 import { createClient } from "@/lib/supabase/server";
 
@@ -23,6 +24,7 @@ export type Subject = {
 	obtained_marks: number;
 	credit_hours: number;
 	grade_point: number;
+	letter_grade: string;
 };
 
 export async function getSemesters(userId: string): Promise<Semester[]> {
@@ -54,17 +56,18 @@ export async function getSemesters(userId: string): Promise<Semester[]> {
 		const subjectsWithGrades = (semester.subjects || []).map((subject) => ({
 			...subject,
 			grade_point: calculateGradePoint(subject.obtained_marks),
+			letter_grade: getLetterGrade(subject.obtained_marks),
 		}));
 
 		const sgpa = calculateSGPA(
-			subjectsWithGrades.map((s: Subject) => ({
+			subjectsWithGrades.map((s) => ({
 				gradePoint: s.grade_point,
 				creditHours: s.credit_hours,
 			})),
 		);
 
 		const totalCreditHours = subjectsWithGrades.reduce(
-			(sum: number, s: Subject) => sum + s.credit_hours,
+			(sum, s) => sum + s.credit_hours,
 			0,
 		);
 
