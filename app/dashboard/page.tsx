@@ -7,7 +7,6 @@ import { GPATrendChart } from "@/components/dashboard/gpa-trend-chart";
 import { QuickInsights } from "@/components/dashboard/quick-insights";
 import { SemesterList } from "@/components/dashboard/semester-list";
 import { StatsCards } from "@/components/dashboard/stats-cards";
-import { Separator } from "@/components/ui/separator";
 import {
 	SidebarInset,
 	SidebarProvider,
@@ -32,7 +31,6 @@ export default async function DashboardPage() {
 				{/* Top Navigation */}
 				<header className="flex h-16 shrink-0 items-center gap-4 border-b border-[#2a2a2a] bg-[#0f0f0f]/95 backdrop-blur-xl px-6 sticky top-0 z-50">
 					<SidebarTrigger className="-ml-2 text-gray-400 hover:text-white hover:bg-[#1a1a1a]" />
-					<Separator orientation="vertical" className="h-6 bg-[#2a2a2a]" />
 
 					<div className="flex items-center gap-2 text-sm">
 						<span className="text-gray-400">Overview</span>

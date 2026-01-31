@@ -14,74 +14,74 @@ export function GPACircularChart({ cgpa, targetGpa }: GPACircularChartProps) {
 	const strokeDashoffset = circumference - (percentage / 100) * circumference;
 
 	return (
-		<Card className="col-span-12 lg:col-span-4 bg-[#1a1a1a] border-[#2a2a2a] rounded-3xl overflow-hidden">
+		<Card className="col-span-12 lg:col-span-4 bg-[#141414] border-[#262626] rounded-xl">
 			<CardHeader className="pb-2">
 				<div className="flex items-center gap-2">
-					<Target className="h-5 w-5 text-orange-400" />
-					<CardTitle className="text-lg font-semibold text-white">
+					<Target className="h-4 w-4 text-gray-500" />
+					<CardTitle className="text-sm font-medium text-white">
 						Progress
 					</CardTitle>
 				</div>
 			</CardHeader>
-			<CardContent className="flex items-center justify-center py-6">
+			<CardContent className="flex items-center justify-center py-4">
 				<div className="relative">
-					{/* Outer circle */}
-					<svg width="160" height="160" className="transform -rotate-90">
+					<svg
+						width="140"
+						height="140"
+						className="transform -rotate-90"
+						role="img"
+						aria-label={`GPA Progress: ${cgpa.toFixed(2)} of 4.0`}
+					>
+						<title>GPA Progress Chart</title>
 						{/* Background circle */}
 						<circle
-							cx="80"
-							cy="80"
-							r="65"
-							stroke="#2a2a2a"
-							strokeWidth="12"
+							cx="70"
+							cy="70"
+							r="55"
+							stroke="#1a1a1a"
+							strokeWidth="10"
 							fill="none"
 						/>
 						{/* Progress circle */}
 						<circle
-							cx="80"
-							cy="80"
-							r="65"
-							stroke="url(#gradient)"
-							strokeWidth="12"
+							cx="70"
+							cy="70"
+							r="55"
+							stroke="#f97316"
+							strokeWidth="10"
 							fill="none"
 							strokeLinecap="round"
-							strokeDasharray={circumference}
-							strokeDashoffset={strokeDashoffset}
-							className="transition-all duration-1000"
+							strokeDasharray={2 * Math.PI * 55}
+							strokeDashoffset={
+								2 * Math.PI * 55 - (percentage / 100) * 2 * Math.PI * 55
+							}
+							className="transition-all duration-500"
 						/>
-						<defs>
-							<linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-								<stop offset="0%" stopColor="#f97316" />
-								<stop offset="100%" stopColor="#ef4444" />
-							</linearGradient>
-						</defs>
 					</svg>
 
 					{/* Center content */}
 					<div className="absolute inset-0 flex flex-col items-center justify-center">
-						<span className="text-4xl font-bold text-white">
+						<span className="text-3xl font-semibold text-white">
 							{cgpa.toFixed(2)}
 						</span>
-						<span className="text-xs text-gray-500 mt-1">
-							of {targetGpa} target
-						</span>
+						<span className="text-xs text-gray-500">of 4.0</span>
 					</div>
 				</div>
 			</CardContent>
 
 			{/* Stats below */}
-			<div className="px-6 pb-6 grid grid-cols-2 gap-4">
-				<div className="text-center p-3 rounded-2xl bg-[#252525]">
-					<p className="text-2xl font-bold text-white">
+			<div className="px-4 pb-4 grid grid-cols-2 gap-3">
+				<div className="text-center p-2.5 rounded-lg bg-[#1a1a1a]">
+					<p className="text-xl font-semibold text-white">
 						{((cgpa / targetGpa) * 100).toFixed(0)}%
 					</p>
-					<p className="text-xs text-gray-500 mt-1">To Target</p>
+					<p className="text-xs text-gray-500">To Target</p>
 				</div>
-				<div className="text-center p-3 rounded-2xl bg-[#252525]">
-					<p className="text-2xl font-bold text-orange-400">
-						{(targetGpa - cgpa).toFixed(2)}
+				<div className="text-center p-2.5 rounded-lg bg-[#1a1a1a]">
+					<p className="text-xl font-semibold text-orange-500">
+						{Math.max(targetGpa - cgpa, 0).toFixed(2)}
 					</p>
-					<p className="text-xs text-gray-500 mt-1">Points Needed</p>
+					<p className="text-xs text-gray-500">Points Needed</p>
 				</div>
 			</div>
 		</Card>

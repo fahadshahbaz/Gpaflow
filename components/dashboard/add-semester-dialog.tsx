@@ -46,37 +46,30 @@ export function AddSemesterDialog() {
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
-				<Button className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-400 hover:to-red-400 text-white font-medium px-5 h-11 rounded-xl shadow-lg shadow-orange-500/20 transition-all duration-300 hover:shadow-xl hover:shadow-orange-500/30 hover:-translate-y-0.5">
-					<Plus className="mr-2 h-4 w-4" />
+				<Button className="bg-orange-500 hover:bg-orange-600 text-white font-medium px-4 h-9 rounded-lg">
+					<Plus className="mr-1.5 h-4 w-4" />
 					New Semester
 				</Button>
 			</DialogTrigger>
-			<DialogContent className="bg-[#1a1a1a] border-[#2a2a2a] sm:max-w-[440px] rounded-2xl shadow-2xl shadow-black/50">
-				<DialogHeader className="space-y-3">
-					<div className="flex items-center gap-3">
-						<div className="h-10 w-10 rounded-xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center">
-							<Plus className="h-5 w-5 text-white" />
-						</div>
-						<div>
-							<DialogTitle className="text-xl font-semibold text-white">
-								Create Semester
-							</DialogTitle>
-							<DialogDescription className="text-gray-500 text-sm">
-								Add a new semester to track your academic progress
-							</DialogDescription>
-						</div>
-					</div>
+			<DialogContent className="bg-[#141414] border-[#262626] sm:max-w-[400px] rounded-xl">
+				<DialogHeader>
+					<DialogTitle className="text-lg font-semibold text-white">
+						Create Semester
+					</DialogTitle>
+					<DialogDescription className="text-gray-500 text-sm">
+						Add a new semester to track your academic progress
+					</DialogDescription>
 				</DialogHeader>
-				<form onSubmit={handleSubmit} className="space-y-6 pt-4">
+				<form onSubmit={handleSubmit} className="space-y-4 pt-2">
 					<Field>
-						<FieldLabel className="text-gray-400 text-sm font-medium mb-2 block">
+						<FieldLabel className="text-gray-400 text-sm mb-1.5 block">
 							Semester Name
 						</FieldLabel>
 						<Input
 							placeholder="e.g. Semester 1, Fall 2024"
 							value={name}
 							onChange={(e) => setName(e.target.value)}
-							className="bg-[#252525] border-[#333333] h-12 rounded-xl text-white placeholder:text-gray-600 focus:border-orange-500/50 focus:ring-2 focus:ring-orange-500/20 transition-all"
+							className="bg-[#1a1a1a] border-[#2a2a2a] h-10 rounded-lg text-white placeholder:text-gray-600 focus:border-orange-500/50 focus:ring-1 focus:ring-orange-500/20"
 							disabled={loading}
 						/>
 						<AnimatePresence>
@@ -86,35 +79,35 @@ export function AddSemesterDialog() {
 									animate={{ opacity: 1, height: "auto" }}
 									exit={{ opacity: 0, height: 0 }}
 								>
-									<FieldError className="mt-2 text-red-400 text-sm">
+									<FieldError className="mt-1.5 text-red-400 text-sm">
 										{error}
 									</FieldError>
 								</motion.div>
 							)}
 						</AnimatePresence>
 					</Field>
-					<DialogFooter className="gap-3">
+					<DialogFooter className="gap-2 pt-2">
 						<Button
 							type="button"
 							variant="ghost"
 							onClick={() => setOpen(false)}
 							disabled={loading}
-							className="text-gray-400 hover:text-white hover:bg-[#252525] h-11 px-5"
+							className="text-gray-400 hover:text-white hover:bg-[#1a1a1a] h-9 px-4"
 						>
 							Cancel
 						</Button>
 						<Button
 							type="submit"
 							disabled={loading || !name.trim()}
-							className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-400 hover:to-red-400 text-white font-medium h-11 px-6 rounded-xl transition-all duration-300 disabled:opacity-50 shadow-lg shadow-orange-500/20"
+							className="bg-orange-500 hover:bg-orange-600 text-white font-medium h-9 px-4 rounded-lg disabled:opacity-50"
 						>
 							{loading ? (
 								<span className="flex items-center gap-2">
-									<span className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+									<span className="h-3.5 w-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
 									Creating...
 								</span>
 							) : (
-								"Create Semester"
+								"Create"
 							)}
 						</Button>
 					</DialogFooter>

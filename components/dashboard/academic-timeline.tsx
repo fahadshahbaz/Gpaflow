@@ -1,7 +1,6 @@
 "use client";
 
-import { Calendar, ChevronRight } from "lucide-react";
-import { motion } from "motion/react";
+import { Calendar } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { Semester } from "@/lib/supabase/queries";
 
@@ -10,7 +9,6 @@ interface AcademicTimelineProps {
 }
 
 export function AcademicTimeline({ semesters }: AcademicTimelineProps) {
-	// Sort semesters by semester_number
 	const sortedSemesters = [...semesters].sort(
 		(a, b) => a.semester_number - b.semester_number,
 	);
@@ -19,35 +17,35 @@ export function AcademicTimeline({ semesters }: AcademicTimelineProps) {
 	const demoSemesters = [
 		{
 			id: "1",
-			name: "Semester 1",
+			name: "S1",
 			sgpa: 3.2,
 			total_credit_hours: 15,
 			semester_number: 1,
 		},
 		{
 			id: "2",
-			name: "Semester 2",
+			name: "S2",
 			sgpa: 3.5,
 			total_credit_hours: 18,
 			semester_number: 2,
 		},
 		{
 			id: "3",
-			name: "Semester 3",
+			name: "S3",
 			sgpa: 3.6,
 			total_credit_hours: 16,
 			semester_number: 3,
 		},
 		{
 			id: "4",
-			name: "Semester 4",
+			name: "S4",
 			sgpa: 3.4,
 			total_credit_hours: 17,
 			semester_number: 4,
 		},
 		{
 			id: "5",
-			name: "Semester 5",
+			name: "S5",
 			sgpa: 3.7,
 			total_credit_hours: 15,
 			semester_number: 5,
@@ -56,72 +54,62 @@ export function AcademicTimeline({ semesters }: AcademicTimelineProps) {
 
 	const displaySemesters =
 		sortedSemesters.length > 0 ? sortedSemesters : demoSemesters;
+	const isDemo = semesters.length === 0;
 
 	return (
-		<Card className="col-span-12 lg:col-span-8 bg-[#1a1a1a] border-[#2a2a2a] rounded-3xl overflow-hidden">
-			<CardHeader className="pb-3 flex flex-row items-center justify-between">
-				<CardTitle className="text-lg font-semibold text-white flex items-center gap-2">
-					<Calendar className="h-5 w-5 text-orange-400" />
-					Academic Timeline
-				</CardTitle>
-				<span className="text-xs text-gray-500">
-					{semesters.length > 0 ? "Your journey" : "Demo preview"}
+		<Card className="col-span-12 lg:col-span-8 bg-[#141414] border-[#262626] rounded-xl">
+			<CardHeader className="pb-2 flex flex-row items-center justify-between">
+				<div className="flex items-center gap-2">
+					<Calendar className="h-4 w-4 text-gray-500" />
+					<CardTitle className="text-sm font-medium text-white">
+						Timeline
+					</CardTitle>
+					{isDemo && (
+						<span className="text-[10px] text-gray-600 bg-[#1a1a1a] px-1.5 py-0.5 rounded">
+							Demo
+						</span>
+					)}
+				</div>
+				<span className="text-xs text-gray-600">
+					{displaySemesters.length} of 8
 				</span>
 			</CardHeader>
 			<CardContent className="pt-2">
 				<div className="relative">
 					{/* Timeline bar */}
-					<div className="absolute top-6 left-0 right-0 h-1 bg-[#2a2a2a] rounded-full" />
+					<div className="absolute top-4 left-0 right-0 h-0.5 bg-[#1a1a1a] rounded-full" />
 
 					{/* Progress indicator */}
 					<div
-						className="absolute top-6 left-0 h-1 bg-gradient-to-r from-orange-500 to-red-500 rounded-full transition-all duration-500"
+						className="absolute top-4 left-0 h-0.5 bg-orange-500 rounded-full transition-all duration-500"
 						style={{ width: `${(displaySemesters.length / 8) * 100}%` }}
 					/>
 
 					{/* Semester dots */}
-					<div className="flex justify-between relative pt-2">
+					<div className="flex justify-between relative pt-1">
 						{displaySemesters.map((semester, index) => (
-							<motion.div
-								key={semester.id}
-								initial={{ opacity: 0, y: 10 }}
-								animate={{ opacity: 1, y: 0 }}
-								transition={{ delay: index * 0.1 }}
-								className="flex flex-col items-center cursor-pointer group"
-							>
-								{/* Dot */}
-								<div className="relative z-10 w-5 h-5 rounded-full bg-[#1a1a1a] border-2 border-orange-500 flex items-center justify-center group-hover:scale-125 transition-transform">
-									<div className="w-2 h-2 rounded-full bg-orange-500" />
-								</div>
-
-								{/* Label */}
-								<div className="mt-3 text-center">
-									<p className="text-xs text-gray-500 group-hover:text-white transition-colors">
-										S{index + 1}
-									</p>
-									<p className="text-sm font-semibold text-white mt-0.5">
+							<div key={semester.id} className="flex flex-col items-center">
+								<div className="w-3 h-3 rounded-full bg-[#141414] border-2 border-orange-500" />
+								<div className="mt-2 text-center">
+									<p className="text-[10px] text-gray-600">S{index + 1}</p>
+									<p className="text-xs font-medium text-white">
 										{semester.sgpa.toFixed(2)}
 									</p>
-									<p className="text-[10px] text-gray-600 mt-0.5">
-										{semester.total_credit_hours} CH
-									</p>
 								</div>
-							</motion.div>
+							</div>
 						))}
 
-						{/* Future semesters (dotted) */}
+						{/* Future semesters */}
 						{Array.from({
 							length: Math.max(0, 8 - displaySemesters.length),
 						}).map((_, i) => (
 							<div
 								key={`future-${i}`}
-								className="flex flex-col items-center opacity-40"
+								className="flex flex-col items-center opacity-30"
 							>
-								<div className="relative z-10 w-5 h-5 rounded-full bg-[#1a1a1a] border-2 border-dashed border-[#3a3a3a] flex items-center justify-center">
-									<div className="w-1.5 h-1.5 rounded-full bg-[#3a3a3a]" />
-								</div>
-								<div className="mt-3 text-center">
-									<p className="text-xs text-gray-600">
+								<div className="w-3 h-3 rounded-full bg-[#141414] border border-dashed border-[#333]" />
+								<div className="mt-2 text-center">
+									<p className="text-[10px] text-gray-600">
 										S{displaySemesters.length + i + 1}
 									</p>
 								</div>
@@ -130,43 +118,32 @@ export function AcademicTimeline({ semesters }: AcademicTimelineProps) {
 					</div>
 				</div>
 
-				{/* Timeline details */}
-				<div className="mt-8 pt-4 border-t border-[#2a2a2a] flex items-center justify-between">
-					<div className="flex items-center gap-6">
-						<div>
-							<p className="text-xs text-gray-500">Completed</p>
-							<p className="text-lg font-semibold text-white">
-								{displaySemesters.length} Semesters
-							</p>
-						</div>
-						<div className="h-8 w-px bg-[#2a2a2a]" />
-						<div>
-							<p className="text-xs text-gray-500">Credits</p>
-							<p className="text-lg font-semibold text-white">
-								{displaySemesters.reduce(
-									(sum, s) => sum + s.total_credit_hours,
-									0,
-								)}
-							</p>
-						</div>
-						<div className="h-8 w-px bg-[#2a2a2a]" />
-						<div>
-							<p className="text-xs text-gray-500">Average</p>
-							<p className="text-lg font-semibold text-orange-400">
-								{(
-									displaySemesters.reduce((sum, s) => sum + s.sgpa, 0) /
-									displaySemesters.length
-								).toFixed(2)}
-							</p>
-						</div>
+				{/* Stats */}
+				<div className="mt-6 pt-3 border-t border-[#1f1f1f] flex items-center gap-6 text-xs">
+					<div>
+						<p className="text-gray-600">Completed</p>
+						<p className="text-white font-medium">
+							{displaySemesters.length} semesters
+						</p>
 					</div>
-
-					<button
-						type="button"
-						className="flex items-center gap-1 text-sm text-gray-500 hover:text-orange-400 transition-colors"
-					>
-						View all <ChevronRight className="h-4 w-4" />
-					</button>
+					<div>
+						<p className="text-gray-600">Credits</p>
+						<p className="text-white font-medium">
+							{displaySemesters.reduce(
+								(sum, s) => sum + s.total_credit_hours,
+								0,
+							)}
+						</p>
+					</div>
+					<div>
+						<p className="text-gray-600">Average</p>
+						<p className="text-orange-500 font-medium">
+							{(
+								displaySemesters.reduce((sum, s) => sum + s.sgpa, 0) /
+								displaySemesters.length
+							).toFixed(2)}
+						</p>
+					</div>
 				</div>
 			</CardContent>
 		</Card>

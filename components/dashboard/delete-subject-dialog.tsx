@@ -1,6 +1,5 @@
 "use client";
 
-import { Trash2 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import {
@@ -49,29 +48,22 @@ export function DeleteSubjectDialog({
 
 	return (
 		<AlertDialog open={open} onOpenChange={onOpenChange}>
-			<AlertDialogContent className="bg-[#1a1a1a] border-[#2a2a2a] rounded-2xl shadow-2xl shadow-black/50">
-				<AlertDialogHeader className="space-y-3">
-					<div className="flex items-center gap-3">
-						<div className="h-10 w-10 rounded-xl bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center">
-							<Trash2 className="h-5 w-5 text-white" />
-						</div>
-						<div>
-							<AlertDialogTitle className="text-xl font-semibold text-white">
-								Delete Subject
-							</AlertDialogTitle>
-							<AlertDialogDescription className="text-gray-500 text-sm">
-								This action cannot be undone
-							</AlertDialogDescription>
-						</div>
-					</div>
+			<AlertDialogContent className="bg-[#1a1a1a] border-[#2a2a2a]">
+				<AlertDialogHeader className="space-y-1">
+					<AlertDialogTitle className="text-lg font-semibold text-white">
+						Delete Subject
+					</AlertDialogTitle>
+					<AlertDialogDescription className="text-gray-500 text-sm">
+						This action cannot be undone
+					</AlertDialogDescription>
 				</AlertDialogHeader>
 
-				<div className="py-4">
-					<p className="text-gray-300">
+				<div className="py-3">
+					<p className="text-gray-300 text-sm">
 						Are you sure you want to delete{" "}
-						<span className="font-semibold text-white">{subjectName}</span>?
-						This will permanently remove this subject and recalculate your
-						semester GPA.
+						<span className="font-medium text-white">{subjectName}</span>? This
+						will permanently remove this subject and recalculate your semester
+						GPA.
 					</p>
 
 					<AnimatePresence>
@@ -88,17 +80,17 @@ export function DeleteSubjectDialog({
 					</AnimatePresence>
 				</div>
 
-				<AlertDialogFooter className="gap-3">
+				<AlertDialogFooter className="gap-2">
 					<AlertDialogCancel
 						disabled={loading}
-						className="bg-transparent border-[#333333] text-gray-400 hover:text-white hover:bg-[#252525] h-11 px-5"
+						className="bg-transparent border-[#333333] text-gray-400 hover:text-white hover:bg-[#252525] h-9 px-4"
 					>
 						Cancel
 					</AlertDialogCancel>
 					<AlertDialogAction
 						onClick={handleDelete}
 						disabled={loading}
-						className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-400 hover:to-red-500 text-white font-medium h-11 px-6 rounded-xl transition-all duration-300 disabled:opacity-50"
+						className="bg-red-500 hover:bg-red-600 text-white font-medium h-9 px-4 disabled:opacity-50"
 					>
 						{loading ? (
 							<span className="flex items-center gap-2">

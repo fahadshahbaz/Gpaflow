@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { calculateGradePoint, getLetterGrade } from "@/lib/grading/numl";
 import { createClient } from "@/lib/supabase/server";
 import { subjectSchema } from "@/lib/validations/subject";
 import { getUser } from "./auth";
@@ -111,9 +112,14 @@ export async function createSubject(semesterId: string, data: SubjectInput) {
 		name: result.data.name,
 		obtained_marks: result.data.obtained_marks,
 		credit_hours: result.data.credit_hours,
+		grade_point: calculateGradePoint(result.data.obtained_marks),
+		letter_grade: getLetterGrade(result.data.obtained_marks),
 	});
 
-	if (error) throw error;
+	if (error) {
+		console.error("Create subject error:", JSON.stringify(error, null, 2));
+		throw new Error(error.message || "Failed to create subject");
+	}
 
 	revalidatePath("/dashboard");
 }
@@ -141,10 +147,13 @@ export async function updateSubject(
 	}
 
 	// Build update object with only provided fields
-	const updateData: Partial<SubjectInput> = {};
+	const updateData: Record<string, string | number> = {};
 	if (data.name !== undefined) updateData.name = data.name;
-	if (data.obtained_marks !== undefined)
+	if (data.obtained_marks !== undefined) {
 		updateData.obtained_marks = data.obtained_marks;
+		updateData.grade_point = calculateGradePoint(data.obtained_marks);
+		updateData.letter_grade = getLetterGrade(data.obtained_marks);
+	}
 	if (data.credit_hours !== undefined)
 		updateData.credit_hours = data.credit_hours;
 
