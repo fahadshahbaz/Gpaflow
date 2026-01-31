@@ -65,57 +65,39 @@ export function GradeProgress({ semesters }: GradeProgressProps) {
 	const topGradePercentage = breakdown[0]?.percentage || 0;
 
 	return (
-		<div className="bg-white rounded-3xl p-6 card-shadow">
+		<div className="bg-white rounded-3xl p-6 card-shadow h-full">
 			<div className="flex items-start justify-between mb-4">
 				<h3 className="text-lg font-semibold text-gray-900">
 					Grade Distribution
 				</h3>
-				<button
-					type="button"
-					className="h-8 w-8 rounded-full hover:bg-gray-100 flex items-center justify-center text-gray-400"
-					aria-label="More options"
-				>
-					<svg
-						className="h-5 w-5"
-						fill="currentColor"
-						viewBox="0 0 20 20"
-						aria-hidden="true"
-					>
-						<circle cx="4" cy="10" r="1.5" />
-						<circle cx="10" cy="10" r="1.5" />
-						<circle cx="16" cy="10" r="1.5" />
-					</svg>
-				</button>
+				<div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-green-50">
+					<span className="text-xs font-semibold text-green-600">
+						{topGradePercentage}% A's
+					</span>
+				</div>
 			</div>
 
 			{/* Big Number */}
-			<div className="flex items-end gap-3 mb-6">
-				<span className="text-5xl font-light text-gray-900 tracking-tight">
+			<div className="flex items-end gap-3 mb-5">
+				<span className="text-4xl font-light text-gray-900 tracking-tight">
 					{totalSubjects}
 				</span>
-				<div className="mb-2">
+				<div className="mb-1">
 					<span className="text-sm text-gray-500">subjects</span>
-				</div>
-				<div className="ml-auto mb-2">
-					<div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-green-50">
-						<span className="text-xs font-semibold text-green-600">
-							{topGradePercentage}% A's
-						</span>
-					</div>
 				</div>
 			</div>
 
 			{/* Progress Bars */}
-			<div className="space-y-4">
+			<div className="space-y-3">
 				{breakdown.map((item) => (
 					<div key={item.grade}>
-						<div className="flex items-center justify-between mb-2">
+						<div className="flex items-center justify-between mb-1.5">
 							<span className="text-sm text-gray-600">{item.grade}</span>
 							<span className="text-sm font-medium text-gray-900">
 								{item.count}
 							</span>
 						</div>
-						<div className="h-2.5 bg-gray-100 rounded-full overflow-hidden">
+						<div className="h-2 bg-gray-100 rounded-full overflow-hidden">
 							<div
 								className={`h-full rounded-full transition-all duration-500 ${item.color}`}
 								style={{

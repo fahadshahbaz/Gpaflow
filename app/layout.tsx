@@ -17,6 +17,9 @@ export const metadata: Metadata = {
 	title: "GPA Flow",
 	description:
 		"GPA Flow - Calculate your GPA with ease and keep track of your grades",
+	icons: {
+		icon: "/favicon.png",
+	},
 };
 
 export default function RootLayout({

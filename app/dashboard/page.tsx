@@ -37,21 +37,23 @@ export default async function DashboardPage() {
 				/>
 			</div>
 
-			{/* Main Chart Row */}
+			{/* GPA Chart + Insights Row */}
 			<div className="grid grid-cols-12 gap-4 mb-6">
-				<GPATrendChart semesters={semesters} targetGpa={stats.targetGpa} />
+				<div className="col-span-12 lg:col-span-8">
+					<GPATrendChart semesters={semesters} targetGpa={stats.targetGpa} />
+				</div>
+				<div className="col-span-12 lg:col-span-4">
+					<InsightCard semesters={semesters} cgpa={stats.cgpa} />
+				</div>
 			</div>
 
-			{/* Secondary Stats Row */}
+			{/* Activity & Grade Distribution Row */}
 			<div className="grid grid-cols-12 gap-4">
-				<div className="col-span-12 md:col-span-4">
+				<div className="col-span-12 md:col-span-6">
 					<ActivityDots semesters={semesters} />
 				</div>
-				<div className="col-span-12 md:col-span-4">
+				<div className="col-span-12 md:col-span-6">
 					<GradeProgress semesters={semesters} />
-				</div>
-				<div className="col-span-12 md:col-span-4">
-					<InsightCard semesters={semesters} cgpa={stats.cgpa} />
 				</div>
 			</div>
 		</div>
