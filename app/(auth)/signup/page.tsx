@@ -1,5 +1,6 @@
 "use client";
 
+import { GraduationCap } from "lucide-react";
 import Link from "next/link";
 import { useActionState } from "react";
 import { type AuthState, signUp } from "@/lib/supabase/auth";
@@ -15,9 +16,14 @@ export default function SignupPage() {
 				<div className="text-center">
 					<Link
 						href="/"
-						className="inline-block text-2xl font-bold text-gray-900 mb-6"
+						className="inline-flex items-center justify-center gap-2.5 mb-6"
 					>
-						GPA<span className="text-blue-500">Flow</span>
+						<div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-600">
+							<GraduationCap className="h-6 w-6 text-white" />
+						</div>
+						<span className="text-2xl font-semibold text-gray-900 tracking-tight">
+							GPAFlow
+						</span>
 					</Link>
 					<h1 className="text-2xl font-bold text-gray-900">Create account</h1>
 					<p className="mt-2 text-gray-500">
