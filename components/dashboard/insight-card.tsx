@@ -1,6 +1,6 @@
 "use client";
 
-import { Sparkles } from "lucide-react";
+import { Lightbulb, Sparkles } from "lucide-react";
 import type { Semester } from "@/lib/supabase/queries";
 
 interface InsightCardProps {
@@ -8,7 +8,40 @@ interface InsightCardProps {
 	cgpa: number;
 }
 
+const motivationalQuotes = [
+	{
+		quote: "Success is the sum of small efforts repeated day in and day out.",
+		author: "Robert Collier",
+	},
+	{
+		quote: "The expert in anything was once a beginner.",
+		author: "Helen Hayes",
+	},
+	{ quote: "Education is the passport to the future.", author: "Malcolm X" },
+	{
+		quote:
+			"The beautiful thing about learning is that no one can take it away from you.",
+		author: "B.B. King",
+	},
+	{
+		quote: "Your GPA doesn't define you, but your effort does.",
+		author: "Unknown",
+	},
+];
+
+const tips = [
+	"Review notes within 24 hours to boost retention by 60%.",
+	"Break study sessions into 25-min focused blocks.",
+	"Teaching others helps you understand better.",
+	"Sleep 7-8 hours before exams for peak performance.",
+	"Start assignments early to reduce stress.",
+];
+
 function generateInsight(semesters: Semester[], cgpa: number) {
+	const randomQuote =
+		motivationalQuotes[Math.floor(Math.random() * motivationalQuotes.length)];
+	const randomTip = tips[Math.floor(Math.random() * tips.length)];
+
 	if (semesters.length === 0) {
 		return {
 			percentage: "0%",
@@ -16,6 +49,8 @@ function generateInsight(semesters: Semester[], cgpa: number) {
 			description:
 				"Add your first semester to begin tracking your academic progress.",
 			gradient: "from-blue-400 via-blue-500 to-indigo-600",
+			quote: randomQuote,
+			tip: randomTip,
 		};
 	}
 
@@ -25,6 +60,8 @@ function generateInsight(semesters: Semester[], cgpa: number) {
 			title: "Great Start!",
 			description: `You're at ${cgpa.toFixed(2)} CGPA. Keep adding semesters to track your progress.`,
 			gradient: "from-blue-400 via-cyan-500 to-teal-500",
+			quote: randomQuote,
+			tip: randomTip,
 		};
 	}
 
@@ -40,6 +77,8 @@ function generateInsight(semesters: Semester[], cgpa: number) {
 			title: "GPA Improved!",
 			description: `Your SGPA increased by ${improvement.toFixed(2)} compared to ${prevSemester.name}.`,
 			gradient: "from-green-400 via-emerald-500 to-teal-500",
+			quote: randomQuote,
+			tip: randomTip,
 		};
 	} else if (improvement < 0) {
 		return {
@@ -47,6 +86,8 @@ function generateInsight(semesters: Semester[], cgpa: number) {
 			title: "Room for Growth",
 			description: `Focus on improvement. Your SGPA dropped by ${Math.abs(improvement).toFixed(2)} from last semester.`,
 			gradient: "from-orange-400 via-amber-500 to-yellow-500",
+			quote: randomQuote,
+			tip: randomTip,
 		};
 	} else {
 		return {
@@ -54,6 +95,8 @@ function generateInsight(semesters: Semester[], cgpa: number) {
 			title: "Consistent Performance",
 			description: "You maintained your SGPA. Keep up the steady progress!",
 			gradient: "from-blue-400 via-indigo-500 to-purple-500",
+			quote: randomQuote,
+			tip: randomTip,
 		};
 	}
 }
@@ -63,31 +106,40 @@ export function InsightCard({ semesters, cgpa }: InsightCardProps) {
 
 	return (
 		<div
-			className={`relative overflow-hidden rounded-3xl bg-gradient-to-br ${insight.gradient} p-6 text-white`}
+			className={`relative overflow-hidden rounded-3xl bg-gradient-to-br ${insight.gradient} p-6 text-white h-full flex flex-col`}
 		>
 			{/* Decorative circles */}
-			<div className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-white/10" />
-			<div className="absolute -right-4 top-8 h-16 w-16 rounded-full bg-white/10" />
-			<div className="absolute -bottom-6 -left-6 h-24 w-24 rounded-full bg-white/10" />
+			<div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-white/10" />
+			<div className="absolute -right-2 top-10 h-12 w-12 rounded-full bg-white/10" />
+			<div className="absolute -bottom-4 -left-4 h-20 w-20 rounded-full bg-white/10" />
 
 			{/* Content */}
-			<div className="relative z-10">
-				<div className="flex items-center gap-2 mb-4">
+			<div className="relative z-10 flex-1">
+				<div className="flex items-center gap-2 mb-3">
 					<Sparkles className="h-4 w-4" />
 					<span className="text-xs font-medium uppercase tracking-wider opacity-90">
 						Insights
 					</span>
 				</div>
 
-				<p className="text-5xl font-light tracking-tight mb-3">
+				<p className="text-4xl font-light tracking-tight mb-1">
 					{insight.percentage}
 				</p>
 
-				<h3 className="text-lg font-semibold mb-1">{insight.title}</h3>
-
-				<p className="text-sm opacity-90 leading-relaxed">
+				<h3 className="text-base font-semibold mb-1">{insight.title}</h3>
+				<p className="text-sm opacity-90 leading-relaxed mb-4">
 					{insight.description}
 				</p>
+			</div>
+
+			{/* Quote or Tip */}
+			<div className="relative z-10 pt-3 border-t border-white/20">
+				<div className="flex items-start gap-2">
+					<Lightbulb className="h-3.5 w-3.5 mt-0.5 opacity-75 flex-shrink-0" />
+					<p className="text-xs opacity-85 leading-relaxed italic">
+						"{insight.tip}"
+					</p>
+				</div>
 			</div>
 		</div>
 	);

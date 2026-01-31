@@ -6,140 +6,129 @@ interface ActivityDotsProps {
 	semesters: Semester[];
 }
 
-// Generate activity data from semesters - shows subject count per day of week pattern
+// Generate activity data from semesters
 function generateActivityData(semesters: Semester[]) {
 	// Demo data if no semesters
 	if (semesters.length === 0) {
 		return {
-			data: [
-				[1, 2, 3, 2, 3, 2, 1],
-				[2, 3, 4, 3, 4, 3, 2],
-				[1, 2, 3, 4, 3, 2, 1],
-				[2, 3, 4, 5, 4, 3, 2],
-				[1, 2, 3, 4, 3, 2, 1],
+			semesters: [
+				{ name: "S1", subjects: 5 },
+				{ name: "S2", subjects: 6 },
+				{ name: "S3", subjects: 5 },
+				{ name: "S4", subjects: 7 },
+				{ name: "S5", subjects: 6 },
 			],
-			peak: "Wed",
-			total: 45,
-			change: 12,
+			total: 29,
+			avgPerSemester: 5.8,
+			isDemo: true,
 		};
 	}
 
-	// Create activity pattern based on actual semester data
-	const totalSubjects = semesters.reduce(
-		(sum, s) => sum + (s.subjects?.length || 0),
-		0,
-	);
-	const avgPerSemester = totalSubjects / semesters.length;
+	const semesterData = semesters.map((s, i) => ({
+		name: `S${i + 1}`,
+		fullName: s.name,
+		subjects: s.subjects?.length || 0,
+	}));
 
-	// Generate pattern rows based on semesters
-	const data = semesters.slice(0, 5).map((semester) => {
-		const subjectCount = semester.subjects?.length || 0;
-		// Create 7-day pattern with variation
-		return Array.from({ length: 7 }, (_, i) => {
-			const base = Math.ceil(subjectCount / 2);
-			const variation = Math.sin((i / 6) * Math.PI) * 2;
-			return Math.max(1, Math.min(5, Math.round(base + variation)));
-		});
-	});
+	const total = semesterData.reduce((sum, s) => sum + s.subjects, 0);
+	const avgPerSemester = semesters.length > 0 ? total / semesters.length : 0;
 
 	return {
-		data,
-		peak: "Thu",
-		total: totalSubjects,
-		change: Math.round(avgPerSemester),
+		semesters: semesterData,
+		total,
+		avgPerSemester: Number(avgPerSemester.toFixed(1)),
+		isDemo: false,
 	};
 }
 
 export function ActivityDots({ semesters }: ActivityDotsProps) {
 	const activity = generateActivityData(semesters);
-	const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+	const maxSubjects = Math.max(...activity.semesters.map((s) => s.subjects), 8);
 
-	// Get color based on value (1-5)
-	const getColor = (value: number) => {
-		const colors = [
-			"bg-green-200",
-			"bg-green-300",
-			"bg-green-400",
-			"bg-green-500",
-			"bg-green-600",
-		];
-		return colors[Math.min(value - 1, 4)] || colors[0];
+	// Get color intensity based on position (darker for more recent)
+	const getColor = (
+		semesterIndex: number,
+		dotIndex: number,
+		totalDots: number,
+	) => {
+		const isActive = dotIndex < totalDots;
+		if (!isActive) return "bg-gray-100";
+
+		// More recent semesters get darker colors
+		const intensity = (semesterIndex + 1) / activity.semesters.length;
+		if (intensity > 0.8) return "bg-green-600";
+		if (intensity > 0.6) return "bg-green-500";
+		if (intensity > 0.4) return "bg-green-400";
+		if (intensity > 0.2) return "bg-green-300";
+		return "bg-green-200";
 	};
 
 	return (
-		<div className="bg-white rounded-3xl p-6 card-shadow">
+		<div className="bg-white rounded-3xl p-6 card-shadow h-full">
 			<div className="flex items-start justify-between mb-4">
 				<h3 className="text-lg font-semibold text-gray-900">Subjects</h3>
-				<div className="flex items-center gap-2">
+				{activity.isDemo && (
 					<span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
-						Peak:{" "}
-						<span className="font-medium text-gray-700">{activity.peak}</span>
+						Demo
 					</span>
-					<button
-						type="button"
-						className="h-8 w-8 rounded-full hover:bg-gray-100 flex items-center justify-center text-gray-400"
-						aria-label="More options"
-					>
-						<svg
-							className="h-5 w-5"
-							fill="currentColor"
-							viewBox="0 0 20 20"
-							aria-hidden="true"
-						>
-							<circle cx="4" cy="10" r="1.5" />
-							<circle cx="10" cy="10" r="1.5" />
-							<circle cx="16" cy="10" r="1.5" />
-						</svg>
-					</button>
-				</div>
+				)}
 			</div>
 
 			{/* Big Number */}
-			<div className="flex items-end gap-4 mb-6">
-				<span className="text-5xl font-light text-gray-900 tracking-tight">
+			<div className="flex items-end gap-4 mb-5">
+				<span className="text-4xl font-light text-gray-900 tracking-tight">
 					{activity.total}
 				</span>
-				<div className="flex flex-col mb-2">
-					{/* Dot Matrix */}
-					<div className="flex gap-1">
-						{activity.data[activity.data.length - 1]?.map((value, i) => (
-							<div
-								key={i}
-								className={`h-2.5 w-2.5 rounded-full ${getColor(value)}`}
-							/>
-						))}
-					</div>
+				<div className="mb-1">
+					<span className="text-sm text-gray-500">total subjects</span>
 				</div>
-				<div className="text-right mb-2 ml-auto">
-					<p className="text-xs text-gray-500">vs last period</p>
+				<div className="text-right mb-1 ml-auto">
+					<p className="text-xs text-gray-500">avg per semester</p>
 					<p className="text-sm font-semibold text-green-600">
-						+{activity.change}
+						{activity.avgPerSemester}
 					</p>
 				</div>
 			</div>
 
-			{/* Full Dot Matrix */}
-			<div className="space-y-1.5">
-				{activity.data.map((row, rowIndex) => (
-					<div key={rowIndex} className="flex gap-1.5 justify-center">
-						{row.map((value, colIndex) => (
-							<div
-								key={colIndex}
-								className={`h-3 w-3 rounded-full ${getColor(value)} transition-all hover:scale-125`}
-								title={`${days[colIndex]}: ${value} subjects`}
-							/>
-						))}
+			{/* Semester Grid */}
+			<div className="space-y-2">
+				{activity.semesters.map((semester, semesterIndex) => (
+					<div key={semester.name} className="flex items-center gap-3">
+						<span className="text-xs text-gray-500 w-6 flex-shrink-0">
+							{semester.name}
+						</span>
+						<div className="flex gap-1.5 flex-1">
+							{Array.from({ length: maxSubjects }, (_, dotIndex) => (
+								<div
+									key={dotIndex}
+									className={`h-3 w-3 rounded-full transition-all hover:scale-110 ${getColor(semesterIndex, dotIndex, semester.subjects)}`}
+									title={
+										dotIndex < semester.subjects
+											? `Subject ${dotIndex + 1}`
+											: ""
+									}
+								/>
+							))}
+						</div>
+						<span className="text-xs font-medium text-gray-700 w-4 text-right">
+							{semester.subjects}
+						</span>
 					</div>
 				))}
 			</div>
 
-			{/* Day Labels */}
-			<div className="flex gap-1.5 justify-center mt-2">
-				{days.map((day) => (
-					<div key={day} className="w-3 text-center">
-						<span className="text-[9px] text-gray-400">{day[0]}</span>
-					</div>
-				))}
+			{/* Legend */}
+			<div className="flex items-center justify-between mt-4 pt-3 border-t border-gray-100">
+				<div className="flex items-center gap-1.5">
+					<div className="h-2.5 w-2.5 rounded-full bg-green-200" />
+					<div className="h-2.5 w-2.5 rounded-full bg-green-400" />
+					<div className="h-2.5 w-2.5 rounded-full bg-green-600" />
+					<span className="text-xs text-gray-500 ml-1">Recent semesters</span>
+				</div>
+				<div className="flex items-center gap-1.5">
+					<div className="h-2.5 w-2.5 rounded-full bg-gray-100" />
+					<span className="text-xs text-gray-400">Empty</span>
+				</div>
 			</div>
 		</div>
 	);
