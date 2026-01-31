@@ -24,7 +24,7 @@ export default function HomePage() {
 					initial={false}
 					animate={{ height: isOpen ? "auto" : "56px" }}
 					transition={{ type: "spring", stiffness: 300, damping: 30 }}
-					className="max-w-3xl mx-auto bg-white/70 backdrop-blur-md border border-white/20 shadow-sm rounded-[28px] px-5 overflow-hidden"
+					className="max-w-3xl mx-auto bg-white/50 bg-noise backdrop-blur-xl border border-white/40 shadow-sm rounded-[28px] px-5 overflow-hidden"
 				>
 					<div className="h-14 flex items-center justify-between shrink-0">
 						<Link href="/" className="flex items-center gap-2.5">

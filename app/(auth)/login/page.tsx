@@ -11,8 +11,8 @@ export default function LoginPage() {
 	const [state, formAction, pending] = useActionState(signIn, initialState);
 
 	return (
-		<main className="min-h-screen flex items-center justify-center bg-[#f5f5f5] p-4">
-			<div className="w-full max-w-md space-y-8">
+		<main className="min-h-screen bg-[#f5f5f5] pt-24 px-4">
+			<div className="w-full max-w-md mx-auto space-y-8">
 				<div className="text-center">
 					<Link
 						href="/"
@@ -109,6 +109,10 @@ export default function LoginPage() {
 						Sign up
 					</Link>
 				</p>
+
+				<footer className="pt-8 text-center text-xs text-gray-400">
+					<p>© {new Date().getFullYear()} GPAFlow. All rights reserved.</p>
+				</footer>
 			</div>
 		</main>
 	);
