@@ -4,9 +4,17 @@ A modern, intuitive GPA tracking dashboard for university students. Track your a
 
 ![GPAFlow Dashboard](https://via.placeholder.com/800x400.png?text=GPAFlow+Dashboard)
 
+## Live Demo
+
+Try GPAFlow now - no installation needed!
+
+**[https://gpaflow.vercel.app](https://gpaflow.vercel.app)**
+
+Simply sign up and start tracking your GPA immediately.
+
 ## What is GPAFlow?
 
-GPAFlow helps students effortlessly track their academic performance. Whether you're in your first semester or final year, simply add your subjects with marks and credit hours — GPAFlow handles the rest, calculating your SGPA and CGPA instantly.
+GPAFlow helps students effortlessly track their academic performance. Whether you're in your first semester or final year, simply add your subjects with marks and credit hours, GPAFlow handles the rest, calculating your SGPA and CGPA instantly.
 
 ## Why GPAFlow?
 
@@ -39,7 +47,7 @@ GPAFlow helps students effortlessly track their academic performance. Whether yo
 ## Supported Universities
 
 - **NUML** (National University of Modern Languages) - *Currently Supported*
-- More universities coming soon...
+- More universities coming soon... (or suggest yours!)
 
 ## Getting Started
 
@@ -82,11 +90,11 @@ Open [http://localhost:3000](http://localhost:3000) to view the app.
 ## How to Use
 
 1. **Sign Up**: Create an account with your email
-2. **Add Semester**: Click "Add Semester" and give it a name
+2. **Add Semester**: Go to Semesters tab and click "Add Semester" and give it a name
 3. **Add Subjects**: For each subject, enter:
    - Subject name
    - Obtained marks (0-100)
-   - Credit hours (1-6)
+   - Credit hours (1-4)
 4. **View Dashboard**: See your SGPA, CGPA, and visual analytics
 5. **Track Progress**: Add more semesters to see your GPA progression over time
 
@@ -98,6 +106,7 @@ Open [http://localhost:3000](http://localhost:3000) to view the app.
 - **Database**: Supabase (PostgreSQL)
 - **Authentication**: Supabase Auth
 - **Charts**: Recharts
+- **Linting & Formatting**: Biome
 - **Package Manager**: pnpm
 
 ## Scripts
@@ -105,8 +114,8 @@ Open [http://localhost:3000](http://localhost:3000) to view the app.
 - `pnpm dev` - Start development server
 - `pnpm build` - Build for production
 - `pnpm start` - Start production server
-- `pnpm lint` - Run linter
-- `pnpm format` - Format code
+- `pnpm lint` - Run Biome linter
+- `pnpm format` - Format code with Biome
 
 ## Support
 
