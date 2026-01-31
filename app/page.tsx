@@ -1,14 +1,6 @@
 import Link from "next/link";
-import { getUser } from "@/lib/supabase/auth";
-import { redirect } from "next/navigation";
 
-export default async function HomePage() {
-	const user = await getUser();
-
-	if (user) {
-		redirect("/dashboard");
-	}
-
+export default function HomePage() {
 	return (
 		<main className="min-h-screen flex flex-col items-center justify-center bg-zinc-950 p-4">
 			<div className="text-center space-y-6">
