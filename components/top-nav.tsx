@@ -45,7 +45,7 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 							<GraduationCap className="h-5 w-5 text-white" />
 						</div>
 						<span className="text-lg font-semibold text-gray-900 tracking-tight">
-							GPAFlow
+							GPA<span className="text-blue-500">Flow</span>
 						</span>
 					</Link>
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { Lightbulb, Sparkles } from "lucide-react";
+import { useEffect, useState } from "react";
 import type { Semester } from "@/lib/supabase/queries";
 
 interface InsightCardProps {
@@ -37,10 +38,14 @@ const tips = [
 	"Start assignments early to reduce stress.",
 ];
 
-function generateInsight(semesters: Semester[], cgpa: number) {
-	const randomQuote =
-		motivationalQuotes[Math.floor(Math.random() * motivationalQuotes.length)];
-	const randomTip = tips[Math.floor(Math.random() * tips.length)];
+function generateInsight(
+	semesters: Semester[],
+	cgpa: number,
+	quoteIndex: number,
+	tipIndex: number,
+) {
+	const randomQuote = motivationalQuotes[quoteIndex];
+	const randomTip = tips[tipIndex];
 
 	if (semesters.length === 0) {
 		return {
@@ -102,7 +107,16 @@ function generateInsight(semesters: Semester[], cgpa: number) {
 }
 
 export function InsightCard({ semesters, cgpa }: InsightCardProps) {
-	const insight = generateInsight(semesters, cgpa);
+	// Use deterministic indices for SSR, randomize on client
+	const [quoteIndex, setQuoteIndex] = useState(0);
+	const [tipIndex, setTipIndex] = useState(0);
+
+	useEffect(() => {
+		setQuoteIndex(Math.floor(Math.random() * motivationalQuotes.length));
+		setTipIndex(Math.floor(Math.random() * tips.length));
+	}, []);
+
+	const insight = generateInsight(semesters, cgpa, quoteIndex, tipIndex);
 
 	return (
 		<div
