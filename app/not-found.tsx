@@ -1,15 +1,18 @@
-import { GraduationCap, Home } from "lucide-react";
-import Link from "next/link";
+"use client";
+
+import { ArrowLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Logo } from "@/components/ui/logo";
 
 export default function NotFound() {
+    const router = useRouter();
+
     return (
         <main className="min-h-screen bg-[#f5f5f5] flex items-center justify-center px-6">
             <div className="text-center max-w-md">
                 {/* Logo */}
                 <div className="flex justify-center mb-8">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg shadow-blue-500/20">
-                        <GraduationCap className="h-8 w-8 text-white" />
-                    </div>
+                    <Logo size="lg" />
                 </div>
 
                 {/* 404 Text */}
@@ -26,22 +29,15 @@ export default function NotFound() {
                     been moved or doesn't exist.
                 </p>
 
-                {/* Actions */}
-                <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                    <Link
-                        href="/"
-                        className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-colors"
-                    >
-                        <Home className="h-4 w-4" />
-                        Go home
-                    </Link>
-                    <Link
-                        href="/dashboard"
-                        className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white hover:bg-gray-50 text-gray-700 font-medium rounded-lg border border-gray-200 transition-colors"
-                    >
-                        Dashboard
-                    </Link>
-                </div>
+                {/* Go Back Button */}
+                <button
+                    type="button"
+                    onClick={() => router.back()}
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-colors"
+                >
+                    <ArrowLeft className="h-4 w-4" />
+                    Go back
+                </button>
             </div>
         </main>
     );

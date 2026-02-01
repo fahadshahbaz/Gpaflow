@@ -1,9 +1,9 @@
 "use client";
 
-import { GraduationCap } from "lucide-react";
 import Link from "next/link";
 import { useActionState } from "react";
 import { type AuthState, signUp } from "@/lib/supabase/auth";
+import { Logo } from "@/components/ui/logo";
 
 const initialState: AuthState = {};
 
@@ -14,17 +14,9 @@ export default function SignupPage() {
 		<main className="min-h-screen bg-[#f5f5f5] pt-24 px-4">
 			<div className="w-full max-w-md mx-auto space-y-8">
 				<div className="text-center">
-					<Link
-						href="/"
-						className="inline-flex items-center justify-center gap-2.5 mb-6"
-					>
-						<div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-600">
-							<GraduationCap className="h-6 w-6 text-white" />
-						</div>
-						<span className="text-2xl font-semibold text-gray-900 tracking-tight">
-							GPA<span className="text-blue-500">Flow</span>
-						</span>
-					</Link>
+					<div className="inline-flex items-center justify-center mb-6">
+						<Logo href="/" />
+					</div>
 					<h1 className="text-2xl font-bold text-gray-900">Create account</h1>
 					<p className="mt-2 text-gray-500">
 						Start tracking your academic journey
@@ -131,7 +123,10 @@ export default function SignupPage() {
 				</p>
 
 				<footer className="pt-8 text-center text-xs text-gray-400">
-					<p>© {new Date().getFullYear()} GPA<span className="text-blue-500">Flow</span>. All rights reserved.</p>
+					<p>
+						© {new Date().getFullYear()} GPA
+						<span className="text-blue-500">Flow</span>. All rights reserved.
+					</p>
 				</footer>
 			</div>
 		</main>

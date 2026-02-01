@@ -3,7 +3,6 @@
 import {
 	BookOpen,
 	ChevronDown,
-	GraduationCap,
 	LayoutDashboard,
 	LogOut,
 	Menu,
@@ -17,6 +16,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { signOut } from "@/lib/supabase/auth";
 import { cn } from "@/lib/utils";
+import { Logo } from "@/components/ui/logo";
 
 const navItems = [
 	{ title: "Overview", href: "/dashboard", icon: LayoutDashboard },
@@ -40,14 +40,7 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 			<header className="px-5">
 				<div className="h-14 flex items-center justify-between shrink-0">
 					{/* Logo */}
-					<Link href="/dashboard" className="flex items-center gap-2.5">
-						<div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-600">
-							<GraduationCap className="h-5 w-5 text-white" />
-						</div>
-						<span className="text-lg font-semibold text-gray-900 tracking-tight">
-							GPA<span className="text-blue-500">Flow</span>
-						</span>
-					</Link>
+					<Logo size="sm" href="/dashboard" />
 
 					{/* Desktop Navigation */}
 					<nav className="hidden md:flex items-center gap-0.5 bg-white/150 backdrop-blur-sm rounded-full px-1 py-1 shadow-sm">
