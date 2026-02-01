@@ -40,8 +40,45 @@ export default function SettingsPage() {
 
 	if (isLoading) {
 		return (
-			<div className="flex items-center justify-center min-h-[calc(100vh-4rem)]">
-				<Loader2 className="h-6 w-6 animate-spin text-gray-400" />
+			<div className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-6">
+				<div className="w-full max-w-lg">
+					{/* Header Skeleton */}
+					<div className="text-center mb-8">
+						<div className="flex justify-center mb-4">
+							<div className="h-14 w-14 rounded-2xl bg-gray-200 animate-pulse" />
+						</div>
+						<div className="h-7 w-48 mx-auto mb-2 bg-gray-200 rounded-xl animate-pulse" />
+						<div className="h-4 w-56 mx-auto bg-gray-200 rounded-xl animate-pulse" />
+					</div>
+
+					{/* Card Skeleton */}
+					<div className="rounded-2xl bg-white border border-gray-200 overflow-hidden card-shadow">
+						{/* Avatar Section */}
+						<div className="p-6 border-b border-gray-100 flex items-center gap-4">
+							<div className="h-16 w-16 rounded-2xl bg-gray-200 animate-pulse" />
+							<div>
+								<div className="h-5 w-32 mb-2 bg-gray-200 rounded-lg animate-pulse" />
+								<div className="h-4 w-48 bg-gray-200 rounded-lg animate-pulse" />
+							</div>
+						</div>
+
+						{/* Form Section */}
+						<div className="p-6 space-y-6">
+							<div>
+								<div className="h-4 w-28 mb-3 bg-gray-200 rounded-lg animate-pulse" />
+								<div className="h-12 bg-gray-200 rounded-xl animate-pulse" />
+								<div className="h-3 w-48 mt-2 bg-gray-200 rounded-lg animate-pulse" />
+							</div>
+							<div>
+								<div className="h-4 w-28 mb-3 bg-gray-200 rounded-lg animate-pulse" />
+								<div className="h-12 bg-gray-200 rounded-xl animate-pulse" />
+							</div>
+							<div className="h-12 bg-gray-200 rounded-xl animate-pulse" />
+						</div>
+					</div>
+
+					<div className="h-4 w-64 mx-auto mt-6 bg-gray-200 rounded-lg animate-pulse" />
+				</div>
 			</div>
 		);
 	}
