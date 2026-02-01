@@ -92,6 +92,7 @@ export type DashboardStats = {
 
 export async function getDashboardStats(
 	userId: string,
+	targetGpa = 3.5,
 ): Promise<DashboardStats> {
 	const semesters = await getSemesters(userId);
 
@@ -111,6 +112,6 @@ export async function getDashboardStats(
 		cgpa,
 		totalCreditHours,
 		semesterCount: semesters.length,
-		targetGpa: 3.5, // default target, could be stored in user profile
+		targetGpa,
 	};
 }

@@ -9,8 +9,10 @@ import { getDashboardStats, getSemesters } from "@/lib/supabase/queries";
 export default async function DashboardPage() {
 	const user = await getUser();
 
+	const userTargetGpa = user?.user_metadata?.target_gpa ?? 3.5;
+
 	const [stats, semesters] = await Promise.all([
-		getDashboardStats(user!.id),
+		getDashboardStats(user!.id, userTargetGpa),
 		getSemesters(user!.id),
 	]);
 

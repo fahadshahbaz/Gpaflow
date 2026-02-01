@@ -172,3 +172,20 @@ export async function updateUserName(
 
 	return { success: "Name updated successfully" };
 }
+
+export async function updateTargetGpa(targetGpa: number): Promise<AuthState> {
+	if (targetGpa < 0 || targetGpa > 4) {
+		return { error: "Target GPA must be between 0 and 4" };
+	}
+
+	const supabase = await createClient();
+	const { error } = await supabase.auth.updateUser({
+		data: { target_gpa: targetGpa },
+	});
+
+	if (error) {
+		return { error: error.message };
+	}
+
+	return { success: "Target GPA updated" };
+}

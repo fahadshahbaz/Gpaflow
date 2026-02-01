@@ -7,7 +7,6 @@ import {
 	LogOut,
 	Menu,
 	Settings,
-	TrendingUp,
 	X,
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
@@ -21,7 +20,6 @@ import { Logo } from "@/components/ui/logo";
 const navItems = [
 	{ title: "Overview", href: "/dashboard", icon: LayoutDashboard },
 	{ title: "Semesters", href: "/dashboard/semesters", icon: BookOpen },
-	{ title: "Analytics", href: "/dashboard/analytics", icon: TrendingUp },
 	{ title: "Settings", href: "/dashboard/settings", icon: Settings },
 ];
 
