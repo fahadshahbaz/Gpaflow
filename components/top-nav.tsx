@@ -50,7 +50,7 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 					</Link>
 
 					{/* Desktop Navigation */}
-					<nav className="hidden md:flex items-center gap-0.5 bg-gray-100/80 backdrop-blur-sm rounded-full px-1 py-1">
+					<nav className="hidden md:flex items-center gap-0.5 bg-white/150 backdrop-blur-sm rounded-full px-1 py-1 shadow-sm">
 						{navItems.map((item) => {
 							const isActive = pathname === item.href;
 							return (

@@ -19,7 +19,7 @@ export default async function DashboardLayout({
 	return (
 		<div className="min-h-screen bg-[#f5f5f5]">
 			<TopNav userName={userName} userEmail={user?.email} />
-			<main className="flex-1">{children}</main>
+			<main className="flex-1 pt-24">{children}</main>
 		</div>
 	);
 }
