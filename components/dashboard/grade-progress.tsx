@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import type { Semester } from "@/lib/supabase/queries";
 
 interface GradeProgressProps {
@@ -13,55 +14,46 @@ interface GradeBreakdown {
 	color: string;
 }
 
-function calculateGradeBreakdown(semesters: Semester[]): GradeBreakdown[] {
-	// Collect all subjects across semesters
-	const allSubjects = semesters.flatMap((s) => s.subjects || []);
-
-	if (allSubjects.length === 0) {
-		// Demo data
-		return [
-			{ grade: "A/A+", count: 12, percentage: 40, color: "bg-green-500" },
-			{ grade: "B/B+", count: 9, percentage: 30, color: "bg-blue-500" },
-			{ grade: "C/C+", count: 6, percentage: 20, color: "bg-amber-500" },
-			{ grade: "D & Below", count: 3, percentage: 10, color: "bg-red-400" },
-		];
-	}
-
-	// Count grades
-	const gradeGroups = {
-		"A/A+": 0,
-		"B/B+": 0,
-		"C/C+": 0,
-		"D & Below": 0,
-	};
-
-	for (const subject of allSubjects) {
-		const grade = subject.letter_grade || "";
-		if (grade.startsWith("A")) gradeGroups["A/A+"]++;
-		else if (grade.startsWith("B")) gradeGroups["B/B+"]++;
-		else if (grade.startsWith("C")) gradeGroups["C/C+"]++;
-		else gradeGroups["D & Below"]++;
-	}
-
-	const total = allSubjects.length;
-	const colors = {
-		"A/A+": "bg-green-500",
-		"B/B+": "bg-blue-500",
-		"C/C+": "bg-amber-500",
-		"D & Below": "bg-red-400",
-	};
-
-	return Object.entries(gradeGroups).map(([grade, count]) => ({
-		grade,
-		count,
-		percentage: total > 0 ? Math.round((count / total) * 100) : 0,
-		color: colors[grade as keyof typeof colors],
-	}));
-}
-
 export function GradeProgress({ semesters }: GradeProgressProps) {
-	const breakdown = calculateGradeBreakdown(semesters);
-	const totalSubjects = breakdown.reduce((sum, b) => sum + b.count, 0);
+	const breakdown = useMemo<GradeBreakdown[]>(() => {
+		const allSubjects = semesters.flatMap((s) => s.subjects || []);
+
+		const gradeGroups = {
+			"A/A+": 0,
+			"B/B+": 0,
+			"C/C+": 0,
+			"D & Below": 0,
+		};
+
+		for (const subject of allSubjects) {
+			const grade = subject.letter_grade || "";
+			if (grade.startsWith("A")) gradeGroups["A/A+"]++;
+			else if (grade.startsWith("B")) gradeGroups["B/B+"]++;
+			else if (grade.startsWith("C")) gradeGroups["C/C+"]++;
+			else if (grade) gradeGroups["D & Below"]++;
+		}
+
+		const total = allSubjects.length;
+		const colors = {
+			"A/A+": "bg-green-500",
+			"B/B+": "bg-blue-500",
+			"C/C+": "bg-amber-500",
+			"D & Below": "bg-red-400",
+		};
+
+		return Object.entries(gradeGroups).map(([grade, count]) => ({
+			grade,
+			count,
+			percentage: total > 0 ? Math.round((count / total) * 100) : 0,
+			color: colors[grade as keyof typeof colors],
+		}));
+	}, [semesters]);
+
+	const totalSubjects = useMemo(
+		() => breakdown.reduce((sum, b) => sum + b.count, 0),
+		[breakdown],
+	);
+
 	const topGradePercentage = breakdown[0]?.percentage || 0;
 
 	return (
@@ -70,11 +62,13 @@ export function GradeProgress({ semesters }: GradeProgressProps) {
 				<h3 className="text-lg font-semibold text-gray-900">
 					Grade Distribution
 				</h3>
-				<div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-green-50">
-					<span className="text-xs font-semibold text-green-600">
-						{topGradePercentage}% A's
-					</span>
-				</div>
+				{totalSubjects > 0 && (
+					<div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-green-50">
+						<span className="text-xs font-semibold text-green-600">
+							{topGradePercentage}% A's
+						</span>
+					</div>
+				)}
 			</div>
 
 			{/* Big Number */}
@@ -87,29 +81,35 @@ export function GradeProgress({ semesters }: GradeProgressProps) {
 				</div>
 			</div>
 
-			{/* Progress Bars */}
-			<div className="space-y-3">
-				{breakdown.map((item) => (
-					<div key={item.grade}>
-						<div className="flex items-center justify-between mb-1.5">
-							<span className="text-sm text-gray-600">{item.grade}</span>
-							<span className="text-sm font-medium text-gray-900">
-								{item.count}
-							</span>
+			{/* Progress Bars or Empty State */}
+			{totalSubjects === 0 ? (
+				<div className="text-center py-8 text-gray-400 text-sm">
+					No subjects added yet
+				</div>
+			) : (
+				<div className="space-y-3">
+					{breakdown.map((item) => (
+						<div key={item.grade}>
+							<div className="flex items-center justify-between mb-1.5">
+								<span className="text-sm text-gray-600">{item.grade}</span>
+								<span className="text-sm font-medium text-gray-900">
+									{item.count}
+								</span>
+							</div>
+							<div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+								<div
+									className={`h-full rounded-full transition-all duration-500 ${item.color}`}
+									style={{
+										width: `${item.percentage}%`,
+										backgroundImage:
+											"repeating-linear-gradient(90deg, transparent 0px, transparent 3px, rgba(255,255,255,0.3) 3px, rgba(255,255,255,0.3) 5px)",
+									}}
+								/>
+							</div>
 						</div>
-						<div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-							<div
-								className={`h-full rounded-full transition-all duration-500 ${item.color}`}
-								style={{
-									width: `${item.percentage}%`,
-									backgroundImage:
-										"repeating-linear-gradient(90deg, transparent 0px, transparent 3px, rgba(255,255,255,0.3) 3px, rgba(255,255,255,0.3) 5px)",
-								}}
-							/>
-						</div>
-					</div>
-				))}
-			</div>
+					))}
+				</div>
+			)}
 		</div>
 	);
 }

@@ -1,12 +1,15 @@
 "use client";
 
+import { useMemo } from "react";
 import { TrendingDown, TrendingUp } from "lucide-react";
+import type { Semester } from "@/lib/supabase/queries";
 
 interface StatsCardsProps {
 	cgpa: number;
 	totalCreditHours: number;
 	semesterCount: number;
 	targetGpa: number;
+	semesters: Semester[];
 }
 
 export function StatsCards({
@@ -14,10 +17,19 @@ export function StatsCards({
 	totalCreditHours,
 	semesterCount,
 	targetGpa,
+	semesters,
 }: StatsCardsProps) {
+	// Calculate actual GPA change from last two semesters
+	const gpaChange = useMemo(() => {
+		if (semesters.length < 2) return null;
+		const lastSGPA = semesters[semesters.length - 1].sgpa;
+		const prevSGPA = semesters[semesters.length - 2].sgpa;
+		return lastSGPA - prevSGPA;
+	}, [semesters]);
+
 	const isTargetMet = cgpa >= targetGpa;
-	const percentageToTarget = Math.min((cgpa / targetGpa) * 100, 100);
-	const gpaChange = 0.15; // This would come from comparing with previous semester
+	const percentageToTarget =
+		targetGpa > 0 ? Math.min((cgpa / targetGpa) * 100, 100) : 0;
 
 	return (
 		<>
@@ -28,42 +40,27 @@ export function StatsCards({
 						<h3 className="text-sm font-medium text-gray-500">
 							Cumulative GPA
 						</h3>
-						<button
-							type="button"
-							className="h-8 w-8 rounded-full hover:bg-gray-100 flex items-center justify-center text-gray-400"
-							aria-label="More options"
-						>
-							<svg
-								className="h-5 w-5"
-								fill="currentColor"
-								viewBox="0 0 20 20"
-								aria-hidden="true"
-							>
-								<circle cx="4" cy="10" r="1.5" />
-								<circle cx="10" cy="10" r="1.5" />
-								<circle cx="16" cy="10" r="1.5" />
-							</svg>
-						</button>
 					</div>
 					<div className="flex items-end gap-3 mb-4">
 						<span className="text-5xl font-light text-gray-900 tracking-tight">
 							{cgpa.toFixed(2)}
 						</span>
-						<div
-							className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium mb-2 ${
-								gpaChange >= 0
-									? "bg-green-50 text-green-600"
-									: "bg-red-50 text-red-600"
-							}`}
-						>
-							{gpaChange >= 0 ? (
-								<TrendingUp className="h-3.5 w-3.5" />
-							) : (
-								<TrendingDown className="h-3.5 w-3.5" />
-							)}
-							{gpaChange >= 0 ? "+" : ""}
-							{((gpaChange * 100) / cgpa).toFixed(0)}%
-						</div>
+						{gpaChange !== null && (
+							<div
+								className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium mb-2 ${gpaChange >= 0
+										? "bg-green-50 text-green-600"
+										: "bg-red-50 text-red-600"
+									}`}
+							>
+								{gpaChange >= 0 ? (
+									<TrendingUp className="h-3.5 w-3.5" />
+								) : (
+									<TrendingDown className="h-3.5 w-3.5" />
+								)}
+								{gpaChange >= 0 ? "+" : ""}
+								{gpaChange.toFixed(2)}
+							</div>
+						)}
 					</div>
 
 					{/* Progress to target */}
@@ -121,21 +118,22 @@ export function StatsCards({
 				<div className="bg-white rounded-3xl p-6 card-shadow h-full">
 					<div className="flex items-center justify-between mb-2">
 						<h3 className="text-sm font-medium text-gray-500">Target GPA</h3>
-						<span
-							className={`px-2.5 py-1 rounded-full text-xs font-medium ${
-								isTargetMet
-									? "bg-green-50 text-green-600"
-									: "bg-amber-50 text-amber-600"
-							}`}
-						>
-							{isTargetMet ? "Achieved" : "In Progress"}
-						</span>
+						{semesterCount > 0 && (
+							<span
+								className={`px-2.5 py-1 rounded-full text-xs font-medium ${isTargetMet
+										? "bg-green-50 text-green-600"
+										: "bg-amber-50 text-amber-600"
+									}`}
+							>
+								{isTargetMet ? "Achieved" : "In Progress"}
+							</span>
+						)}
 					</div>
 					<span className="text-5xl font-light text-gray-900 tracking-tight">
 						{targetGpa.toFixed(2)}
 					</span>
 					<div className="mt-4 flex items-center gap-4">
-						{!isTargetMet && (
+						{!isTargetMet && semesterCount > 0 && (
 							<p className="text-sm text-gray-500">
 								<span className="font-semibold text-blue-600">
 									{(targetGpa - cgpa).toFixed(2)}

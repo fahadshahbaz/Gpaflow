@@ -34,6 +34,7 @@ export default async function DashboardPage() {
 					totalCreditHours={stats.totalCreditHours}
 					semesterCount={stats.semesterCount}
 					targetGpa={stats.targetGpa}
+					semesters={semesters}
 				/>
 			</div>
 
