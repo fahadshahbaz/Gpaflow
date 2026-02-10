@@ -14,17 +14,20 @@ import {
 } from "@/components/ui/dialog";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { calculateGradePoint, getLetterGrade } from "@/lib/grading/numl";
+import { getGradingEngine } from "@/lib/grading";
 import { updateSubject } from "@/lib/supabase/mutations";
+import type { UniversitySlug } from "@/types/grading";
 
 interface EditSubjectDialogProps {
 	subject: {
 		id: string;
 		name: string;
 		obtained_marks: number;
+		total_marks?: number;
 		credit_hours: number;
 	};
 	semesterId: string;
+	university: UniversitySlug;
 	open: boolean;
 	onOpenChange: (open: boolean) => void;
 }
@@ -32,56 +35,72 @@ interface EditSubjectDialogProps {
 export function EditSubjectDialog({
 	subject,
 	semesterId,
+	university,
 	open,
 	onOpenChange,
 }: EditSubjectDialogProps) {
 	const [name, setName] = useState(subject.name);
 	const [marks, setMarks] = useState(String(subject.obtained_marks));
+	const [totalMarks, setTotalMarks] = useState(String(subject.total_marks ?? 100));
 	const [creditHours, setCreditHours] = useState(String(subject.credit_hours));
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
 
-	// Reset form when subject changes
+	const engine = getGradingEngine(university);
+	const isGCUWF = university === "gcuwf";
+
 	useEffect(() => {
 		setName(subject.name);
 		setMarks(String(subject.obtained_marks));
+		setTotalMarks(String(subject.total_marks ?? 100));
 		setCreditHours(String(subject.credit_hours));
 		setError(null);
 	}, [subject]);
 
-	// Real-time grade preview
 	const gradePreview = useMemo(() => {
 		const marksNum = Number.parseFloat(marks);
-		if (Number.isNaN(marksNum) || marksNum < 0 || marksNum > 100) {
-			return null;
-		}
+		const totalMarksNum = Number.parseFloat(totalMarks);
+		const creditHoursNum = Number.parseInt(creditHours, 10) || 3;
+
+		if (Number.isNaN(marksNum) || marksNum < 0) return null;
+		if (isGCUWF && (Number.isNaN(totalMarksNum) || totalMarksNum <= 0)) return null;
+		if (marksNum > (isGCUWF ? totalMarksNum : 100)) return null;
+
+		const maxMarks = isGCUWF ? totalMarksNum : 100;
+		const percentage = (marksNum / maxMarks) * 100;
+
 		return {
-			letterGrade: getLetterGrade(marksNum),
-			gradePoint: calculateGradePoint(marksNum),
+			letterGrade: engine.getLetterGrade(marksNum, creditHoursNum, isGCUWF ? totalMarksNum : undefined),
+			gradePoint: engine.calculateGradePoint(marksNum, creditHoursNum, isGCUWF ? totalMarksNum : undefined),
+			percentage: percentage.toFixed(1),
 		};
-	}, [marks]);
+	}, [marks, totalMarks, creditHours, engine, isGCUWF]);
 
 	async function handleSubmit(e: React.FormEvent) {
 		e.preventDefault();
 
 		const trimmedName = name.trim();
 		const marksNum = Number.parseFloat(marks);
+		const totalMarksNum = Number.parseFloat(totalMarks);
 		const creditHoursNum = Number.parseInt(creditHours, 10);
 
-		// Client-side validation
 		if (!trimmedName) {
 			setError("Subject name is required");
 			return;
 		}
-		if (Number.isNaN(marksNum) || marksNum < 0 || marksNum > 100) {
-			setError("Marks must be between 0 and 100");
+
+		const maxMarks = isGCUWF ? totalMarksNum : 100;
+		if (Number.isNaN(marksNum) || marksNum < 0 || marksNum > maxMarks) {
+			setError(`Marks must be between 0 and ${maxMarks}`);
 			return;
 		}
-		if (
-			Number.isNaN(creditHoursNum) ||
-			creditHoursNum < 1 ||
-			creditHoursNum > 6
-		) {
+
+		if (isGCUWF && (Number.isNaN(totalMarksNum) || totalMarksNum <= 0)) {
+			setError("Total marks must be greater than 0");
+			return;
+		}
+
+		if (Number.isNaN(creditHoursNum) || creditHoursNum < 1 || creditHoursNum > 6) {
 			setError("Credit hours must be between 1 and 6");
 			return;
 		}
@@ -93,6 +112,7 @@ export function EditSubjectDialog({
 			await updateSubject(subject.id, semesterId, {
 				name: trimmedName,
 				obtained_marks: marksNum,
+				total_marks: isGCUWF ? totalMarksNum : undefined,
 				credit_hours: creditHoursNum,
 			});
 			onOpenChange(false);
@@ -116,7 +136,6 @@ export function EditSubjectDialog({
 				</DialogHeader>
 
 				<form onSubmit={handleSubmit} className="space-y-4 pt-2">
-					{/* Subject Name */}
 					<Field>
 						<FieldLabel className="text-gray-600 text-sm font-medium mb-1.5 block">
 							Subject Name
@@ -125,22 +144,21 @@ export function EditSubjectDialog({
 							placeholder="e.g. Calculus, Programming Fundamentals"
 							value={name}
 							onChange={(e) => setName(e.target.value)}
-							className="bg-gray-50 border-gray-200 h-10 text-gray-900 placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 rounded-xl"
+							className="bg-secondary/50 border-input h-10 text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-xl"
 							disabled={loading}
 						/>
 					</Field>
 
-					{/* Marks and Credit Hours - Side by side */}
-					<div className="grid grid-cols-2 gap-4">
+					<div className={`grid gap-4 ${isGCUWF ? "grid-cols-3" : "grid-cols-2"}`}>
 						<Field>
 							<FieldLabel className="text-gray-600 text-sm font-medium mb-1.5 block">
 								Obtained Marks
 							</FieldLabel>
 							<Input
 								type="number"
-								placeholder="0 - 100"
+								placeholder={isGCUWF ? "0" : "0 - 100"}
 								min={0}
-								max={100}
+								max={isGCUWF ? Number(totalMarks) || 999 : 100}
 								step="0.1"
 								value={marks}
 								onChange={(e) => setMarks(e.target.value)}
@@ -148,6 +166,25 @@ export function EditSubjectDialog({
 								disabled={loading}
 							/>
 						</Field>
+
+						{isGCUWF && (
+							<Field>
+								<FieldLabel className="text-gray-600 text-sm font-medium mb-1.5 block">
+									Total Marks
+								</FieldLabel>
+								<Input
+									type="number"
+									placeholder="100"
+									min={1}
+									step="1"
+									value={totalMarks}
+									onChange={(e) => setTotalMarks(e.target.value)}
+									className="bg-gray-50 border-gray-200 h-10 text-gray-900 placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 rounded-xl"
+									disabled={loading}
+								/>
+							</Field>
+						)}
+
 						<Field>
 							<FieldLabel className="text-gray-600 text-sm font-medium mb-1.5 block">
 								Credit Hours
@@ -165,7 +202,6 @@ export function EditSubjectDialog({
 						</Field>
 					</div>
 
-					{/* Real-time Grade Preview */}
 					<AnimatePresence>
 						{gradePreview && (
 							<motion.div
@@ -173,14 +209,14 @@ export function EditSubjectDialog({
 								animate={{ opacity: 1, y: 0 }}
 								exit={{ opacity: 0, y: -10 }}
 								transition={{ duration: 0.2 }}
-								className="p-3 rounded-xl bg-blue-50 border border-blue-100"
+								className="p-3 rounded-xl bg-primary-50 border border-primary-100"
 							>
-								<p className="text-xs text-blue-600 uppercase tracking-wider mb-2 font-medium">
+								<p className="text-xs text-primary uppercase tracking-wider mb-2 font-medium">
 									Grade Preview
 								</p>
 								<div className="flex items-center justify-between">
 									<div className="flex items-center gap-3">
-										<Badge className="bg-blue-500 text-white border-0 px-2.5 py-1 text-base font-semibold">
+										<Badge className="bg-primary text-primary-foreground border-0 px-2.5 py-1 text-base font-semibold">
 											{gradePreview.letterGrade}
 										</Badge>
 										<div>
@@ -192,7 +228,7 @@ export function EditSubjectDialog({
 									</div>
 									<div className="text-right">
 										<p className="text-base font-medium text-gray-700">
-											{marks}%
+											{gradePreview.percentage}%
 										</p>
 										<p className="text-xs text-gray-500">Percentage</p>
 									</div>
@@ -201,7 +237,6 @@ export function EditSubjectDialog({
 						)}
 					</AnimatePresence>
 
-					{/* Error Message */}
 					<AnimatePresence>
 						{error && (
 							<motion.div
@@ -209,7 +244,7 @@ export function EditSubjectDialog({
 								animate={{ opacity: 1, height: "auto" }}
 								exit={{ opacity: 0, height: 0 }}
 							>
-								<FieldError className="text-red-500 text-sm">
+								<FieldError className="text-destructive text-sm">
 									{error}
 								</FieldError>
 							</motion.div>
@@ -229,7 +264,7 @@ export function EditSubjectDialog({
 						<Button
 							type="submit"
 							disabled={loading || !name.trim() || !marks || !creditHours}
-							className="bg-blue-500 hover:bg-blue-600 text-white font-medium h-9 px-4 rounded-xl disabled:opacity-50"
+							className="bg-primary hover:bg-primary-600 text-primary-foreground font-medium h-9 px-4 rounded-xl disabled:opacity-50"
 						>
 							{loading ? (
 								<span className="flex items-center gap-2">

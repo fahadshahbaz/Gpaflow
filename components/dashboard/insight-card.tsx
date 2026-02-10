@@ -2,7 +2,7 @@
 
 import { Lightbulb, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
-import type { Semester } from "@/lib/supabase/queries";
+import type { Semester } from "@/types/grading";
 
 interface InsightCardProps {
 	semesters: Semester[];

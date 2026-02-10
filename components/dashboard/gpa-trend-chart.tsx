@@ -10,7 +10,7 @@ import {
 	XAxis,
 	YAxis,
 } from "recharts";
-import type { Semester } from "@/lib/supabase/queries";
+import type { Semester } from "@/types/grading";
 
 interface GPATrendChartProps {
 	semesters: Semester[];
@@ -76,7 +76,7 @@ export function GPATrendChart({
 							<div key={item.name}>
 								<p className="text-xs text-gray-500 mb-0.5">{item.semester}</p>
 								<p
-									className={`text-xl font-light ${index === chartData.length - 1 ? "text-blue-600" : "text-gray-400"}`}
+									className={`text-xl font-light ${index === chartData.length - 1 ? "text-primary" : "text-muted-foreground"}`}
 								>
 									{item.sgpa.toFixed(2)}
 								</p>
@@ -93,12 +93,12 @@ export function GPATrendChart({
 							>
 								<defs>
 									<linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
-										<stop offset="0%" stopColor="#3b82f6" stopOpacity={0.8} />
-										<stop offset="100%" stopColor="#3b82f6" stopOpacity={0.3} />
+										<stop offset="0%" stopColor="var(--primary)" stopOpacity={0.8} />
+										<stop offset="100%" stopColor="var(--primary)" stopOpacity={0.3} />
 									</linearGradient>
 									<linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
-										<stop offset="0%" stopColor="#3b82f6" stopOpacity={0.15} />
-										<stop offset="100%" stopColor="#3b82f6" stopOpacity={0} />
+										<stop offset="0%" stopColor="var(--primary)" stopOpacity={0.15} />
+										<stop offset="100%" stopColor="var(--primary)" stopOpacity={0} />
 									</linearGradient>
 								</defs>
 								<XAxis
@@ -107,7 +107,7 @@ export function GPATrendChart({
 									fontSize={11}
 									tickLine={false}
 									axisLine={false}
-									tick={{ fill: "#9ca3af" }}
+									tick={{ fill: "var(--muted-foreground)" }}
 									dy={5}
 								/>
 								<YAxis
@@ -115,7 +115,7 @@ export function GPATrendChart({
 									fontSize={11}
 									tickLine={false}
 									axisLine={false}
-									tick={{ fill: "#9ca3af" }}
+									tick={{ fill: "var(--muted-foreground)" }}
 									domain={[0, 4]}
 									ticks={[0, 1, 2, 3, 4]}
 								/>
@@ -125,20 +125,20 @@ export function GPATrendChart({
 										if (active && payload && payload.length) {
 											const data = payload[0].payload as ChartDataPoint;
 											return (
-												<div className="bg-white border border-gray-200 rounded-xl px-3 py-2 shadow-lg">
-													<p className="text-xs font-medium text-gray-900 mb-1.5">
+												<div className="bg-popover border border-border rounded-xl px-3 py-2 shadow-lg">
+													<p className="text-xs font-medium text-foreground mb-1.5">
 														{data.semester}
 													</p>
 													<div className="space-y-1">
 														<div className="flex items-center justify-between gap-4">
-															<span className="text-xs text-gray-500">SGPA</span>
-															<span className="text-xs font-semibold text-blue-600">
+															<span className="text-xs text-muted-foreground">SGPA</span>
+															<span className="text-xs font-semibold text-primary">
 																{data.sgpa}
 															</span>
 														</div>
 														<div className="flex items-center justify-between gap-4">
-															<span className="text-xs text-gray-500">CGPA</span>
-															<span className="text-xs font-medium text-gray-900">
+															<span className="text-xs text-muted-foreground">CGPA</span>
+															<span className="text-xs font-medium text-foreground">
 																{data.cgpa}
 															</span>
 														</div>
@@ -159,10 +159,10 @@ export function GPATrendChart({
 									type="monotone"
 									dataKey="cgpa"
 									fill="url(#areaGradient)"
-									stroke="#3b82f6"
+									stroke="var(--primary)"
 									strokeWidth={2}
-									dot={{ fill: "#3b82f6", strokeWidth: 0, r: 3 }}
-									activeDot={{ fill: "#3b82f6", strokeWidth: 0, r: 5 }}
+									dot={{ fill: "var(--primary)", strokeWidth: 0, r: 3 }}
+									activeDot={{ fill: "var(--primary)", strokeWidth: 0, r: 5 }}
 								/>
 							</ComposedChart>
 						</ResponsiveContainer>
@@ -171,12 +171,12 @@ export function GPATrendChart({
 					{/* Legend */}
 					<div className="flex items-center gap-6 mt-3 pt-3 border-t border-gray-100">
 						<div className="flex items-center gap-2">
-							<div className="w-3 h-3 rounded bg-blue-500/60" />
-							<span className="text-xs text-gray-500">SGPA</span>
+							<div className="w-3 h-3 rounded bg-primary/60" />
+							<span className="text-xs text-muted-foreground">SGPA</span>
 						</div>
 						<div className="flex items-center gap-2">
-							<div className="w-3 h-0.5 bg-blue-500 rounded" />
-							<span className="text-xs text-gray-500">CGPA Trend</span>
+							<div className="w-3 h-0.5 bg-primary rounded" />
+							<span className="text-xs text-muted-foreground">CGPA Trend</span>
 						</div>
 						{targetGpa && (
 							<div className="flex items-center gap-2 ml-auto">

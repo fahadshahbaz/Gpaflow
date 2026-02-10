@@ -46,7 +46,7 @@ export function AddSemesterDialog() {
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
-				<Button className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-4 h-9 rounded-xl">
+				<Button className="bg-primary hover:bg-primary-600 text-primary-foreground font-medium px-4 h-9 rounded-xl">
 					<Plus className="mr-1.5 h-4 w-4" />
 					New Semester
 				</Button>
@@ -69,7 +69,7 @@ export function AddSemesterDialog() {
 							placeholder="e.g. Semester 1, Fall 2024"
 							value={name}
 							onChange={(e) => setName(e.target.value)}
-							className="bg-gray-50 border-gray-200 h-11 rounded-xl text-gray-900 placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+							className="bg-secondary/50 border-input h-11 rounded-xl text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20"
 							disabled={loading}
 						/>
 						<AnimatePresence>
@@ -79,7 +79,7 @@ export function AddSemesterDialog() {
 									animate={{ opacity: 1, height: "auto" }}
 									exit={{ opacity: 0, height: 0 }}
 								>
-									<FieldError className="mt-2 text-red-500 text-sm">
+									<FieldError className="mt-2 text-destructive text-sm">
 										{error}
 									</FieldError>
 								</motion.div>
@@ -99,7 +99,7 @@ export function AddSemesterDialog() {
 						<Button
 							type="submit"
 							disabled={loading || !name.trim()}
-							className="bg-blue-500 hover:bg-blue-600 text-white font-medium h-10 px-5 rounded-xl disabled:opacity-50"
+							className="bg-primary hover:bg-primary-600 text-primary-foreground font-medium h-10 px-5 rounded-xl disabled:opacity-50"
 						>
 							{loading ? (
 								<span className="flex items-center gap-2">

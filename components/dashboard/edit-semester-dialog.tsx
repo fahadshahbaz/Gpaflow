@@ -60,8 +60,8 @@ export function EditSemesterDialog({
 			<DialogContent className="bg-white border-gray-200 sm:max-w-[425px] rounded-2xl">
 				<DialogHeader>
 					<div className="flex items-center gap-3">
-						<div className="h-10 w-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center">
-							<Pencil className="h-5 w-5 text-blue-500" />
+						<div className="h-10 w-10 rounded-xl bg-primary-50 border border-primary-100 flex items-center justify-center">
+							<Pencil className="h-5 w-5 text-primary" />
 						</div>
 						<div>
 							<DialogTitle className="text-xl font-semibold text-gray-900">
@@ -82,7 +82,7 @@ export function EditSemesterDialog({
 							placeholder="e.g. Semester 1, Fall 2024"
 							value={name}
 							onChange={(e) => setName(e.target.value)}
-							className="bg-gray-50 border-gray-200 h-11 rounded-xl text-gray-900 placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
+							className="bg-secondary/50 border-input h-11 rounded-xl text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
 							disabled={loading}
 						/>
 						<AnimatePresence>
@@ -92,7 +92,7 @@ export function EditSemesterDialog({
 									animate={{ opacity: 1, height: "auto" }}
 									exit={{ opacity: 0, height: 0 }}
 								>
-									<FieldError className="mt-2 text-red-500 text-sm">
+									<FieldError className="mt-2 text-destructive text-sm">
 										{error}
 									</FieldError>
 								</motion.div>
@@ -112,7 +112,7 @@ export function EditSemesterDialog({
 						<Button
 							type="submit"
 							disabled={loading || !name.trim() || name === currentName}
-							className="bg-blue-500 hover:bg-blue-600 text-white font-medium h-11 px-6 rounded-xl transition-all disabled:opacity-50"
+							className="bg-primary hover:bg-primary-600 text-primary-foreground font-medium h-11 px-6 rounded-xl transition-all disabled:opacity-50"
 						>
 							{loading ? "Saving..." : "Save Changes"}
 						</Button>

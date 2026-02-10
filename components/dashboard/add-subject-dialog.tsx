@@ -15,42 +15,57 @@ import {
 } from "@/components/ui/dialog";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { calculateGradePoint, getLetterGrade } from "@/lib/grading/numl";
+import { getGradingEngine } from "@/lib/grading";
 import { createSubject } from "@/lib/supabase/mutations";
+import type { UniversitySlug } from "@/types/grading";
 
 interface AddSubjectDialogProps {
 	semesterId: string;
 	semesterName: string;
+	university: UniversitySlug;
 	trigger?: React.ReactNode;
 }
 
 export function AddSubjectDialog({
 	semesterId,
 	semesterName,
+	university,
 	trigger,
 }: AddSubjectDialogProps) {
 	const [open, setOpen] = useState(false);
 	const [name, setName] = useState("");
 	const [marks, setMarks] = useState("");
+	const [totalMarks, setTotalMarks] = useState("100");
 	const [creditHours, setCreditHours] = useState("");
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
 
-	// Real-time grade preview
+	const engine = getGradingEngine(university);
+	const isGCUWF = university === "gcuwf";
+
 	const gradePreview = useMemo(() => {
 		const marksNum = Number.parseFloat(marks);
-		if (Number.isNaN(marksNum) || marksNum < 0 || marksNum > 100) {
-			return null;
-		}
+		const totalMarksNum = Number.parseFloat(totalMarks);
+		const creditHoursNum = Number.parseInt(creditHours, 10) || 3;
+
+		if (Number.isNaN(marksNum) || marksNum < 0) return null;
+		if (isGCUWF && (Number.isNaN(totalMarksNum) || totalMarksNum <= 0)) return null;
+		if (marksNum > (isGCUWF ? totalMarksNum : 100)) return null;
+
+		const maxMarks = isGCUWF ? totalMarksNum : 100;
+		const percentage = (marksNum / maxMarks) * 100;
+
 		return {
-			letterGrade: getLetterGrade(marksNum),
-			gradePoint: calculateGradePoint(marksNum),
+			letterGrade: engine.getLetterGrade(marksNum, creditHoursNum, isGCUWF ? totalMarksNum : undefined),
+			gradePoint: engine.calculateGradePoint(marksNum, creditHoursNum, isGCUWF ? totalMarksNum : undefined),
+			percentage: percentage.toFixed(1),
 		};
-	}, [marks]);
+	}, [marks, totalMarks, creditHours, engine, isGCUWF]);
 
 	function resetForm() {
 		setName("");
 		setMarks("");
+		setTotalMarks("100");
 		setCreditHours("");
 		setError(null);
 	}
@@ -60,22 +75,26 @@ export function AddSubjectDialog({
 
 		const trimmedName = name.trim();
 		const marksNum = Number.parseFloat(marks);
+		const totalMarksNum = Number.parseFloat(totalMarks);
 		const creditHoursNum = Number.parseInt(creditHours, 10);
 
-		// Client-side validation
 		if (!trimmedName) {
 			setError("Subject name is required");
 			return;
 		}
-		if (Number.isNaN(marksNum) || marksNum < 0 || marksNum > 100) {
-			setError("Marks must be between 0 and 100");
+
+		const maxMarks = isGCUWF ? totalMarksNum : 100;
+		if (Number.isNaN(marksNum) || marksNum < 0 || marksNum > maxMarks) {
+			setError(`Marks must be between 0 and ${maxMarks}`);
 			return;
 		}
-		if (
-			Number.isNaN(creditHoursNum) ||
-			creditHoursNum < 1 ||
-			creditHoursNum > 6
-		) {
+
+		if (isGCUWF && (Number.isNaN(totalMarksNum) || totalMarksNum <= 0)) {
+			setError("Total marks must be greater than 0");
+			return;
+		}
+
+		if (Number.isNaN(creditHoursNum) || creditHoursNum < 1 || creditHoursNum > 6) {
 			setError("Credit hours must be between 1 and 6");
 			return;
 		}
@@ -87,6 +106,7 @@ export function AddSubjectDialog({
 			await createSubject(semesterId, {
 				name: trimmedName,
 				obtained_marks: marksNum,
+				total_marks: isGCUWF ? totalMarksNum : undefined,
 				credit_hours: creditHoursNum,
 			});
 			setOpen(false);
@@ -111,7 +131,7 @@ export function AddSubjectDialog({
 					<Button
 						variant="ghost"
 						size="sm"
-						className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 h-8"
+						className="text-primary hover:text-primary-700 hover:bg-primary-50 h-8"
 					>
 						<Plus className="h-4 w-4 mr-1" />
 						Add subject
@@ -129,7 +149,6 @@ export function AddSubjectDialog({
 				</DialogHeader>
 
 				<form onSubmit={handleSubmit} className="space-y-4 pt-2">
-					{/* Subject Name */}
 					<Field>
 						<FieldLabel className="text-gray-600 text-sm font-medium mb-2 block">
 							Subject Name
@@ -138,22 +157,21 @@ export function AddSubjectDialog({
 							placeholder="e.g. Calculus, Programming Fundamentals"
 							value={name}
 							onChange={(e) => setName(e.target.value)}
-							className="bg-gray-50 border-gray-200 h-11 rounded-xl text-gray-900 placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+							className="bg-secondary/50 border-input h-11 rounded-xl text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20"
 							disabled={loading}
 						/>
 					</Field>
 
-					{/* Marks and Credit Hours - Side by side */}
-					<div className="grid grid-cols-2 gap-4">
+					<div className={`grid gap-4 ${isGCUWF ? "grid-cols-3" : "grid-cols-2"}`}>
 						<Field>
 							<FieldLabel className="text-gray-600 text-sm font-medium mb-2 block">
 								Obtained Marks
 							</FieldLabel>
 							<Input
 								type="number"
-								placeholder="0 - 100"
+								placeholder={isGCUWF ? "0" : "0 - 100"}
 								min={0}
-								max={100}
+								max={isGCUWF ? Number(totalMarks) || 999 : 100}
 								step="0.1"
 								value={marks}
 								onChange={(e) => setMarks(e.target.value)}
@@ -161,6 +179,25 @@ export function AddSubjectDialog({
 								disabled={loading}
 							/>
 						</Field>
+
+						{isGCUWF && (
+							<Field>
+								<FieldLabel className="text-gray-600 text-sm font-medium mb-2 block">
+									Total Marks
+								</FieldLabel>
+								<Input
+									type="number"
+									placeholder="100"
+									min={1}
+									step="1"
+									value={totalMarks}
+									onChange={(e) => setTotalMarks(e.target.value)}
+									className="bg-gray-50 border-gray-200 h-11 rounded-xl text-gray-900 placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+									disabled={loading}
+								/>
+							</Field>
+						)}
+
 						<Field>
 							<FieldLabel className="text-gray-600 text-sm font-medium mb-2 block">
 								Credit Hours
@@ -178,7 +215,6 @@ export function AddSubjectDialog({
 						</Field>
 					</div>
 
-					{/* Real-time Grade Preview */}
 					<AnimatePresence>
 						{gradePreview && (
 							<motion.div
@@ -186,14 +222,14 @@ export function AddSubjectDialog({
 								animate={{ opacity: 1, y: 0 }}
 								exit={{ opacity: 0, y: -10 }}
 								transition={{ duration: 0.2 }}
-								className="p-4 rounded-xl bg-blue-50 border border-blue-100"
+								className="p-4 rounded-xl bg-primary-50 border border-primary-100"
 							>
-								<p className="text-xs text-blue-600 uppercase tracking-wider mb-2 font-medium">
+								<p className="text-xs text-primary uppercase tracking-wider mb-2 font-medium">
 									Grade Preview
 								</p>
 								<div className="flex items-center justify-between">
 									<div className="flex items-center gap-3">
-										<span className="bg-blue-500 text-white px-3 py-1.5 rounded-lg text-base font-semibold">
+										<span className="bg-primary text-primary-foreground px-3 py-1.5 rounded-lg text-base font-semibold">
 											{gradePreview.letterGrade}
 										</span>
 										<div>
@@ -205,7 +241,7 @@ export function AddSubjectDialog({
 									</div>
 									<div className="text-right">
 										<p className="text-lg font-medium text-gray-700">
-											{marks}%
+											{gradePreview.percentage}%
 										</p>
 										<p className="text-xs text-gray-500">Percentage</p>
 									</div>
@@ -214,7 +250,6 @@ export function AddSubjectDialog({
 						)}
 					</AnimatePresence>
 
-					{/* Error Message */}
 					<AnimatePresence>
 						{error && (
 							<motion.div
@@ -222,7 +257,7 @@ export function AddSubjectDialog({
 								animate={{ opacity: 1, height: "auto" }}
 								exit={{ opacity: 0, height: 0 }}
 							>
-								<FieldError className="text-red-500 text-sm">
+								<FieldError className="text-destructive text-sm">
 									{error}
 								</FieldError>
 							</motion.div>
@@ -242,7 +277,7 @@ export function AddSubjectDialog({
 						<Button
 							type="submit"
 							disabled={loading || !name.trim() || !marks || !creditHours}
-							className="bg-blue-500 hover:bg-blue-600 text-white font-medium h-10 px-5 rounded-xl disabled:opacity-50"
+							className="bg-primary hover:bg-primary-600 text-primary-foreground font-medium h-10 px-5 rounded-xl disabled:opacity-50"
 						>
 							{loading ? (
 								<span className="flex items-center gap-2">

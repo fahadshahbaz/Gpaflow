@@ -52,8 +52,8 @@ export function DeleteSemesterDialog({
 			<DialogContent className="bg-white border-gray-200 sm:max-w-[425px] rounded-2xl">
 				<DialogHeader>
 					<div className="flex items-center gap-3">
-						<div className="h-10 w-10 rounded-xl bg-red-50 border border-red-100 flex items-center justify-center">
-							<AlertTriangle className="h-5 w-5 text-red-500" />
+						<div className="h-10 w-10 rounded-xl bg-destructive-50 border border-destructive-100 flex items-center justify-center">
+							<AlertTriangle className="h-5 w-5 text-destructive" />
 						</div>
 						<div>
 							<DialogTitle className="text-xl font-semibold text-gray-900">
@@ -65,7 +65,7 @@ export function DeleteSemesterDialog({
 						Are you sure you want to delete{" "}
 						<span className="text-gray-900 font-medium">{semesterName}</span>?
 						{subjectCount > 0 && (
-							<span className="block mt-2 text-red-500 text-xs">
+							<span className="block mt-2 text-destructive text-xs">
 								This will also delete {subjectCount} subject
 								{subjectCount > 1 ? "s" : ""} associated with this semester.
 							</span>
@@ -73,7 +73,7 @@ export function DeleteSemesterDialog({
 					</DialogDescription>
 				</DialogHeader>
 				{error && (
-					<p className="text-sm text-red-600 bg-red-50 border border-red-100 rounded-lg px-3 py-2">
+					<p className="text-sm text-destructive bg-destructive-50 border border-destructive-100 rounded-lg px-3 py-2">
 						{error}
 					</p>
 				)}
@@ -91,7 +91,7 @@ export function DeleteSemesterDialog({
 						type="button"
 						onClick={handleDelete}
 						disabled={loading}
-						className="bg-red-500 hover:bg-red-600 text-white font-medium h-11 px-6 rounded-xl transition-all disabled:opacity-50"
+						className="bg-destructive hover:bg-destructive-600 text-destructive-foreground font-medium h-11 px-6 rounded-xl transition-all disabled:opacity-50"
 					>
 						<Trash2 className="h-4 w-4 mr-2" />
 						{loading ? "Deleting..." : "Delete"}

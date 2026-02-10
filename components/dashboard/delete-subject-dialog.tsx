@@ -72,7 +72,7 @@ export function DeleteSubjectDialog({
 								initial={{ opacity: 0, height: 0 }}
 								animate={{ opacity: 1, height: "auto" }}
 								exit={{ opacity: 0, height: 0 }}
-								className="mt-3 text-red-500 text-sm"
+								className="mt-3 text-destructive text-sm"
 							>
 								{error}
 							</motion.p>
@@ -90,7 +90,7 @@ export function DeleteSubjectDialog({
 					<AlertDialogAction
 						onClick={handleDelete}
 						disabled={loading}
-						className="bg-red-500 hover:bg-red-600 text-white font-medium h-9 px-4 rounded-xl disabled:opacity-50"
+						className="bg-destructive hover:bg-destructive-600 text-destructive-foreground font-medium h-9 px-4 rounded-xl disabled:opacity-50"
 					>
 						{loading ? (
 							<span className="flex items-center gap-2">

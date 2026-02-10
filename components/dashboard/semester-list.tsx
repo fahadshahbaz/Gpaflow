@@ -18,8 +18,8 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { getLetterGrade } from "@/lib/grading/numl";
-import type { Semester, Subject } from "@/lib/supabase/queries";
+import { getGradingEngine } from "@/lib/grading";
+import type { Semester, Subject, UniversitySlug } from "@/types/grading";
 import { AddSubjectDialog } from "./add-subject-dialog";
 import { DeleteSemesterDialog } from "./delete-semester-dialog";
 import { DeleteSubjectDialog } from "./delete-subject-dialog";
@@ -28,9 +28,11 @@ import { EditSubjectDialog } from "./edit-subject-dialog";
 
 interface SemesterListProps {
 	semesters: Semester[];
+	university: UniversitySlug;
 }
 
-export function SemesterList({ semesters }: SemesterListProps) {
+export function SemesterList({ semesters, university }: SemesterListProps) {
+	const engine = getGradingEngine(university);
 	const [editingSemester, setEditingSemester] = useState<Semester | null>(null);
 	const [deletingSemester, setDeletingSemester] = useState<Semester | null>(
 		null,
@@ -121,7 +123,7 @@ export function SemesterList({ semesters }: SemesterListProps) {
 									</DropdownMenuItem>
 									<DropdownMenuItem
 										onClick={() => setDeletingSemester(semester)}
-										className="text-red-600 hover:text-red-700 hover:bg-red-50 cursor-pointer text-sm rounded-lg"
+										className="text-destructive hover:text-destructive-700 hover:bg-destructive-50 cursor-pointer text-sm rounded-lg"
 									>
 										<Trash2 className="h-4 w-4 mr-2" />
 										Delete
@@ -132,7 +134,7 @@ export function SemesterList({ semesters }: SemesterListProps) {
 
 						{/* Stats Row */}
 						<div className="flex items-center gap-2 mb-4">
-							<span className="px-3 py-1.5 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold">
+							<span className="px-3 py-1.5 rounded-full bg-primary-50 text-primary-600 text-xs font-semibold">
 								{semester.sgpa.toFixed(2)} SGPA
 							</span>
 							<span className="px-3 py-1.5 rounded-full bg-gray-100 text-gray-600 text-xs font-medium">
@@ -147,11 +149,12 @@ export function SemesterList({ semesters }: SemesterListProps) {
 								<AddSubjectDialog
 									semesterId={semester.id}
 									semesterName={semester.name}
+									university={university}
 									trigger={
 										<Button
 											variant="ghost"
 											size="sm"
-											className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 h-8 text-xs"
+											className="text-primary hover:text-primary-700 hover:bg-primary-50 h-8 text-xs"
 										>
 											Add subject
 											<ChevronRight className="h-3.5 w-3.5 ml-1" />
@@ -173,8 +176,8 @@ export function SemesterList({ semesters }: SemesterListProps) {
 											{subject.name}
 										</span>
 										<div className="flex items-center gap-2">
-											<span className="text-blue-600 font-semibold text-sm">
-												{getLetterGrade(subject.obtained_marks)}
+											<span className="text-primary font-semibold text-sm">
+												{subject.letter_grade}
 											</span>
 											<span className="text-gray-400 text-xs">
 												{subject.credit_hours}ch
@@ -212,7 +215,7 @@ export function SemesterList({ semesters }: SemesterListProps) {
 																semesterId: semester.id,
 															})
 														}
-														className="text-red-600 hover:text-red-700 hover:bg-red-50 cursor-pointer text-xs rounded-lg"
+														className="text-destructive hover:text-destructive-700 hover:bg-destructive-50 cursor-pointer text-xs rounded-lg"
 													>
 														<Trash2 className="h-3.5 w-3.5 mr-2" />
 														Delete
@@ -246,10 +249,11 @@ export function SemesterList({ semesters }: SemesterListProps) {
 								<AddSubjectDialog
 									semesterId={semester.id}
 									semesterName={semester.name}
+									university={university}
 									trigger={
 										<button
 											type="button"
-											className="w-full text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl py-2.5 text-xs font-medium flex items-center justify-center gap-1 transition-colors border-2 border-dashed border-gray-200 hover:border-blue-200"
+											className="w-full text-muted-foreground hover:text-primary hover:bg-primary-50 rounded-xl py-2.5 text-xs font-medium flex items-center justify-center gap-1 transition-colors border-2 border-dashed border-input hover:border-primary-200"
 										>
 											<Plus className="h-3.5 w-3.5" />
 											Add Subject
@@ -287,6 +291,7 @@ export function SemesterList({ semesters }: SemesterListProps) {
 				<EditSubjectDialog
 					subject={editingSubject.subject}
 					semesterId={editingSubject.semesterId}
+					university={university}
 					open={!!editingSubject}
 					onOpenChange={(open) => !open && setEditingSubject(null)}
 				/>

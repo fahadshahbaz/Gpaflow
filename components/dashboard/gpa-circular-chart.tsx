@@ -47,7 +47,7 @@ export function GPACircularChart({ cgpa, targetGpa }: GPACircularChartProps) {
 							cx="70"
 							cy="70"
 							r="55"
-							stroke="#f97316"
+							stroke="var(--primary)"
 							strokeWidth="10"
 							fill="none"
 							strokeLinecap="round"
@@ -78,7 +78,7 @@ export function GPACircularChart({ cgpa, targetGpa }: GPACircularChartProps) {
 					<p className="text-xs text-gray-500">To Target</p>
 				</div>
 				<div className="text-center p-2.5 rounded-lg bg-[#1a1a1a]">
-					<p className="text-xl font-semibold text-orange-500">
+					<p className="text-xl font-semibold text-primary">
 						{Math.max(targetGpa - cgpa, 0).toFixed(2)}
 					</p>
 					<p className="text-xs text-gray-500">Points Needed</p>

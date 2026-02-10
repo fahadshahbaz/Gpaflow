@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import type { Semester } from "@/lib/supabase/queries";
+import type { Semester } from "@/types/grading";
 
 interface ActivityDotsProps {
 	semesters: Semester[];
@@ -39,11 +39,12 @@ export function ActivityDots({ semesters }: ActivityDotsProps) {
 		if (!isActive) return "bg-gray-100";
 
 		const intensity = (semesterIndex + 1) / activity.semesters.length;
-		if (intensity > 0.8) return "bg-green-600";
-		if (intensity > 0.6) return "bg-green-500";
-		if (intensity > 0.4) return "bg-green-400";
-		if (intensity > 0.2) return "bg-green-300";
-		return "bg-green-200";
+		if (intensity > 0.8) return "bg-success-600";
+		if (intensity > 0.6) return "bg-success-50"; 
+		if (intensity > 0.6) return "bg-success";
+		if (intensity > 0.4) return "bg-success-600/70"; /* approximate */
+		if (intensity > 0.2) return "bg-success-600/40";
+		return "bg-success-600/20";
 	};
 
 	return (
@@ -62,7 +63,7 @@ export function ActivityDots({ semesters }: ActivityDotsProps) {
 				</div>
 				<div className="text-right mb-1 ml-auto">
 					<p className="text-xs text-gray-500">avg per semester</p>
-					<p className="text-sm font-semibold text-green-600">
+					<p className="text-sm font-semibold text-success-600">
 						{activity.avgPerSemester}
 					</p>
 				</div>
@@ -105,9 +106,9 @@ export function ActivityDots({ semesters }: ActivityDotsProps) {
 			{activity.semesters.length > 0 && (
 				<div className="flex items-center justify-between mt-4 pt-3 border-t border-gray-100">
 					<div className="flex items-center gap-1.5">
-						<div className="h-2.5 w-2.5 rounded-full bg-green-200" />
-						<div className="h-2.5 w-2.5 rounded-full bg-green-400" />
-						<div className="h-2.5 w-2.5 rounded-full bg-green-600" />
+						<div className="h-2.5 w-2.5 rounded-full bg-success-600/20" />
+						<div className="h-2.5 w-2.5 rounded-full bg-success-600/60" />
+						<div className="h-2.5 w-2.5 rounded-full bg-success-600" />
 						<span className="text-xs text-gray-500 ml-1">Recent semesters</span>
 					</div>
 					<div className="flex items-center gap-1.5">

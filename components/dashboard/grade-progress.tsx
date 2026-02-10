@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import type { Semester } from "@/lib/supabase/queries";
+import type { Semester } from "@/types/grading";
 
 interface GradeProgressProps {
 	semesters: Semester[];
@@ -35,10 +35,10 @@ export function GradeProgress({ semesters }: GradeProgressProps) {
 
 		const total = allSubjects.length;
 		const colors = {
-			"A/A+": "bg-green-500",
-			"B/B+": "bg-blue-500",
-			"C/C+": "bg-amber-500",
-			"D & Below": "bg-red-400",
+			"A/A+": "bg-success-500",
+			"B/B+": "bg-primary-500",
+			"C/C+": "bg-warning-600",
+			"D & Below": "bg-destructive-400",
 		};
 
 		return Object.entries(gradeGroups).map(([grade, count]) => ({
@@ -63,8 +63,8 @@ export function GradeProgress({ semesters }: GradeProgressProps) {
 					Grade Distribution
 				</h3>
 				{totalSubjects > 0 && (
-					<div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-green-50">
-						<span className="text-xs font-semibold text-green-600">
+					<div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-success-50">
+						<span className="text-xs font-semibold text-success-600">
 							{topGradePercentage}% A's
 						</span>
 					</div>

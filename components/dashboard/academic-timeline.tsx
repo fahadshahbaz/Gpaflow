@@ -2,7 +2,7 @@
 
 import { Calendar } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import type { Semester } from "@/lib/supabase/queries";
+import type { Semester } from "@/types/grading";
 
 interface AcademicTimelineProps {
 	semesters: Semester[];
@@ -81,7 +81,7 @@ export function AcademicTimeline({ semesters }: AcademicTimelineProps) {
 
 					{/* Progress indicator */}
 					<div
-						className="absolute top-4 left-0 h-0.5 bg-orange-500 rounded-full transition-all duration-500"
+						className="absolute top-4 left-0 h-0.5 bg-primary rounded-full transition-all duration-500"
 						style={{ width: `${(displaySemesters.length / 8) * 100}%` }}
 					/>
 
@@ -89,7 +89,7 @@ export function AcademicTimeline({ semesters }: AcademicTimelineProps) {
 					<div className="flex justify-between relative pt-1">
 						{displaySemesters.map((semester, index) => (
 							<div key={semester.id} className="flex flex-col items-center">
-								<div className="w-3 h-3 rounded-full bg-[#141414] border-2 border-orange-500" />
+								<div className="w-3 h-3 rounded-full bg-[#141414] border-2 border-primary" />
 								<div className="mt-2 text-center">
 									<p className="text-[10px] text-gray-600">S{index + 1}</p>
 									<p className="text-xs font-medium text-white">
@@ -137,7 +137,7 @@ export function AcademicTimeline({ semesters }: AcademicTimelineProps) {
 					</div>
 					<div>
 						<p className="text-gray-600">Average</p>
-						<p className="text-orange-500 font-medium">
+						<p className="text-primary font-medium">
 							{(
 								displaySemesters.reduce((sum, s) => sum + s.sgpa, 0) /
 								displaySemesters.length

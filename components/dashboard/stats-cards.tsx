@@ -3,7 +3,7 @@
 import { useCallback, useMemo, useState, useTransition } from "react";
 import { Check, Pencil, TrendingDown, TrendingUp, X } from "lucide-react";
 import { useRouter } from "next/navigation";
-import type { Semester } from "@/lib/supabase/queries";
+import type { Semester } from "@/types/grading";
 import { updateTargetGpa } from "@/lib/supabase/auth";
 
 interface StatsCardsProps {
@@ -82,8 +82,8 @@ export function StatsCards({
 						{gpaChange !== null && (
 							<div
 								className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium mb-2 ${gpaChange >= 0
-										? "bg-green-50 text-green-600"
-										: "bg-red-50 text-red-600"
+									? "bg-success-50 text-success-600"
+									: "bg-destructive-50 text-destructive-600"
 									}`}
 							>
 								{gpaChange >= 0 ? (
@@ -107,7 +107,7 @@ export function StatsCards({
 						</div>
 						<div className="h-2 bg-gray-100 rounded-full overflow-hidden">
 							<div
-								className="h-full bg-gradient-to-r from-blue-500 to-blue-400 rounded-full transition-all duration-500"
+								className="h-full bg-gradient-to-r from-primary to-primary-400 rounded-full transition-all duration-500"
 								style={{ width: `${percentageToTarget}%` }}
 							/>
 						</div>
@@ -156,8 +156,8 @@ export function StatsCards({
 							{semesterCount > 0 && !isEditing && (
 								<span
 									className={`px-2.5 py-1 rounded-full text-xs font-medium ${isTargetMet
-											? "bg-green-50 text-green-600"
-											: "bg-amber-50 text-amber-600"
+										? "bg-success-50 text-success-600"
+										: "bg-warning-50 text-warning-600"
 										}`}
 								>
 									{isTargetMet ? "Achieved" : "In Progress"}
@@ -186,17 +186,17 @@ export function StatsCards({
 									max="4"
 									value={editValue}
 									onChange={(e) => setEditValue(e.target.value)}
-									className="w-full text-4xl font-light text-gray-900 tracking-tight bg-gray-50 border border-gray-200 rounded-xl px-4 py-2 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+									className="w-full text-4xl font-light text-foreground tracking-tight bg-secondary/50 border-input rounded-xl px-4 py-2 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
 									disabled={isPending}
 								/>
 							</div>
-							{error && <p className="text-xs text-red-500">{error}</p>}
+							{error && <p className="text-xs text-destructive">{error}</p>}
 							<div className="flex gap-2">
 								<button
 									type="button"
 									onClick={handleSave}
 									disabled={isPending}
-									className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 disabled:bg-blue-300 text-white text-sm font-medium rounded-lg transition-colors"
+									className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-primary hover:bg-primary-600 disabled:bg-primary-300 text-primary-foreground text-sm font-medium rounded-lg transition-colors"
 								>
 									<Check className="h-4 w-4" />
 									{isPending ? "Saving..." : "Save"}
@@ -220,7 +220,7 @@ export function StatsCards({
 							<div className="mt-4 flex items-center gap-4">
 								{!isTargetMet && semesterCount > 0 && (
 									<p className="text-sm text-gray-500">
-										<span className="font-semibold text-blue-600">
+										<span className="font-semibold text-primary">
 											{(targetGpa - cgpa).toFixed(2)}
 										</span>{" "}
 										points needed

@@ -133,7 +133,7 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 												<form action={signOut}>
 													<button
 														type="submit"
-														className="flex w-full items-center gap-3 px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+														className="flex w-full items-center gap-3 px-3 py-2 text-sm text-destructive hover:bg-destructive-50 rounded-lg transition-colors"
 													>
 														<LogOut className="h-4 w-4" />
 														Sign Out
@@ -188,11 +188,11 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 														className={cn(
 															"flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg transition-colors",
 															isActive
-																? "text-blue-600"
-																: "text-gray-600 hover:text-gray-900",
+																? "text-primary"
+																: "text-muted-foreground hover:text-foreground",
 														)}
 													>
-														<item.icon className={cn("h-4 w-4", isActive && "text-blue-500")} />
+														<item.icon className={cn("h-4 w-4", isActive && "text-primary")} />
 														{item.title}
 													</Link>
 												);
@@ -203,7 +203,7 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 												<button
 													type="submit"
 													onClick={() => setShowMobileMenu(false)}
-													className="flex w-full items-center gap-3 px-3 py-2 text-sm font-medium text-red-500 hover:text-red-600 rounded-lg transition-colors"
+													className="flex w-full items-center gap-3 px-3 py-2 text-sm font-medium text-destructive hover:text-destructive-600 rounded-lg transition-colors"
 												>
 													<LogOut className="h-4 w-4" />
 													Sign out
