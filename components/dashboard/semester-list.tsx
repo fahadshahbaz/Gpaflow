@@ -18,7 +18,7 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { getGradingEngine } from "@/lib/grading";
+import { getUniversityGradingEngine } from "@/lib/grading";
 import type { Semester, Subject, UniversitySlug } from "@/types/grading";
 import { AddSubjectDialog } from "./add-subject-dialog";
 import { DeleteSemesterDialog } from "./delete-semester-dialog";
@@ -32,7 +32,7 @@ interface SemesterListProps {
 }
 
 export function SemesterList({ semesters, university }: SemesterListProps) {
-	const engine = getGradingEngine(university);
+	const engine = getUniversityGradingEngine(university);
 	const [editingSemester, setEditingSemester] = useState<Semester | null>(null);
 	const [deletingSemester, setDeletingSemester] = useState<Semester | null>(
 		null,

@@ -9,6 +9,7 @@ export const subjectSchema = z.object({
 		.number()
 		.min(0, "Marks cannot be negative")
 		.max(100, "Marks cannot exceed 100"),
+	total_marks: z.number().min(1).optional(),
 	credit_hours: z
 		.number()
 		.min(1, "Credit hours must be at least 1")

@@ -13,6 +13,11 @@ export default async function DashboardLayout({
 		redirect("/login");
 	}
 
+	// Redirect to onboarding if university not selected
+	if (!user.user_metadata?.university) {
+		redirect("/onboarding");
+	}
+
 	const userName =
 		user?.user_metadata?.name || user?.email?.split("@")[0] || "User";
 

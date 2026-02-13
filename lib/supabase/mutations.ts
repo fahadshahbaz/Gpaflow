@@ -80,6 +80,7 @@ export async function updateSemester(id: string, name: string) {
 export type SubjectInput = {
 	name: string;
 	obtained_marks: number;
+	total_marks?: number;
 	credit_hours: number;
 };
 
@@ -111,6 +112,7 @@ export async function createSubject(semesterId: string, data: SubjectInput) {
 		semester_id: semesterId,
 		name: result.data.name,
 		obtained_marks: result.data.obtained_marks,
+		total_marks: result.data.total_marks,
 		credit_hours: result.data.credit_hours,
 		grade_point: calculateGradePoint(result.data.obtained_marks),
 		letter_grade: getLetterGrade(result.data.obtained_marks),
@@ -147,13 +149,14 @@ export async function updateSubject(
 	}
 
 	// Build update object with only provided fields
-	const updateData: Record<string, string | number> = {};
+	const updateData: Record<string, string | number | undefined> = {};
 	if (data.name !== undefined) updateData.name = data.name;
 	if (data.obtained_marks !== undefined) {
 		updateData.obtained_marks = data.obtained_marks;
 		updateData.grade_point = calculateGradePoint(data.obtained_marks);
 		updateData.letter_grade = getLetterGrade(data.obtained_marks);
 	}
+	if (data.total_marks !== undefined) updateData.total_marks = data.total_marks;
 	if (data.credit_hours !== undefined)
 		updateData.credit_hours = data.credit_hours;
 

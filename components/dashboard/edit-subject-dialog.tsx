@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/dialog";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { getGradingEngine } from "@/lib/grading";
+import { getUniversityGradingEngine } from "@/lib/grading";
 import { updateSubject } from "@/lib/supabase/mutations";
 import type { UniversitySlug } from "@/types/grading";
 
@@ -46,7 +46,7 @@ export function EditSubjectDialog({
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
 
-	const engine = getGradingEngine(university);
+	const engine = getUniversityGradingEngine(university);
 	const isGCUWF = university === "gcuwf";
 
 	useEffect(() => {

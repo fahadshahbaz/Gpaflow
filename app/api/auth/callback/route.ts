@@ -4,7 +4,6 @@ import { createClient } from "@/lib/supabase/server";
 export async function GET(request: NextRequest) {
     const { searchParams, origin } = new URL(request.url);
     const code = searchParams.get("code");
-    const next = searchParams.get("next") ?? "/dashboard";
     const type = searchParams.get("type");
 
     if (code) {
@@ -12,14 +11,14 @@ export async function GET(request: NextRequest) {
         const { error } = await supabase.auth.exchangeCodeForSession(code);
 
         if (!error) {
-            // If this is a password recovery, redirect to reset page
             if (type === "recovery") {
                 return NextResponse.redirect(`${origin}/reset-password`);
             }
-            return NextResponse.redirect(`${origin}${next}`);
+            // Email confirmation redirects to login
+            return NextResponse.redirect(`${origin}/login?confirmed=true`);
         }
     }
 
-    // Redirect to error page or login on failure
     return NextResponse.redirect(`${origin}/login?error=auth_callback_error`);
 }
+

@@ -28,7 +28,7 @@ export default function HomePage() {
 				>
 					<div className="h-14 flex items-center justify-between shrink-0">
 						<Link href="/" className="flex items-center gap-2.5">
-							<div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-600">
+							<div className="flex h-9 w-9 items-center justify-center rounded-xl bg-linear-to-br from-blue-500 to-blue-600">
 								<GraduationCap className="h-5 w-5 text-white" />
 							</div>
 							<span className="text-base sm:text-lg font-semibold text-gray-900 tracking-tight">

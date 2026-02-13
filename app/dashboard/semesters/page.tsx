@@ -2,10 +2,12 @@ import { AddSemesterDialog } from "@/components/dashboard/add-semester-dialog";
 import { SemesterList } from "@/components/dashboard/semester-list";
 import { getUser } from "@/lib/supabase/auth";
 import { getSemesters } from "@/lib/supabase/queries";
+import type { UniversitySlug } from "@/types/grading";
 
 export default async function SemestersPage() {
 	const user = await getUser();
 	const semesters = await getSemesters(user!.id);
+	const university = (user?.user_metadata?.university as UniversitySlug) || "numl";
 
 	return (
 		<div className="max-w-[1600px] mx-auto px-6 py-8">
@@ -34,8 +36,9 @@ export default async function SemestersPage() {
 							: `${semesters.length} semester${semesters.length > 1 ? "s" : ""} • Your semester-wise performance`}
 					</p>
 				</div>
-				<SemesterList semesters={semesters} />
+				<SemesterList semesters={semesters} university={university} />
 			</div>
 		</div>
 	);
 }
+

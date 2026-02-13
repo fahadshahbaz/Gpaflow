@@ -1,34 +1,32 @@
 "use server";
 
-import {
-	calculateCGPA,
-	calculateGradePoint,
-	calculateSGPA,
-	getLetterGrade,
-} from "@/lib/grading/numl";
+import { getUniversityGradingEngine } from "@/lib/grading";
 import { createClient } from "@/lib/supabase/server";
+import { getUser } from "@/lib/supabase/auth";
+import type {
+	UniversitySlug,
+	Subject,
+	SubjectInput,
+	Semester,
+	SemesterInput,
+	DashboardStats,
+} from "@/types/grading";
 
-export type Semester = {
-	id: string;
-	name: string;
-	semester_number: number;
-	year: number;
-	sgpa: number;
-	total_credit_hours: number;
-	subjects: Subject[];
-};
+async function getUserUniversity(): Promise<UniversitySlug> {
+	const user = await getUser();
+	const university = user?.user_metadata?.university;
 
-export type Subject = {
-	id: string;
-	name: string;
-	obtained_marks: number;
-	credit_hours: number;
-	grade_point: number;
-	letter_grade: string;
-};
+	if (university === "gcuwf" || university === "numl") {
+		return university;
+	}
+
+	return "numl"; // Default fallback
+}
 
 export async function getSemesters(userId: string): Promise<Semester[]> {
 	const supabase = await createClient();
+	const university = await getUserUniversity();
+	const engine = getUniversityGradingEngine(university);
 
 	const { data: semesters, error } = await supabase
 		.from("semesters")
@@ -41,6 +39,7 @@ export async function getSemesters(userId: string): Promise<Semester[]> {
 				id,
 				name,
 				obtained_marks,
+				total_marks,
 				credit_hours
 			)
 		`)
@@ -52,19 +51,49 @@ export async function getSemesters(userId: string): Promise<Semester[]> {
 		return [];
 	}
 
-	return semesters.map((semester) => {
-		const subjectsWithGrades = (semester.subjects || []).map((subject) => ({
-			...subject,
-			grade_point: calculateGradePoint(subject.obtained_marks),
-			letter_grade: getLetterGrade(subject.obtained_marks),
-		}));
+	type RawSemester = {
+		id: string;
+		name: string;
+		semester_number: number;
+		year: number;
+		subjects: SubjectInput[] | null;
+	};
 
-		const sgpa = calculateSGPA(
-			subjectsWithGrades.map((s) => ({
-				gradePoint: s.grade_point,
-				creditHours: s.credit_hours,
-			})),
+	return (semesters as RawSemester[]).map((semester): Semester => {
+		const rawSubjects = (semester.subjects || []) as SubjectInput[];
+
+		const subjectsWithGrades: Subject[] = rawSubjects.map(
+			(subject): Subject => ({
+				...subject,
+				grade_point: engine.calculateGradePoint(
+					subject.obtained_marks,
+					subject.credit_hours,
+					subject.total_marks,
+				),
+				letter_grade: String(
+					engine.getLetterGrade(subject.obtained_marks, subject.credit_hours, subject.total_marks),
+				),
+			}),
 		);
+
+		let sgpa: number;
+
+		if (university === "gcuwf") {
+			sgpa = engine.calculateSGPA(
+				subjectsWithGrades.map((s) => ({
+					marks: s.obtained_marks,
+					creditHours: s.credit_hours,
+					totalMarks: s.total_marks,
+				})),
+			);
+		} else {
+			sgpa = engine.calculateSGPA(
+				subjectsWithGrades.map((s) => ({
+					gradePoint: s.grade_point,
+					creditHours: s.credit_hours,
+				})),
+			);
+		}
 
 		const totalCreditHours = subjectsWithGrades.reduce(
 			(sum, s) => sum + s.credit_hours,
@@ -83,20 +112,15 @@ export async function getSemesters(userId: string): Promise<Semester[]> {
 	});
 }
 
-export type DashboardStats = {
-	cgpa: number;
-	totalCreditHours: number;
-	semesterCount: number;
-	targetGpa: number;
-};
-
 export async function getDashboardStats(
 	userId: string,
 	targetGpa = 3.5,
 ): Promise<DashboardStats> {
 	const semesters = await getSemesters(userId);
+	const university = await getUserUniversity();
+	const engine = getUniversityGradingEngine(university);
 
-	const cgpa = calculateCGPA(
+	const cgpa = engine.calculateCGPA(
 		semesters.map((s) => ({
 			sgpa: s.sgpa,
 			totalCreditHours: s.total_credit_hours,
@@ -115,3 +139,4 @@ export async function getDashboardStats(
 		targetGpa,
 	};
 }
+

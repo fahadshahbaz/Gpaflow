@@ -189,3 +189,25 @@ export async function updateTargetGpa(targetGpa: number): Promise<AuthState> {
 
 	return { success: "Target GPA updated" };
 }
+
+export async function updateUniversity(
+	university: import("@/types/grading").UniversitySlug,
+): Promise<AuthState> {
+	const supabase = await createClient();
+	const { error } = await supabase.auth.updateUser({
+		data: { university },
+	});
+
+	if (error) {
+		return { error: error.message };
+	}
+
+	return { success: "University updated" };
+}
+
+export async function hasCompletedOnboarding(): Promise<boolean> {
+	const user = await getUser();
+	return !!user?.user_metadata?.university;
+}
+
+
