@@ -1,10 +1,10 @@
 "use client";
 
-import { GraduationCap } from "lucide-react";
 import Link from "next/link";
 import { useActionState } from "react";
-import { type AuthState, signIn } from "@/lib/supabase/auth";
+import { type AuthState, signIn, signInWithGoogle } from "@/lib/supabase/auth";
 import { Logo } from "@/components/ui/logo";
+import { GoogleIcon } from "@/components/ui/google-icon";
 
 const initialState: AuthState = {};
 
@@ -23,13 +23,37 @@ export default function LoginPage() {
 				</div>
 
 				<div className="bg-white rounded-2xl p-8 card-shadow border border-gray-100">
-					<form action={formAction} className="space-y-5">
-						{state.error && (
-							<div className="rounded-lg bg-red-50 border border-red-100 p-3 text-sm text-red-600">
-								{state.error}
-							</div>
-						)}
+					{state.error && (
+						<div className="rounded-lg bg-red-50 border border-red-100 p-3 text-sm text-red-600 mb-5">
+							{state.error}
+						</div>
+					)}
 
+					{/* Google Sign-In */}
+					<form action={signInWithGoogle}>
+						<button
+							type="submit"
+							className="w-full flex items-center justify-center gap-3 rounded-xl border border-gray-200 bg-white px-4 py-2.5 font-medium text-gray-700 transition hover:bg-gray-50 hover:border-gray-300 active:scale-[0.98]"
+						>
+							<GoogleIcon />
+							Continue with Google
+						</button>
+					</form>
+
+					{/* Divider */}
+					<div className="relative my-6">
+						<div className="absolute inset-0 flex items-center">
+							<div className="w-full border-t border-gray-200" />
+						</div>
+						<div className="relative flex justify-center text-sm">
+							<span className="bg-white px-3 text-gray-400">
+								or continue with email
+							</span>
+						</div>
+					</div>
+
+					{/* Email/Password Form */}
+					<form action={formAction} className="space-y-5">
 						<div className="space-y-4">
 							<div>
 								<label

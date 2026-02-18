@@ -14,11 +14,17 @@ export async function GET(request: NextRequest) {
             if (type === "recovery") {
                 return NextResponse.redirect(`${origin}/reset-password`);
             }
-            // Email confirmation redirects to login
-            return NextResponse.redirect(`${origin}/login?confirmed=true`);
+
+            // For OAuth sign-in (Google), check if user needs onboarding
+            const { data: { user } } = await supabase.auth.getUser();
+            if (user?.user_metadata?.university) {
+                return NextResponse.redirect(`${origin}/dashboard`);
+            }
+
+            // New OAuth user or user who hasn't completed onboarding
+            return NextResponse.redirect(`${origin}/onboarding`);
         }
     }
 
     return NextResponse.redirect(`${origin}/login?error=auth_callback_error`);
 }
-
