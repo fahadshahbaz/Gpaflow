@@ -12,7 +12,7 @@ export default async function SemestersPage() {
 	return (
 		<div className="max-w-[1600px] mx-auto px-6 py-8">
 			{/* Page Header */}
-			<div className="flex items-center justify-between mb-8">
+			<div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-8">
 				<div>
 					<h1 className="text-3xl font-light text-gray-900">
 						<span className="font-medium">Semesters</span>

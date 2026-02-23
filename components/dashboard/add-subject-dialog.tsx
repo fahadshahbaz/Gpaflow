@@ -162,7 +162,7 @@ export function AddSubjectDialog({
 						/>
 					</Field>
 
-					<div className={`grid gap-4 ${isGCUWF ? "grid-cols-3" : "grid-cols-2"}`}>
+					<div className={`grid gap-4 items-end ${isGCUWF ? "grid-cols-3" : "grid-cols-2"}`}>
 						<Field>
 							<FieldLabel className="text-gray-600 text-sm font-medium mb-2 block">
 								Obtained Marks
