@@ -31,9 +31,12 @@ We use the latest tools to ensure the dashboard is fast and reliable:
    Copy `.env.example` to `.env.local` and add your Supabase credentials:
    ```env
    NEXT_PUBLIC_SUPABASE_URL=your_url
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_key
+   NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY=your_key
+   
+   // Site URL (used for OAuth redirects)
+   NEXT_PUBLIC_SITE_URL=http://localhost:3000
+   
    ```
-
 3. **Run Dev**
    ```bash
    pnpm dev

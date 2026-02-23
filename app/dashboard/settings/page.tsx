@@ -40,7 +40,7 @@ export default function SettingsPage() {
 
 	if (isLoading) {
 		return (
-			<div className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-6">
+			<div className="min-h-[calc(100vh-4rem)] flex justify-center pt-16 sm:pt-0 sm:items-center p-6">
 				<div className="w-full max-w-lg">
 					{/* Header Skeleton */}
 					<div className="text-center mb-8">
@@ -84,7 +84,7 @@ export default function SettingsPage() {
 	}
 
 	return (
-		<div className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-6">
+		<div className="min-h-[calc(100vh-4rem)] flex justify-center pt-16 sm:pt-0 sm:items-center p-6">
 			<div className="w-full max-w-lg">
 				{/* Header */}
 				<div className="text-center mb-8">

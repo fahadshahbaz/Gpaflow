@@ -12,7 +12,7 @@ export default function SignupPage() {
 	const [state, formAction, pending] = useActionState(signUp, initialState);
 
 	return (
-		<main className="min-h-screen bg-[#f5f5f5] pt-24 px-4">
+		<main className="min-h-screen bg-[#f5f5f5] pt-16 sm:pt-24 px-4">
 			<div className="w-full max-w-md mx-auto space-y-8">
 				<div className="text-center">
 					<div className="inline-flex items-center justify-center mb-6">
