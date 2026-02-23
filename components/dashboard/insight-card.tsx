@@ -18,7 +18,8 @@ const motivationalQuotes = [
 		quote: "The expert in anything was once a beginner.",
 		author: "Helen Hayes",
 	},
-	{ quote: "Education is the passport to the future.", author: "Malcolm X" },
+	{ quote: "Education is the passport to the future.", 
+		author: "Malcolm X" },
 	{
 		quote:
 			"The beautiful thing about learning is that no one can take it away from you.",
@@ -26,6 +27,26 @@ const motivationalQuotes = [
 	},
 	{
 		quote: "Your GPA doesn't define you, but your effort does.",
+		author: "Fahad",
+	},
+	{
+		quote: "It does not matter how slowly you go as long as you do not stop.",
+		author: "Confucius",
+	},
+	{
+		quote: "The only way to do great work is to love what you do.",
+		author: "Steve Jobs",
+	},
+	{
+		quote: "Don't let what you cannot do interfere with what you can do.",
+		author: "John Wooden",
+	},
+	{
+		quote: "Discipline is the bridge between goals and accomplishment.",
+		author: "Jim Rohn",
+	},
+	{
+		quote: "Small progress is still progress.",
 		author: "Unknown",
 	},
 ];
@@ -36,6 +57,11 @@ const tips = [
 	"Teaching others helps you understand better.",
 	"Sleep 7-8 hours before exams for peak performance.",
 	"Start assignments early to reduce stress.",
+	"Use active recall instead of passive re-reading.",
+	"Exercise before studying to improve focus and memory.",
+	"Study in different locations to strengthen recall.",
+	"Write summaries in your own words after each lecture.",
+	"Take short breaks every hour to avoid burnout.",
 ];
 
 function generateInsight(

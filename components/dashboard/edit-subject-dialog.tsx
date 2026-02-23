@@ -76,6 +76,17 @@ export function EditSubjectDialog({
 		};
 	}, [marks, totalMarks, creditHours, engine, isGCUWF]);
 
+	function handleNumericChange(
+		value: string,
+		setter: (val: string) => void,
+		allowDecimal = true,
+	) {
+		const filtered = allowDecimal
+			? value.replace(/[^0-9.]/g, "").replace(/(\.)(?=.*\.)/g, "")
+			: value.replace(/[^0-9]/g, "");
+		setter(filtered);
+	}
+
 	async function handleSubmit(e: React.FormEvent) {
 		e.preventDefault();
 
@@ -155,13 +166,11 @@ export function EditSubjectDialog({
 								Obtained Marks
 							</FieldLabel>
 							<Input
-								type="number"
+								type="text"
+								inputMode="decimal"
 								placeholder={isGCUWF ? "0" : "0 - 100"}
-								min={0}
-								max={isGCUWF ? Number(totalMarks) || 999 : 100}
-								step="0.1"
 								value={marks}
-								onChange={(e) => setMarks(e.target.value)}
+								onChange={(e) => handleNumericChange(e.target.value, setMarks)}
 								className="bg-gray-50 border-gray-200 h-10 text-gray-900 placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 rounded-xl"
 								disabled={loading}
 							/>
@@ -173,12 +182,11 @@ export function EditSubjectDialog({
 									Total Marks
 								</FieldLabel>
 								<Input
-									type="number"
+									type="text"
+									inputMode="numeric"
 									placeholder="100"
-									min={1}
-									step="1"
 									value={totalMarks}
-									onChange={(e) => setTotalMarks(e.target.value)}
+									onChange={(e) => handleNumericChange(e.target.value, setTotalMarks, false)}
 									className="bg-gray-50 border-gray-200 h-10 text-gray-900 placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 rounded-xl"
 									disabled={loading}
 								/>
@@ -190,12 +198,11 @@ export function EditSubjectDialog({
 								Credit Hours
 							</FieldLabel>
 							<Input
-								type="number"
+								type="text"
+								inputMode="numeric"
 								placeholder="1 - 6"
-								min={1}
-								max={6}
 								value={creditHours}
-								onChange={(e) => setCreditHours(e.target.value)}
+								onChange={(e) => handleNumericChange(e.target.value, setCreditHours, false)}
 								className="bg-gray-50 border-gray-200 h-10 text-gray-900 placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 rounded-xl"
 								disabled={loading}
 							/>

@@ -40,9 +40,8 @@ export function ActivityDots({ semesters }: ActivityDotsProps) {
 
 		const intensity = (semesterIndex + 1) / activity.semesters.length;
 		if (intensity > 0.8) return "bg-success-600";
-		if (intensity > 0.6) return "bg-success-50"; 
 		if (intensity > 0.6) return "bg-success";
-		if (intensity > 0.4) return "bg-success-600/70"; /* approximate */
+		if (intensity > 0.4) return "bg-success-600/70";
 		if (intensity > 0.2) return "bg-success-600/40";
 		return "bg-success-600/20";
 	};
