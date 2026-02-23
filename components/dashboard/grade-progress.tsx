@@ -35,10 +35,10 @@ export function GradeProgress({ semesters }: GradeProgressProps) {
 
 		const total = allSubjects.length;
 		const colors = {
-			"A/A+": "bg-success-500",
+			"A/A+": "bg-success",
 			"B/B+": "bg-primary-500",
 			"C/C+": "bg-warning-600",
-			"D & Below": "bg-destructive-400",
+			"D & Below": "bg-destructive",
 		};
 
 		return Object.entries(gradeGroups).map(([grade, count]) => ({
