@@ -30,7 +30,7 @@ GPAFlow uses a flexible **Strategy Pattern** for grading - each university has i
 | University | Grading System | Status |
 |-----------|---------------|--------|
 | **NUML** - National University of Modern Languages | Letter grades with 4.0 GPA scale | ✅ Supported |
-| **GCUWF** - GC University for Women Faisalabad | Quality points table system | ✅ Supported |
+| **GCWUF** - GC University for Women Faisalabad | Quality points table system | ✅ Supported |
 
 > 🎓 **Your university not listed?** We're actively looking for contributors to add support for more universities! Check the [Contributing Guide](CONTRIBUTING.md) for details.
 

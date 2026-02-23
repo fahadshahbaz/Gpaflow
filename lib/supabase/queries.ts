@@ -16,7 +16,7 @@ async function getUserUniversity(): Promise<UniversitySlug> {
 	const user = await getUser();
 	const university = user?.user_metadata?.university;
 
-	if (university === "gcuwf" || university === "numl") {
+	if (university === "gcwuf" || university === "numl") {
 		return university;
 	}
 
@@ -78,7 +78,7 @@ export async function getSemesters(userId: string): Promise<Semester[]> {
 
 		let sgpa: number;
 
-		if (university === "gcuwf") {
+		if (university === "gcwuf") {
 			sgpa = engine.calculateSGPA(
 				subjectsWithGrades.map((s) => ({
 					marks: s.obtained_marks,

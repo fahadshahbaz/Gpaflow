@@ -107,11 +107,11 @@ We're actively looking for contributors to add grading engines for more universi
 4. Register it in `lib/grading/index.ts`
 5. Add it to the onboarding selection screen
 
-Look at `lib/grading/numl.ts` or `lib/grading/gcuwf.ts` as reference implementations.
+Look at `lib/grading/numl.ts` or `lib/grading/gcwuf.ts` as reference implementations.
 
 **Currently supported:**
 - ✅ NUML (National University of Modern Languages)
-- ✅ GCUWF (GC University for Women Faisalabad)
+- ✅ GCWUF (GC University for Women Faisalabad)
 
 If your university uses a different grading policy, open a PR or an issue - we'd love to support it!
 

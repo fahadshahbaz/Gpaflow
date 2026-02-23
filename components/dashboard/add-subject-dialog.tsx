@@ -41,7 +41,7 @@ export function AddSubjectDialog({
 	const [error, setError] = useState<string | null>(null);
 
 	const engine = getUniversityGradingEngine(university);
-	const isGCUWF = university === "gcuwf";
+	const isGCWUF = university === "gcwuf";
 
 	const gradePreview = useMemo(() => {
 		const marksNum = Number.parseFloat(marks);
@@ -49,18 +49,18 @@ export function AddSubjectDialog({
 		const creditHoursNum = Number.parseInt(creditHours, 10) || 3;
 
 		if (Number.isNaN(marksNum) || marksNum < 0) return null;
-		if (isGCUWF && (Number.isNaN(totalMarksNum) || totalMarksNum <= 0)) return null;
-		if (marksNum > (isGCUWF ? totalMarksNum : 100)) return null;
+		if (isGCWUF && (Number.isNaN(totalMarksNum) || totalMarksNum <= 0)) return null;
+		if (marksNum > (isGCWUF ? totalMarksNum : 100)) return null;
 
-		const maxMarks = isGCUWF ? totalMarksNum : 100;
+		const maxMarks = isGCWUF ? totalMarksNum : 100;
 		const percentage = (marksNum / maxMarks) * 100;
 
 		return {
-			letterGrade: engine.getLetterGrade(marksNum, creditHoursNum, isGCUWF ? totalMarksNum : undefined),
-			gradePoint: engine.calculateGradePoint(marksNum, creditHoursNum, isGCUWF ? totalMarksNum : undefined),
+			letterGrade: engine.getLetterGrade(marksNum, creditHoursNum, isGCWUF ? totalMarksNum : undefined),
+			gradePoint: engine.calculateGradePoint(marksNum, creditHoursNum, isGCWUF ? totalMarksNum : undefined),
 			percentage: percentage.toFixed(1),
 		};
-	}, [marks, totalMarks, creditHours, engine, isGCUWF]);
+	}, [marks, totalMarks, creditHours, engine, isGCWUF]);
 
 	function resetForm() {
 		setName("");
@@ -94,13 +94,13 @@ export function AddSubjectDialog({
 			return;
 		}
 
-		const maxMarks = isGCUWF ? totalMarksNum : 100;
+		const maxMarks = isGCWUF ? totalMarksNum : 100;
 		if (Number.isNaN(marksNum) || marksNum < 0 || marksNum > maxMarks) {
 			setError(`Marks must be between 0 and ${maxMarks}`);
 			return;
 		}
 
-		if (isGCUWF && (Number.isNaN(totalMarksNum) || totalMarksNum <= 0)) {
+		if (isGCWUF && (Number.isNaN(totalMarksNum) || totalMarksNum <= 0)) {
 			setError("Total marks must be greater than 0");
 			return;
 		}
@@ -117,7 +117,7 @@ export function AddSubjectDialog({
 			await createSubject(semesterId, {
 				name: trimmedName,
 				obtained_marks: marksNum,
-				total_marks: isGCUWF ? totalMarksNum : undefined,
+				total_marks: isGCWUF ? totalMarksNum : undefined,
 				credit_hours: creditHoursNum,
 			});
 			setOpen(false);
@@ -173,7 +173,7 @@ export function AddSubjectDialog({
 						/>
 					</Field>
 
-					<div className={`grid gap-4 items-end ${isGCUWF ? "grid-cols-3" : "grid-cols-2"}`}>
+					<div className={`grid gap-4 items-end ${isGCWUF ? "grid-cols-3" : "grid-cols-2"}`}>
 						<Field>
 							<FieldLabel className="text-gray-600 text-sm font-medium mb-2 block">
 								Obtained Marks
@@ -181,7 +181,7 @@ export function AddSubjectDialog({
 							<Input
 								type="text"
 								inputMode="decimal"
-								placeholder={isGCUWF ? "0" : "0 - 100"}
+								placeholder={isGCWUF ? "0" : "0 - 100"}
 								value={marks}
 								onChange={(e) => handleNumericChange(e.target.value, setMarks)}
 								className="bg-gray-50 border-gray-200 h-11 rounded-xl text-gray-900 placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
@@ -189,7 +189,7 @@ export function AddSubjectDialog({
 							/>
 						</Field>
 
-						{isGCUWF && (
+						{isGCWUF && (
 							<Field>
 								<FieldLabel className="text-gray-600 text-sm font-medium mb-2 block">
 									Total Marks

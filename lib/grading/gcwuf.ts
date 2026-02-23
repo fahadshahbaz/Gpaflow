@@ -1,4 +1,4 @@
-// GCUWF Grading Engine - Quality Points Table System
+// GCWUF Grading Engine - Quality Points Table System
 // Strategy: Quality Points (QP) Lookup Table
 // Formula: GPA = Sum(Quality Points) / Sum(Credit Hours)
 
@@ -95,7 +95,7 @@ export function getLetterGrade(
 
     const percentage = (obtainedMarks / total) * 100;
 
-    // Standard GCUWF Grading Policy
+    // Standard GCWUF Grading Policy
     if (percentage >= 80) return "A";
     if (percentage >= 65) return "B";
     if (percentage >= 50) return "C";

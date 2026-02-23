@@ -1,4 +1,4 @@
-export type UniversitySlug = "numl" | "gcuwf";
+export type UniversitySlug = "numl" | "gcwuf";
 
 export interface University {
     id: string;
@@ -16,10 +16,10 @@ export const UNIVERSITIES: Record<UniversitySlug, University> = {
         fullName: "National University of Modern Languages",
         description: "Letter grade system with 4.0 GPA scale",
     },
-    gcuwf: {
-        id: "gcuwf",
-        name: "GCUWF",
-        slug: "gcuwf",
+    gcwuf: {
+        id: "gcwuf",
+        name: "GCWUF",
+        slug: "gcwuf",
         fullName: "GC University for Women Faisalabad",
         description: "Quality points table system",
     },
@@ -37,7 +37,7 @@ export interface SubjectInput {
     id: string;
     name: string;
     obtained_marks: number;
-    total_marks?: number; // Only for GCUWF, NUML always uses 100
+    total_marks?: number; // Only for GCWUF, NUML always uses 100
     credit_hours: number;
 }
 

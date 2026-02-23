@@ -3,19 +3,19 @@
 
 import type { GradingEngine, UniversitySlug } from "@/types/grading";
 import * as numlEngine from "./numl";
-import * as gcuwfEngine from "./gcuwf";
+import * as gcwufEngine from "./gcwuf";
 
 /**
  * Get the grading engine for a specific university
  */
 export function getUniversityGradingEngine(university: UniversitySlug): GradingEngine {
     switch (university) {
-        case "gcuwf":
+        case "gcwuf":
             return {
-                calculateGradePoint: gcuwfEngine.calculateGradePoint,
-                getLetterGrade: gcuwfEngine.getLetterGrade,
-                calculateSGPA: gcuwfEngine.calculateSGPA,
-                calculateCGPA: gcuwfEngine.calculateCGPA,
+                calculateGradePoint: gcwufEngine.calculateGradePoint,
+                getLetterGrade: gcwufEngine.getLetterGrade,
+                calculateSGPA: gcwufEngine.calculateSGPA,
+                calculateCGPA: gcwufEngine.calculateCGPA,
             };
         case "numl":
         default:
@@ -36,4 +36,4 @@ export function getUniversityGradingEngine(university: UniversitySlug): GradingE
 }
 
 // Re-export individual engines for direct access if needed
-export { numlEngine as numl, gcuwfEngine as gcuwf };
+export { numlEngine as numl, gcwufEngine as gcwuf };
