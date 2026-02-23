@@ -242,7 +242,6 @@
 	}
 }
 
-/* Custom utility classes for Zentra-style design */
 @layer utilities {
 	.card-shadow {
 		box-shadow:

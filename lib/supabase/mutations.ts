@@ -6,9 +6,6 @@ import { createClient } from "@/lib/supabase/server";
 import { subjectSchema } from "@/lib/validations/subject";
 import { getUser } from "./auth";
 
-// ============================================
-// SEMESTER MUTATIONS
-// ============================================
 
 export async function createSemester(name: string) {
 	const user = await getUser();
@@ -72,10 +69,6 @@ export async function updateSemester(id: string, name: string) {
 
 	revalidatePath("/dashboard");
 }
-
-// ============================================
-// SUBJECT MUTATIONS
-// ============================================
 
 export type SubjectInput = {
 	name: string;

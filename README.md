@@ -21,28 +21,17 @@ We use the latest tools to ensure the dashboard is fast and reliable:
 
 ## Getting Started
 
-1. **Clone & Install**
-   ```bash
-   git clone https://github.com/fahadshahbaz/gpaflow.git
-   pnpm install
-   ```
+Want to run it locally or contribute? Check out the [Contributing Guide](CONTRIBUTING.md) for full setup instructions.
 
-2. **Environment Setup**
-   Copy `.env.example` to `.env.local` and add your Supabase credentials:
-   ```env
-   NEXT_PUBLIC_SUPABASE_URL=your_url
-   NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY=your_key
-   
-   // Site URL (used for OAuth redirects)
-   NEXT_PUBLIC_SITE_URL=http://localhost:3000
-   
-   ```
-3. **Run Dev**
-   ```bash
-   pnpm dev
-   ```
+## Supported Universities
 
-## Grading Engine
-GPAFlow uses a flexible **Strategy Pattern** for grading. While it currently follows the NUML (2023 Rules) linear interpolation system, the engine is designed to adapt to any university's grading policy with minimal configuration.
+GPAFlow uses a flexible **Strategy Pattern** for grading - each university has its own grading engine that plugs in seamlessly.
+
+| University | Grading System | Status |
+|-----------|---------------|--------|
+| **NUML** - National University of Modern Languages | Letter grades with 4.0 GPA scale | ✅ Supported |
+| **GCUWF** - GC University for Women Faisalabad | Quality points table system | ✅ Supported |
+
+> 🎓 **Your university not listed?** We're actively looking for contributors to add support for more universities! Check the [Contributing Guide](CONTRIBUTING.md) for details.
 
 Made with 💙 by [Fahad Shahbaz](https://fahadshahbaz.dev)
