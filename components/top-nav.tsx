@@ -12,7 +12,7 @@ import {
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { signOut } from "@/lib/supabase/auth";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/ui/logo";
@@ -32,9 +32,34 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 	const pathname = usePathname();
 	const [showDropdown, setShowDropdown] = useState(false);
 	const [showMobileMenu, setShowMobileMenu] = useState(false);
+	const [hidden, setHidden] = useState(false);
+	const lastScrollY = useRef(0);
+
+	useEffect(() => {
+		const handleScroll = () => {
+			const currentScrollY = window.scrollY;
+			const scrollingDown = currentScrollY > lastScrollY.current;
+
+			if (scrollingDown && currentScrollY > 60) {
+				setHidden(true);
+				setShowDropdown(false);
+				setShowMobileMenu(false);
+			} else if (!scrollingDown) {
+				setHidden(false);
+			}
+
+			lastScrollY.current = currentScrollY;
+		};
+
+		window.addEventListener("scroll", handleScroll, { passive: true });
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, []);
 
 	return (
-		<div className="fixed top-6 left-0 right-0 px-4 z-50">
+		<div className={cn(
+			"fixed top-6 left-0 right-0 px-4 z-50 transition-transform duration-300",
+			hidden && "-translate-y-[calc(100%+2rem)]"
+		)}>
 			<header className="px-5">
 				<div className="h-14 flex items-center justify-between shrink-0">
 					{/* Logo */}
