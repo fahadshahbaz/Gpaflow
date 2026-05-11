@@ -1,4 +1,4 @@
-# GPAFlow 💙
+# GPAFlow 📈
 
 **Stop using complicated spreadsheets.** GPAFlow is a high-performance, persistent academic dashboard built to track your academic journey over 4 years, not just calculate it once.
 
@@ -34,4 +34,4 @@ GPAFlow uses a flexible **Strategy Pattern** for grading - each university has i
 
 > 🎓 **Your university not listed?** We're actively looking for contributors to add support for more universities! Check the [Contributing Guide](CONTRIBUTING.md) for details.
 
-Made with 💙 by [Fahad Shahbaz](https://fahadshahbaz.dev)
+Made with 🎓 by [Fahad Shahbaz](https://fahadshahbaz.dev)
