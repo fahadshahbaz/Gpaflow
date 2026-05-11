@@ -183,7 +183,7 @@ export default function HomePage() {
 						© {new Date().getFullYear()} GPAFlow.
 					</p>
 					<p className="text-sm text-gray-500">
-						Made with 💙 by{" "}
+						Made with 🎓 by{" "}
 						<a
 							href="https://fahadshahbaz.dev"
 							target="_blank"
