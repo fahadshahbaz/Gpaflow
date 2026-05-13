@@ -14,10 +14,31 @@ import {
 import { GithubIcon, LinkedinIcon } from "@/components/ui/icons";
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function HomePage() {
 	const [isOpen, setIsOpen] = useState(false);
+	const [hidden, setHidden] = useState(false);
+	const lastScrollY = useRef(0);
+
+	useEffect(() => {
+		const handleScroll = () => {
+			const currentScrollY = window.scrollY;
+			const scrollingDown = currentScrollY > lastScrollY.current;
+
+			if (scrollingDown && currentScrollY > 60) {
+				setHidden(true);
+				setIsOpen(false);
+			} else if (!scrollingDown) {
+				setHidden(false);
+			}
+
+			lastScrollY.current = currentScrollY;
+		};
+
+		window.addEventListener("scroll", handleScroll, { passive: true });
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, []);
 
 	return (
 		<main className="relative min-h-screen bg-[#fafafa] overflow-hidden selection:bg-blue-200">
@@ -29,7 +50,7 @@ export default function HomePage() {
 			<div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
 
 			{/* Header */}
-			<div className="fixed top-6 left-0 right-0 z-50 px-4">
+			<div className={`fixed top-6 left-0 right-0 z-50 px-4 transition-transform duration-300 ${hidden ? "-translate-y-[calc(100%+2rem)]" : ""}`}>
 				<motion.header
 					initial={false}
 					animate={{ height: isOpen ? "auto" : "56px" }}
