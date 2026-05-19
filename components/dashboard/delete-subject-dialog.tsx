@@ -68,14 +68,15 @@ export function DeleteSubjectDialog({
 
 					<AnimatePresence>
 						{error && (
-							<motion.p
-								initial={{ opacity: 0, height: 0 }}
-								animate={{ opacity: 1, height: "auto" }}
-								exit={{ opacity: 0, height: 0 }}
+							<motion.div
+								initial={{ opacity: 0, y: -4 }}
+								animate={{ opacity: 1, y: 0 }}
+								exit={{ opacity: 0, y: -4 }}
+								transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
 								className="mt-3 text-destructive text-sm"
 							>
 								{error}
-							</motion.p>
+							</motion.div>
 						)}
 					</AnimatePresence>
 				</div>

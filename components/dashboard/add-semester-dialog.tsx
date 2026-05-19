@@ -75,9 +75,10 @@ export function AddSemesterDialog() {
 						<AnimatePresence>
 							{error && (
 								<motion.div
-									initial={{ opacity: 0, height: 0 }}
-									animate={{ opacity: 1, height: "auto" }}
-									exit={{ opacity: 0, height: 0 }}
+									initial={{ opacity: 0, y: -4 }}
+									animate={{ opacity: 1, y: 0 }}
+									exit={{ opacity: 0, y: -4 }}
+									transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
 								>
 									<FieldError className="mt-2 text-destructive text-sm">
 										{error}

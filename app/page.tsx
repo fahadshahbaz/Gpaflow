@@ -59,10 +59,7 @@ export default function HomePage() {
 					hidden ? "-translate-y-[calc(100%+2rem)]" : ""
 				}`}
 			>
-				<motion.header
-					initial={false}
-					animate={{ height: isOpen ? "auto" : "64px" }}
-					transition={{ type: "spring", stiffness: 350, damping: 30 }}
+				<header
 					className="max-w-4xl mx-auto bg-white/70 backdrop-blur-xl border border-white/80 shadow-[0_12px_40px_rgba(0,0,0,0.03)] rounded-[32px] px-6 overflow-hidden border-slate-100"
 				>
 					<div className="h-[60px] flex items-center justify-between shrink-0">
@@ -132,10 +129,10 @@ export default function HomePage() {
 					<AnimatePresence>
 						{isOpen && (
 							<motion.div
-								initial={{ opacity: 0, y: -10 }}
+								initial={{ opacity: 0, y: -8 }}
 								animate={{ opacity: 1, y: 0 }}
-								exit={{ opacity: 0, y: -10 }}
-								transition={{ duration: 0.2 }}
+								exit={{ opacity: 0, y: -8 }}
+								transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
 								className="flex sm:hidden flex-col items-center gap-3 pb-6 pt-2 border-t border-slate-100 mt-2"
 							>
 								<Link
@@ -155,7 +152,7 @@ export default function HomePage() {
 							</motion.div>
 						)}
 					</AnimatePresence>
-				</motion.header>
+				</header>
 			</div>
 
 			{/* Hero Section */}
