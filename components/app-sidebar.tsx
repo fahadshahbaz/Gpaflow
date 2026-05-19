@@ -49,7 +49,7 @@ export function AppSidebar({ userName, userEmail }: AppSidebarProps) {
 				<Link href="/dashboard" className="flex items-center gap-3">
 					<motion.div
 						whileHover={{ scale: 1.05 }}
-						whileTap={{ scale: 0.95 }}
+						whileTap={{ scale: 0.98 }}
 						className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-destructive shadow-lg shadow-primary/20"
 					>
 						<GraduationCap className="h-5 w-5 text-primary-foreground" />

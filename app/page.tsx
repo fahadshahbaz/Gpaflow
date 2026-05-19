@@ -104,7 +104,7 @@ export default function HomePage() {
 							</Link>
 							<Link
 								href="/signup"
-								className="h-10 px-6 flex items-center justify-center text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-all active:scale-95 shadow-md shadow-blue-600/10"
+								className="h-10 px-6 flex items-center justify-center text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-all active:scale-[0.98] shadow-md shadow-blue-600/10"
 							>
 								Sign up
 							</Link>
@@ -200,7 +200,7 @@ export default function HomePage() {
 					>
 						<Link
 							href="/signup"
-							className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition-all active:scale-95 shadow-xl shadow-blue-600/20 w-full sm:w-auto cursor-pointer"
+							className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition-all active:scale-[0.98] shadow-xl shadow-blue-600/20 w-full sm:w-auto cursor-pointer"
 						>
 							Sign up
 							<ArrowRight className="h-4.5 w-4.5 transition-transform group-hover:translate-x-1" />
@@ -591,7 +591,7 @@ export default function HomePage() {
 						<div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center items-center w-full sm:w-auto">
 							<Link
 								href="/signup"
-								className="px-8 py-4 bg-white text-blue-600 font-bold rounded-full hover:bg-slate-50 transition-all active:scale-95 shadow-lg shadow-white/5 w-full sm:w-auto text-center cursor-pointer"
+								className="px-8 py-4 bg-white text-blue-600 font-bold rounded-full hover:bg-slate-50 transition-all active:scale-[0.98] shadow-lg shadow-white/5 w-full sm:w-auto text-center cursor-pointer"
 							>
 								Sign up
 							</Link>
@@ -695,7 +695,7 @@ export default function HomePage() {
 								target="_blank"
 								rel="noopener noreferrer"
 								aria-label="GitHub Profile"
-								className="w-9 h-9 rounded-full bg-slate-850 flex items-center justify-center text-slate-400 hover:bg-slate-800 hover:text-white transition-all active:scale-95 border border-slate-800"
+								className="w-9 h-9 rounded-full bg-slate-850 flex items-center justify-center text-slate-400 hover:bg-slate-800 hover:text-white transition-all active:scale-[0.98] border border-slate-800"
 							>
 								<GithubIcon className="w-[18px] h-[18px]" />
 							</a>
@@ -704,7 +704,7 @@ export default function HomePage() {
 								target="_blank"
 								rel="noopener noreferrer"
 								aria-label="LinkedIn Profile"
-								className="w-9 h-9 rounded-full bg-slate-850 flex items-center justify-center text-slate-400 hover:bg-slate-800 hover:text-white transition-all active:scale-95 border border-slate-800"
+								className="w-9 h-9 rounded-full bg-slate-850 flex items-center justify-center text-slate-400 hover:bg-slate-800 hover:text-white transition-all active:scale-[0.98] border border-slate-800"
 							>
 								<LinkedinIcon className="w-[18px] h-[18px]" />
 							</a>
