@@ -42,7 +42,7 @@ export function AddSubjectDialog({
 
 	const engine = getUniversityGradingEngine(university);
 	const isGCWUF = university === "gcwuf";
-	const maxCredits = university === "numl" ? 4 : 6;
+	const maxCredits = university === "numl" ? 4 : university === "gcwuf" ? 5 : 6;
 
 	const gradePreview = useMemo(() => {
 		const marksNum = Number.parseFloat(marks);
