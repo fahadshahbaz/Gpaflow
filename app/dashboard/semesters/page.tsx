@@ -1,3 +1,4 @@
+import { redirect } from "next/navigation";
 import { AddSemesterDialog } from "@/components/dashboard/add-semester-dialog";
 import { SemesterList } from "@/components/dashboard/semester-list";
 import { getUser } from "@/lib/supabase/auth";
@@ -6,9 +7,14 @@ import type { UniversitySlug } from "@/types/grading";
 
 export default async function SemestersPage() {
 	const user = await getUser();
-	const semesters = await getSemesters(user?.id);
+
+	if (!user) {
+		redirect("/login");
+	}
+
+	const semesters = await getSemesters(user.id);
 	const university =
-		(user?.user_metadata?.university as UniversitySlug) || "numl";
+		(user.user_metadata?.university as UniversitySlug) || "numl";
 
 	return (
 		<div className="max-w-[1600px] mx-auto px-6 py-8">

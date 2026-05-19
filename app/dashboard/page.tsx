@@ -1,3 +1,4 @@
+import { redirect } from "next/navigation";
 import { ActivityDots } from "@/components/dashboard/activity-dots";
 import { GPATrendChart } from "@/components/dashboard/gpa-trend-chart";
 import { GradeProgress } from "@/components/dashboard/grade-progress";
@@ -9,11 +10,15 @@ import { getDashboardStats, getSemesters } from "@/lib/supabase/queries";
 export default async function DashboardPage() {
 	const user = await getUser();
 
-	const userTargetGpa = user?.user_metadata?.target_gpa ?? 3.5;
+	if (!user) {
+		redirect("/login");
+	}
+
+	const userTargetGpa = user.user_metadata?.target_gpa ?? 3.5;
 
 	const [stats, semesters] = await Promise.all([
-		getDashboardStats(user?.id, userTargetGpa),
-		getSemesters(user?.id),
+		getDashboardStats(user.id, userTargetGpa),
+		getSemesters(user.id),
 	]);
 
 	const userName =
