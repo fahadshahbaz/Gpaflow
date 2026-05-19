@@ -1,9 +1,9 @@
 "use client";
 
-import { updateUniversity } from "@/lib/supabase/auth";
-import { Logo } from "@/components/ui/logo";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { Logo } from "@/components/ui/logo";
+import { updateUniversity } from "@/lib/supabase/auth";
 import { UNIVERSITIES, type UniversitySlug } from "@/types/grading";
 
 // Build university options from the UNIVERSITIES constant

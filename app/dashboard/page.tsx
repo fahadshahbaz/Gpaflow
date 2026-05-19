@@ -12,8 +12,8 @@ export default async function DashboardPage() {
 	const userTargetGpa = user?.user_metadata?.target_gpa ?? 3.5;
 
 	const [stats, semesters] = await Promise.all([
-		getDashboardStats(user!.id, userTargetGpa),
-		getSemesters(user!.id),
+		getDashboardStats(user?.id, userTargetGpa),
+		getSemesters(user?.id),
 	]);
 
 	const userName =

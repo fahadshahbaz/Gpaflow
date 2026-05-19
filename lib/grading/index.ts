@@ -2,8 +2,8 @@
 // Provides a unified interface to access grading functions based on university
 
 import type { GradingEngine, UniversitySlug } from "@/types/grading";
-import * as numlEngine from "./numl";
 import * as gcwufEngine from "./gcwuf";
+import * as numlEngine from "./numl";
 
 /**
  * Get the grading engine for a specific university
@@ -19,7 +19,6 @@ export function getUniversityGradingEngine(
 				calculateSGPA: gcwufEngine.calculateSGPA,
 				calculateCGPA: gcwufEngine.calculateCGPA,
 			};
-		case "numl":
 		default:
 			return {
 				calculateGradePoint: (marks: number) =>

@@ -11,10 +11,10 @@ import {
 	X,
 	Zap,
 } from "lucide-react";
-import { GithubIcon, LinkedinIcon } from "@/components/ui/icons";
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { GithubIcon, LinkedinIcon } from "@/components/ui/icons";
 
 export default function HomePage() {
 	const [isOpen, setIsOpen] = useState(false);

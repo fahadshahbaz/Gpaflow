@@ -13,9 +13,9 @@ import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { Logo } from "@/components/ui/logo";
 import { signOut } from "@/lib/supabase/auth";
 import { cn } from "@/lib/utils";
-import { Logo } from "@/components/ui/logo";
 
 const navItems = [
 	{ title: "Overview", href: "/dashboard", icon: LayoutDashboard },

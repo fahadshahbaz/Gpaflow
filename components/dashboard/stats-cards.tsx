@@ -1,10 +1,10 @@
 "use client";
 
-import { useCallback, useMemo, useState, useTransition } from "react";
 import { Check, Pencil, TrendingDown, TrendingUp, X } from "lucide-react";
 import { useRouter } from "next/navigation";
-import type { Semester } from "@/types/grading";
+import { useCallback, useMemo, useState, useTransition } from "react";
 import { updateTargetGpa } from "@/lib/supabase/auth";
+import type { Semester } from "@/types/grading";
 
 interface StatsCardsProps {
 	cgpa: number;

@@ -1,15 +1,14 @@
 "use server";
 
 import { getUniversityGradingEngine } from "@/lib/grading";
-import { createClient } from "@/lib/supabase/server";
 import { getUser } from "@/lib/supabase/auth";
+import { createClient } from "@/lib/supabase/server";
 import type {
-	UniversitySlug,
+	DashboardStats,
+	Semester,
 	Subject,
 	SubjectInput,
-	Semester,
-	SemesterInput,
-	DashboardStats,
+	UniversitySlug,
 } from "@/types/grading";
 
 async function getUserUniversity(): Promise<UniversitySlug> {

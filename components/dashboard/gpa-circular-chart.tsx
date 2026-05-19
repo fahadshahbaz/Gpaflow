@@ -11,7 +11,7 @@ interface GPACircularChartProps {
 export function GPACircularChart({ cgpa, targetGpa }: GPACircularChartProps) {
 	const percentage = Math.min((cgpa / 4.0) * 100, 100);
 	const circumference = 2 * Math.PI * 45;
-	const strokeDashoffset = circumference - (percentage / 100) * circumference;
+	const _strokeDashoffset = circumference - (percentage / 100) * circumference;
 
 	return (
 		<Card className="col-span-12 lg:col-span-4 bg-[#141414] border-[#262626] rounded-xl">

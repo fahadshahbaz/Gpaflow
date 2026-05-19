@@ -6,7 +6,7 @@ import type { UniversitySlug } from "@/types/grading";
 
 export default async function SemestersPage() {
 	const user = await getUser();
-	const semesters = await getSemesters(user!.id);
+	const semesters = await getSemesters(user?.id);
 	const university =
 		(user?.user_metadata?.university as UniversitySlug) || "numl";
 

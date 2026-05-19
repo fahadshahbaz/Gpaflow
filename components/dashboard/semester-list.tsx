@@ -32,7 +32,7 @@ interface SemesterListProps {
 }
 
 export function SemesterList({ semesters, university }: SemesterListProps) {
-	const engine = getUniversityGradingEngine(university);
+	const _engine = getUniversityGradingEngine(university);
 	const [editingSemester, setEditingSemester] = useState<Semester | null>(null);
 	const [deletingSemester, setDeletingSemester] = useState<Semester | null>(
 		null,
