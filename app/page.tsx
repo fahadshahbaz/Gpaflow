@@ -50,7 +50,9 @@ export default function HomePage() {
 			<div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
 
 			{/* Header */}
-			<div className={`fixed top-6 left-0 right-0 z-50 px-4 transition-transform duration-300 ${hidden ? "-translate-y-[calc(100%+2rem)]" : ""}`}>
+			<div
+				className={`fixed top-6 left-0 right-0 z-50 px-4 transition-transform duration-300 ${hidden ? "-translate-y-[calc(100%+2rem)]" : ""}`}
+			>
 				<motion.header
 					initial={false}
 					animate={{ height: isOpen ? "auto" : "56px" }}
@@ -90,7 +92,11 @@ export default function HomePage() {
 							aria-expanded={isOpen}
 							className="flex sm:hidden h-9 w-9 items-center justify-center rounded-full text-gray-600 hover:bg-gray-100/50 transition-colors"
 						>
-							{isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+							{isOpen ? (
+								<X className="h-5 w-5" />
+							) : (
+								<Menu className="h-5 w-5" />
+							)}
 						</button>
 					</div>
 
@@ -126,7 +132,6 @@ export default function HomePage() {
 			{/* Hero Section */}
 			<section className="relative pt-40 sm:pt-48 pb-20 px-6">
 				<div className="max-w-5xl mx-auto flex flex-col items-center text-center">
-
 					<motion.h1
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
@@ -145,7 +150,9 @@ export default function HomePage() {
 						transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
 						className="text-lg sm:text-xl text-gray-500 max-w-2xl mx-auto mb-10 font-light"
 					>
-						Stop relying on ephemeral calculators. GPAFlow is a persistent, beautifully designed dashboard to track your semesters and predict your future grades.
+						Stop relying on ephemeral calculators. GPAFlow is a persistent,
+						beautifully designed dashboard to track your semesters and predict
+						your future grades.
 					</motion.p>
 
 					<motion.div
@@ -193,8 +200,12 @@ export default function HomePage() {
 							<div className="col-span-1 md:col-span-2 rounded-[2rem] bg-white border border-gray-100 p-8 shadow-sm flex flex-col justify-between h-64">
 								<div className="flex justify-between items-start">
 									<div>
-										<p className="text-sm font-medium text-gray-500 mb-1">Current CGPA</p>
-										<p className="text-6xl font-bold text-gray-900 tracking-tight">3.84</p>
+										<p className="text-sm font-medium text-gray-500 mb-1">
+											Current CGPA
+										</p>
+										<p className="text-6xl font-bold text-gray-900 tracking-tight">
+											3.84
+										</p>
 									</div>
 									<div className="px-3 py-1 bg-green-50 text-green-600 rounded-full text-xs font-bold flex items-center gap-1">
 										<TrendingUp className="h-3 w-3" />
@@ -209,8 +220,12 @@ export default function HomePage() {
 											key={i}
 											initial={{ height: 0 }}
 											animate={{ height: `${height}%` }}
-											transition={{ duration: 1, delay: 0.8 + (i * 0.1), type: "spring" }}
-											className={`flex-1 rounded-t-xl ${i === 5 ? 'bg-blue-500' : 'bg-gray-100'}`}
+											transition={{
+												duration: 1,
+												delay: 0.8 + i * 0.1,
+												type: "spring",
+											}}
+											className={`flex-1 rounded-t-xl ${i === 5 ? "bg-blue-500" : "bg-gray-100"}`}
 										/>
 									))}
 								</div>
@@ -219,9 +234,17 @@ export default function HomePage() {
 							{/* Mock Card 2 */}
 							<div className="rounded-[2rem] bg-[#0f172a] p-8 shadow-xl flex flex-col justify-between h-64 relative overflow-hidden">
 								<div className="relative z-10">
-									<p className="text-sm font-medium text-slate-400">Target Predictor</p>
-									<p className="text-2xl font-semibold text-white mt-2">Aiming for 3.9?</p>
-									<p className="text-sm text-slate-400 mt-2 leading-relaxed">You need a <span className="text-blue-400 font-bold">4.0</span> next semester to hit your goal.</p>
+									<p className="text-sm font-medium text-slate-400">
+										Target Predictor
+									</p>
+									<p className="text-2xl font-semibold text-white mt-2">
+										Aiming for 3.9?
+									</p>
+									<p className="text-sm text-slate-400 mt-2 leading-relaxed">
+										You need a{" "}
+										<span className="text-blue-400 font-bold">4.0</span> next
+										semester to hit your goal.
+									</p>
 								</div>
 								<div className="relative z-10 h-10 w-10 rounded-full bg-slate-800 flex items-center justify-center">
 									<Target className="h-5 w-5 text-blue-400" />
@@ -241,7 +264,8 @@ export default function HomePage() {
 							Designed for performance.
 						</h2>
 						<p className="text-gray-500 max-w-xl mx-auto text-lg">
-							A toolkit crafted perfectly for university students who care about the details.
+							A toolkit crafted perfectly for university students who care about
+							the details.
 						</p>
 					</div>
 
@@ -255,7 +279,8 @@ export default function HomePage() {
 								Visualized Progress
 							</h3>
 							<p className="text-gray-500 max-w-sm leading-relaxed">
-								Don't just look at numbers. See your academic trajectory mapped out across semesters with beautiful, interactive charts.
+								Don't just look at numbers. See your academic trajectory mapped
+								out across semesters with beautiful, interactive charts.
 							</p>
 						</div>
 
@@ -268,7 +293,8 @@ export default function HomePage() {
 								Lightning Fast
 							</h3>
 							<p className="text-gray-500 leading-relaxed">
-								Built on Next.js App Router and Supabase. Your data is synced instantly across all your devices.
+								Built on Next.js App Router and Supabase. Your data is synced
+								instantly across all your devices.
 							</p>
 						</div>
 
@@ -281,7 +307,8 @@ export default function HomePage() {
 								Multi-University
 							</h3>
 							<p className="text-gray-500 leading-relaxed">
-								Support for various grading systems out of the box (NUML, GCWUF, and more).
+								Support for various grading systems out of the box (NUML, GCWUF,
+								and more).
 							</p>
 						</div>
 
@@ -296,7 +323,8 @@ export default function HomePage() {
 										Smart Predictions
 									</h3>
 									<p className="text-gray-500 max-w-sm leading-relaxed">
-										Enter your target CGPA and we'll calculate exactly what grades you need in your upcoming semesters to hit your goal.
+										Enter your target CGPA and we'll calculate exactly what
+										grades you need in your upcoming semesters to hit your goal.
 									</p>
 								</div>
 
@@ -309,11 +337,12 @@ export default function HomePage() {
 									<div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
 										<div className="w-[85%] h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full" />
 									</div>
-									<p className="text-[10px] text-gray-400 mt-2 text-right">On track</p>
+									<p className="text-[10px] text-gray-400 mt-2 text-right">
+										On track
+									</p>
 								</div>
 							</div>
 						</div>
-
 					</div>
 				</div>
 			</section>
@@ -325,18 +354,24 @@ export default function HomePage() {
 						Ready to take control of your grades?
 					</h2>
 					<p className="text-blue-100 text-lg md:text-xl max-w-2xl mx-auto mb-10 font-light">
-						Be part of a growing community of students. Get the insights, tracking, and predictions you need to achieve academic success.
+						Be part of a growing community of students. Get the insights,
+						tracking, and predictions you need to achieve academic success.
 					</p>
 					<div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-						<Link href="/signup" className="px-8 py-3.5 bg-white text-blue-600 font-bold rounded-full hover:bg-gray-50 transition-all active:scale-95 shadow-sm">
+						<Link
+							href="/signup"
+							className="px-8 py-3.5 bg-white text-blue-600 font-bold rounded-full hover:bg-gray-50 transition-all active:scale-95 shadow-sm"
+						>
 							Get Started
 						</Link>
-						<Link href="/login" className="px-8 py-3.5 bg-transparent text-white border border-white/30 font-medium rounded-full hover:bg-white/10 transition-all active:scale-95">
+						<Link
+							href="/login"
+							className="px-8 py-3.5 bg-transparent text-white border border-white/30 font-medium rounded-full hover:bg-white/10 transition-all active:scale-95"
+						>
 							Sign in
 						</Link>
 					</div>
 				</div>
-
 			</section>
 
 			{/* Dark Footer */}
@@ -349,10 +384,14 @@ export default function HomePage() {
 								<div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600">
 									<GraduationCap className="h-5 w-5 text-white" />
 								</div>
-								<span className="text-xl font-bold text-white tracking-tight">GPAFlow</span>
+								<span className="text-xl font-bold text-white tracking-tight">
+									GPAFlow
+								</span>
 							</div>
 							<p className="text-gray-400 text-sm leading-relaxed mb-8">
-								GPAFlow is a platform that connects students to build a strong and sustainable academic journey. Join us and discover insights, tracking, and new opportunities.
+								GPAFlow is a platform that connects students to build a strong
+								and sustainable academic journey. Join us and discover insights,
+								tracking, and new opportunities.
 							</p>
 						</div>
 
@@ -361,15 +400,49 @@ export default function HomePage() {
 							<div>
 								<h3 className="text-white font-semibold mb-6 text-sm">App</h3>
 								<ul className="space-y-4">
-									<li><Link href="/login" className="text-gray-400 hover:text-white transition-colors text-sm">Log in</Link></li>
-									<li><Link href="/signup" className="text-gray-400 hover:text-white transition-colors text-sm">Sign up</Link></li>
+									<li>
+										<Link
+											href="/login"
+											className="text-gray-400 hover:text-white transition-colors text-sm"
+										>
+											Log in
+										</Link>
+									</li>
+									<li>
+										<Link
+											href="/signup"
+											className="text-gray-400 hover:text-white transition-colors text-sm"
+										>
+											Sign up
+										</Link>
+									</li>
 								</ul>
 							</div>
 							<div>
-								<h3 className="text-white font-semibold mb-6 text-sm">Project</h3>
+								<h3 className="text-white font-semibold mb-6 text-sm">
+									Project
+								</h3>
 								<ul className="space-y-4">
-									<li><a href="https://github.com/fahadshahbaz/gpaflow" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors text-sm">GitHub</a></li>
-									<li><a href="https://fahadshahbaz.dev" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors text-sm">Portfolio</a></li>
+									<li>
+										<a
+											href="https://github.com/fahadshahbaz/gpaflow"
+											target="_blank"
+											rel="noopener noreferrer"
+											className="text-gray-400 hover:text-white transition-colors text-sm"
+										>
+											GitHub
+										</a>
+									</li>
+									<li>
+										<a
+											href="https://fahadshahbaz.dev"
+											target="_blank"
+											rel="noopener noreferrer"
+											className="text-gray-400 hover:text-white transition-colors text-sm"
+										>
+											Portfolio
+										</a>
+									</li>
 								</ul>
 							</div>
 						</div>
@@ -381,10 +454,22 @@ export default function HomePage() {
 							© {new Date().getFullYear()} GPAFlow. All rights reserved.
 						</p>
 						<div className="flex gap-4">
-							<a href="https://github.com/fahadshahbaz" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile" className="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-white/10 hover:text-white transition-all active:scale-95">
+							<a
+								href="https://github.com/fahadshahbaz"
+								target="_blank"
+								rel="noopener noreferrer"
+								aria-label="GitHub Profile"
+								className="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-white/10 hover:text-white transition-all active:scale-95"
+							>
 								<GithubIcon className="w-[18px] h-[18px]" />
 							</a>
-							<a href="https://linkedin.com/in/fahadshahbaz" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile" className="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-white/10 hover:text-white transition-all active:scale-95">
+							<a
+								href="https://linkedin.com/in/fahadshahbaz"
+								target="_blank"
+								rel="noopener noreferrer"
+								aria-label="LinkedIn Profile"
+								className="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-white/10 hover:text-white transition-all active:scale-95"
+							>
 								<LinkedinIcon className="w-[18px] h-[18px]" />
 							</a>
 						</div>

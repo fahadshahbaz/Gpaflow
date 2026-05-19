@@ -18,8 +18,7 @@ const motivationalQuotes = [
 		quote: "The expert in anything was once a beginner.",
 		author: "Helen Hayes",
 	},
-	{ quote: "Education is the passport to the future.", 
-		author: "Malcolm X" },
+	{ quote: "Education is the passport to the future.", author: "Malcolm X" },
 	{
 		quote:
 			"The beautiful thing about learning is that no one can take it away from you.",

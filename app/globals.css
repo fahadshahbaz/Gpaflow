@@ -109,7 +109,6 @@
 	--primary-600: #93c5fd;
 	--primary-700: #bfdbfe;
 
-
 	--secondary: #1f1f1f;
 	--secondary-foreground: #fafafa;
 
@@ -260,11 +259,13 @@
 	}
 
 	.striped-bar {
-		background-image: repeating-linear-gradient(90deg,
-				currentColor 0px,
-				currentColor 3px,
-				transparent 3px,
-				transparent 5px);
+		background-image: repeating-linear-gradient(
+			90deg,
+			currentColor 0px,
+			currentColor 3px,
+			transparent 3px,
+			transparent 5px
+		);
 	}
 
 	.bg-noise {

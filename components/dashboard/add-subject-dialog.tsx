@@ -42,6 +42,7 @@ export function AddSubjectDialog({
 
 	const engine = getUniversityGradingEngine(university);
 	const isGCWUF = university === "gcwuf";
+	const maxCredits = university === "numl" ? 4 : university === "gcwuf" ? 5 : 6;
 
 	const gradePreview = useMemo(() => {
 		const marksNum = Number.parseFloat(marks);
@@ -49,15 +50,24 @@ export function AddSubjectDialog({
 		const creditHoursNum = Number.parseInt(creditHours, 10) || 3;
 
 		if (Number.isNaN(marksNum) || marksNum < 0) return null;
-		if (isGCWUF && (Number.isNaN(totalMarksNum) || totalMarksNum <= 0)) return null;
+		if (isGCWUF && (Number.isNaN(totalMarksNum) || totalMarksNum <= 0))
+			return null;
 		if (marksNum > (isGCWUF ? totalMarksNum : 100)) return null;
 
 		const maxMarks = isGCWUF ? totalMarksNum : 100;
 		const percentage = (marksNum / maxMarks) * 100;
 
 		return {
-			letterGrade: engine.getLetterGrade(marksNum, creditHoursNum, isGCWUF ? totalMarksNum : undefined),
-			gradePoint: engine.calculateGradePoint(marksNum, creditHoursNum, isGCWUF ? totalMarksNum : undefined),
+			letterGrade: engine.getLetterGrade(
+				marksNum,
+				creditHoursNum,
+				isGCWUF ? totalMarksNum : undefined,
+			),
+			gradePoint: engine.calculateGradePoint(
+				marksNum,
+				creditHoursNum,
+				isGCWUF ? totalMarksNum : undefined,
+			),
 			percentage: percentage.toFixed(1),
 		};
 	}, [marks, totalMarks, creditHours, engine, isGCWUF]);
@@ -105,8 +115,12 @@ export function AddSubjectDialog({
 			return;
 		}
 
-		if (Number.isNaN(creditHoursNum) || creditHoursNum < 1 || creditHoursNum > 6) {
-			setError("Credit hours must be between 1 and 6");
+		if (
+			Number.isNaN(creditHoursNum) ||
+			creditHoursNum < 1 ||
+			creditHoursNum > maxCredits
+		) {
+			setError(`Credit hours must be between 1 and ${maxCredits}`);
 			return;
 		}
 
@@ -173,7 +187,9 @@ export function AddSubjectDialog({
 						/>
 					</Field>
 
-					<div className={`grid gap-4 items-end ${isGCWUF ? "grid-cols-3" : "grid-cols-2"}`}>
+					<div
+						className={`grid gap-4 items-end ${isGCWUF ? "grid-cols-3" : "grid-cols-2"}`}
+					>
 						<Field>
 							<FieldLabel className="text-gray-600 text-sm font-medium mb-2 block">
 								Obtained Marks
@@ -199,7 +215,9 @@ export function AddSubjectDialog({
 									inputMode="numeric"
 									placeholder="100"
 									value={totalMarks}
-									onChange={(e) => handleNumericChange(e.target.value, setTotalMarks, false)}
+									onChange={(e) =>
+										handleNumericChange(e.target.value, setTotalMarks, false)
+									}
 									className="bg-gray-50 border-gray-200 h-11 rounded-xl text-gray-900 placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
 									disabled={loading}
 								/>
@@ -213,9 +231,11 @@ export function AddSubjectDialog({
 							<Input
 								type="text"
 								inputMode="numeric"
-								placeholder="1 - 6"
+								placeholder={`1 - ${maxCredits}`}
 								value={creditHours}
-								onChange={(e) => handleNumericChange(e.target.value, setCreditHours, false)}
+								onChange={(e) =>
+									handleNumericChange(e.target.value, setCreditHours, false)
+								}
 								className="bg-gray-50 border-gray-200 h-11 rounded-xl text-gray-900 placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
 								disabled={loading}
 							/>

@@ -8,31 +8,27 @@ import * as gcwufEngine from "./gcwuf";
 /**
  * Get the grading engine for a specific university
  */
-export function getUniversityGradingEngine(university: UniversitySlug): GradingEngine {
-    switch (university) {
-        case "gcwuf":
-            return {
-                calculateGradePoint: gcwufEngine.calculateGradePoint,
-                getLetterGrade: gcwufEngine.getLetterGrade,
-                calculateSGPA: gcwufEngine.calculateSGPA,
-                calculateCGPA: gcwufEngine.calculateCGPA,
-            };
-        case "numl":
-        default:
-            return {
-                calculateGradePoint: (marks: number) =>
-                    numlEngine.calculateGradePoint(marks),
-                getLetterGrade: (marks: number) => numlEngine.getLetterGrade(marks),
-                calculateSGPA: (subjects) =>
-                    numlEngine.calculateSGPA(
-                        subjects.map((s) => ({
-                            gradePoint: s.gradePoint ?? 0,
-                            creditHours: s.creditHours,
-                        })),
-                    ),
-                calculateCGPA: numlEngine.calculateCGPA,
-            };
-    }
+export function getUniversityGradingEngine(
+	university: UniversitySlug,
+): GradingEngine {
+	switch (university) {
+		case "gcwuf":
+			return {
+				calculateGradePoint: gcwufEngine.calculateGradePoint,
+				getLetterGrade: gcwufEngine.getLetterGrade,
+				calculateSGPA: gcwufEngine.calculateSGPA,
+				calculateCGPA: gcwufEngine.calculateCGPA,
+			};
+		case "numl":
+		default:
+			return {
+				calculateGradePoint: (marks: number) =>
+					numlEngine.calculateGradePoint(marks),
+				getLetterGrade: (marks: number) => numlEngine.getLetterGrade(marks),
+				calculateSGPA: numlEngine.calculateSGPA,
+				calculateCGPA: numlEngine.calculateCGPA,
+			};
+	}
 }
 
 // Re-export individual engines for direct access if needed

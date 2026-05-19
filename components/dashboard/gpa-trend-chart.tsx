@@ -93,12 +93,28 @@ export function GPATrendChart({
 							>
 								<defs>
 									<linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
-										<stop offset="0%" stopColor="var(--primary)" stopOpacity={0.8} />
-										<stop offset="100%" stopColor="var(--primary)" stopOpacity={0.3} />
+										<stop
+											offset="0%"
+											stopColor="var(--primary)"
+											stopOpacity={0.8}
+										/>
+										<stop
+											offset="100%"
+											stopColor="var(--primary)"
+											stopOpacity={0.3}
+										/>
 									</linearGradient>
 									<linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
-										<stop offset="0%" stopColor="var(--primary)" stopOpacity={0.15} />
-										<stop offset="100%" stopColor="var(--primary)" stopOpacity={0} />
+										<stop
+											offset="0%"
+											stopColor="var(--primary)"
+											stopOpacity={0.15}
+										/>
+										<stop
+											offset="100%"
+											stopColor="var(--primary)"
+											stopOpacity={0}
+										/>
 									</linearGradient>
 								</defs>
 								<XAxis
@@ -131,13 +147,17 @@ export function GPATrendChart({
 													</p>
 													<div className="space-y-1">
 														<div className="flex items-center justify-between gap-4">
-															<span className="text-xs text-muted-foreground">SGPA</span>
+															<span className="text-xs text-muted-foreground">
+																SGPA
+															</span>
 															<span className="text-xs font-semibold text-primary">
 																{data.sgpa}
 															</span>
 														</div>
 														<div className="flex items-center justify-between gap-4">
-															<span className="text-xs text-muted-foreground">CGPA</span>
+															<span className="text-xs text-muted-foreground">
+																CGPA
+															</span>
 															<span className="text-xs font-medium text-foreground">
 																{data.cgpa}
 															</span>

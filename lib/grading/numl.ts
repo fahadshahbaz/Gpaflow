@@ -56,15 +56,24 @@ export function getGradeResult(
 }
 
 export function calculateSGPA(
-	subjects: Array<{ gradePoint: number; creditHours: number }>,
+	subjects: Array<{
+		grade_point?: number;
+		obtained_marks?: number;
+		credit_hours: number;
+	}>,
 ): number {
 	if (subjects.length === 0) return 0;
 
-	const totalWeightedPoints = subjects.reduce(
-		(sum, s) => sum + s.gradePoint * s.creditHours,
-		0,
-	);
-	const totalCreditHours = subjects.reduce((sum, s) => sum + s.creditHours, 0);
+	const totalWeightedPoints = subjects.reduce((sum, s) => {
+		const gp =
+			s.grade_point !== undefined
+				? s.grade_point
+				: s.obtained_marks !== undefined
+					? calculateGradePoint(s.obtained_marks)
+					: 0;
+		return sum + gp * s.credit_hours;
+	}, 0);
+	const totalCreditHours = subjects.reduce((sum, s) => sum + s.credit_hours, 0);
 
 	if (totalCreditHours === 0) return 0;
 	return Math.round((totalWeightedPoints / totalCreditHours) * 100) / 100;
