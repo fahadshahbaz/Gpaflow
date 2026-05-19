@@ -200,14 +200,14 @@ export default function HomePage() {
 					>
 						<Link
 							href="/signup"
-							className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition-all active:scale-[0.98] shadow-xl shadow-blue-600/20 w-full sm:w-auto cursor-pointer"
+							className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition-colors duration-200 hover:duration-0 active:scale-[0.98] shadow-xl shadow-blue-600/20 w-full sm:w-auto cursor-pointer"
 						>
 							Sign up
 							<ArrowRight className="h-4.5 w-4.5 transition-transform group-hover:translate-x-1" />
 						</Link>
 						<Link
 							href="/login"
-							className="inline-flex items-center justify-center px-8 py-4 bg-white border border-gray-200 text-gray-700 font-semibold rounded-full hover:bg-slate-50 hover:border-gray-300 transition-colors w-full sm:w-auto shadow-sm cursor-pointer"
+							className="inline-flex items-center justify-center px-8 py-4 bg-white border border-gray-200 text-gray-700 font-semibold rounded-full hover:bg-slate-50 hover:border-gray-300 transition-colors duration-200 hover:duration-0 w-full sm:w-auto shadow-sm cursor-pointer"
 						>
 							Sign in
 						</Link>
@@ -435,7 +435,7 @@ export default function HomePage() {
 					{/* Bento Grid */}
 					<div className="grid md:grid-cols-3 gap-6">
 						{/* Bento Card 1 - Giant card */}
-						<div className="md:col-span-2 rounded-3xl bg-slate-50/50 border border-slate-150 p-8 flex flex-col justify-between overflow-hidden relative group hover:border-slate-300 transition-all duration-300">
+						<div className="md:col-span-2 rounded-3xl bg-slate-50/50 border border-slate-150 p-8 flex flex-col justify-between overflow-hidden relative group hover:border-slate-300 transition-colors duration-200 hover:duration-0">
 							<div className="space-y-4 max-w-md relative z-10">
 								<div className="h-11 w-11 rounded-xl bg-white flex items-center justify-center shadow-sm border border-slate-100">
 									<LineChart className="h-5 w-5 text-indigo-600" />
@@ -464,7 +464,7 @@ export default function HomePage() {
 						</div>
 
 						{/* Bento Card 2 */}
-						<div className="rounded-3xl bg-slate-50/50 border border-slate-150 p-8 flex flex-col justify-between overflow-hidden relative group hover:border-slate-300 transition-all duration-300">
+						<div className="rounded-3xl bg-slate-50/50 border border-slate-150 p-8 flex flex-col justify-between overflow-hidden relative group hover:border-slate-300 transition-colors duration-200 hover:duration-0">
 							<div className="space-y-4">
 								<div className="h-11 w-11 rounded-xl bg-white flex items-center justify-center shadow-sm border border-slate-100">
 									<Zap className="h-5 w-5 text-amber-500" />
@@ -485,7 +485,7 @@ export default function HomePage() {
 						</div>
 
 						{/* Bento Card 3 */}
-						<div className="rounded-3xl bg-slate-50/50 border border-slate-150 p-8 flex flex-col justify-between overflow-hidden relative group hover:border-slate-300 transition-all duration-300">
+						<div className="rounded-3xl bg-slate-50/50 border border-slate-150 p-8 flex flex-col justify-between overflow-hidden relative group hover:border-slate-300 transition-colors duration-200 hover:duration-0">
 							<div className="space-y-4">
 								<div className="h-11 w-11 rounded-xl bg-white flex items-center justify-center shadow-sm border border-slate-100">
 									<BarChart3 className="h-5 w-5 text-emerald-500" />
@@ -505,7 +505,7 @@ export default function HomePage() {
 						</div>
 
 						{/* Bento Card 4 - Giant card */}
-						<div className="md:col-span-2 rounded-3xl bg-slate-50/50 border border-slate-150 p-8 flex flex-col justify-between overflow-hidden relative group hover:border-slate-300 transition-all duration-300">
+						<div className="md:col-span-2 rounded-3xl bg-slate-50/50 border border-slate-150 p-8 flex flex-col justify-between overflow-hidden relative group hover:border-slate-300 transition-colors duration-200 hover:duration-0">
 							<div className="flex flex-col sm:flex-row gap-8 justify-between items-start sm:items-center w-full">
 								<div className="space-y-4 max-w-sm">
 									<div className="h-11 w-11 rounded-xl bg-white flex items-center justify-center shadow-sm border border-slate-100">
@@ -522,7 +522,7 @@ export default function HomePage() {
 								</div>
 
 								{/* Interactive Slider Card Mockup */}
-								<div className="w-full sm:w-60 bg-white rounded-2xl border border-slate-150 p-5 shadow-sm group-hover:shadow-md transition-all duration-300">
+								<div className="w-full sm:w-60 bg-white rounded-2xl border border-slate-150 p-5 shadow-sm group-hover:shadow-md transition-colors duration-200 hover:duration-0">
 									<div className="flex justify-between items-center text-xs font-semibold mb-2">
 										<span className="text-gray-400">TARGET GPA Goal</span>
 										<span className="text-indigo-600 font-bold text-sm bg-indigo-50 px-2 py-0.5 rounded">
