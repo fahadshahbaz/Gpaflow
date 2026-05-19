@@ -1,10 +1,22 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { calculateGradePoint, getLetterGrade } from "@/lib/grading/numl";
+import { getUniversityGradingEngine } from "@/lib/grading";
 import { createClient } from "@/lib/supabase/server";
 import { subjectSchema } from "@/lib/validations/subject";
+import type { UniversitySlug } from "@/types/grading";
 import { getUser } from "./auth";
+
+async function getUserUniversity(): Promise<UniversitySlug> {
+	const user = await getUser();
+	const university = user?.user_metadata?.university;
+
+	if (university === "gcwuf" || university === "numl") {
+		return university;
+	}
+
+	return "numl"; // Default fallback
+}
 
 export async function createSemester(name: string) {
 	const user = await getUser();
@@ -100,14 +112,27 @@ export async function createSubject(semesterId: string, data: SubjectInput) {
 		throw new Error("Semester not found");
 	}
 
+	const university = await getUserUniversity();
+	const engine = getUniversityGradingEngine(university);
+
 	const { error } = await supabase.from("subjects").insert({
 		semester_id: semesterId,
 		name: result.data.name,
 		obtained_marks: result.data.obtained_marks,
 		total_marks: result.data.total_marks,
 		credit_hours: result.data.credit_hours,
-		grade_point: calculateGradePoint(result.data.obtained_marks),
-		letter_grade: getLetterGrade(result.data.obtained_marks),
+		grade_point: engine.calculateGradePoint(
+			result.data.obtained_marks,
+			result.data.credit_hours,
+			result.data.total_marks,
+		),
+		letter_grade: String(
+			engine.getLetterGrade(
+				result.data.obtained_marks,
+				result.data.credit_hours,
+				result.data.total_marks,
+			),
+		),
 	});
 
 	if (error) {
@@ -143,14 +168,58 @@ export async function updateSubject(
 	// Build update object with only provided fields
 	const updateData: Record<string, string | number | undefined> = {};
 	if (data.name !== undefined) updateData.name = data.name;
+
 	if (data.obtained_marks !== undefined) {
 		updateData.obtained_marks = data.obtained_marks;
-		updateData.grade_point = calculateGradePoint(data.obtained_marks);
-		updateData.letter_grade = getLetterGrade(data.obtained_marks);
 	}
-	if (data.total_marks !== undefined) updateData.total_marks = data.total_marks;
-	if (data.credit_hours !== undefined)
+	if (data.total_marks !== undefined) {
+		updateData.total_marks = data.total_marks;
+	}
+	if (data.credit_hours !== undefined) {
 		updateData.credit_hours = data.credit_hours;
+	}
+
+	// Recalculate grades if any grade-affecting fields are updated
+	if (
+		data.obtained_marks !== undefined ||
+		data.credit_hours !== undefined ||
+		data.total_marks !== undefined
+	) {
+		const { data: existingSubject } = await supabase
+			.from("subjects")
+			.select("obtained_marks, credit_hours, total_marks")
+			.eq("id", subjectId)
+			.single();
+
+		const finalObtainedMarks =
+			data.obtained_marks !== undefined
+				? data.obtained_marks
+				: (existingSubject?.obtained_marks ?? 0);
+		const finalCreditHours =
+			data.credit_hours !== undefined
+				? data.credit_hours
+				: (existingSubject?.credit_hours ?? 3);
+		const finalTotalMarks =
+			data.total_marks !== undefined
+				? data.total_marks
+				: (existingSubject?.total_marks ?? undefined);
+
+		const university = await getUserUniversity();
+		const engine = getUniversityGradingEngine(university);
+
+		updateData.grade_point = engine.calculateGradePoint(
+			finalObtainedMarks,
+			finalCreditHours,
+			finalTotalMarks,
+		);
+		updateData.letter_grade = String(
+			engine.getLetterGrade(
+				finalObtainedMarks,
+				finalCreditHours,
+				finalTotalMarks,
+			),
+		);
+	}
 
 	const { error } = await supabase
 		.from("subjects")
