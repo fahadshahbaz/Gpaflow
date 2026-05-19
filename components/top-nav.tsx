@@ -134,10 +134,11 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 											aria-label="Close dropdown"
 										/>
 										<motion.div
-											initial={{ opacity: 0, scale: 0.95, y: 10 }}
+											initial={{ opacity: 0, scale: 0.97, y: 4 }}
 											animate={{ opacity: 1, scale: 1, y: 0 }}
-											exit={{ opacity: 0, scale: 0.95, y: 10 }}
-											transition={{ duration: 0.2 }}
+											exit={{ opacity: 0, scale: 0.97, y: 4 }}
+											style={{ originX: 1, originY: 0 }}
+											transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
 											className="absolute right-0 mt-2 w-64 rounded-2xl bg-white shadow-xl border border-gray-100 pb-2 z-[100] overflow-hidden"
 										>
 											<div className="px-4 py-3 border-b border-gray-100">
@@ -198,10 +199,11 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 										aria-label="Close menu"
 									/>
 									<motion.div
-										initial={{ opacity: 0, scale: 0.95, y: 10 }}
+										initial={{ opacity: 0, scale: 0.97, y: 4 }}
 										animate={{ opacity: 1, scale: 1, y: 0 }}
-										exit={{ opacity: 0, scale: 0.95, y: 10 }}
-										transition={{ duration: 0.2 }}
+										exit={{ opacity: 0, scale: 0.97, y: 4 }}
+										style={{ originX: 1, originY: 0 }}
+										transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
 										className="absolute right-0 mt-2 w-48 rounded-2xl bg-white shadow-xl border border-gray-100 py-2 z-[100] overflow-hidden"
 									>
 										<div className="p-1.5">

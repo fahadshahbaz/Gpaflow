@@ -162,7 +162,7 @@ export default function HomePage() {
 					<motion.div
 						initial={{ opacity: 0, y: 15 }}
 						animate={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.5, ease: "easeOut" }}
+						transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
 						className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 text-xs font-bold text-indigo-600 mb-6 shadow-sm shadow-indigo-500/5"
 					>
 						<Sparkles className="h-3.5 w-3.5 text-indigo-500" />
@@ -172,7 +172,7 @@ export default function HomePage() {
 					<motion.h1
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+						transition={{ duration: 0.3, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
 						className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-gray-900 leading-[1.1] tracking-tight mb-6"
 					>
 						Master your academic <br />
@@ -184,7 +184,7 @@ export default function HomePage() {
 					<motion.p
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+						transition={{ duration: 0.3, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
 						className="text-lg sm:text-xl text-gray-500 max-w-2xl mx-auto mb-10 leading-relaxed font-light"
 					>
 						Say goodbye to simple spreadsheets. GPAFlow provides a beautiful,
@@ -195,7 +195,7 @@ export default function HomePage() {
 					<motion.div
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+						transition={{ duration: 0.3, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
 						className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full sm:w-auto"
 					>
 						<Link
@@ -221,7 +221,7 @@ export default function HomePage() {
 					<motion.div
 						initial={{ opacity: 0, y: 40 }}
 						animate={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+						transition={{ duration: 0.4, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
 						className="relative rounded-[2.5rem] border border-slate-200/80 bg-white shadow-2xl overflow-hidden p-3 sm:p-5 shadow-indigo-900/5"
 					>
 						{/* Window Header */}
