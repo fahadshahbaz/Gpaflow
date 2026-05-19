@@ -235,5 +235,3 @@ export async function hasCompletedOnboarding(): Promise<boolean> {
 	const user = await getUser();
 	return !!user?.user_metadata?.university;
 }
-
-

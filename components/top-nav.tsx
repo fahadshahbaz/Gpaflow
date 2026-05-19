@@ -56,10 +56,12 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 	}, []);
 
 	return (
-		<div className={cn(
-			"fixed top-6 left-0 right-0 px-4 z-50 transition-transform duration-300",
-			hidden && "-translate-y-[calc(100%+2rem)]"
-		)}>
+		<div
+			className={cn(
+				"fixed top-6 left-0 right-0 px-4 z-50 transition-transform duration-300",
+				hidden && "-translate-y-[calc(100%+2rem)]",
+			)}
+		>
 			<header className="px-5">
 				<div className="h-14 flex items-center justify-between shrink-0">
 					{/* Logo */}
@@ -217,7 +219,12 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 																: "text-muted-foreground hover:text-foreground",
 														)}
 													>
-														<item.icon className={cn("h-4 w-4", isActive && "text-primary")} />
+														<item.icon
+															className={cn(
+																"h-4 w-4",
+																isActive && "text-primary",
+															)}
+														/>
 														{item.title}
 													</Link>
 												);

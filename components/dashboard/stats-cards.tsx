@@ -81,10 +81,11 @@ export function StatsCards({
 						</span>
 						{gpaChange !== null && (
 							<div
-								className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium mb-2 ${gpaChange >= 0
-									? "bg-success-50 text-success-600"
-									: "bg-destructive-50 text-destructive-600"
-									}`}
+								className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium mb-2 ${
+									gpaChange >= 0
+										? "bg-success-50 text-success-600"
+										: "bg-destructive-50 text-destructive-600"
+								}`}
 							>
 								{gpaChange >= 0 ? (
 									<TrendingUp className="h-3.5 w-3.5" />
@@ -155,10 +156,11 @@ export function StatsCards({
 						<div className="flex items-center gap-2">
 							{semesterCount > 0 && !isEditing && (
 								<span
-									className={`px-2.5 py-1 rounded-full text-xs font-medium ${isTargetMet
-										? "bg-success-50 text-success-600"
-										: "bg-warning-50 text-warning-600"
-										}`}
+									className={`px-2.5 py-1 rounded-full text-xs font-medium ${
+										isTargetMet
+											? "bg-success-50 text-success-600"
+											: "bg-warning-50 text-warning-600"
+									}`}
 								>
 									{isTargetMet ? "Achieved" : "In Progress"}
 								</span>

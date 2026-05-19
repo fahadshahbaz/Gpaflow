@@ -6,7 +6,6 @@ import { createClient } from "@/lib/supabase/server";
 import { subjectSchema } from "@/lib/validations/subject";
 import { getUser } from "./auth";
 
-
 export async function createSemester(name: string) {
 	const user = await getUser();
 	if (!user) throw new Error("Unauthorized");

@@ -71,29 +71,16 @@ export async function getSemesters(userId: string): Promise<Semester[]> {
 					subject.total_marks,
 				),
 				letter_grade: String(
-					engine.getLetterGrade(subject.obtained_marks, subject.credit_hours, subject.total_marks),
+					engine.getLetterGrade(
+						subject.obtained_marks,
+						subject.credit_hours,
+						subject.total_marks,
+					),
 				),
 			}),
 		);
 
-		let sgpa: number;
-
-		if (university === "gcwuf") {
-			sgpa = engine.calculateSGPA(
-				subjectsWithGrades.map((s) => ({
-					marks: s.obtained_marks,
-					creditHours: s.credit_hours,
-					totalMarks: s.total_marks,
-				})),
-			);
-		} else {
-			sgpa = engine.calculateSGPA(
-				subjectsWithGrades.map((s) => ({
-					gradePoint: s.grade_point,
-					creditHours: s.credit_hours,
-				})),
-			);
-		}
+		const sgpa = engine.calculateSGPA(subjectsWithGrades);
 
 		const totalCreditHours = subjectsWithGrades.reduce(
 			(sum, s) => sum + s.credit_hours,
@@ -139,4 +126,3 @@ export async function getDashboardStats(
 		targetGpa,
 	};
 }
-
