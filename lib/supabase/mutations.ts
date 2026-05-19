@@ -7,17 +7,6 @@ import { subjectSchema } from "@/lib/validations/subject";
 import type { UniversitySlug } from "@/types/grading";
 import { getUser } from "./auth";
 
-async function getUserUniversity(): Promise<UniversitySlug> {
-	const user = await getUser();
-	const university = user?.user_metadata?.university;
-
-	if (university === "gcwuf" || university === "numl") {
-		return university;
-	}
-
-	return "numl"; // Default fallback
-}
-
 export async function createSemester(name: string) {
 	const user = await getUser();
 	if (!user) throw new Error("Unauthorized");
@@ -112,7 +101,8 @@ export async function createSubject(semesterId: string, data: SubjectInput) {
 		throw new Error("Semester not found");
 	}
 
-	const university = await getUserUniversity();
+	const university =
+		(user.user_metadata?.university as UniversitySlug) || "numl";
 	const engine = getUniversityGradingEngine(university);
 
 	const { error } = await supabase.from("subjects").insert({
@@ -185,26 +175,32 @@ export async function updateSubject(
 		data.credit_hours !== undefined ||
 		data.total_marks !== undefined
 	) {
-		const { data: existingSubject } = await supabase
+		const { data: existingSubject, error: fetchError } = await supabase
 			.from("subjects")
 			.select("obtained_marks, credit_hours, total_marks")
 			.eq("id", subjectId)
+			.eq("semester_id", semesterId)
 			.single();
+
+		if (fetchError || !existingSubject) {
+			throw new Error("Subject not found");
+		}
 
 		const finalObtainedMarks =
 			data.obtained_marks !== undefined
 				? data.obtained_marks
-				: (existingSubject?.obtained_marks ?? 0);
+				: existingSubject.obtained_marks;
 		const finalCreditHours =
 			data.credit_hours !== undefined
 				? data.credit_hours
-				: (existingSubject?.credit_hours ?? 3);
+				: existingSubject.credit_hours;
 		const finalTotalMarks =
 			data.total_marks !== undefined
 				? data.total_marks
-				: (existingSubject?.total_marks ?? undefined);
+				: (existingSubject.total_marks ?? undefined);
 
-		const university = await getUserUniversity();
+		const university =
+			(user.user_metadata?.university as UniversitySlug) || "numl";
 		const engine = getUniversityGradingEngine(university);
 
 		updateData.grade_point = engine.calculateGradePoint(
