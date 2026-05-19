@@ -41,23 +41,37 @@ const buttonVariants = cva(
 	},
 );
 
+import { motion } from "motion/react";
+
 function Button({
 	className,
 	variant = "default",
 	size = "default",
 	asChild = false,
 	...props
-}: React.ComponentProps<"button"> &
+}: React.ComponentProps<typeof motion.button> &
 	VariantProps<typeof buttonVariants> & {
 		asChild?: boolean;
 	}) {
-	const Comp = asChild ? Slot.Root : "button";
+	if (asChild) {
+		return (
+			<Slot.Root
+				data-slot="button"
+				data-variant={variant}
+				data-size={size}
+				className={cn(buttonVariants({ variant, size, className }))}
+				{...(props as any)}
+			/>
+		);
+	}
 
 	return (
-		<Comp
+		<motion.button
 			data-slot="button"
 			data-variant={variant}
 			data-size={size}
+			whileTap={{ scale: 0.98 }}
+			transition={{ type: "spring", stiffness: 400, damping: 25 }}
 			className={cn(buttonVariants({ variant, size, className }))}
 			{...props}
 		/>
