@@ -7,7 +7,6 @@ import {
 	GraduationCap,
 	LineChart,
 	Menu,
-	Sparkles,
 	Target,
 	TrendingUp,
 	X,
@@ -44,10 +43,10 @@ export default function HomePage() {
 	}, []);
 
 	return (
-		<main className="relative min-h-screen bg-[#fcfdff] overflow-hidden selection:bg-indigo-100 font-sans">
-			{/* High-End Ambient Background Blobs */}
-			<div className="pointer-events-none absolute top-[-5%] left-[-10%] w-[60%] h-[50%] rounded-full bg-gradient-to-tr from-blue-300/20 to-indigo-300/10 blur-[130px] animate-pulse" />
-			<div className="pointer-events-none absolute top-[20%] right-[-10%] w-[50%] h-[60%] rounded-full bg-gradient-to-br from-violet-300/20 to-purple-300/10 blur-[140px]" />
+		<main className="relative min-h-screen bg-[#fcfdff] overflow-hidden selection:bg-blue-100 font-sans">
+			{/* High-fidelity background organic glow */}
+			<div className="pointer-events-none absolute top-[-5%] left-[-10%] w-[60%] h-[50%] rounded-full bg-gradient-to-tr from-blue-300/20 to-blue-200/10 blur-[130px] animate-pulse" />
+			<div className="pointer-events-none absolute top-[20%] right-[-10%] w-[50%] h-[60%] rounded-full bg-gradient-to-br from-blue-300/20 to-sky-300/10 blur-[140px]" />
 			<div className="pointer-events-none absolute bottom-[10%] left-[-5%] w-[40%] h-[40%] rounded-full bg-blue-400/10 blur-[120px]" />
 
 			{/* Decorative grid pattern */}
@@ -59,10 +58,10 @@ export default function HomePage() {
 					hidden ? "-translate-y-[calc(100%+2rem)]" : ""
 				}`}
 			>
-				<header className="max-w-4xl mx-auto bg-white/70 backdrop-blur-xl border border-white/80 shadow-[0_12px_40px_rgba(0,0,0,0.03)] rounded-[32px] px-6 overflow-hidden border-slate-100">
+				<header className="max-w-4xl mx-auto bg-white/75 backdrop-blur-xl border border-slate-200/60 shadow-[inset_0_1.5px_2.5px_rgba(255,255,255,0.9),0_12px_36px_-4px_rgba(15,23,42,0.06),0_4px_12px_-2px_rgba(15,23,42,0.03)] rounded-[32px] px-6 overflow-hidden">
 					<div className="h-[60px] flex items-center justify-between shrink-0">
 						<Link href="/" className="flex items-center gap-2.5 group">
-							<div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-md shadow-blue-500/20 group-hover:shadow-blue-500/40 transition-all duration-300">
+							<div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-b from-blue-500 to-blue-600 border border-blue-400/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_3px_6px_rgba(59,130,246,0.25)] group-hover:from-blue-450 group-hover:to-blue-550 transition-all duration-300 active:scale-95">
 								<GraduationCap className="h-5 w-5 text-white" />
 							</div>
 							<span className="text-base sm:text-lg font-bold text-gray-900 tracking-tight">
@@ -71,22 +70,22 @@ export default function HomePage() {
 						</Link>
 
 						{/* Desktop Navigation Links */}
-						<nav className="hidden md:flex items-center gap-8 text-sm font-semibold text-gray-500">
+						<nav className="hidden md:flex items-center gap-2 text-sm font-semibold text-gray-500">
 							<a
 								href="#features"
-								className="hover:text-indigo-600 transition-colors"
+								className="px-3.5 py-1.5 rounded-xl hover:text-blue-650 hover:bg-slate-50 border border-transparent hover:border-slate-200/60 hover:shadow-[inset_0_1px_0_#ffffff,0_1.5px_2px_rgba(15,23,42,0.03)] transition-all duration-200"
 							>
 								Features
 							</a>
 							<a
 								href="#preview"
-								className="hover:text-indigo-600 transition-colors"
+								className="px-3.5 py-1.5 rounded-xl hover:text-blue-650 hover:bg-slate-50 border border-transparent hover:border-slate-200/60 hover:shadow-[inset_0_1px_0_#ffffff,0_1.5px_2px_rgba(15,23,42,0.03)] transition-all duration-200"
 							>
 								Dashboard
 							</a>
 							<a
 								href="#predict"
-								className="hover:text-indigo-600 transition-colors"
+								className="px-3.5 py-1.5 rounded-xl hover:text-blue-650 hover:bg-slate-50 border border-transparent hover:border-slate-200/60 hover:shadow-[inset_0_1px_0_#ffffff,0_1.5px_2px_rgba(15,23,42,0.03)] transition-all duration-200"
 							>
 								Predictions
 							</a>
@@ -96,7 +95,7 @@ export default function HomePage() {
 						<div className="hidden sm:flex items-center gap-2">
 							<Link
 								href="/login"
-								className="h-10 px-5 flex items-center justify-center text-sm font-semibold text-gray-600 hover:text-indigo-600 transition-colors rounded-full"
+								className="h-10 px-5 flex items-center justify-center text-sm font-semibold text-gray-600 hover:text-blue-650 transition-colors rounded-full"
 							>
 								Log in
 							</Link>
@@ -114,7 +113,7 @@ export default function HomePage() {
 							onClick={() => setIsOpen(!isOpen)}
 							aria-label="Toggle menu"
 							aria-expanded={isOpen}
-							className="flex sm:hidden h-9 w-9 items-center justify-center rounded-full text-gray-600 hover:bg-slate-100 transition-colors cursor-pointer"
+							className="flex sm:hidden h-9 w-9 items-center justify-center rounded-xl bg-linear-gradient(180deg,#fff_0%,#f1f5f9_100%) border border-slate-200 shadow-[inset_0_1px_0_#fff,0_1.5px_3px_rgba(0,0,0,0.08)] text-gray-600 hover:bg-slate-50 transition active:scale-95 cursor-pointer"
 						>
 							{isOpen ? (
 								<X className="h-5 w-5" />
@@ -256,7 +255,7 @@ export default function HomePage() {
 										</span>
 									</div>
 									<div className="space-y-2">
-										<div className="flex items-center gap-2.5 px-3.5 py-2.5 bg-indigo-50/80 border border-indigo-100/60 shadow-[inset_0_1.5px_3px_rgba(79,70,229,0.08)] text-indigo-600 rounded-xl text-xs font-bold select-none">
+										<div className="flex items-center gap-2.5 px-3.5 py-2.5 bg-blue-50/80 border border-blue-100/60 shadow-[inset_0_1.5px_3px_rgba(59,130,246,0.08)] text-blue-600 rounded-xl text-xs font-bold select-none">
 											<BarChart3 className="h-4 w-4" />
 											Overview
 										</div>
@@ -272,15 +271,15 @@ export default function HomePage() {
 								</div>
 
 								{/* Target GPA Inset LCD Display */}
-								<div className="bg-gradient-to-br from-indigo-900 via-indigo-950 to-slate-950 border border-indigo-955 shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.4),0_1.5px_2px_rgba(255,255,255,0.06)] rounded-2xl p-4.5 space-y-3">
-									<div className="text-[9px] font-bold tracking-widest text-indigo-300 uppercase font-mono">
+								<div className="bg-gradient-to-br from-blue-900 via-blue-950 to-slate-950 border border-slate-800 shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.4),0_1.5px_2px_rgba(255,255,255,0.06)] rounded-2xl p-4.5 space-y-3">
+									<div className="text-[9px] font-bold tracking-widest text-blue-300 uppercase font-mono">
 										Target GPA
 									</div>
 									<div className="text-xl font-extrabold text-white tracking-wide font-mono">
 										3.92 GPA
 									</div>
-									<div className="w-full bg-indigo-950/80 h-2.5 rounded-full p-0.5 border border-indigo-900 shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.5)] flex items-center">
-										<div className="h-full bg-gradient-to-r from-blue-400 to-indigo-500 rounded-full shadow-[0_0_8px_rgba(59,130,246,0.6)] w-[85%]" />
+									<div className="w-full bg-blue-950/80 h-2.5 rounded-full p-0.5 border border-blue-900 shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.5)] flex items-center">
+										<div className="h-full bg-gradient-to-r from-blue-400 to-blue-500 rounded-full shadow-[0_0_8px_rgba(59,130,246,0.6)] w-[85%]" />
 									</div>
 								</div>
 							</div>
@@ -320,12 +319,12 @@ export default function HomePage() {
 											>
 												<stop
 													offset="0%"
-													stopColor="#4f46e5"
+													stopColor="#2563eb"
 													stopOpacity="0.22"
 												/>
 												<stop
 													offset="100%"
-													stopColor="#4f46e5"
+													stopColor="#2563eb"
 													stopOpacity="0.0"
 												/>
 											</linearGradient>
@@ -338,7 +337,7 @@ export default function HomePage() {
 										<path
 											d="M 0 100 Q 50 85 100 60 T 200 45 T 300 15"
 											fill="none"
-											stroke="#4f46e5"
+											stroke="#2563eb"
 											strokeWidth="3.5"
 											strokeLinecap="round"
 										/>
@@ -347,7 +346,7 @@ export default function HomePage() {
 											cx="100"
 											cy="60"
 											r="4.5"
-											fill="#4f46e5"
+											fill="#2563eb"
 											stroke="white"
 											strokeWidth="2"
 										/>
@@ -355,7 +354,7 @@ export default function HomePage() {
 											cx="200"
 											cy="45"
 											r="4.5"
-											fill="#4f46e5"
+											fill="#2563eb"
 											stroke="white"
 											strokeWidth="2"
 										/>
@@ -363,7 +362,7 @@ export default function HomePage() {
 											cx="295"
 											cy="16"
 											r="6"
-											fill="#6366f1"
+											fill="#3b82f6"
 											stroke="white"
 											strokeWidth="2"
 										/>
@@ -374,7 +373,7 @@ export default function HomePage() {
 									<div>Sem 1</div>
 									<div>Sem 2</div>
 									<div>Sem 3</div>
-									<div className="text-indigo-600 font-extrabold">
+									<div className="text-blue-600 font-extrabold">
 										Sem 4 (Active)
 									</div>
 								</div>
@@ -403,20 +402,20 @@ export default function HomePage() {
 								</div>
 
 								{/* Stats Card 2 */}
-								<div className="flex-1 p-5 bg-gradient-to-br from-indigo-900 to-indigo-950 border border-indigo-950 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.08),inset_0_-2px_4px_rgba(0,0,0,0.4),0_6px_20px_rgba(15,23,42,0.05)] rounded-3xl flex flex-col justify-between text-white relative overflow-hidden">
+								<div className="flex-1 p-5 bg-gradient-to-br from-blue-900 to-blue-950 border border-blue-950 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.08),inset_0_-2px_4px_rgba(0,0,0,0.4),0_6px_20px_rgba(15,23,42,0.05)] rounded-3xl flex flex-col justify-between text-white relative overflow-hidden">
 									<div className="flex justify-between items-center relative z-10">
-										<span className="text-[10px] uppercase font-bold text-indigo-350 tracking-wider font-mono">
+										<span className="text-[10px] uppercase font-bold text-blue-100 tracking-wider font-mono">
 											Forecast Target
 										</span>
-										<div className="h-7 w-7 rounded-full bg-indigo-950/80 border border-indigo-900 flex items-center justify-center shadow-inner">
-											<Target className="h-4 w-4 text-indigo-400" />
+										<div className="h-7 w-7 rounded-full bg-blue-950/80 border border-blue-900/80 flex items-center justify-center shadow-inner">
+											<Target className="h-4 w-4 text-blue-200" />
 										</div>
 									</div>
 									<div className="relative z-10">
 										<div className="text-3xl font-extrabold tracking-tight leading-none font-mono">
 											A Grade
 										</div>
-										<p className="text-[9px] font-medium text-indigo-300 mt-2.5 font-mono">
+										<p className="text-[9px] font-medium text-blue-200/90 mt-2.5 font-mono">
 											Requires 3.90 next sem
 										</p>
 									</div>
@@ -451,7 +450,7 @@ export default function HomePage() {
 						<div className="card-skeuo md:col-span-2 rounded-[32px] p-8 flex flex-col lg:flex-row justify-between items-center gap-8 overflow-hidden relative group">
 							<div className="space-y-4 max-w-md relative z-10">
 								<div className="h-11 w-11 rounded-xl icon-skeuo-inset">
-									<LineChart className="h-5 w-5 text-indigo-600" />
+									<LineChart className="h-5 w-5 text-blue-600" />
 								</div>
 								<h3 className="text-2xl font-bold text-gray-900">
 									Visualized Grade Growth
@@ -468,7 +467,7 @@ export default function HomePage() {
 									<span className="px-3 py-1 bg-white border border-slate-150 rounded-lg text-xs font-semibold text-gray-600 shadow-2xs">
 										Dynamic Scaling
 									</span>
-									<span className="px-3 py-1 bg-indigo-50 border border-indigo-100 rounded-lg text-xs font-semibold text-indigo-600">
+									<span className="px-3 py-1 bg-blue-50 border border-blue-100 rounded-lg text-xs font-semibold text-blue-600">
 										Predictive Curves
 									</span>
 								</div>
@@ -525,7 +524,7 @@ export default function HomePage() {
 								</svg>
 								<div className="flex justify-between text-[9px] font-bold text-slate-400 pt-2 border-t border-slate-100 z-10">
 									<span>SEM 1: 3.20</span>
-									<span className="text-indigo-600">TARGET: 3.85</span>
+									<span className="text-blue-600">TARGET: 3.85</span>
 								</div>
 							</div>
 						</div>
@@ -562,7 +561,7 @@ export default function HomePage() {
 									</div>
 									<div className="flex justify-between">
 										<span>LAST SYNCED</span>
-										<span className="text-indigo-600 font-semibold">
+										<span className="text-blue-600 font-semibold">
 											JUST NOW
 										</span>
 									</div>
@@ -608,9 +607,9 @@ export default function HomePage() {
 
 						{/* Bento Card 4 - Giant card */}
 						<div className="card-skeuo md:col-span-2 rounded-[32px] p-8 flex flex-col lg:flex-row justify-between items-center gap-8 overflow-hidden relative group">
-							<div className="space-y-4 max-w-sm relative z-10">
+							<div className="space-y-4 max-w-md relative z-10">
 								<div className="h-11 w-11 rounded-xl icon-skeuo-inset">
-									<Target className="h-5 w-5 text-purple-600" />
+									<Target className="h-5 w-5 text-blue-600" />
 								</div>
 								<h3 className="text-2xl font-bold text-gray-900">
 									Intelligent Grade Forecasting
@@ -628,17 +627,17 @@ export default function HomePage() {
 									<span className="text-slate-400 uppercase tracking-wider text-[9px]">
 										Target GPA Goal
 									</span>
-									<span className="text-indigo-600 font-extrabold text-xs bg-white border border-slate-100 px-2 py-0.5 rounded-lg shadow-2xs">
+									<span className="text-blue-600 font-extrabold text-xs bg-white border border-slate-100 px-2 py-0.5 rounded-lg shadow-2xs">
 										3.75 GPA
 									</span>
 								</div>
 
 								{/* Track Inset */}
 								<div className="w-full h-4 bg-slate-200/70 rounded-full p-0.5 border border-slate-300/40 shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.08)] flex items-center relative my-3">
-									<div className="h-full bg-gradient-to-r from-blue-500 via-indigo-500 to-indigo-600 rounded-full w-[85%]" />
+									<div className="h-full bg-gradient-to-r from-blue-500 to-blue-600 rounded-full w-[85%]" />
 									{/* Raised Thumb Button */}
 									<div className="absolute left-[81%] w-6 h-6 rounded-full bg-linear-gradient(180deg,#fff_0%,#f1f5f9_100%) border border-slate-300/80 shadow-[inset_0_1px_0_#fff,0_2.5px_5px_rgba(0,0,0,0.12)] flex items-center justify-center cursor-pointer select-none">
-										<div className="w-2 h-2 rounded-full bg-indigo-600 shadow-inner" />
+										<div className="w-2 h-2 rounded-full bg-blue-600 shadow-inner" />
 									</div>
 								</div>
 
@@ -657,7 +656,7 @@ export default function HomePage() {
 
 			{/* Brand-Styled Premium Call-to-Action Section */}
 			<section className="mt-8 px-6 pb-20 pt-8 relative overflow-hidden">
-				<div className="max-w-5xl mx-auto rounded-[3.5rem] bg-gradient-to-br from-indigo-900 via-blue-900 to-indigo-950 p-10 sm:p-20 text-white relative overflow-hidden shadow-2xl shadow-indigo-900/10">
+				<div className="max-w-5xl mx-auto rounded-[3.5rem] bg-gradient-to-br from-blue-900 via-blue-950 to-slate-950 p-10 sm:p-20 text-white relative overflow-hidden border border-blue-800/60 shadow-[inset_0_2px_4px_rgba(255,255,255,0.08),inset_0_-4px_8px_rgba(0,0,0,0.4),0_20px_50px_rgba(15,23,42,0.15)]">
 					{/* Glowing decorative nodes */}
 					<div className="absolute inset-0 opacity-20 pointer-events-none">
 						<div className="absolute top-[-20%] left-[-20%] w-[80%] h-[80%] rounded-full bg-white blur-[120px]" />
@@ -686,13 +685,13 @@ export default function HomePage() {
 					</div>
 
 					<div className="relative z-10 flex flex-col items-center text-center max-w-2xl mx-auto space-y-6">
-						<div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-[10px] font-bold text-indigo-200 uppercase tracking-widest">
-							<Sparkles className="h-3 w-3" /> Step Into The Flow
+						<div className="inline-flex items-center gap-1.5 px-4.5 py-1.5 rounded-full bg-blue-950/80 border border-blue-900 shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.6),0_1px_0_rgba(255,255,255,0.05)] text-[10px] font-bold text-blue-300 uppercase tracking-widest font-mono">
+							Step Into The Flow
 						</div>
 						<h2 className="text-4xl md:text-5xl font-extrabold leading-[1.1] tracking-tight text-white">
-							Ready to take absolute control of your academic journey?
+							Ready to own your academic journey?
 						</h2>
-						<p className="text-indigo-200 font-light text-base sm:text-lg leading-relaxed">
+						<p className="text-blue-200 font-light text-base sm:text-lg leading-relaxed">
 							Be part of the next generation of students using data-driven
 							forecasting to predict and guarantee GPA outcomes. Setup in less
 							than 60 seconds.
@@ -701,7 +700,7 @@ export default function HomePage() {
 						<div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center items-center w-full sm:w-auto">
 							<Link
 								href="/signup"
-								className="btn-skeuo-white text-indigo-700 font-bold px-8 py-4 rounded-full w-full sm:w-auto text-center cursor-pointer"
+								className="btn-skeuo-white text-blue-700 font-bold px-8 py-4 rounded-full w-full sm:w-auto text-center cursor-pointer"
 							>
 								Sign up
 							</Link>
@@ -717,13 +716,13 @@ export default function HomePage() {
 			</section>
 
 			{/* Sleek Dark Brand Footer */}
-			<footer className="relative z-10 bg-[#0f172a] pt-20 pb-10 px-6 border-t border-slate-800">
+			<footer className="relative z-10 bg-[#0f172a] pt-20 pb-10 px-6 border-t border-slate-800 shadow-[inset_0_1.5px_3px_rgba(255,255,255,0.02)]">
 				<div className="max-w-5xl mx-auto">
 					<div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 mb-16">
 						{/* Left Column - Brand Info */}
 						<div className="md:col-span-6 lg:col-span-5 space-y-6">
 							<div className="flex items-center gap-2.5">
-								<div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600">
+								<div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-b from-blue-500 to-blue-600 border border-blue-400/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_2px_4px_rgba(0,0,0,0.15)] transition active:scale-95">
 									<GraduationCap className="h-5 w-5 text-white" />
 								</div>
 								<span className="text-xl font-bold text-white tracking-tight">
@@ -805,7 +804,7 @@ export default function HomePage() {
 								target="_blank"
 								rel="noopener noreferrer"
 								aria-label="GitHub Profile"
-								className="w-9 h-9 rounded-full bg-slate-850 flex items-center justify-center text-slate-400 hover:bg-slate-800 hover:text-white transition-all active:scale-[0.98] border border-slate-800"
+								className="w-9 h-9 rounded-full bg-gradient-to-b from-slate-800 to-slate-900 flex items-center justify-center text-slate-400 hover:text-white transition-all active:scale-[0.95] border border-slate-700/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_2px_4px_rgba(0,0,0,0.3)] hover:from-slate-750 hover:to-slate-850 hover:border-slate-600"
 							>
 								<GithubIcon className="w-[18px] h-[18px]" />
 							</a>
@@ -814,7 +813,7 @@ export default function HomePage() {
 								target="_blank"
 								rel="noopener noreferrer"
 								aria-label="LinkedIn Profile"
-								className="w-9 h-9 rounded-full bg-slate-850 flex items-center justify-center text-slate-400 hover:bg-slate-800 hover:text-white transition-all active:scale-[0.98] border border-slate-800"
+								className="w-9 h-9 rounded-full bg-gradient-to-b from-slate-800 to-slate-900 flex items-center justify-center text-slate-400 hover:text-white transition-all active:scale-[0.95] border border-slate-700/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_2px_4px_rgba(0,0,0,0.3)] hover:from-slate-750 hover:to-slate-850 hover:border-slate-600"
 							>
 								<LinkedinIcon className="w-[18px] h-[18px]" />
 							</a>
