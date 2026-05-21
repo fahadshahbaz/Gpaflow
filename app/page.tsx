@@ -716,7 +716,7 @@ export default function HomePage() {
 			</section>
 
 			{/* Sleek Dark Brand Footer */}
-			<footer className="relative z-10 bg-[#0f172a] pt-20 pb-10 px-6 border-t border-slate-800 shadow-[inset_0_1.5px_3px_rgba(255,255,255,0.02)]">
+			<footer className="relative z-10 bg-gradient-to-b from-slate-950 via-[#0d1321] to-[#090d16] pt-20 pb-10 px-6 border-t border-slate-900 shadow-[inset_0_4px_12px_rgba(0,0,0,0.4),0_-1px_0_rgba(255,255,255,0.03)]">
 				<div className="max-w-5xl mx-auto">
 					<div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 mb-16">
 						{/* Left Column - Brand Info */}
@@ -793,7 +793,7 @@ export default function HomePage() {
 					</div>
 
 					{/* Bottom copyright bar */}
-					<div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-6">
+					<div className="pt-8 border-t border-slate-950/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] flex flex-col md:flex-row items-center justify-between gap-6">
 						<p className="text-slate-500 text-xs font-semibold">
 							© {new Date().getFullYear()} GPAFlow. Built with pride for higher
 							education.

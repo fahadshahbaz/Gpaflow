@@ -46,7 +46,7 @@ export default function LoginPage() {
 						type="email"
 						required
 						defaultValue=""
-						className="block w-full rounded-xl border border-gray-200 bg-slate-50/50 px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-500/10 focus:outline-none transition-all duration-200"
+						className="block w-full rounded-xl border border-slate-200 bg-slate-50/70 px-4 py-3 text-sm text-gray-900 placeholder-slate-400 shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.06)] focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/10 focus:outline-none transition-all duration-200"
 						placeholder="sellostore@company.com"
 					/>
 					{state.fieldErrors?.email && (
@@ -70,13 +70,13 @@ export default function LoginPage() {
 							name="password"
 							type={showPassword ? "text" : "password"}
 							required
-							className="block w-full rounded-xl border border-gray-200 bg-slate-50/50 pl-4 pr-11 py-3 text-sm text-gray-900 placeholder-gray-400 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-500/10 focus:outline-none transition-all duration-200"
+							className="block w-full rounded-xl border border-slate-200 bg-slate-50/70 pl-4 pr-11 py-3 text-sm text-gray-900 placeholder-slate-400 shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.06)] focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/10 focus:outline-none transition-all duration-200"
 							placeholder="Enter your password"
 						/>
 						<button
 							type="button"
 							onClick={() => setShowPassword(!showPassword)}
-							className="absolute inset-y-0 right-0 flex items-center pr-3.5 text-gray-400 hover:text-gray-600 transition"
+							className="absolute inset-y-0 right-0 flex items-center pr-3.5 text-gray-400 hover:text-gray-650 transition"
 						>
 							{showPassword ? (
 								<EyeOff className="h-4 w-4" />
@@ -97,7 +97,7 @@ export default function LoginPage() {
 					<label className="flex items-center gap-2 cursor-pointer group text-gray-500">
 						<input
 							type="checkbox"
-							className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500/20 focus:ring-offset-0 cursor-pointer"
+							className="h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500/20 focus:ring-offset-0 cursor-pointer"
 						/>
 						<span className="text-xs font-medium text-gray-500 group-hover:text-gray-700 transition">
 							Remember Me
@@ -105,7 +105,7 @@ export default function LoginPage() {
 					</label>
 					<Link
 						href="/forgot-password"
-						className="text-xs font-semibold text-indigo-600 hover:text-indigo-700 hover:underline transition"
+						className="text-xs font-bold text-blue-600 hover:text-blue-750 hover:underline transition"
 					>
 						Forgot Your Password?
 					</Link>
@@ -115,7 +115,7 @@ export default function LoginPage() {
 				<button
 					type="submit"
 					disabled={pending}
-					className="w-full flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-4 py-3 text-sm font-semibold text-white transition-all duration-200 hover:bg-indigo-700 active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-indigo-600/10 cursor-pointer"
+					className="w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-b from-blue-500 to-blue-600 border border-blue-400/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_3px_8px_rgba(59,130,246,0.25)] text-sm font-bold text-white hover:from-blue-450 hover:to-blue-550 active:scale-[0.97] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
 				>
 					{pending ? (
 						<>
@@ -142,7 +142,7 @@ export default function LoginPage() {
 			<form action={signInWithGoogle} className="w-full">
 				<button
 					type="submit"
-					className="w-full flex items-center justify-center gap-2.5 rounded-xl border border-gray-200 bg-white py-3 px-4 text-xs font-semibold text-gray-700 hover:bg-slate-50 hover:border-gray-300 transition-all duration-200 active:scale-[0.98] shadow-sm cursor-pointer"
+					className="w-full flex items-center justify-center gap-2.5 rounded-xl border border-slate-200/80 bg-linear-gradient(180deg,#fff_0%,#f8fafc_100%) py-3 px-4 text-xs font-bold text-slate-700 shadow-[inset_0_1px_0_#ffffff,0_2px_4px_rgba(0,0,0,0.06)] hover:bg-slate-50 hover:border-slate-350 transition-all duration-200 active:scale-[0.96] cursor-pointer"
 				>
 					<GoogleIcon />
 					Continue with Google
@@ -154,7 +154,7 @@ export default function LoginPage() {
 				Don&apos;t Have An Account?{" "}
 				<Link
 					href="/signup"
-					className="font-bold text-indigo-600 hover:text-indigo-700 hover:underline transition"
+					className="font-bold text-blue-600 hover:text-blue-750 hover:underline transition"
 				>
 					Register Now.
 				</Link>
