@@ -59,9 +59,7 @@ export default function HomePage() {
 					hidden ? "-translate-y-[calc(100%+2rem)]" : ""
 				}`}
 			>
-				<header
-					className="max-w-4xl mx-auto bg-white/70 backdrop-blur-xl border border-white/80 shadow-[0_12px_40px_rgba(0,0,0,0.03)] rounded-[32px] px-6 overflow-hidden border-slate-100"
-				>
+				<header className="max-w-4xl mx-auto bg-white/70 backdrop-blur-xl border border-white/80 shadow-[0_12px_40px_rgba(0,0,0,0.03)] rounded-[32px] px-6 overflow-hidden border-slate-100">
 					<div className="h-[60px] flex items-center justify-between shrink-0">
 						<Link href="/" className="flex items-center gap-2.5 group">
 							<div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 shadow-md shadow-blue-500/20 group-hover:shadow-indigo-500/40 transition-all duration-300">
@@ -104,7 +102,7 @@ export default function HomePage() {
 							</Link>
 							<Link
 								href="/signup"
-								className="h-10 px-6 flex items-center justify-center text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-all active:scale-[0.98] shadow-md shadow-blue-600/10"
+								className="btn-skeuo-primary h-10 px-6 flex items-center justify-center text-sm font-semibold rounded-full"
 							>
 								Sign up
 							</Link>
@@ -138,14 +136,14 @@ export default function HomePage() {
 								<Link
 									href="/login"
 									onClick={() => setIsOpen(false)}
-									className="w-full text-center py-3 text-sm font-semibold text-gray-600 hover:text-indigo-600 bg-slate-50 rounded-2xl"
+									className="btn-skeuo-white w-full text-center py-3 text-sm font-semibold rounded-2xl"
 								>
 									Log in
 								</Link>
 								<Link
 									href="/signup"
 									onClick={() => setIsOpen(false)}
-									className="w-full text-center py-3 text-sm font-semibold bg-blue-600 text-white rounded-2xl shadow-md shadow-blue-600/10"
+									className="btn-skeuo-primary w-full text-center py-3 text-sm font-semibold rounded-2xl"
 								>
 									Sign up
 								</Link>
@@ -172,7 +170,11 @@ export default function HomePage() {
 					<motion.h1
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.3, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
+						transition={{
+							duration: 0.3,
+							delay: 0.05,
+							ease: [0.22, 1, 0.36, 1],
+						}}
 						className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-gray-900 leading-[1.1] tracking-tight mb-6"
 					>
 						Master your academic <br />
@@ -195,19 +197,23 @@ export default function HomePage() {
 					<motion.div
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.3, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+						transition={{
+							duration: 0.3,
+							delay: 0.15,
+							ease: [0.22, 1, 0.36, 1],
+						}}
 						className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full sm:w-auto"
 					>
 						<Link
 							href="/signup"
-							className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition-colors duration-200 hover:duration-0 active:scale-[0.98] shadow-xl shadow-blue-600/20 w-full sm:w-auto cursor-pointer"
+							className="btn-skeuo-primary group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full w-full sm:w-auto cursor-pointer"
 						>
 							Sign up
 							<ArrowRight className="h-4.5 w-4.5 transition-transform group-hover:translate-x-1" />
 						</Link>
 						<Link
 							href="/login"
-							className="inline-flex items-center justify-center px-8 py-4 bg-white border border-gray-200 text-gray-700 font-semibold rounded-full hover:bg-slate-50 hover:border-gray-300 transition-colors duration-200 hover:duration-0 w-full sm:w-auto shadow-sm cursor-pointer"
+							className="btn-skeuo-white inline-flex items-center justify-center px-8 py-4 rounded-full w-full sm:w-auto cursor-pointer"
 						>
 							Sign in
 						</Link>
@@ -591,13 +597,13 @@ export default function HomePage() {
 						<div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center items-center w-full sm:w-auto">
 							<Link
 								href="/signup"
-								className="px-8 py-4 bg-white text-blue-600 font-bold rounded-full hover:bg-slate-50 transition-all active:scale-[0.98] shadow-lg shadow-white/5 w-full sm:w-auto text-center cursor-pointer"
+								className="btn-skeuo-white text-indigo-700 font-bold px-8 py-4 rounded-full w-full sm:w-auto text-center cursor-pointer"
 							>
 								Sign up
 							</Link>
 							<Link
 								href="/login"
-								className="px-8 py-4 bg-transparent border border-white/20 text-white font-semibold rounded-full hover:bg-white/10 transition-all w-full sm:w-auto text-center cursor-pointer"
+								className="btn-skeuo-glass px-8 py-4 rounded-full border-white/20 text-white font-semibold hover:text-white w-full sm:w-auto text-center cursor-pointer"
 							>
 								Sign in
 							</Link>
