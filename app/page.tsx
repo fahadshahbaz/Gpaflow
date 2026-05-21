@@ -62,11 +62,11 @@ export default function HomePage() {
 				<header className="max-w-4xl mx-auto bg-white/70 backdrop-blur-xl border border-white/80 shadow-[0_12px_40px_rgba(0,0,0,0.03)] rounded-[32px] px-6 overflow-hidden border-slate-100">
 					<div className="h-[60px] flex items-center justify-between shrink-0">
 						<Link href="/" className="flex items-center gap-2.5 group">
-							<div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 shadow-md shadow-blue-500/20 group-hover:shadow-indigo-500/40 transition-all duration-300">
+							<div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-md shadow-blue-500/20 group-hover:shadow-blue-500/40 transition-all duration-300">
 								<GraduationCap className="h-5 w-5 text-white" />
 							</div>
 							<span className="text-base sm:text-lg font-bold text-gray-900 tracking-tight">
-								GPA<span className="text-indigo-600">Flow</span>
+								GPA<span className="text-blue-600">Flow</span>
 							</span>
 						</Link>
 
@@ -161,7 +161,7 @@ export default function HomePage() {
 						initial={{ opacity: 0, y: 15 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-						className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 text-xs font-bold text-indigo-600 mb-6 shadow-sm shadow-indigo-500/5"
+						className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-xs font-bold text-blue-600 mb-6 shadow-sm shadow-blue-500/5"
 					>
 						Visualized Semester & GPA Forecasting
 					</motion.div>
@@ -177,7 +177,7 @@ export default function HomePage() {
 						className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-gray-900 leading-[1.1] tracking-tight mb-6"
 					>
 						Master your academic <br />
-						<span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600">
+						<span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-blue-500 to-sky-500">
 							trajectory.
 						</span>
 					</motion.h1>
@@ -248,8 +248,8 @@ export default function HomePage() {
 							<div className="hidden lg:flex lg:col-span-3 flex-col justify-between p-4 bg-slate-50/50 border border-slate-200/50 rounded-3xl h-[410px] shadow-[inset_0_1.5px_0_#ffffff,0_4px_12px_rgba(15,23,42,0.02)]">
 								<div className="space-y-6">
 									<div className="flex items-center gap-2.5 px-2">
-										<div className="h-8.5 w-8.5 rounded-xl icon-skeuo-inset bg-indigo-50 shadow-[inset_0_1.5px_3px_rgba(79,70,229,0.08)]">
-											<GraduationCap className="h-4.5 w-4.5 text-indigo-650" />
+										<div className="h-8.5 w-8.5 rounded-xl icon-skeuo-inset bg-blue-50 shadow-[inset_0_1.5px_3px_rgba(59,130,246,0.08)]">
+											<GraduationCap className="h-4.5 w-4.5 text-blue-600" />
 										</div>
 										<span className="text-xs font-bold text-slate-800">
 											GPAFlow Hub
@@ -723,11 +723,11 @@ export default function HomePage() {
 						{/* Left Column - Brand Info */}
 						<div className="md:col-span-6 lg:col-span-5 space-y-6">
 							<div className="flex items-center gap-2.5">
-								<div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-600">
+								<div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600">
 									<GraduationCap className="h-5 w-5 text-white" />
 								</div>
 								<span className="text-xl font-bold text-white tracking-tight">
-									GPA<span className="text-indigo-500">Flow</span>
+									GPA<span className="text-blue-550">Flow</span>
 								</span>
 							</div>
 							<p className="text-slate-400 text-sm leading-relaxed font-light max-w-sm">
