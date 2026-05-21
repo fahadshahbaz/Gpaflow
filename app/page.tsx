@@ -302,7 +302,7 @@ export default function HomePage() {
 								</div>
 
 								{/* Oscilloscope Trend Screen Inset */}
-								<div className="relative flex-1 w-full min-h-[190px] flex items-end widget-skeuo-inset border-slate-200/50 shadow-[inset_0_2px_6px_rgba(15,23,42,0.05),0_1px_0_#ffffff] rounded-2xl p-4 overflow-hidden">
+								<div className="relative flex-1 w-full min-h-[190px] flex items-end widget-skeuo-inset border-slate-200/50 shadow-[inset_0_2px_6px_rgba(15,23,42,0.05),0_1px_0_#ffffff] rounded-2xl px-0 py-4 overflow-hidden">
 									{/* Screen grid lines */}
 									<div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f060_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f060_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none" />
 									<svg
@@ -360,8 +360,8 @@ export default function HomePage() {
 											strokeWidth="2"
 										/>
 										<circle
-											cx="300"
-											cy="15"
+											cx="295"
+											cy="16"
 											r="6"
 											fill="#6366f1"
 											stroke="white"
