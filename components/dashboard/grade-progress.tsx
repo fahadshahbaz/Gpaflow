@@ -35,10 +35,10 @@ export function GradeProgress({ semesters }: GradeProgressProps) {
 
 		const total = allSubjects.length;
 		const colors = {
-			"A/A+": "bg-success",
-			"B/B+": "bg-primary-500",
-			"C/C+": "bg-warning-600",
-			"D & Below": "bg-destructive",
+			"A/A+": "linear-gradient(to right, #34d399, #10b981)",
+			"B/B+": "linear-gradient(to right, #60a5fa, #2563eb)",
+			"C/C+": "linear-gradient(to right, #fbbf24, #d97706)",
+			"D & Below": "linear-gradient(to right, #f43f5e, #e11d48)",
 		};
 
 		return Object.entries(gradeGroups).map(([grade, count]) => ({
@@ -57,59 +57,60 @@ export function GradeProgress({ semesters }: GradeProgressProps) {
 	const topGradePercentage = breakdown[0]?.percentage || 0;
 
 	return (
-		<div className="bg-white rounded-3xl p-6 card-shadow h-full">
-			<div className="flex items-start justify-between mb-4">
-				<h3 className="text-lg font-semibold text-gray-900">
-					Grade Distribution
-				</h3>
-				{totalSubjects > 0 && (
-					<div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-success-50">
-						<span className="text-xs font-semibold text-success-600">
-							{topGradePercentage}% A's
-						</span>
+		<div className="card-skeuo rounded-[32px] p-6 h-full flex flex-col justify-between">
+			<div>
+				<div className="flex items-start justify-between mb-4">
+					<h3 className="text-lg font-semibold text-slate-800">
+						Grade Distribution
+					</h3>
+					{totalSubjects > 0 && (
+						<div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-emerald-200/50 bg-emerald-50/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.6),0_1.5px_3px_rgba(0,0,0,0.03)]">
+							<span className="text-xs font-normal text-emerald-600">
+								{topGradePercentage}% A's
+							</span>
+						</div>
+					)}
+				</div>
+
+				{/* Big Number */}
+				<div className="flex items-end gap-3 mb-5">
+					<span className="text-4xl font-light text-slate-800 tracking-tight">
+						{totalSubjects}
+					</span>
+					<div className="mb-1">
+						<span className="text-sm text-slate-400 font-normal">subjects</span>
+					</div>
+				</div>
+
+				{/* Progress Bars or Empty State */}
+				{totalSubjects === 0 ? (
+					<div className="text-center py-8 text-slate-400 text-sm font-normal">
+						No subjects added yet
+					</div>
+				) : (
+					<div className="space-y-3.5">
+						{breakdown.map((item) => (
+							<div key={item.grade}>
+								<div className="flex items-center justify-between mb-1.5">
+									<span className="text-sm text-slate-500 font-normal">{item.grade}</span>
+									<span className="text-sm font-normal text-slate-700">
+										{item.count}
+									</span>
+								</div>
+								<div className="h-3 bg-slate-100/90 rounded-full shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.06),0_1px_0_rgba(255,255,255,0.8)] border border-slate-200/20 p-[1px] overflow-hidden">
+									<div
+										className="h-full rounded-full transition-all duration-500 shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_1px_2px_rgba(0,0,0,0.12)]"
+										style={{
+											width: `${item.percentage}%`,
+											backgroundImage: `repeating-linear-gradient(90deg, transparent 0px, transparent 3px, rgba(255,255,255,0.15) 3px, rgba(255,255,255,0.15) 5px), ${item.color}`,
+										}}
+									/>
+								</div>
+							</div>
+						))}
 					</div>
 				)}
 			</div>
-
-			{/* Big Number */}
-			<div className="flex items-end gap-3 mb-5">
-				<span className="text-4xl font-light text-gray-900 tracking-tight">
-					{totalSubjects}
-				</span>
-				<div className="mb-1">
-					<span className="text-sm text-gray-500">subjects</span>
-				</div>
-			</div>
-
-			{/* Progress Bars or Empty State */}
-			{totalSubjects === 0 ? (
-				<div className="text-center py-8 text-gray-400 text-sm">
-					No subjects added yet
-				</div>
-			) : (
-				<div className="space-y-3">
-					{breakdown.map((item) => (
-						<div key={item.grade}>
-							<div className="flex items-center justify-between mb-1.5">
-								<span className="text-sm text-gray-600">{item.grade}</span>
-								<span className="text-sm font-medium text-gray-900">
-									{item.count}
-								</span>
-							</div>
-							<div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-								<div
-									className={`h-full rounded-full transition-all duration-500 ${item.color}`}
-									style={{
-										width: `${item.percentage}%`,
-										backgroundImage:
-											"repeating-linear-gradient(90deg, transparent 0px, transparent 3px, rgba(255,255,255,0.3) 3px, rgba(255,255,255,0.3) 5px)",
-									}}
-								/>
-							</div>
-						</div>
-					))}
-				</div>
-			)}
 		</div>
 	);
 }

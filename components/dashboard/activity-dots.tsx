@@ -30,39 +30,51 @@ export function ActivityDots({ semesters }: ActivityDotsProps) {
 		[activity.semesters],
 	);
 
-	const getColor = (
+	const getDotStyles = (
 		semesterIndex: number,
 		dotIndex: number,
 		totalDots: number,
 	) => {
 		const isActive = dotIndex < totalDots;
-		if (!isActive) return "bg-gray-100";
+		if (!isActive) {
+			return "bg-slate-100 border border-slate-200/50 shadow-[inset_0_1.5px_2.5px_rgba(0,0,0,0.05),0_1px_0_#ffffff] hover:scale-105";
+		}
 
 		const intensity = (semesterIndex + 1) / activity.semesters.length;
-		if (intensity > 0.8) return "bg-success-600";
-		if (intensity > 0.6) return "bg-success";
-		if (intensity > 0.4) return "bg-success-600/70";
-		if (intensity > 0.2) return "bg-success-600/40";
-		return "bg-success-600/20";
+		let gradientClass = "from-emerald-400 to-emerald-600 border border-emerald-600/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_1.5px_3px_rgba(16,185,129,0.25)]";
+
+		if (intensity > 0.8) {
+			gradientClass = "from-emerald-400 to-emerald-600 border border-emerald-600/35 shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_2px_4px_rgba(16,185,129,0.3)]";
+		} else if (intensity > 0.6) {
+			gradientClass = "from-emerald-400 to-emerald-500 border border-emerald-500/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_1.5px_3px_rgba(16,185,129,0.25)]";
+		} else if (intensity > 0.4) {
+			gradientClass = "from-emerald-400/80 to-emerald-500/90 border border-emerald-500/25 shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_1.5px_2.5px_rgba(16,185,129,0.2)]";
+		} else if (intensity > 0.2) {
+			gradientClass = "from-emerald-300/85 to-emerald-400 border border-emerald-400/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_1px_2px_rgba(16,185,129,0.15)]";
+		} else {
+			gradientClass = "from-emerald-300/50 to-emerald-400/60 border border-emerald-300/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.2),0_0.5px_1.5px_rgba(16,185,129,0.1)]";
+		}
+
+		return `bg-gradient-to-br hover:scale-125 hover:shadow-[0_0_8px_rgba(16,185,129,0.5)] ${gradientClass}`;
 	};
 
 	return (
-		<div className="bg-white rounded-3xl p-6 card-shadow h-full">
+		<div className="card-skeuo rounded-[32px] p-6 h-full">
 			<div className="flex items-start justify-between mb-4">
-				<h3 className="text-lg font-semibold text-gray-900">Subjects</h3>
+				<h3 className="text-lg font-semibold text-slate-800">Subjects</h3>
 			</div>
 
 			{/* Big Number */}
 			<div className="flex items-end gap-4 mb-5">
-				<span className="text-4xl font-light text-gray-900 tracking-tight">
+				<span className="text-4xl font-light text-slate-800 tracking-tight">
 					{activity.total}
 				</span>
 				<div className="mb-1">
-					<span className="text-sm text-gray-500">total subjects</span>
+					<span className="text-sm text-slate-400 font-normal">total subjects</span>
 				</div>
 				<div className="text-right mb-1 ml-auto">
-					<p className="text-xs text-gray-500">avg per semester</p>
-					<p className="text-sm font-semibold text-success-600">
+					<p className="text-xs text-slate-400 font-normal">avg per semester</p>
+					<p className="text-sm font-normal text-emerald-600">
 						{activity.avgPerSemester}
 					</p>
 				</div>
@@ -70,21 +82,21 @@ export function ActivityDots({ semesters }: ActivityDotsProps) {
 
 			{/* Semester Grid or Empty State */}
 			{activity.semesters.length === 0 ? (
-				<div className="text-center py-8 text-gray-400 text-sm">
+				<div className="text-center py-8 text-slate-400 text-sm font-normal">
 					No semesters added yet
 				</div>
 			) : (
 				<div className="space-y-2">
 					{activity.semesters.map((semester, semesterIndex) => (
-						<div key={semester.name} className="flex items-center gap-3">
-							<span className="text-xs text-gray-500 w-6 flex-shrink-0">
+						<div key={semester.name} className="flex items-center gap-3 py-1">
+							<span className="text-xs text-slate-500 font-normal w-6 flex-shrink-0">
 								{semester.name}
 							</span>
 							<div className="flex gap-1.5 flex-1">
 								{Array.from({ length: maxSubjects }, (_, dotIndex) => (
 									<div
 										key={dotIndex}
-										className={`h-3 w-3 rounded-full transition-all hover:scale-110 ${getColor(semesterIndex, dotIndex, semester.subjects)}`}
+										className={`h-3 w-3 rounded-full transition-all duration-300 ${getDotStyles(semesterIndex, dotIndex, semester.subjects)}`}
 										title={
 											dotIndex < semester.subjects
 												? `Subject ${dotIndex + 1}`
@@ -93,7 +105,7 @@ export function ActivityDots({ semesters }: ActivityDotsProps) {
 									/>
 								))}
 							</div>
-							<span className="text-xs font-medium text-gray-700 w-4 text-right">
+							<span className="text-xs font-normal text-slate-700 w-4 text-right">
 								{semester.subjects}
 							</span>
 						</div>
@@ -103,16 +115,16 @@ export function ActivityDots({ semesters }: ActivityDotsProps) {
 
 			{/* Legend */}
 			{activity.semesters.length > 0 && (
-				<div className="flex items-center justify-between mt-4 pt-3 border-t border-gray-100">
+				<div className="flex items-center justify-between mt-4 pt-3 border-t border-slate-100/90">
 					<div className="flex items-center gap-1.5">
-						<div className="h-2.5 w-2.5 rounded-full bg-success-600/20" />
-						<div className="h-2.5 w-2.5 rounded-full bg-success-600/60" />
-						<div className="h-2.5 w-2.5 rounded-full bg-success-600" />
-						<span className="text-xs text-gray-500 ml-1">Recent semesters</span>
+						<div className="h-2.5 w-2.5 rounded-full bg-emerald-500/20 border border-emerald-500/10" />
+						<div className="h-2.5 w-2.5 rounded-full bg-emerald-500/60 border border-emerald-500/10" />
+						<div className="h-2.5 w-2.5 rounded-full bg-emerald-500 shadow-[0_0_4px_rgba(16,185,129,0.4)]" />
+						<span className="text-xs text-slate-400 font-normal ml-1">Recent semesters</span>
 					</div>
 					<div className="flex items-center gap-1.5">
-						<div className="h-2.5 w-2.5 rounded-full bg-gray-100" />
-						<span className="text-xs text-gray-400">Empty</span>
+						<div className="h-2.5 w-2.5 rounded-full bg-slate-100 border border-slate-200/50 shadow-[inset_0_1px_1.5px_rgba(0,0,0,0.05)]" />
+						<span className="text-xs text-slate-400 font-normal">Empty</span>
 					</div>
 				</div>
 			)}

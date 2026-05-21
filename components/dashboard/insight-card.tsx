@@ -145,18 +145,18 @@ export function InsightCard({ semesters, cgpa }: InsightCardProps) {
 
 	return (
 		<div
-			className={`relative overflow-hidden rounded-3xl bg-gradient-to-br ${insight.gradient} p-6 text-white h-full flex flex-col`}
+			className={`relative overflow-hidden rounded-[32px] bg-gradient-to-br ${insight.gradient} border border-white/20 p-6 text-white h-full flex flex-col shadow-[inset_0_2.5px_0_rgba(255,255,255,0.22),inset_0_-2.5px_0_rgba(0,0,0,0.06),0_8px_30px_rgba(15,23,42,0.04)] hover:translate-y-[-1.5px] hover:shadow-lg active:scale-[0.99] transition-all duration-300`}
 		>
 			{/* Decorative circles */}
-			<div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-white/10" />
-			<div className="absolute -right-2 top-10 h-12 w-12 rounded-full bg-white/10" />
-			<div className="absolute -bottom-4 -left-4 h-20 w-20 rounded-full bg-white/10" />
+			<div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-white/5 border border-white/10 backdrop-blur-[1px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]" />
+			<div className="absolute -right-2 top-10 h-12 w-12 rounded-full bg-white/5 border border-white/10 backdrop-blur-[1px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]" />
+			<div className="absolute -bottom-4 -left-4 h-20 w-20 rounded-full bg-white/5 border border-white/10 backdrop-blur-[1px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]" />
 
 			{/* Content */}
 			<div className="relative z-10 flex-1">
 				<div className="flex items-center gap-2 mb-3">
-					<Sparkles className="h-4 w-4" />
-					<span className="text-xs font-medium uppercase tracking-wider opacity-90">
+					<Sparkles className="h-4 w-4 opacity-80" />
+					<span className="text-xs font-normal uppercase tracking-wider opacity-85">
 						Insights
 					</span>
 				</div>
@@ -165,17 +165,17 @@ export function InsightCard({ semesters, cgpa }: InsightCardProps) {
 					{insight.percentage}
 				</p>
 
-				<h3 className="text-base font-semibold mb-1">{insight.title}</h3>
-				<p className="text-sm opacity-90 leading-relaxed mb-4">
+				<h3 className="text-base font-normal mb-1">{insight.title}</h3>
+				<p className="text-sm opacity-85 leading-relaxed font-normal mb-4">
 					{insight.description}
 				</p>
 			</div>
 
 			{/* Quote or Tip */}
-			<div className="relative z-10 pt-3 border-t border-white/20">
+			<div className="relative z-10 pt-3 border-t border-white/15">
 				<div className="flex items-start gap-2">
-					<Lightbulb className="h-3.5 w-3.5 mt-0.5 opacity-75 flex-shrink-0" />
-					<p className="text-xs opacity-85 leading-relaxed italic">
+					<Lightbulb className="h-3.5 w-3.5 mt-0.5 opacity-65 flex-shrink-0" />
+					<p className="text-xs opacity-80 leading-relaxed italic font-normal">
 						"{insight.tip}"
 					</p>
 				</div>

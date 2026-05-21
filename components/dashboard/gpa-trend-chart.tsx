@@ -55,14 +55,14 @@ export function GPATrendChart({
 	const hasData = chartData.length > 0;
 
 	return (
-		<div className="bg-white rounded-3xl p-6 card-shadow h-full">
+		<div className="card-skeuo rounded-[32px] p-6 h-full">
 			{/* Header */}
 			<div className="flex items-start justify-between mb-4">
 				<div>
-					<h3 className="text-lg font-semibold text-gray-900">
+					<h3 className="text-lg font-semibold text-slate-800">
 						GPA Progression
 					</h3>
-					<p className="text-sm text-gray-500">
+					<p className="text-sm text-slate-500 font-normal">
 						Semester-wise performance tracking
 					</p>
 				</div>
@@ -71,12 +71,12 @@ export function GPATrendChart({
 			{hasData ? (
 				<>
 					{/* Stats Row */}
-					<div className="flex flex-wrap gap-6 mb-4 pb-4 border-b border-gray-100">
+					<div className="flex flex-wrap gap-6 mb-4 pb-4 border-b border-slate-100/90">
 						{chartData.map((item, index) => (
 							<div key={item.name}>
-								<p className="text-xs text-gray-500 mb-0.5">{item.semester}</p>
+								<p className="text-xs text-slate-500 font-normal mb-0.5">{item.semester}</p>
 								<p
-									className={`text-xl font-light ${index === chartData.length - 1 ? "text-primary" : "text-muted-foreground"}`}
+									className={`text-xl font-light ${index === chartData.length - 1 ? "text-primary" : "text-slate-400 font-normal"}`}
 								>
 									{item.sgpa.toFixed(2)}
 								</p>
@@ -141,24 +141,24 @@ export function GPATrendChart({
 										if (active && payload && payload.length) {
 											const data = payload[0].payload as ChartDataPoint;
 											return (
-												<div className="bg-popover border border-border rounded-xl px-3 py-2 shadow-lg">
-													<p className="text-xs font-medium text-foreground mb-1.5">
+												<div className="bg-white/90 backdrop-blur-md border border-slate-200/80 rounded-2xl px-3.5 py-2.5 shadow-[0_12px_28px_rgba(15,23,42,0.06),inset_0_1px_0_#ffffff]">
+													<p className="text-xs font-normal text-slate-800 mb-1.5">
 														{data.semester}
 													</p>
-													<div className="space-y-1">
-														<div className="flex items-center justify-between gap-4">
-															<span className="text-xs text-muted-foreground">
+													<div className="space-y-1.5">
+														<div className="flex items-center justify-between gap-6">
+															<span className="text-xs text-slate-400 font-normal">
 																SGPA
 															</span>
-															<span className="text-xs font-semibold text-primary">
+															<span className="text-xs font-normal text-primary">
 																{data.sgpa}
 															</span>
 														</div>
-														<div className="flex items-center justify-between gap-4">
-															<span className="text-xs text-muted-foreground">
+														<div className="flex items-center justify-between gap-6">
+															<span className="text-xs text-slate-400 font-normal">
 																CGPA
 															</span>
-															<span className="text-xs font-medium text-foreground">
+															<span className="text-xs font-normal text-slate-700">
 																{data.cgpa}
 															</span>
 														</div>
@@ -189,18 +189,18 @@ export function GPATrendChart({
 					</div>
 
 					{/* Legend */}
-					<div className="flex items-center gap-6 mt-3 pt-3 border-t border-gray-100">
+					<div className="flex items-center gap-6 mt-3 pt-3 border-t border-slate-100/90">
 						<div className="flex items-center gap-2">
 							<div className="w-3 h-3 rounded bg-primary/60" />
-							<span className="text-xs text-muted-foreground">SGPA</span>
+							<span className="text-xs text-slate-400 font-normal">SGPA</span>
 						</div>
 						<div className="flex items-center gap-2">
-							<div className="w-3 h-0.5 bg-primary rounded" />
-							<span className="text-xs text-muted-foreground">CGPA Trend</span>
+							<div className="w-3.5 h-1 bg-primary rounded shadow-[0_1px_2px_rgba(0,0,0,0.15)]" />
+							<span className="text-xs text-slate-400 font-normal">CGPA Trend</span>
 						</div>
 						{targetGpa && (
 							<div className="flex items-center gap-2 ml-auto">
-								<span className="text-xs text-gray-400">
+								<span className="text-xs text-slate-400 font-normal">
 									Target: {targetGpa}
 								</span>
 							</div>
