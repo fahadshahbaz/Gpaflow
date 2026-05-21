@@ -62,7 +62,7 @@ export default function ForgotPasswordPage() {
 				<button
 					type="submit"
 					disabled={pending}
-					className="w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-b from-blue-500 to-blue-600 border border-blue-400/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_3px_8px_rgba(59,130,246,0.25)] py-3 text-sm font-bold text-white hover:from-blue-450 hover:to-blue-550 active:scale-[0.97] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+					className="w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-b from-blue-500 via-blue-600 to-blue-700 py-3 px-4 text-sm font-extrabold text-white border-t border-x border-blue-400/40 border-b-[3px] border-blue-700 shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_4px_10px_rgba(37,99,235,0.3)] hover:brightness-105 transition-all duration-150 active:translate-y-[2px] active:border-b-[1px] active:shadow-[inset_0_2px_4px_rgba(0,0,0,0.2),0_1px_2px_rgba(37,99,235,0.15)] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
 				>
 					{pending ? (
 						<>

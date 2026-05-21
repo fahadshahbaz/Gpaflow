@@ -13,7 +13,7 @@ export default function AuthLayout({
 			<div className="w-full lg:w-1/2 flex flex-col justify-between p-6 sm:p-10 md:p-16 min-h-screen bg-white">
 				{/* Top Logo */}
 				<div className="flex justify-start">
-					<Logo href="/" />
+					<Logo href="/" variant="skeuomorphic" />
 				</div>
 
 				{/* Form Content Wrapper */}
@@ -73,10 +73,6 @@ export default function AuthLayout({
 
 					{/* Top Section - Headers */}
 					<div className="relative z-10 space-y-4 max-w-lg">
-						<div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-850/55 backdrop-blur-md border border-blue-400/35 shadow-[inset_0_2px_4px_rgba(255,255,255,0.2),inset_0_-1px_3px_rgba(0,0,0,0.35),0_4px_10px_rgba(29,78,216,0.12)] text-xs font-bold text-sky-200 tracking-wide uppercase font-mono">
-							<span className="w-2 h-2 rounded-full bg-sky-300 animate-pulse shadow-[0_0_8px_rgba(125,211,252,0.8)]" />
-							Smart Academic Companion
-						</div>
 						<h2 className="text-4xl font-extrabold tracking-tight leading-[1.15] text-white">
 							Effortlessly track your academic progress.
 						</h2>
