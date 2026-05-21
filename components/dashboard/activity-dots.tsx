@@ -60,9 +60,12 @@ export function ActivityDots({ semesters }: ActivityDotsProps) {
 	};
 
 	return (
-		<div className="card-skeuo rounded-[32px] p-5 h-full">
-			<div className="flex items-start justify-between mb-3">
-				<h3 className="text-lg font-semibold text-slate-800">Subjects</h3>
+		<div className="card-skeuo rounded-[32px] p-6 h-full flex flex-col">
+			<div className="flex items-start justify-between mb-4">
+				<div>
+					<h3 className="text-lg font-semibold text-slate-800">Subjects</h3>
+					<p className="text-sm text-slate-500 font-normal">Semester-wise subject breakdown</p>
+				</div>
 				<div className="icon-skeuo-raised h-9 w-9 rounded-xl border border-slate-200/80 shadow-[inset_0_1px_0_#ffffff,0_2px_4px_rgba(0,0,0,0.02)] text-slate-400/90 flex items-center justify-center flex-shrink-0">
 					<BookOpen className="h-4.5 w-4.5" />
 				</div>
@@ -70,15 +73,15 @@ export function ActivityDots({ semesters }: ActivityDotsProps) {
 
 			{/* Big Number */}
 			<div className="flex items-end gap-4 mb-3.5">
-				<span className="text-4xl font-light text-slate-800 tracking-tight">
+				<span className="text-4xl font-light text-slate-800 tracking-tight leading-none">
 					{activity.total}
 				</span>
 				<div className="mb-1">
 					<span className="text-sm text-slate-400 font-normal">total subjects</span>
 				</div>
 				<div className="text-right mb-1 ml-auto">
-					<p className="text-xs text-slate-400 font-normal">avg per semester</p>
-					<p className="text-sm font-normal text-emerald-600">
+					<p className="text-xs text-slate-400 font-normal leading-tight">avg per semester</p>
+					<p className="text-sm font-normal text-emerald-600 leading-tight mt-0.5">
 						{activity.avgPerSemester}
 					</p>
 				</div>
@@ -86,11 +89,11 @@ export function ActivityDots({ semesters }: ActivityDotsProps) {
 
 			{/* Semester Grid or Empty State */}
 			{activity.semesters.length === 0 ? (
-				<div className="text-center py-8 text-slate-400 text-sm font-normal">
+				<div className="text-center py-8 text-slate-400 text-sm font-normal my-auto">
 					No semesters added yet
 				</div>
 			) : (
-				<div className="space-y-2">
+				<div className="space-y-2 my-2">
 					{activity.semesters.map((semester, semesterIndex) => (
 						<div key={semester.name} className="flex items-center gap-3 py-1">
 							<span className="text-xs text-slate-500 font-normal w-6 flex-shrink-0">
@@ -119,7 +122,7 @@ export function ActivityDots({ semesters }: ActivityDotsProps) {
 
 			{/* Legend */}
 			{activity.semesters.length > 0 && (
-				<div className="flex items-center justify-between mt-3 pt-2.5 border-t border-slate-100/90">
+				<div className="flex items-center justify-between mt-auto pt-2.5 border-t border-slate-100/90">
 					<div className="flex items-center gap-1.5">
 						<div className="h-2.5 w-2.5 rounded-full bg-emerald-500/20 border border-emerald-500/10" />
 						<div className="h-2.5 w-2.5 rounded-full bg-emerald-500/60 border border-emerald-500/10" />

@@ -145,7 +145,7 @@ export function InsightCard({ semesters, cgpa }: InsightCardProps) {
 
 	return (
 		<div
-			className={`relative overflow-hidden rounded-[32px] bg-gradient-to-br ${insight.gradient} border border-white/20 p-5 text-white h-full flex flex-col shadow-[inset_0_2.5px_0_rgba(255,255,255,0.22),inset_0_-2.5px_0_rgba(0,0,0,0.06),0_8px_30px_rgba(15,23,42,0.04)] hover:translate-y-[-1.5px] hover:shadow-lg active:scale-[0.99] transition-all duration-300`}
+			className={`relative overflow-hidden rounded-[32px] bg-gradient-to-br ${insight.gradient} border border-white/20 p-6 text-white h-full flex flex-col shadow-[inset_0_2.5px_0_rgba(255,255,255,0.22),inset_0_-2.5px_0_rgba(0,0,0,0.06),0_8px_30px_rgba(15,23,42,0.04)] hover:translate-y-[-1.5px] hover:shadow-lg active:scale-[0.99] transition-all duration-300`}
 		>
 			{/* Decorative circles */}
 			<div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-white/5 border border-white/10 backdrop-blur-[1px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]" />
@@ -153,8 +153,8 @@ export function InsightCard({ semesters, cgpa }: InsightCardProps) {
 			<div className="absolute -bottom-4 -left-4 h-20 w-20 rounded-full bg-white/5 border border-white/10 backdrop-blur-[1px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]" />
 
 			{/* Content */}
-			<div className="relative z-10 flex-1">
-				<div className="flex items-start justify-between mb-2">
+			<div className="relative z-10 mb-4">
+				<div className="flex items-start justify-between mb-3">
 					<div className="flex items-center gap-2 mt-1">
 						<span className="text-xs font-normal uppercase tracking-wider opacity-85">
 							Insights
@@ -165,18 +165,18 @@ export function InsightCard({ semesters, cgpa }: InsightCardProps) {
 					</div>
 				</div>
 
-				<p className="text-4xl font-light tracking-tight mb-1">
-					{insight.percentage}
-				</p>
+				<div className="flex items-baseline gap-2 mt-1 mb-2">
+					<span className="text-4xl font-light tracking-tight">{insight.percentage}</span>
+					<span className="text-base font-normal opacity-85">{insight.title}</span>
+				</div>
 
-				<h3 className="text-base font-normal mb-1">{insight.title}</h3>
-				<p className="text-sm opacity-85 leading-relaxed font-normal mb-3">
+				<p className="text-sm opacity-85 leading-relaxed font-normal">
 					{insight.description}
 				</p>
 			</div>
 
 			{/* Quote or Tip */}
-			<div className="relative z-10 pt-3 border-t border-white/15">
+			<div className="relative z-10 pt-3 border-t border-white/15 mt-auto">
 				<div className="flex items-start gap-2">
 					<Lightbulb className="h-3.5 w-3.5 mt-0.5 opacity-65 flex-shrink-0" />
 					<p className="text-xs opacity-80 leading-relaxed italic font-normal">

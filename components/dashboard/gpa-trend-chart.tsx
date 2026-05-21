@@ -1,17 +1,17 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import {
 	Area,
 	Bar,
-	CartesianGrid,
+	Cell,
 	ComposedChart,
 	ResponsiveContainer,
 	Tooltip,
 	XAxis,
 	YAxis,
 } from "recharts";
-import { TrendingUp } from "lucide-react";
+import { TrendingUp, Award } from "lucide-react";
 import type { Semester } from "@/types/grading";
 
 interface GPATrendChartProps {
@@ -31,6 +31,8 @@ export function GPATrendChart({
 	semesters,
 	targetGpa = 3.5,
 }: GPATrendChartProps) {
+	const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
 	const chartData = useMemo<ChartDataPoint[]>(() => {
 		if (semesters.length === 0) return [];
 
@@ -59,7 +61,7 @@ export function GPATrendChart({
 	return (
 		<div className="card-skeuo rounded-[32px] p-5 h-full flex flex-col justify-between">
 			{/* Header */}
-			<div className="flex items-start justify-between mb-3">
+			<div className="flex items-start justify-between mb-2.5 select-none">
 				<div>
 					<h3 className="text-lg font-semibold text-slate-800">
 						GPA Progression
@@ -74,170 +76,181 @@ export function GPATrendChart({
 			</div>
 
 			{hasData ? (
-				<>
-					{/* Stats Row with physically-inset digital LCD display modules */}
-					<div className="flex flex-wrap gap-2.5 mb-3 pb-3 border-b border-slate-100/90">
+				<div className="flex flex-col justify-between flex-1 mt-1.5 min-h-[175px] relative">
+					<div className="relative h-[135px] w-full mt-1">
+						{/* Baseline Shelf */}
+						<div className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-slate-200/70 z-0 rounded-full" />
+
+						{/* Recharts Chart */}
+						<div className="absolute inset-0 z-10">
+							<ResponsiveContainer width="100%" height="100%">
+								<ComposedChart
+									data={chartData}
+									margin={{ top: 15, right: 2, left: 2, bottom: 0 }}
+									barCategoryGap={6}
+									onMouseMove={(state) => {
+										if (state && state.activeTooltipIndex !== undefined) {
+											setHoveredIndex(state.activeTooltipIndex);
+										} else {
+											setHoveredIndex(null);
+										}
+									}}
+									onMouseLeave={() => setHoveredIndex(null)}
+								>
+									<defs>
+										<linearGradient id="activeBarGradient" x1="0" y1="0" x2="0" y2="1">
+											<stop offset="0%" stopColor="var(--primary)" stopOpacity={1} />
+											<stop offset="100%" stopColor="#1d4ed8" stopOpacity={0.95} />
+										</linearGradient>
+										<linearGradient id="fadedBarGradient" x1="0" y1="0" x2="0" y2="1">
+											<stop offset="0%" stopColor="#e2e8f0" stopOpacity={0.4} />
+											<stop offset="100%" stopColor="#cbd5e1" stopOpacity={0.2} />
+										</linearGradient>
+										<linearGradient id="connectorGradient" x1="0" y1="0" x2="0" y2="1">
+											<stop offset="0%" stopColor="var(--primary)" stopOpacity={0.08} />
+											<stop offset="100%" stopColor="var(--primary)" stopOpacity={0.00} />
+										</linearGradient>
+									</defs>
+
+									<XAxis
+										dataKey="name"
+										hide={true}
+									/>
+									<YAxis
+										hide={true}
+										domain={[0, 4.1]}
+									/>
+
+									<Tooltip
+										cursor={false}
+										allowEscapeViewBox={{ x: true, y: true }}
+										content={({ active, payload }) => {
+											if (active && payload && payload.length) {
+												const data = payload[0].payload as ChartDataPoint;
+												return (
+													<div className="flex flex-col items-center select-none pointer-events-none transition-all duration-150 animate-fade-in">
+														{/* Floating Pill */}
+														<div className="bg-slate-900/95 text-slate-100 border border-slate-800 rounded-full px-4 py-1.5 shadow-[0_12px_30px_rgba(15,23,42,0.25)] flex items-center gap-2.5 text-[11px] font-medium backdrop-blur-md">
+															<span className="text-white font-bold">{data.semester}</span>
+															<span className="h-3 w-[1px] bg-slate-800" />
+															<span className="flex items-center gap-1">
+																<span className="text-slate-400 font-normal">SGPA:</span>
+																<span className="text-primary-foreground font-semibold">{data.sgpa.toFixed(2)}</span>
+															</span>
+															<span className="h-3 w-[1px] bg-slate-800" />
+															<span className="flex items-center gap-1">
+																<span className="text-slate-400 font-normal">CGPA:</span>
+																<span className="text-slate-200 font-semibold">{data.cgpa.toFixed(2)}</span>
+															</span>
+														</div>
+														{/* Hollow pointer dot */}
+														<div className="flex flex-col items-center mt-1.5">
+															<div className="h-2.5 w-[1px] bg-slate-400/50" />
+															<div className="h-2 w-2 rounded-full border border-primary bg-white shadow-[0_0_8px_rgba(59,130,246,0.5)] mt-0.5 animate-pulse" />
+														</div>
+													</div>
+												);
+											}
+											return null;
+										}}
+									/>
+
+									{/* Connecting shaded area region underneath */}
+									<Area
+										type="linear"
+										dataKey="sgpa"
+										stroke="transparent"
+										fill="url(#connectorGradient)"
+										activeDot={false}
+										dot={false}
+									/>
+
+									{/* Histogram bars */}
+									<Bar
+										dataKey="sgpa"
+										radius={[4, 4, 0, 0]}
+										maxBarSize={48}
+									>
+										{chartData.map((entry, index) => {
+											const isHovered = hoveredIndex === index;
+											const isLatest = index === chartData.length - 1;
+
+											let fillUrl = "url(#activeBarGradient)";
+											let opacity = 0.85;
+											let stroke = "var(--primary)";
+											let strokeOpacity = 0.5;
+
+											if (hoveredIndex !== null) {
+												if (isHovered) {
+													fillUrl = "url(#activeBarGradient)";
+													opacity = 1.0;
+													stroke = "var(--primary)";
+													strokeOpacity = 1.0;
+												} else {
+													fillUrl = "url(#fadedBarGradient)";
+													opacity = 0.25;
+													stroke = "#cbd5e1";
+													strokeOpacity = 0.15;
+												}
+											} else {
+												if (isLatest) {
+													fillUrl = "url(#activeBarGradient)";
+													opacity = 1.0;
+													stroke = "var(--primary)";
+													strokeOpacity = 0.9;
+												} else {
+													fillUrl = "url(#activeBarGradient)";
+													opacity = 0.45;
+													stroke = "var(--primary)";
+													strokeOpacity = 0.2;
+												}
+											}
+
+											return (
+												<Cell
+													key={`cell-${index}`}
+													fill={fillUrl}
+													opacity={opacity}
+													stroke={stroke}
+													strokeOpacity={strokeOpacity}
+													strokeWidth={1}
+													className="transition-all duration-300"
+												/>
+											);
+										})}
+									</Bar>
+								</ComposedChart>
+							</ResponsiveContainer>
+						</div>
+					</div>
+
+					{/* Bottom Labels showing Semester numbers S1, S2, etc. and SGPA values */}
+					<div className="flex w-full mt-2.5 select-none justify-between border-t border-slate-100/90 pt-2">
 						{chartData.map((item, index) => {
+							const isHovered = hoveredIndex === index;
 							const isLatest = index === chartData.length - 1;
 							return (
 								<div
 									key={item.name}
-									title={item.semester}
-									className={`widget-skeuo-inset rounded-xl px-3 py-1.5 flex flex-col items-center justify-center min-w-[72px] border border-slate-200/50 shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.04),0_1px_0_#ffffff] transition-all duration-200 ${
-										isLatest
-											? "bg-slate-50/30 border-primary/20 shadow-[inset_0_1.5px_3px_rgba(59,130,246,0.03),0_1px_0_#ffffff] scale-[1.02]"
-											: "hover:bg-white"
-									}`}
+									className="flex-1 flex flex-col items-center justify-center text-center px-0.5 transition-all duration-300"
+									style={{
+										opacity: hoveredIndex !== null ? (isHovered ? 1 : 0.3) : 1,
+									}}
 								>
-									<span className="text-[10px] uppercase font-normal tracking-wider text-slate-400 mb-0.5">
+									<span className={`text-[10px] font-bold ${isLatest ? "text-primary" : "text-slate-400"}`}>
 										{item.name}
 									</span>
-									<span
-										className={`text-sm font-normal ${
-											isLatest ? "text-primary font-medium" : "text-slate-700"
-										}`}
-									>
+									<span className={`text-xs mt-0.5 font-semibold ${isLatest ? "text-primary font-bold" : "text-slate-600 font-medium"}`}>
 										{item.sgpa.toFixed(2)}
 									</span>
 								</div>
 							);
 						})}
 					</div>
-
-					{/* Chart with Cartesian engineering grid lines */}
-					<div className="h-[180px] w-full">
-						<ResponsiveContainer width="100%" height="100%">
-							<ComposedChart
-								data={chartData}
-								margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
-							>
-								<defs>
-									<linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
-										<stop
-											offset="0%"
-											stopColor="var(--primary)"
-											stopOpacity={0.8}
-										/>
-										<stop
-											offset="100%"
-											stopColor="var(--primary)"
-											stopOpacity={0.3}
-										/>
-									</linearGradient>
-									<linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
-										<stop
-											offset="0%"
-											stopColor="var(--primary)"
-											stopOpacity={0.15}
-										/>
-										<stop
-											offset="100%"
-											stopColor="var(--primary)"
-											stopOpacity={0}
-										/>
-									</linearGradient>
-								</defs>
-								<CartesianGrid
-									vertical={false}
-									stroke="#e2e8f0"
-									strokeDasharray="3 3"
-									opacity={0.6}
-								/>
-								<XAxis
-									dataKey="name"
-									stroke="transparent"
-									fontSize={11}
-									tickLine={false}
-									axisLine={false}
-									tick={{ fill: "var(--muted-foreground)" }}
-									dy={5}
-								/>
-								<YAxis
-									stroke="transparent"
-									fontSize={11}
-									tickLine={false}
-									axisLine={false}
-									tick={{ fill: "var(--muted-foreground)" }}
-									domain={[0, 4]}
-									ticks={[0, 1, 2, 3, 4]}
-								/>
-								<Tooltip
-									cursor={{ fill: "transparent" }}
-									content={({ active, payload }) => {
-										if (active && payload && payload.length) {
-											const data = payload[0].payload as ChartDataPoint;
-											return (
-												<div className="bg-white/90 backdrop-blur-md border border-slate-200/80 rounded-2xl px-3.5 py-2.5 shadow-[0_12px_28px_rgba(15,23,42,0.06),inset_0_1px_0_#ffffff]">
-													<p className="text-xs font-normal text-slate-800 mb-1.5">
-														{data.semester}
-													</p>
-													<div className="space-y-1.5">
-														<div className="flex items-center justify-between gap-6">
-															<span className="text-xs text-slate-400 font-normal">
-																SGPA
-															</span>
-															<span className="text-xs font-normal text-primary">
-																{data.sgpa}
-															</span>
-														</div>
-														<div className="flex items-center justify-between gap-6">
-															<span className="text-xs text-slate-400 font-normal">
-																CGPA
-															</span>
-															<span className="text-xs font-normal text-slate-700">
-																{data.cgpa}
-															</span>
-														</div>
-													</div>
-												</div>
-											);
-										}
-										return null;
-									}}
-								/>
-								<Bar
-									dataKey="sgpa"
-									fill="url(#barGradient)"
-									radius={[4, 4, 0, 0]}
-									maxBarSize={40}
-								/>
-								<Area
-									type="monotone"
-									dataKey="cgpa"
-									fill="url(#areaGradient)"
-									stroke="var(--primary)"
-									strokeWidth={2}
-									dot={{ fill: "var(--primary)", strokeWidth: 0, r: 3 }}
-									activeDot={{ fill: "var(--primary)", strokeWidth: 0, r: 5 }}
-								/>
-							</ComposedChart>
-						</ResponsiveContainer>
-					</div>
-
-					{/* Legend */}
-					<div className="flex items-center gap-6 mt-3 pt-3 border-t border-slate-100/90">
-						<div className="flex items-center gap-2">
-							<div className="w-3.5 h-3.5 rounded bg-primary/20 border border-primary/20 flex items-center justify-center">
-								<div className="w-1.5 h-1.5 rounded-sm bg-primary/60" />
-							</div>
-							<span className="text-xs text-slate-400 font-normal">SGPA</span>
-						</div>
-						<div className="flex items-center gap-2">
-							<div className="w-4 h-1 bg-primary rounded shadow-[0_1px_2px_rgba(0,0,0,0.15)]" />
-							<span className="text-xs text-slate-400 font-normal">CGPA Trend</span>
-						</div>
-						{targetGpa && (
-							<div className="flex items-center gap-2 ml-auto">
-								<span className="text-xs text-slate-400 font-normal">
-									Target: {targetGpa}
-								</span>
-							</div>
-						)}
-					</div>
-				</>
+				</div>
 			) : (
 				/* No-Data Mock Preview Grid with faint background lines and SVG curves */
-				<div className="relative h-[210px] w-full flex flex-col items-center justify-center border border-slate-100 rounded-2xl bg-slate-50/20 overflow-hidden">
+				<div className="relative h-[254px] w-full flex flex-col items-center justify-center border border-slate-100 rounded-2xl bg-slate-50/20 overflow-hidden">
 					{/* Mock Background Grid Lines */}
 					<div className="absolute inset-0 grid grid-cols-6 grid-rows-4 opacity-[0.06] pointer-events-none">
 						{Array.from({ length: 24 }).map((_, i) => (
@@ -273,11 +286,11 @@ export function GPATrendChart({
 					</svg>
 
 					{/* Content Call-To-Action */}
-					<div className="relative z-10 flex flex-col items-center justify-center text-center p-4 select-none">
-						<div className="icon-skeuo-raised h-10 w-10 rounded-2xl border border-slate-200/80 shadow-[inset_0_1px_0_#ffffff,0_2px_6px_rgba(0,0,0,0.03)] text-slate-400/90 flex items-center justify-center mb-2">
-							<TrendingUp className="h-4.5 w-4.5" />
+					<div className="relative z-10 flex flex-col items-center justify-center text-center p-6 select-none">
+						<div className="icon-skeuo-raised h-12 w-12 rounded-2xl border border-slate-200/80 shadow-[inset_0_1px_0_#ffffff,0_2px_6px_rgba(0,0,0,0.03)] text-slate-400/90 flex items-center justify-center mb-3">
+							<TrendingUp className="h-5 w-5" />
 						</div>
-						<h4 className="text-sm font-normal text-slate-700 mb-0.5">
+						<h4 className="text-sm font-normal text-slate-700 mb-1">
 							No Academic Data Yet
 						</h4>
 						<p className="text-xs text-slate-400 max-w-[260px] leading-relaxed font-normal">
@@ -289,3 +302,4 @@ export function GPATrendChart({
 		</div>
 	);
 }
+

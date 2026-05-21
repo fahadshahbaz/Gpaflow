@@ -16,7 +16,7 @@ export default function DashboardLoading() {
 			</div>
 
 			{/* Stats Grid Skeleton */}
-			<div className="grid grid-cols-12 gap-4 mb-6">
+			<div className="grid grid-cols-12 gap-3 mb-3">
 				<div className="col-span-6 sm:col-span-3">
 					<Skeleton className="h-28 rounded-2xl" />
 				</div>
@@ -32,7 +32,7 @@ export default function DashboardLoading() {
 			</div>
 
 			{/* Chart + Insights Skeleton */}
-			<div className="grid grid-cols-12 gap-4 mb-6">
+			<div className="grid grid-cols-12 gap-3 mb-3">
 				<div className="col-span-12 lg:col-span-8">
 					<Skeleton className="h-80 rounded-3xl" />
 				</div>
@@ -42,7 +42,7 @@ export default function DashboardLoading() {
 			</div>
 
 			{/* Activity & Grade Skeleton */}
-			<div className="grid grid-cols-12 gap-4">
+			<div className="grid grid-cols-12 gap-3">
 				<div className="col-span-12 md:col-span-6">
 					<Skeleton className="h-48 rounded-3xl" />
 				</div>

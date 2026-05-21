@@ -25,17 +25,17 @@ export default async function DashboardPage() {
 		user?.user_metadata?.name || user?.email?.split("@")[0] || "User";
 
 	return (
-		<div className="max-w-[1600px] mx-auto px-6 py-4">
+		<div className="max-w-[1600px] mx-auto px-6 py-6">
 			{/* Welcome Header */}
-			<div className="mb-4">
+			<div className="mb-6">
 				<h1 className="text-3xl font-light text-slate-800">
 					Welcome back, <span className="font-medium">{userName}</span>
 				</h1>
-				<p className="text-slate-500 mt-1">Here's your academic overview</p>
+				<p className="text-slate-500 mt-1.5">Here's your academic overview</p>
 			</div>
 
 			{/* Stats Grid */}
-			<div className="grid grid-cols-12 gap-2 mb-2">
+			<div className="grid grid-cols-12 gap-3 mb-3">
 				<StatsCards
 					cgpa={stats.cgpa}
 					totalCreditHours={stats.totalCreditHours}
@@ -46,7 +46,7 @@ export default async function DashboardPage() {
 			</div>
 
 			{/* GPA Chart + Insights Row */}
-			<div className="grid grid-cols-12 gap-2 mb-2">
+			<div className="grid grid-cols-12 gap-3 mb-3">
 				<div className="col-span-12 lg:col-span-8">
 					<GPATrendChart semesters={semesters} targetGpa={stats.targetGpa} />
 				</div>
@@ -56,7 +56,7 @@ export default async function DashboardPage() {
 			</div>
 
 			{/* Activity & Grade Distribution Row */}
-			<div className="grid grid-cols-12 gap-2">
+			<div className="grid grid-cols-12 gap-3">
 				<div className="col-span-12 md:col-span-6">
 					<ActivityDots semesters={semesters} />
 				</div>
