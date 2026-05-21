@@ -444,3 +444,49 @@
 		transform: translateY(0.75px) scale(0.98);
 	}
 }
+
+@utility card-skeuo {
+	background: linear-gradient(180deg, #ffffff 0%, #fcfdfe 100%);
+	border: 1px solid rgba(15, 23, 42, 0.08);
+	box-shadow:
+		inset 0 2px 0 #ffffff,
+		inset 0 -2px 0 rgba(15, 23, 42, 0.02),
+		0 8px 30px rgba(15, 23, 42, 0.02),
+		0 2px 8px rgba(15, 23, 42, 0.01);
+	transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+	&:hover {
+		border-color: rgba(15, 23, 42, 0.12);
+	}
+}
+
+@utility icon-skeuo-inset {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	background: #f8fafc;
+	border: 1px solid rgba(15, 23, 42, 0.08);
+	box-shadow:
+		inset 0 2px 4px rgba(15, 23, 42, 0.06),
+		0 1px 0 #ffffff;
+}
+
+@utility icon-skeuo-raised {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
+	border: 1px solid rgba(15, 23, 42, 0.1);
+	box-shadow:
+		inset 0 1px 0 #ffffff,
+		inset 0 -1.5px 0 rgba(15, 23, 42, 0.05),
+		0 2px 4px rgba(15, 23, 42, 0.05);
+}
+
+@utility widget-skeuo-inset {
+	background: #f8fafc;
+	border: 1px solid rgba(15, 23, 42, 0.06);
+	box-shadow:
+		inset 0 2px 5px rgba(15, 23, 42, 0.04),
+		0 1px 0 #ffffff;
+}

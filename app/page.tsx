@@ -163,7 +163,6 @@ export default function HomePage() {
 						transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
 						className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 text-xs font-bold text-indigo-600 mb-6 shadow-sm shadow-indigo-500/5"
 					>
-						<Sparkles className="h-3.5 w-3.5 text-indigo-500" />
 						Visualized Semester & GPA Forecasting
 					</motion.div>
 
@@ -228,63 +227,66 @@ export default function HomePage() {
 						initial={{ opacity: 0, y: 40 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.4, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-						className="relative rounded-[2.5rem] border border-slate-200/80 bg-white shadow-2xl overflow-hidden p-3 sm:p-5 shadow-indigo-900/5"
+						className="relative rounded-[2.5rem] border border-slate-200/80 bg-gradient-to-b from-white to-slate-50 shadow-[inset_0_2.5px_0_#ffffff,inset_0_-2.5px_0_rgba(15,23,42,0.02),0_25px_60px_-15px_rgba(15,23,42,0.06),0_10px_20px_-10px_rgba(15,23,42,0.04)] overflow-hidden p-3 sm:p-5"
 					>
 						{/* Window Header */}
-						<div className="h-10 bg-slate-50/50 rounded-t-[1.8rem] border-b border-slate-100 flex items-center px-6 gap-2 justify-between shrink-0">
+						<div className="h-12 bg-slate-50/50 rounded-t-[1.8rem] border-b border-slate-200/60 flex items-center px-6 gap-2 justify-between shrink-0">
 							<div className="flex gap-2">
-								<div className="w-3 h-3 rounded-full bg-rose-400" />
-								<div className="w-3 h-3 rounded-full bg-amber-400" />
-								<div className="w-3 h-3 rounded-full bg-emerald-400" />
+								<div className="w-3.5 h-3.5 rounded-full bg-gradient-to-b from-rose-400 to-rose-500 border border-rose-500/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_1.5px_3px_rgba(225,29,72,0.15)]" />
+								<div className="w-3.5 h-3.5 rounded-full bg-gradient-to-b from-amber-400 to-amber-500 border border-amber-500/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_1.5px_3px_rgba(217,119,6,0.15)]" />
+								<div className="w-3.5 h-3.5 rounded-full bg-gradient-to-b from-emerald-400 to-emerald-500 border border-emerald-500/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_1.5px_3px_rgba(5,150,105,0.15)]" />
 							</div>
-							<div className="text-[10px] font-semibold text-slate-400 bg-white px-4 py-0.5 rounded-lg border border-slate-100 tracking-wide uppercase">
+							<div className="text-[10px] font-mono tracking-wider font-semibold text-slate-400 bg-slate-100 border border-slate-200/60 shadow-[inset_0_1.5px_3px_rgba(15,23,42,0.06),0_1px_0_#ffffff] px-6 py-1 rounded-full uppercase">
 								gpaflow.app/dashboard
 							</div>
 							<div className="w-12" />
 						</div>
 
 						{/* Mock App Interface Grid */}
-						<div className="p-4 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6 bg-slate-50/50 rounded-b-[1.8rem]">
+						<div className="p-4 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6 bg-slate-100/20 rounded-b-[1.8rem]">
 							{/* Sidebar Left Column Mock */}
-							<div className="hidden lg:flex lg:col-span-3 flex-col justify-between p-4 bg-white border border-slate-100 rounded-2xl h-[400px]">
+							<div className="hidden lg:flex lg:col-span-3 flex-col justify-between p-4 bg-slate-50/50 border border-slate-200/50 rounded-3xl h-[410px] shadow-[inset_0_1.5px_0_#ffffff,0_4px_12px_rgba(15,23,42,0.02)]">
 								<div className="space-y-6">
-									<div className="flex items-center gap-2 px-2">
-										<div className="h-7 w-7 rounded-lg bg-indigo-600 flex items-center justify-center text-white">
-											<GraduationCap className="h-4 w-4" />
+									<div className="flex items-center gap-2.5 px-2">
+										<div className="h-8.5 w-8.5 rounded-xl icon-skeuo-inset bg-indigo-50 shadow-[inset_0_1.5px_3px_rgba(79,70,229,0.08)]">
+											<GraduationCap className="h-4.5 w-4.5 text-indigo-650" />
 										</div>
 										<span className="text-xs font-bold text-slate-800">
 											GPAFlow Hub
 										</span>
 									</div>
-									<div className="space-y-1.5">
-										<div className="flex items-center gap-2.5 px-3 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-xs font-semibold">
+									<div className="space-y-2">
+										<div className="flex items-center gap-2.5 px-3.5 py-2.5 bg-indigo-50/80 border border-indigo-100/60 shadow-[inset_0_1.5px_3px_rgba(79,70,229,0.08)] text-indigo-600 rounded-xl text-xs font-bold select-none">
 											<BarChart3 className="h-4 w-4" />
 											Overview
 										</div>
-										<div className="flex items-center gap-2.5 px-3 py-2 text-slate-500 rounded-xl text-xs font-semibold hover:bg-slate-50 transition">
+										<div className="flex items-center gap-2.5 px-3.5 py-2.5 text-slate-550 bg-white border border-slate-200/80 shadow-[inset_0_1px_0_#ffffff,0_1.5px_3px_rgba(15,23,42,0.03)] hover:bg-slate-50 transition active:scale-[0.97] rounded-xl text-xs font-semibold cursor-pointer">
 											<BookOpen className="h-4 w-4" />
 											Semesters
 										</div>
-										<div className="flex items-center gap-2.5 px-3 py-2 text-slate-500 rounded-xl text-xs font-semibold hover:bg-slate-50 transition">
+										<div className="flex items-center gap-2.5 px-3.5 py-2.5 text-slate-550 bg-white border border-slate-200/80 shadow-[inset_0_1px_0_#ffffff,0_1.5px_3px_rgba(15,23,42,0.03)] hover:bg-slate-50 transition active:scale-[0.97] rounded-xl text-xs font-semibold cursor-pointer">
 											<Target className="h-4 w-4" />
 											Grade Target
 										</div>
 									</div>
 								</div>
 
-								<div className="p-3 bg-indigo-900 rounded-xl text-white space-y-2">
-									<div className="text-[9px] font-bold tracking-widest text-indigo-200 uppercase">
+								{/* Target GPA Inset LCD Display */}
+								<div className="bg-gradient-to-br from-indigo-900 via-indigo-950 to-slate-950 border border-indigo-955 shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.4),0_1.5px_2px_rgba(255,255,255,0.06)] rounded-2xl p-4.5 space-y-3">
+									<div className="text-[9px] font-bold tracking-widest text-indigo-300 uppercase font-mono">
 										Target GPA
 									</div>
-									<div className="text-lg font-bold">3.92 GPA</div>
-									<div className="w-full bg-indigo-850 h-1 rounded-full overflow-hidden">
-										<div className="w-[85%] h-full bg-indigo-400 rounded-full" />
+									<div className="text-xl font-extrabold text-white tracking-wide font-mono">
+										3.92 GPA
+									</div>
+									<div className="w-full bg-indigo-950/80 h-2.5 rounded-full p-0.5 border border-indigo-900 shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.5)] flex items-center">
+										<div className="h-full bg-gradient-to-r from-blue-400 to-indigo-500 rounded-full shadow-[0_0_8px_rgba(59,130,246,0.6)] w-[85%]" />
 									</div>
 								</div>
 							</div>
 
 							{/* Center Area Graph Mock */}
-							<div className="col-span-1 lg:col-span-6 flex flex-col justify-between p-6 bg-white border border-slate-100 rounded-2xl h-[400px]">
+							<div className="col-span-1 lg:col-span-6 flex flex-col justify-between p-6 bg-white border border-slate-200/80 rounded-3xl h-[410px] shadow-[inset_0_2px_0_#ffffff,0_6px_20px_rgba(15,23,42,0.02)]">
 								<div className="flex justify-between items-start mb-4">
 									<div>
 										<p className="text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-0.5">
@@ -294,15 +296,17 @@ export default function HomePage() {
 											Semester GPA Trend
 										</h4>
 									</div>
-									<span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-lg">
+									<span className="text-xs font-extrabold text-emerald-650 bg-emerald-50/85 border border-emerald-100 shadow-[inset_0_1.5px_2px_rgba(16,185,129,0.05)] px-3 py-1 rounded-xl select-none">
 										+0.12 Gain
 									</span>
 								</div>
 
-								{/* Dynamic Area Chart representation using custom SVG paths */}
-								<div className="relative flex-1 w-full min-h-[180px] flex items-end">
+								{/* Oscilloscope Trend Screen Inset */}
+								<div className="relative flex-1 w-full min-h-[190px] flex items-end widget-skeuo-inset border-slate-200/50 shadow-[inset_0_2px_6px_rgba(15,23,42,0.05),0_1px_0_#ffffff] rounded-2xl p-4 overflow-hidden">
+									{/* Screen grid lines */}
+									<div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f060_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f060_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none" />
 									<svg
-										className="w-full h-full min-h-[180px]"
+										className="w-full h-full min-h-[160px] relative z-10"
 										viewBox="0 0 300 120"
 									>
 										<title>GPA Growth Chart</title>
@@ -317,7 +321,7 @@ export default function HomePage() {
 												<stop
 													offset="0%"
 													stopColor="#4f46e5"
-													stopOpacity="0.2"
+													stopOpacity="0.22"
 												/>
 												<stop
 													offset="100%"
@@ -345,7 +349,7 @@ export default function HomePage() {
 											r="4.5"
 											fill="#4f46e5"
 											stroke="white"
-											strokeWidth="1.5"
+											strokeWidth="2"
 										/>
 										<circle
 											cx="200"
@@ -353,12 +357,12 @@ export default function HomePage() {
 											r="4.5"
 											fill="#4f46e5"
 											stroke="white"
-											strokeWidth="1.5"
+											strokeWidth="2"
 										/>
 										<circle
 											cx="300"
 											cy="15"
-											r="5.5"
+											r="6"
 											fill="#6366f1"
 											stroke="white"
 											strokeWidth="2"
@@ -370,46 +374,49 @@ export default function HomePage() {
 									<div>Sem 1</div>
 									<div>Sem 2</div>
 									<div>Sem 3</div>
-									<div className="text-indigo-600">Sem 4 (Active)</div>
+									<div className="text-indigo-600 font-extrabold">
+										Sem 4 (Active)
+									</div>
 								</div>
 							</div>
 
 							{/* Right Overview stats mock */}
-							<div className="col-span-1 lg:col-span-3 flex flex-col gap-4 h-[400px]">
+							<div className="col-span-1 lg:col-span-3 flex flex-col gap-5 h-[410px]">
 								{/* Stats Card 1 */}
-								<div className="flex-1 p-5 bg-white border border-slate-100 rounded-2xl flex flex-col justify-between">
+								<div className="flex-1 p-5 bg-gradient-to-b from-white to-slate-50/50 border border-slate-200/70 rounded-3xl shadow-[inset_0_1.5px_0_#ffffff,0_4px_14px_rgba(15,23,42,0.02)] flex flex-col justify-between">
 									<div className="flex justify-between items-center">
 										<span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
 											Current CGPA
 										</span>
-										<TrendingUp className="h-4 w-4 text-emerald-500" />
+										<div className="h-7 w-7 rounded-full icon-skeuo-raised">
+											<TrendingUp className="h-4 w-4 text-emerald-550" />
+										</div>
 									</div>
 									<div>
 										<div className="text-4xl font-extrabold text-slate-800 tracking-tight leading-none">
 											3.84
 										</div>
-										<p className="text-[9px] font-semibold text-emerald-600 mt-2">
+										<p className="text-[9px] font-bold text-emerald-650 mt-2.5">
 											Top 8% of department
 										</p>
 									</div>
 								</div>
 
 								{/* Stats Card 2 */}
-								<div className="flex-1 p-5 bg-indigo-900 rounded-2xl flex flex-col justify-between text-white relative overflow-hidden">
-									<div className="absolute top-0 right-0 opacity-10">
-										<Sparkles className="h-24 w-24 text-white" />
-									</div>
+								<div className="flex-1 p-5 bg-gradient-to-br from-indigo-900 to-indigo-950 border border-indigo-950 shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.08),inset_0_-2px_4px_rgba(0,0,0,0.4),0_6px_20px_rgba(15,23,42,0.05)] rounded-3xl flex flex-col justify-between text-white relative overflow-hidden">
 									<div className="flex justify-between items-center relative z-10">
-										<span className="text-[10px] uppercase font-bold text-indigo-200 tracking-wider">
+										<span className="text-[10px] uppercase font-bold text-indigo-350 tracking-wider font-mono">
 											Forecast Target
 										</span>
-										<Target className="h-4 w-4 text-indigo-300" />
+										<div className="h-7 w-7 rounded-full bg-indigo-950/80 border border-indigo-900 flex items-center justify-center shadow-inner">
+											<Target className="h-4 w-4 text-indigo-400" />
+										</div>
 									</div>
 									<div className="relative z-10">
-										<div className="text-3xl font-extrabold tracking-tight leading-none">
+										<div className="text-3xl font-extrabold tracking-tight leading-none font-mono">
 											A Grade
 										</div>
-										<p className="text-[9px] font-medium text-indigo-200 mt-2">
+										<p className="text-[9px] font-medium text-indigo-300 mt-2.5 font-mono">
 											Requires 3.90 next sem
 										</p>
 									</div>
@@ -441,9 +448,9 @@ export default function HomePage() {
 					{/* Bento Grid */}
 					<div className="grid md:grid-cols-3 gap-6">
 						{/* Bento Card 1 - Giant card */}
-						<div className="md:col-span-2 rounded-3xl bg-slate-50/50 border border-slate-150 p-8 flex flex-col justify-between overflow-hidden relative group hover:border-slate-300 transition-colors duration-200 hover:duration-0">
+						<div className="card-skeuo md:col-span-2 rounded-[32px] p-8 flex flex-col lg:flex-row justify-between items-center gap-8 overflow-hidden relative group">
 							<div className="space-y-4 max-w-md relative z-10">
-								<div className="h-11 w-11 rounded-xl bg-white flex items-center justify-center shadow-sm border border-slate-100">
+								<div className="h-11 w-11 rounded-xl icon-skeuo-inset">
 									<LineChart className="h-5 w-5 text-indigo-600" />
 								</div>
 								<h3 className="text-2xl font-bold text-gray-900">
@@ -454,25 +461,79 @@ export default function HomePage() {
 									consecutive semesters. Easily toggle courses, analyze weight
 									distribution, and visualize target ranges.
 								</p>
+								<div className="pt-4 flex flex-wrap gap-2.5 relative z-10">
+									<span className="px-3 py-1 bg-white border border-slate-150 rounded-lg text-xs font-semibold text-gray-600 shadow-2xs">
+										8-Semester Track
+									</span>
+									<span className="px-3 py-1 bg-white border border-slate-150 rounded-lg text-xs font-semibold text-gray-600 shadow-2xs">
+										Dynamic Scaling
+									</span>
+									<span className="px-3 py-1 bg-indigo-50 border border-indigo-100 rounded-lg text-xs font-semibold text-indigo-600">
+										Predictive Curves
+									</span>
+								</div>
 							</div>
 
-							<div className="mt-8 pt-6 border-t border-slate-200/50 flex flex-wrap gap-3 relative z-10">
-								<span className="px-3 py-1 bg-white border border-slate-150 rounded-lg text-xs font-semibold text-gray-600">
-									8-Semester Track
-								</span>
-								<span className="px-3 py-1 bg-white border border-slate-150 rounded-lg text-xs font-semibold text-gray-600">
-									Dynamic Scaling
-								</span>
-								<span className="px-3 py-1 bg-indigo-50 border border-indigo-100 rounded-lg text-xs font-semibold text-indigo-600">
-									Predictive Curves
-								</span>
+							{/* Tactile Oscillosocpe Trend Widget */}
+							<div className="w-full lg:w-72 h-44 rounded-[24px] widget-skeuo-inset p-4 flex flex-col justify-between overflow-hidden relative shrink-0">
+								<div className="flex justify-between items-center text-[9px] font-bold text-slate-400">
+									<span>CGPA OSCILLOSCOPE</span>
+									<span className="flex items-center gap-1 text-emerald-500">
+										<span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
+										LIVE FORECAST
+									</span>
+								</div>
+								{/* Subtle grid pattern */}
+								<div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f050_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f050_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
+								<svg className="w-full h-24 mt-2" viewBox="0 0 100 40">
+									<title>Bento Grade Graph</title>
+									<path
+										d="M0,35 Q15,30 30,20 T60,18 T90,5 L100,5 L100,40 L0,40 Z"
+										fill="rgba(99, 102, 241, 0.06)"
+									/>
+									<path
+										d="M0,35 Q15,30 30,20 T60,18 T90,5"
+										fill="none"
+										stroke="var(--color-primary-500)"
+										strokeWidth="2"
+										strokeLinecap="round"
+									/>
+									<circle
+										cx="30"
+										cy="20"
+										r="1.5"
+										fill="var(--color-primary-600)"
+										stroke="white"
+										strokeWidth="0.5"
+									/>
+									<circle
+										cx="60"
+										cy="18"
+										r="1.5"
+										fill="var(--color-primary-600)"
+										stroke="white"
+										strokeWidth="0.5"
+									/>
+									<circle
+										cx="90"
+										cy="5"
+										r="2.2"
+										fill="var(--color-primary-500)"
+										stroke="white"
+										strokeWidth="0.75"
+									/>
+								</svg>
+								<div className="flex justify-between text-[9px] font-bold text-slate-400 pt-2 border-t border-slate-100 z-10">
+									<span>SEM 1: 3.20</span>
+									<span className="text-indigo-600">TARGET: 3.85</span>
+								</div>
 							</div>
 						</div>
 
 						{/* Bento Card 2 */}
-						<div className="rounded-3xl bg-slate-50/50 border border-slate-150 p-8 flex flex-col justify-between overflow-hidden relative group hover:border-slate-300 transition-colors duration-200 hover:duration-0">
+						<div className="card-skeuo rounded-[32px] p-8 flex flex-col justify-between overflow-hidden relative group">
 							<div className="space-y-4">
-								<div className="h-11 w-11 rounded-xl bg-white flex items-center justify-center shadow-sm border border-slate-100">
+								<div className="h-11 w-11 rounded-xl icon-skeuo-inset">
 									<Zap className="h-5 w-5 text-amber-500" />
 								</div>
 								<h3 className="text-xl font-bold text-gray-900">
@@ -484,16 +545,38 @@ export default function HomePage() {
 									Access anywhere, anytime.
 								</p>
 							</div>
-							<div className="mt-6 flex items-center gap-1.5 text-xs font-bold text-indigo-600">
-								Cloud Sync Status: Active
-								<span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+
+							{/* SUPABASE CLOUD SYNC WIDGET */}
+							<div className="w-full h-24 rounded-[20px] widget-skeuo-inset p-3.5 flex flex-col justify-between relative mt-6 font-mono text-[9px] text-slate-500 overflow-hidden">
+								<div className="flex justify-between items-center text-slate-400">
+									<span>SUPABASE CLOUD SYNC</span>
+									<span className="flex items-center gap-1 text-emerald-500 font-bold">
+										<span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+										SECURE
+									</span>
+								</div>
+								<div className="space-y-1">
+									<div className="flex justify-between">
+										<span>DATABASE PING</span>
+										<span className="text-slate-800 font-semibold">14ms</span>
+									</div>
+									<div className="flex justify-between">
+										<span>LAST SYNCED</span>
+										<span className="text-indigo-600 font-semibold">
+											JUST NOW
+										</span>
+									</div>
+								</div>
+								<div className="w-full bg-slate-200 h-1 rounded-full overflow-hidden mt-1">
+									<div className="w-[100%] h-full bg-emerald-500 rounded-full" />
+								</div>
 							</div>
 						</div>
 
 						{/* Bento Card 3 */}
-						<div className="rounded-3xl bg-slate-50/50 border border-slate-150 p-8 flex flex-col justify-between overflow-hidden relative group hover:border-slate-300 transition-colors duration-200 hover:duration-0">
+						<div className="card-skeuo rounded-[32px] p-8 flex flex-col justify-between overflow-hidden relative group">
 							<div className="space-y-4">
-								<div className="h-11 w-11 rounded-xl bg-white flex items-center justify-center shadow-sm border border-slate-100">
+								<div className="h-11 w-11 rounded-xl icon-skeuo-inset">
 									<BarChart3 className="h-5 w-5 text-emerald-500" />
 								</div>
 								<h3 className="text-xl font-bold text-gray-900">
@@ -505,45 +588,66 @@ export default function HomePage() {
 									GCWUF, GPAFlow handles it natively.
 								</p>
 							</div>
-							<div className="mt-6 text-xs text-gray-400 font-semibold">
-								12+ Supported Grading Schemes
+
+							{/* BADGE DIAL GRID */}
+							<div className="grid grid-cols-2 gap-2 mt-6">
+								<div className="icon-skeuo-raised py-2 px-3 rounded-xl text-center text-[10px] font-bold text-slate-700 select-none">
+									GPA 4.0
+								</div>
+								<div className="icon-skeuo-raised py-2 px-3 rounded-xl text-center text-[10px] font-bold text-slate-700 select-none">
+									NUML Scale
+								</div>
+								<div className="icon-skeuo-raised py-2 px-3 rounded-xl text-center text-[10px] font-bold text-slate-700 select-none">
+									GCWUF Scale
+								</div>
+								<div className="icon-skeuo-raised py-2 px-3 rounded-xl text-center text-[10px] font-bold text-slate-700 select-none">
+									WAM 100
+								</div>
 							</div>
 						</div>
 
 						{/* Bento Card 4 - Giant card */}
-						<div className="md:col-span-2 rounded-3xl bg-slate-50/50 border border-slate-150 p-8 flex flex-col justify-between overflow-hidden relative group hover:border-slate-300 transition-colors duration-200 hover:duration-0">
-							<div className="flex flex-col sm:flex-row gap-8 justify-between items-start sm:items-center w-full">
-								<div className="space-y-4 max-w-sm">
-									<div className="h-11 w-11 rounded-xl bg-white flex items-center justify-center shadow-sm border border-slate-100">
-										<Target className="h-5 w-5 text-purple-600" />
-									</div>
-									<h3 className="text-2xl font-bold text-gray-900">
-										Intelligent Grade Forecasting
-									</h3>
-									<p className="text-gray-500 text-sm leading-relaxed">
-										Define your goal GPA, and our algorithm will retroactively
-										calculate exactly what grades you need to maintain in future
-										courses to make your target a reality.
-									</p>
+						<div className="card-skeuo md:col-span-2 rounded-[32px] p-8 flex flex-col lg:flex-row justify-between items-center gap-8 overflow-hidden relative group">
+							<div className="space-y-4 max-w-sm relative z-10">
+								<div className="h-11 w-11 rounded-xl icon-skeuo-inset">
+									<Target className="h-5 w-5 text-purple-600" />
+								</div>
+								<h3 className="text-2xl font-bold text-gray-900">
+									Intelligent Grade Forecasting
+								</h3>
+								<p className="text-gray-500 text-sm leading-relaxed">
+									Define your goal GPA, and our algorithm will retroactively
+									calculate exactly what grades you need to maintain in future
+									courses to make your target a reality.
+								</p>
+							</div>
+
+							{/* Interactive Slider Card Mockup */}
+							<div className="w-full sm:w-64 bg-slate-50 border border-slate-150 rounded-[24px] p-5.5 shadow-[inset_0_2px_0_#fff,0_4px_12px_rgba(0,0,0,0.02)] flex flex-col justify-between shrink-0">
+								<div className="flex justify-between items-center text-xs font-bold mb-2">
+									<span className="text-slate-400 uppercase tracking-wider text-[9px]">
+										Target GPA Goal
+									</span>
+									<span className="text-indigo-600 font-extrabold text-xs bg-white border border-slate-100 px-2 py-0.5 rounded-lg shadow-2xs">
+										3.75 GPA
+									</span>
 								</div>
 
-								{/* Interactive Slider Card Mockup */}
-								<div className="w-full sm:w-60 bg-white rounded-2xl border border-slate-150 p-5 shadow-sm group-hover:shadow-md transition-colors duration-200 hover:duration-0">
-									<div className="flex justify-between items-center text-xs font-semibold mb-2">
-										<span className="text-gray-400">TARGET GPA Goal</span>
-										<span className="text-indigo-600 font-bold text-sm bg-indigo-50 px-2 py-0.5 rounded">
-											3.75 GPA
-										</span>
+								{/* Track Inset */}
+								<div className="w-full h-4 bg-slate-200/70 rounded-full p-0.5 border border-slate-300/40 shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.08)] flex items-center relative my-3">
+									<div className="h-full bg-gradient-to-r from-blue-500 via-indigo-500 to-indigo-600 rounded-full w-[85%]" />
+									{/* Raised Thumb Button */}
+									<div className="absolute left-[81%] w-6 h-6 rounded-full bg-linear-gradient(180deg,#fff_0%,#f1f5f9_100%) border border-slate-300/80 shadow-[inset_0_1px_0_#fff,0_2.5px_5px_rgba(0,0,0,0.12)] flex items-center justify-center cursor-pointer select-none">
+										<div className="w-2 h-2 rounded-full bg-indigo-600 shadow-inner" />
 									</div>
-									<div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden mt-3 mb-1.5">
-										<div className="w-[85%] h-full bg-gradient-to-r from-blue-500 via-indigo-500 to-indigo-600 rounded-full" />
-									</div>
-									<div className="flex justify-between text-[8px] font-bold uppercase tracking-wider text-slate-400">
-										<span>Current: 3.20</span>
-										<span className="text-emerald-500">
-											Requirements Calculated
-										</span>
-									</div>
+								</div>
+
+								<div className="flex justify-between text-[9px] font-bold text-slate-400 mt-2">
+									<span>Current: 3.20</span>
+									<span className="text-emerald-600 flex items-center gap-1 font-bold">
+										<span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+										Auto-Calculated
+									</span>
 								</div>
 							</div>
 						</div>
