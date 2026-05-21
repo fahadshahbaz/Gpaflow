@@ -77,9 +77,10 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 	return (
 		<div
 			className={cn(
-				"fixed top-4 left-0 right-0 px-6 z-50 transition-transform duration-300",
+				"fixed left-0 right-0 px-6 z-50 transition-all duration-300",
 				hidden && "-translate-y-[calc(100%+2rem)]",
 			)}
+			style={{ top: "calc(1rem + var(--banner-offset, 0px))" }}
 		>
 			<header className="max-w-[1600px] mx-auto w-full relative">
 				<div className="h-[60px] flex items-center justify-between shrink-0">

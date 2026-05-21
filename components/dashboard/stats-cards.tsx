@@ -1,6 +1,15 @@
 "use client";
 
-import { Award, Calendar, Check, GraduationCap, Pencil, TrendingDown, TrendingUp, X } from "lucide-react";
+import {
+	Award,
+	Calendar,
+	Check,
+	GraduationCap,
+	Pencil,
+	TrendingDown,
+	TrendingUp,
+	X,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useCallback, useMemo, useState, useTransition } from "react";
 import { updateTargetGpa } from "@/lib/supabase/auth";
@@ -26,6 +35,8 @@ export function StatsCards({
 	const [editValue, setEditValue] = useState(targetGpa.toString());
 	const [isPending, startTransition] = useTransition();
 	const [error, setError] = useState<string | null>(null);
+
+	const isMaxReached = semesterCount >= 8;
 
 	// Calculate actual GPA change from last two semesters
 	const gpaChange = useMemo(() => {
@@ -106,7 +117,9 @@ export function StatsCards({
 					{/* Progress to target */}
 					<div className="space-y-2 mt-auto">
 						<div className="flex items-center justify-between text-sm">
-							<span className="text-slate-500 font-normal">Progress to Target</span>
+							<span className="text-slate-500 font-normal">
+								Progress to Target
+							</span>
 							<span className="font-normal text-slate-800">
 								{targetGpa.toFixed(2)}
 							</span>
@@ -137,7 +150,9 @@ export function StatsCards({
 							{totalCreditHours}
 						</span>
 					</div>
-					<p className="text-sm text-slate-400 font-normal mt-1.5">credit hours</p>
+					<p className="text-sm text-slate-400 font-normal mt-1.5">
+						credit hours
+					</p>
 				</div>
 			</div>
 
@@ -155,7 +170,9 @@ export function StatsCards({
 							<span className="text-4xl font-light text-slate-800 tracking-tight leading-none">
 								{semesterCount}
 							</span>
-							<span className="text-lg text-slate-400 font-normal leading-none mb-1">/ 8</span>
+							<span className="text-lg text-slate-400 font-normal leading-none mb-1">
+								/ 8
+							</span>
 						</div>
 					</div>
 					{/* 8-segment hardware LED indicator bar */}
@@ -199,8 +216,16 @@ export function StatsCards({
 								<button
 									type="button"
 									onClick={() => setIsEditing(true)}
-									className="icon-skeuo-raised h-8 w-8 rounded-full border border-slate-200/80 shadow-[inset_0_1px_0_#ffffff,0_2px_4px_rgba(0,0,0,0.04)] hover:scale-[1.03] active:scale-[0.97] transition-all text-slate-500 hover:text-slate-700 flex items-center justify-center"
-									aria-label="Edit target GPA"
+									disabled={isMaxReached}
+									className={`icon-skeuo-raised h-8 w-8 rounded-full border border-slate-200/80 shadow-[inset_0_1px_0_#ffffff,0_2px_4px_rgba(0,0,0,0.04)] flex items-center justify-center transition-all ${
+										isMaxReached
+											? "opacity-40 text-slate-400 pointer-events-none"
+											: "hover:scale-[1.03] active:scale-[0.97] text-slate-500 hover:text-slate-700"
+									}`}
+									aria-label={
+										isMaxReached ? "Degree completed" : "Edit target GPA"
+									}
+									title={isMaxReached ? "Degree completed" : "Edit target GPA"}
 								>
 									<Pencil className="h-4 w-4" />
 								</button>
@@ -222,7 +247,9 @@ export function StatsCards({
 									disabled={isPending}
 								/>
 							</div>
-							{error && <p className="text-xs text-rose-600 font-normal">{error}</p>}
+							{error && (
+								<p className="text-xs text-rose-600 font-normal">{error}</p>
+							)}
 							<div className="flex gap-2">
 								<button
 									type="button"

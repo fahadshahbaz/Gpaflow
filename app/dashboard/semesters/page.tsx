@@ -28,7 +28,7 @@ export default async function SemestersPage() {
 						Manage your academic records and subjects
 					</p>
 				</div>
-				<AddSemesterDialog />
+				<AddSemesterDialog semesterCount={semesters.length} />
 			</div>
 
 			{/* Semester List */}

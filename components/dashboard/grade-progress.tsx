@@ -57,6 +57,20 @@ export function GradeProgress({ semesters }: GradeProgressProps) {
 
 	const topGradePercentage = breakdown[0]?.percentage || 0;
 
+	const mostFrequentGrade = useMemo(() => {
+		if (totalSubjects === 0) return null;
+		const sorted = [...breakdown].sort((a, b) => b.count - a.count);
+		return sorted[0];
+	}, [breakdown, totalSubjects]);
+
+	const passingPercentage = useMemo(() => {
+		if (totalSubjects === 0) return 0;
+		const passingCount = breakdown
+			.filter((b) => b.grade !== "D & Below")
+			.reduce((sum, b) => sum + b.count, 0);
+		return Math.round((passingCount / totalSubjects) * 100);
+	}, [breakdown, totalSubjects]);
+
 	return (
 		<div className="card-skeuo rounded-[32px] p-6 h-full flex flex-col justify-between">
 			<div>
@@ -98,7 +112,9 @@ export function GradeProgress({ semesters }: GradeProgressProps) {
 						{breakdown.map((item) => (
 							<div key={item.grade}>
 								<div className="flex items-center justify-between mb-1.5">
-									<span className="text-sm text-slate-500 font-normal">{item.grade}</span>
+									<span className="text-sm text-slate-500 font-normal">
+										{item.grade}
+									</span>
 									<span className="text-sm font-normal text-slate-700">
 										{item.count}
 									</span>
@@ -117,6 +133,24 @@ export function GradeProgress({ semesters }: GradeProgressProps) {
 					</div>
 				)}
 			</div>
+
+			{/* Bottom Insight Footer */}
+			{totalSubjects > 0 && (
+				<div className="flex items-center justify-between mt-auto pt-2.5 border-t border-slate-100/90 text-xs text-slate-400 font-normal">
+					<div className="flex items-center gap-1">
+						<span>Most frequent:</span>
+						<span className="font-semibold text-slate-600">
+							{mostFrequentGrade?.grade}
+						</span>
+					</div>
+					<div className="flex items-center gap-1">
+						<span>Passing rate:</span>
+						<span className="font-semibold text-emerald-600">
+							{passingPercentage}%
+						</span>
+					</div>
+				</div>
+			)}
 		</div>
 	);
 }

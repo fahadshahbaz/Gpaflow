@@ -17,7 +17,14 @@ import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { createSemester } from "@/lib/supabase/mutations";
 
-export function AddSemesterDialog() {
+const MAX_SEMESTERS = 8;
+
+export function AddSemesterDialog({
+	semesterCount = 0,
+}: {
+	semesterCount?: number;
+}) {
+	const isMaxReached = semesterCount >= MAX_SEMESTERS;
 	const [open, setOpen] = useState(false);
 	const [name, setName] = useState("");
 	const [loading, setLoading] = useState(false);
@@ -41,6 +48,19 @@ export function AddSemesterDialog() {
 		} finally {
 			setLoading(false);
 		}
+	}
+
+	if (isMaxReached) {
+		return (
+			<Button
+				disabled
+				className="bg-gray-200 text-gray-400 font-medium px-4 h-9 rounded-xl opacity-60"
+				title="Maximum of 8 semesters reached"
+			>
+				<Plus className="mr-1.5 h-4 w-4" />
+				New Semester
+			</Button>
+		);
 	}
 
 	return (
