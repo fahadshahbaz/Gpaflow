@@ -47,7 +47,7 @@ export default function LoginPage() {
 						required
 						defaultValue=""
 						className="block w-full rounded-xl border border-slate-200 bg-slate-50/70 px-4 py-3 text-sm text-gray-900 placeholder-slate-400 shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.06)] focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/10 focus:outline-none transition-all duration-200"
-						placeholder="sellostore@company.com"
+						placeholder="fahad@example.com"
 					/>
 					{state.fieldErrors?.email && (
 						<p className="text-xs text-rose-500 font-medium">

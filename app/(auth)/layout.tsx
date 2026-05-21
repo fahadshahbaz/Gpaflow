@@ -1,4 +1,3 @@
-import { CheckCircle2, Target, TrendingUp } from "lucide-react";
 import Link from "next/link";
 import { Logo } from "@/components/ui/logo";
 
@@ -71,238 +70,78 @@ export default function AuthLayout({
 						</svg>
 					</div>
 
-					{/* Top Section - Headers */}
-					<div className="relative z-10 space-y-4 max-w-lg">
-						<h2 className="text-4xl font-extrabold tracking-tight leading-[1.15] text-white">
-							Effortlessly track your academic progress.
-						</h2>
-						<p className="text-blue-100/90 text-base leading-relaxed font-light">
-							Log in to access your dashboard, map out future semesters, and
-							automate your GPA forecasting.
-						</p>
+					{/* Top Section - Quiet branding note */}
+					<div className="relative z-10">
+						<span className="text-xs font-bold tracking-wider text-blue-200/70 uppercase font-mono">
+							GPAFlow Predictive Platform
+						</span>
 					</div>
 
-					{/* Dashboard Mockup Center */}
-					<div className="relative z-10 my-auto pt-8 flex items-center justify-center w-full">
-						<div className="relative w-full max-w-[450px]">
-							{" "}
-							{/* Main Dashboard Card */}
-							<div className="w-full bg-slate-50/95 backdrop-blur-sm rounded-[2.2rem] p-6.5 shadow-[inset_0_3px_5px_#ffffff,inset_0_-3px_8px_rgba(0,0,0,0.02),0_20px_45px_-10px_rgba(15,23,42,0.15),0_0_1px_rgba(29,78,216,0.2)] border border-slate-200 text-slate-800 transition-all duration-500 hover:scale-[1.01] hover:shadow-[inset_0_3px_5px_#ffffff,inset_0_-3px_8px_rgba(0,0,0,0.02),0_25px_50px_-10px_rgba(15,23,42,0.18)]">
-								{/* Mockup Header */}
-								<div className="flex justify-between items-center mb-5 pb-3 border-b border-slate-200">
-									<div>
-										<div className="text-[10px] uppercase font-semibold text-slate-400 tracking-wider">
-											Academic Tracker
-										</div>
-										<h4 className="text-sm font-extrabold text-slate-800">
-											GPA Overview
-										</h4>
-									</div>
-									<div className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white border border-slate-200 text-blue-600 font-extrabold text-[10px] shadow-[0_2px_4px_rgba(0,0,0,0.04),inset_0_1px_0_#ffffff] cursor-pointer hover:bg-slate-50 hover:translate-y-[-0.5px] active:translate-y-[0.5px] active:shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.06)] active:bg-slate-100 transition-all duration-150">
-										<TrendingUp className="h-3.5 w-3.5 text-blue-500" />
-										Spring 2026
-									</div>
-								</div>
-
-								{/* Row of stats */}
-								<div className="grid grid-cols-3 gap-3 mb-6">
-									<div className="p-3 rounded-2xl border border-slate-200/60 bg-gradient-to-br from-blue-50/50 to-sky-50/30 shadow-[inset_0_3px_6px_rgba(29,78,216,0.06),inset_0_-1px_0_#ffffff]">
-										<div className="text-[9px] font-bold text-blue-650 mb-0.5 uppercase tracking-wide">
-											Current GPA
-										</div>
-										<div className="text-lg font-extrabold text-blue-900 leading-none font-mono">
-											3.92
-										</div>
-										<div className="text-[8px] text-emerald-600 font-bold mt-1.5 flex items-center gap-0.5">
-											<span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-											+0.04 vs last sem
-										</div>
-									</div>
-									<div className="p-3 rounded-2xl border border-slate-200/60 bg-slate-100/50 shadow-[inset_0_3px_6px_rgba(0,0,0,0.06),inset_0_-1px_0_#ffffff]">
-										<div className="text-[9px] font-bold text-slate-400 mb-0.5 uppercase tracking-wide">
-											Study Hours
-										</div>
-										<div className="text-lg font-extrabold text-slate-800 leading-none font-mono">
-											02:45
-										</div>
-										<div className="text-[8px] text-blue-500 font-bold mt-1.5">
-											Daily avg
-										</div>
-									</div>
-									<div className="p-3 rounded-2xl border border-slate-200/60 bg-slate-100/50 shadow-[inset_0_3px_6px_rgba(0,0,0,0.06),inset_0_-1px_0_#ffffff]">
-										<div className="text-[9px] font-bold text-slate-400 mb-0.5 uppercase tracking-wide">
-											Total Credits
-										</div>
-										<div className="text-lg font-extrabold text-slate-800 leading-none font-mono">
-											84
-										</div>
-										<div className="text-[8px] text-slate-400 font-bold mt-1.5">
-											/ 120 Required
-										</div>
-									</div>
-								</div>
-
-								{/* Course Results List */}
-								<div className="space-y-3">
-									<div className="text-[10px] uppercase font-extrabold text-slate-400 tracking-wider mb-2 flex justify-between items-center">
-										<span>Course Results</span>
-										<span className="text-blue-600 hover:underline cursor-pointer hover:text-blue-700">
-											View All
-										</span>
-									</div>
-
-									{/* Item 1 */}
-									<div className="flex items-center justify-between p-2.5 rounded-xl border border-slate-200 bg-white shadow-[0_3px_6px_rgba(0,0,0,0.03),0_0_1px_rgba(0,0,0,0.1),inset_0_1.5px_0_#ffffff] hover:bg-slate-50/85 hover:translate-y-[-0.5px] hover:shadow-[0_4px_8px_rgba(0,0,0,0.04),0_0_1px_rgba(0,0,0,0.15)] active:translate-y-[0.5px] active:shadow-[inset_0_2px_4px_rgba(0,0,0,0.04)] transition-all duration-150 cursor-pointer">
-										<div className="flex items-center gap-3">
-											<div className="h-7 w-7 rounded-lg bg-blue-100/80 border border-blue-200/50 flex items-center justify-center text-blue-655 font-extrabold text-xs shadow-[inset_0_1px_2px_rgba(255,255,255,0.6),0_1.5px_2px_rgba(0,0,0,0.04)]">
-												CS
-											</div>
-											<div>
-												<div className="text-xs font-bold text-slate-800">
-													Advanced Web Dev
-												</div>
-												<div className="text-[9px] text-slate-400 font-medium">
-													4.0 Credits • Theory & Lab
-												</div>
-											</div>
-										</div>
-										<div className="flex items-center gap-2">
-											<div className="text-xs font-extrabold text-blue-600 font-mono bg-blue-50/50 px-1.5 py-0.5 rounded border border-blue-150 shadow-[inset_0_1px_0_#ffffff]">
-												A
-											</div>
-											<div className="px-2 py-0.5 rounded-md bg-emerald-50 border border-emerald-100 text-[8px] font-bold text-emerald-600 flex items-center gap-0.5 shadow-[inset_0_1px_0_#ffffff]">
-												<CheckCircle2 className="h-2.5 w-2.5" /> Passed
-											</div>
-										</div>
-									</div>
-
-									{/* Item 2 */}
-									<div className="flex items-center justify-between p-2.5 rounded-xl border border-slate-200 bg-white shadow-[0_3px_6px_rgba(0,0,0,0.03),0_0_1px_rgba(0,0,0,0.1),inset_0_1.5px_0_#ffffff] hover:bg-slate-50/85 hover:translate-y-[-0.5px] hover:shadow-[0_4px_8px_rgba(0,0,0,0.04),0_0_1px_rgba(0,0,0,0.15)] active:translate-y-[0.5px] active:shadow-[inset_0_2px_4px_rgba(0,0,0,0.04)] transition-all duration-150 cursor-pointer">
-										<div className="flex items-center gap-3">
-											<div className="h-7 w-7 rounded-lg bg-sky-100/80 border border-sky-200/50 flex items-center justify-center text-sky-600 font-extrabold text-xs shadow-[inset_0_1px_2px_rgba(255,255,255,0.6),0_1.5px_2px_rgba(0,0,0,0.04)]">
-												DS
-											</div>
-											<div>
-												<div className="text-xs font-bold text-slate-800">
-													Machine Learning
-												</div>
-												<div className="text-[9px] text-slate-400 font-medium">
-													4.0 Credits • Calculus Prep
-												</div>
-											</div>
-										</div>
-										<div className="flex items-center gap-2">
-											<div className="text-xs font-extrabold text-sky-700 font-mono bg-sky-50/50 px-1.5 py-0.5 rounded border border-sky-150 shadow-[inset_0_1px_0_#ffffff]">
-												A-
-											</div>
-											<div className="px-2 py-0.5 rounded-md bg-emerald-50 border border-emerald-100 text-[8px] font-bold text-emerald-600 flex items-center gap-0.5 shadow-[inset_0_1px_0_#ffffff]">
-												<CheckCircle2 className="h-2.5 w-2.5" /> Passed
-											</div>
-										</div>
-									</div>
-
-									{/* Item 3 */}
-									<div className="flex items-center justify-between p-2.5 rounded-xl border border-slate-200 bg-white shadow-[0_3px_6px_rgba(0,0,0,0.03),0_0_1px_rgba(0,0,0,0.1),inset_0_1.5px_0_#ffffff] hover:bg-slate-50/85 hover:translate-y-[-0.5px] hover:shadow-[0_4px_8px_rgba(0,0,0,0.04),0_0_1px_rgba(0,0,0,0.15)] active:translate-y-[0.5px] active:shadow-[inset_0_2px_4px_rgba(0,0,0,0.04)] transition-all duration-150 cursor-pointer">
-										<div className="flex items-center gap-3">
-											<div className="h-7 w-7 rounded-lg bg-blue-100/80 border border-blue-200/50 flex items-center justify-center text-blue-600 font-extrabold text-xs shadow-[inset_0_1px_2px_rgba(255,255,255,0.6),0_1.5px_2px_rgba(0,0,0,0.04)]">
-												SE
-											</div>
-											<div>
-												<div className="text-xs font-bold text-slate-800">
-													Database Systems
-												</div>
-												<div className="text-[9px] text-slate-400 font-medium">
-													3.0 Credits • SQL Specialization
-												</div>
-											</div>
-										</div>
-										<div className="flex items-center gap-2">
-											<div className="text-xs font-extrabold text-blue-600 font-mono bg-blue-50/50 px-1.5 py-0.5 rounded border border-blue-150 shadow-[inset_0_1px_0_#ffffff]">
-												A
-											</div>
-											<div className="px-2 py-0.5 rounded-md bg-emerald-50 border border-emerald-100 text-[8px] font-bold text-emerald-600 flex items-center gap-0.5 shadow-[inset_0_1px_0_#ffffff]">
-												<CheckCircle2 className="h-2.5 w-2.5" /> Passed
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							{/* Overlapping Floating Gauge Card */}
-							<div className="absolute bottom-[-24px] right-[-16px] w-[215px] bg-slate-50/95 backdrop-blur-md rounded-2xl p-4 shadow-[inset_0_2px_3px_#ffffff,inset_0_-2px_4px_rgba(0,0,0,0.03),0_12px_28px_rgba(29,78,216,0.18),0_2px_4px_rgba(29,78,216,0.05)] border border-slate-200/90 z-20 transition-all duration-500 hover:translate-y-[-2px] hover:shadow-[inset_0_2px_3px_#ffffff,inset_0_-2px_4px_rgba(0,0,0,0.03),0_15px_32px_rgba(29,78,216,0.22)]">
-								<div className="flex justify-between items-center mb-2.5">
-									<div className="text-[9px] font-extrabold tracking-widest text-slate-400 uppercase font-mono">
-										Target GPA
-									</div>
-									<div className="relative">
-										<Target className="h-4 w-4 text-blue-500" />
-										<span className="absolute top-0 right-0 w-1.5 h-1.5 rounded-full bg-sky-400 animate-ping" />
-										<span className="absolute top-0 right-0 w-1.5 h-1.5 rounded-full bg-sky-400" />
-									</div>
-								</div>
-
-								{/* Semi-circular gauge mock */}
-								<div className="relative flex flex-col items-center justify-center pt-2">
-									<svg className="w-24 h-14" viewBox="0 0 100 50">
-										<title>GPA forecast gauge</title>
-										{/* Gauge Track */}
-										<path
-											d="M 10 50 A 40 40 0 0 1 90 50"
-											fill="none"
-											stroke="#f1f5f9"
-											strokeWidth="8.5"
-											strokeLinecap="round"
-										/>
-										{/* Gauge Value */}
-										<path
-											d="M 10 50 A 40 40 0 0 1 85 40"
-											fill="none"
-											stroke="url(#blueSkyGrad)"
-											strokeWidth="8.5"
-											strokeLinecap="round"
-											strokeDasharray="125"
-											strokeDashoffset="25"
-										/>
-										<defs>
-											<linearGradient
-												id="blueSkyGrad"
-												x1="0%"
-												y1="0%"
-												x2="100%"
-												y2="0%"
-											>
-												<stop offset="0%" stopColor="#3b82f6" />
-												<stop offset="100%" stopColor="#0ea5e9" />
-											</linearGradient>
-										</defs>
-									</svg>
-
-									<div className="absolute bottom-0 text-center">
-										<div className="text-base font-extrabold text-slate-800 leading-none font-mono">
-											3.92
-										</div>
-										<div className="text-[8px] font-bold text-slate-500 mt-1 font-mono">
-											Target: 4.00
-										</div>
-									</div>
-								</div>
-
-								{/* Legend Details */}
-								<div className="grid grid-cols-2 gap-2 mt-4 pt-3 border-t border-slate-100 shadow-[inset_0_1px_0_#ffffff]">
-									<div className="flex items-center gap-1">
-										<span className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_4px_rgba(59,130,246,0.6)]" />
-										<span className="text-[8px] font-bold text-slate-500">
-											Current
-										</span>
-									</div>
-									<div className="flex items-center gap-1 justify-end">
-										<span className="w-1.5 h-1.5 rounded-full bg-sky-400 shadow-[0_0_4px_rgba(56,189,248,0.6)]" />
-										<span className="text-[8px] font-bold text-slate-500">
-											Forecast
-										</span>
-									</div>
-								</div>
-							</div>
+					{/* Center Area - Typographic Hero & Floating Transparent Graph */}
+					<div className="my-auto space-y-8 max-w-2xl w-full relative z-10">
+						<div className="space-y-6">
+							<span className="inline-flex items-center text-[10px] font-bold tracking-widest text-blue-200 uppercase bg-white/10 px-3.5 py-1.5 rounded-full border border-white/10 w-fit">
+								The Student Operating System
+							</span>
+							<h3 className="text-4xl sm:text-5xl font-extrabold text-white leading-[1.15] tracking-tight">
+								Master your academic <br />
+								<span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-sky-200">
+									trajectory.
+								</span>
+							</h3>
+							<p className="text-blue-100/80 text-base font-light leading-relaxed text-justify">
+								GPAFlow provides a beautiful, state-of-the-art predictive dashboard to visualize semesters, track progression, and automate your degree planning down to the decimal.
+							</p>
 						</div>
+
+						{/* Minimal line graph without bg color */}
+						<div className="relative w-full h-[140px] pt-4 select-none">
+							{/* Horizontal grid lines */}
+							<div className="absolute inset-x-0 top-0 h-px bg-white/10" />
+							<div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-px bg-white/5" />
+							<div className="absolute inset-x-0 bottom-0 h-px bg-white/10" />
+
+							<svg className="w-full h-full overflow-visible" viewBox="0 0 500 100">
+								<title>GPA Trajectory Flow</title>
+								<defs>
+									{/* Glow Filter for the main trend line */}
+									<filter id="lineGlow" x="-20%" y="-20%" width="140%" height="140%">
+										<feDropShadow dx="0" dy="4" stdDeviation="6" floodColor="#93c5fd" floodOpacity="0.4" />
+									</filter>
+									{/* Gradient for the path */}
+									<linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
+										<stop offset="0%" stopColor="#93c5fd" stopOpacity="0.5" />
+										<stop offset="50%" stopColor="#ffffff" stopOpacity="0.8" />
+										<stop offset="100%" stopColor="#ffffff" stopOpacity="1" />
+									</linearGradient>
+								</defs>
+
+								{/* The trend path */}
+								<path
+									d="M 15 80 Q 120 70 240 45 T 465 20"
+									fill="none"
+									stroke="url(#lineGrad)"
+									strokeWidth="5"
+									strokeLinecap="round"
+									filter="url(#lineGlow)"
+								/>
+
+								{/* Glow Dots along the path */}
+								<circle cx="15" cy="80" r="4" fill="#93c5fd" />
+								<circle cx="240" cy="45" r="4" fill="#ffffff" />
+								
+								{/* Active end point */}
+								<circle cx="465" cy="20" r="6" fill="#ffffff" />
+
+								{/* Floating Text Markers */}
+								<text x="15" y="96" fill="rgba(255,255,255,0.4)" fontSize="8" fontFamily="monospace" fontWeight="bold">SEM 1</text>
+								<text x="240" y="62" fill="rgba(255,255,255,0.6)" fontSize="8" fontFamily="monospace" fontWeight="bold">SEM 2</text>
+								<text x="435" y="38" fill="#ffffff" fontSize="9" fontFamily="monospace" fontWeight="extrabold">3.92 CGPA</text>
+							</svg>
+						</div>
+
+						{/* Soft decorative divider line */}
+						<div className="w-24 h-1 bg-gradient-to-r from-blue-300/40 to-transparent rounded-full" />
 					</div>
 
 					{/* Bottom Text / Info */}
@@ -315,3 +154,4 @@ export default function AuthLayout({
 		</main>
 	);
 }
+
