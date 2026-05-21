@@ -58,7 +58,7 @@ export function GradeProgress({ semesters }: GradeProgressProps) {
 	const topGradePercentage = breakdown[0]?.percentage || 0;
 
 	return (
-		<div className="card-skeuo rounded-[32px] p-6 h-full flex flex-col justify-between">
+		<div className="card-skeuo rounded-[32px] p-5 h-full flex flex-col justify-between">
 			<div>
 				<div className="flex items-start justify-between mb-4">
 					<div>
@@ -79,7 +79,7 @@ export function GradeProgress({ semesters }: GradeProgressProps) {
 				</div>
 
 				{/* Big Number */}
-				<div className="flex items-end gap-3 mb-5">
+				<div className="flex items-end gap-3 mb-3.5">
 					<span className="text-4xl font-light text-slate-800 tracking-tight">
 						{totalSubjects}
 					</span>
@@ -94,7 +94,7 @@ export function GradeProgress({ semesters }: GradeProgressProps) {
 						No subjects added yet
 					</div>
 				) : (
-					<div className="space-y-3.5">
+					<div className="space-y-2.5">
 						{breakdown.map((item) => (
 							<div key={item.grade}>
 								<div className="flex items-center justify-between mb-1.5">

@@ -57,9 +57,9 @@ export function GPATrendChart({
 	const hasData = chartData.length > 0;
 
 	return (
-		<div className="card-skeuo rounded-[32px] p-6 h-full flex flex-col justify-between">
+		<div className="card-skeuo rounded-[32px] p-5 h-full flex flex-col justify-between">
 			{/* Header */}
-			<div className="flex items-start justify-between mb-4">
+			<div className="flex items-start justify-between mb-3">
 				<div>
 					<h3 className="text-lg font-semibold text-slate-800">
 						GPA Progression
@@ -76,7 +76,7 @@ export function GPATrendChart({
 			{hasData ? (
 				<>
 					{/* Stats Row with physically-inset digital LCD display modules */}
-					<div className="flex flex-wrap gap-2.5 mb-4 pb-4 border-b border-slate-100/90">
+					<div className="flex flex-wrap gap-2.5 mb-3 pb-3 border-b border-slate-100/90">
 						{chartData.map((item, index) => {
 							const isLatest = index === chartData.length - 1;
 							return (
@@ -105,7 +105,7 @@ export function GPATrendChart({
 					</div>
 
 					{/* Chart with Cartesian engineering grid lines */}
-					<div className="h-[200px] w-full">
+					<div className="h-[180px] w-full">
 						<ResponsiveContainer width="100%" height="100%">
 							<ComposedChart
 								data={chartData}
@@ -237,7 +237,7 @@ export function GPATrendChart({
 				</>
 			) : (
 				/* No-Data Mock Preview Grid with faint background lines and SVG curves */
-				<div className="relative h-[254px] w-full flex flex-col items-center justify-center border border-slate-100 rounded-2xl bg-slate-50/20 overflow-hidden">
+				<div className="relative h-[210px] w-full flex flex-col items-center justify-center border border-slate-100 rounded-2xl bg-slate-50/20 overflow-hidden">
 					{/* Mock Background Grid Lines */}
 					<div className="absolute inset-0 grid grid-cols-6 grid-rows-4 opacity-[0.06] pointer-events-none">
 						{Array.from({ length: 24 }).map((_, i) => (
@@ -273,11 +273,11 @@ export function GPATrendChart({
 					</svg>
 
 					{/* Content Call-To-Action */}
-					<div className="relative z-10 flex flex-col items-center justify-center text-center p-6 select-none">
-						<div className="icon-skeuo-raised h-12 w-12 rounded-2xl border border-slate-200/80 shadow-[inset_0_1px_0_#ffffff,0_2px_6px_rgba(0,0,0,0.03)] text-slate-400/90 flex items-center justify-center mb-3">
-							<TrendingUp className="h-5 w-5" />
+					<div className="relative z-10 flex flex-col items-center justify-center text-center p-4 select-none">
+						<div className="icon-skeuo-raised h-10 w-10 rounded-2xl border border-slate-200/80 shadow-[inset_0_1px_0_#ffffff,0_2px_6px_rgba(0,0,0,0.03)] text-slate-400/90 flex items-center justify-center mb-2">
+							<TrendingUp className="h-4.5 w-4.5" />
 						</div>
-						<h4 className="text-sm font-normal text-slate-700 mb-1">
+						<h4 className="text-sm font-normal text-slate-700 mb-0.5">
 							No Academic Data Yet
 						</h4>
 						<p className="text-xs text-slate-400 max-w-[260px] leading-relaxed font-normal">

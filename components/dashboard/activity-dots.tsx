@@ -60,8 +60,8 @@ export function ActivityDots({ semesters }: ActivityDotsProps) {
 	};
 
 	return (
-		<div className="card-skeuo rounded-[32px] p-6 h-full">
-			<div className="flex items-start justify-between mb-4">
+		<div className="card-skeuo rounded-[32px] p-5 h-full">
+			<div className="flex items-start justify-between mb-3">
 				<h3 className="text-lg font-semibold text-slate-800">Subjects</h3>
 				<div className="icon-skeuo-raised h-9 w-9 rounded-xl border border-slate-200/80 shadow-[inset_0_1px_0_#ffffff,0_2px_4px_rgba(0,0,0,0.02)] text-slate-400/90 flex items-center justify-center flex-shrink-0">
 					<BookOpen className="h-4.5 w-4.5" />
@@ -69,7 +69,7 @@ export function ActivityDots({ semesters }: ActivityDotsProps) {
 			</div>
 
 			{/* Big Number */}
-			<div className="flex items-end gap-4 mb-5">
+			<div className="flex items-end gap-4 mb-3.5">
 				<span className="text-4xl font-light text-slate-800 tracking-tight">
 					{activity.total}
 				</span>
@@ -119,7 +119,7 @@ export function ActivityDots({ semesters }: ActivityDotsProps) {
 
 			{/* Legend */}
 			{activity.semesters.length > 0 && (
-				<div className="flex items-center justify-between mt-4 pt-3 border-t border-slate-100/90">
+				<div className="flex items-center justify-between mt-3 pt-2.5 border-t border-slate-100/90">
 					<div className="flex items-center gap-1.5">
 						<div className="h-2.5 w-2.5 rounded-full bg-emerald-500/20 border border-emerald-500/10" />
 						<div className="h-2.5 w-2.5 rounded-full bg-emerald-500/60 border border-emerald-500/10" />

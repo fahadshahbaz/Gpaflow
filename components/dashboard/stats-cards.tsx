@@ -69,7 +69,7 @@ export function StatsCards({
 		<>
 			{/* CGPA Card - Large Featured */}
 			<div className="col-span-12 md:col-span-6 lg:col-span-4">
-				<div className="card-skeuo rounded-[32px] p-6 h-full flex flex-col justify-between">
+				<div className="card-skeuo rounded-[32px] p-5 h-full flex flex-col justify-between">
 					<div>
 						<div className="flex items-center justify-between mb-2">
 							<h3 className="text-sm font-normal text-slate-500">
@@ -79,7 +79,7 @@ export function StatsCards({
 								<GraduationCap className="h-4.5 w-4.5" />
 							</div>
 						</div>
-						<div className="flex items-end gap-3 mb-4">
+						<div className="flex items-end gap-3 mb-2.5">
 							<span className="text-5xl font-light text-slate-800 tracking-tight">
 								{cgpa.toFixed(2)}
 							</span>
@@ -123,7 +123,7 @@ export function StatsCards({
 
 			{/* Credit Hours */}
 			<div className="col-span-6 md:col-span-3 lg:col-span-2">
-				<div className="card-skeuo rounded-[32px] p-6 h-full flex flex-col justify-between">
+				<div className="card-skeuo rounded-[32px] p-5 h-full flex flex-col justify-between">
 					<div>
 						<div className="flex items-center justify-between mb-2">
 							<h3 className="text-sm font-normal text-slate-500">
@@ -137,13 +137,13 @@ export function StatsCards({
 							{totalCreditHours}
 						</span>
 					</div>
-					<p className="text-sm text-slate-400 font-normal mt-2">credit hours</p>
+					<p className="text-sm text-slate-400 font-normal mt-1.5">credit hours</p>
 				</div>
 			</div>
 
 			{/* Semesters */}
 			<div className="col-span-6 md:col-span-3 lg:col-span-2">
-				<div className="card-skeuo rounded-[32px] p-6 h-full flex flex-col justify-between">
+				<div className="card-skeuo rounded-[32px] p-5 h-full flex flex-col justify-between">
 					<div>
 						<div className="flex items-center justify-between mb-2">
 							<h3 className="text-sm font-normal text-slate-500">Semesters</h3>
@@ -159,7 +159,7 @@ export function StatsCards({
 						</div>
 					</div>
 					{/* 8-segment hardware LED indicator bar */}
-					<div className="flex gap-1 mt-3">
+					<div className="flex gap-1 mt-2">
 						{Array.from({ length: 8 }, (_, i) => {
 							const isLit = i < semesterCount;
 							return (
@@ -180,7 +180,7 @@ export function StatsCards({
 
 			{/* Target GPA - Editable */}
 			<div className="col-span-12 md:col-span-6 lg:col-span-4">
-				<div className="card-skeuo rounded-[32px] p-6 h-full flex flex-col justify-between">
+				<div className="card-skeuo rounded-[32px] p-5 h-full flex flex-col justify-between">
 					<div className="flex items-center justify-between mb-2">
 						<h3 className="text-sm font-normal text-slate-500">Target GPA</h3>
 						<div className="flex items-center gap-2">
@@ -209,7 +209,7 @@ export function StatsCards({
 					</div>
 
 					{isEditing ? (
-						<div className="space-y-4">
+						<div className="space-y-3">
 							<div className="flex items-center gap-2">
 								<input
 									type="number"
@@ -249,7 +249,7 @@ export function StatsCards({
 							<span className="text-5xl font-light text-slate-800 tracking-tight">
 								{targetGpa.toFixed(2)}
 							</span>
-							<div className="mt-4 flex items-center gap-4">
+							<div className="mt-3 flex items-center gap-4">
 								{!isTargetMet && semesterCount > 0 && (
 									<p className="text-sm text-slate-500 font-normal">
 										<span className="font-normal text-primary">
