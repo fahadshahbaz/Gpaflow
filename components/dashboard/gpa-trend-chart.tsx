@@ -4,12 +4,14 @@ import { useMemo } from "react";
 import {
 	Area,
 	Bar,
+	CartesianGrid,
 	ComposedChart,
 	ResponsiveContainer,
 	Tooltip,
 	XAxis,
 	YAxis,
 } from "recharts";
+import { TrendingUp } from "lucide-react";
 import type { Semester } from "@/types/grading";
 
 interface GPATrendChartProps {
@@ -55,7 +57,7 @@ export function GPATrendChart({
 	const hasData = chartData.length > 0;
 
 	return (
-		<div className="card-skeuo rounded-[32px] p-6 h-full">
+		<div className="card-skeuo rounded-[32px] p-6 h-full flex flex-col justify-between">
 			{/* Header */}
 			<div className="flex items-start justify-between mb-4">
 				<div>
@@ -66,25 +68,43 @@ export function GPATrendChart({
 						Semester-wise performance tracking
 					</p>
 				</div>
+				<div className="icon-skeuo-raised h-9 w-9 rounded-xl border border-slate-200/80 shadow-[inset_0_1px_0_#ffffff,0_2px_4px_rgba(0,0,0,0.02)] text-slate-400/90 flex items-center justify-center flex-shrink-0">
+					<TrendingUp className="h-4.5 w-4.5" />
+				</div>
 			</div>
 
 			{hasData ? (
 				<>
-					{/* Stats Row */}
-					<div className="flex flex-wrap gap-6 mb-4 pb-4 border-b border-slate-100/90">
-						{chartData.map((item, index) => (
-							<div key={item.name}>
-								<p className="text-xs text-slate-500 font-normal mb-0.5">{item.semester}</p>
-								<p
-									className={`text-xl font-light ${index === chartData.length - 1 ? "text-primary" : "text-slate-400 font-normal"}`}
+					{/* Stats Row with physically-inset digital LCD display modules */}
+					<div className="flex flex-wrap gap-2.5 mb-4 pb-4 border-b border-slate-100/90">
+						{chartData.map((item, index) => {
+							const isLatest = index === chartData.length - 1;
+							return (
+								<div
+									key={item.name}
+									title={item.semester}
+									className={`widget-skeuo-inset rounded-xl px-3 py-1.5 flex flex-col items-center justify-center min-w-[72px] border border-slate-200/50 shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.04),0_1px_0_#ffffff] transition-all duration-200 ${
+										isLatest
+											? "bg-slate-50/30 border-primary/20 shadow-[inset_0_1.5px_3px_rgba(59,130,246,0.03),0_1px_0_#ffffff] scale-[1.02]"
+											: "hover:bg-white"
+									}`}
 								>
-									{item.sgpa.toFixed(2)}
-								</p>
-							</div>
-						))}
+									<span className="text-[10px] uppercase font-normal tracking-wider text-slate-400 mb-0.5">
+										{item.name}
+									</span>
+									<span
+										className={`text-sm font-normal ${
+											isLatest ? "text-primary font-medium" : "text-slate-700"
+										}`}
+									>
+										{item.sgpa.toFixed(2)}
+									</span>
+								</div>
+							);
+						})}
 					</div>
 
-					{/* Chart */}
+					{/* Chart with Cartesian engineering grid lines */}
 					<div className="h-[200px] w-full">
 						<ResponsiveContainer width="100%" height="100%">
 							<ComposedChart
@@ -117,6 +137,12 @@ export function GPATrendChart({
 										/>
 									</linearGradient>
 								</defs>
+								<CartesianGrid
+									vertical={false}
+									stroke="#e2e8f0"
+									strokeDasharray="3 3"
+									opacity={0.6}
+								/>
 								<XAxis
 									dataKey="name"
 									stroke="transparent"
@@ -191,11 +217,13 @@ export function GPATrendChart({
 					{/* Legend */}
 					<div className="flex items-center gap-6 mt-3 pt-3 border-t border-slate-100/90">
 						<div className="flex items-center gap-2">
-							<div className="w-3 h-3 rounded bg-primary/60" />
+							<div className="w-3.5 h-3.5 rounded bg-primary/20 border border-primary/20 flex items-center justify-center">
+								<div className="w-1.5 h-1.5 rounded-sm bg-primary/60" />
+							</div>
 							<span className="text-xs text-slate-400 font-normal">SGPA</span>
 						</div>
 						<div className="flex items-center gap-2">
-							<div className="w-3.5 h-1 bg-primary rounded shadow-[0_1px_2px_rgba(0,0,0,0.15)]" />
+							<div className="w-4 h-1 bg-primary rounded shadow-[0_1px_2px_rgba(0,0,0,0.15)]" />
 							<span className="text-xs text-slate-400 font-normal">CGPA Trend</span>
 						</div>
 						{targetGpa && (
@@ -208,11 +236,54 @@ export function GPATrendChart({
 					</div>
 				</>
 			) : (
-				<div className="flex flex-col items-center justify-center py-16 text-center">
-					<p className="text-gray-400 text-sm">No semesters added yet</p>
-					<p className="text-gray-300 text-xs mt-1">
-						Add your first semester to see the chart
-					</p>
+				/* No-Data Mock Preview Grid with faint background lines and SVG curves */
+				<div className="relative h-[254px] w-full flex flex-col items-center justify-center border border-slate-100 rounded-2xl bg-slate-50/20 overflow-hidden">
+					{/* Mock Background Grid Lines */}
+					<div className="absolute inset-0 grid grid-cols-6 grid-rows-4 opacity-[0.06] pointer-events-none">
+						{Array.from({ length: 24 }).map((_, i) => (
+							<div key={i} className="border-r border-b border-slate-400 border-dashed" />
+						))}
+					</div>
+
+					{/* Faint Mock Chart Path */}
+					<svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" preserveAspectRatio="none">
+						{/* Mock bars */}
+						<rect x="10%" y="60%" width="8%" height="40%" fill="var(--primary)" rx="3" />
+						<rect x="25%" y="45%" width="8%" height="55%" fill="var(--primary)" rx="3" />
+						<rect x="40%" y="55%" width="8%" height="45%" fill="var(--primary)" rx="3" />
+						<rect x="55%" y="30%" width="8%" height="70%" fill="var(--primary)" rx="3" />
+						<rect x="70%" y="40%" width="8%" height="60%" fill="var(--primary)" rx="3" />
+						<rect x="85%" y="20%" width="8%" height="80%" fill="var(--primary)" rx="3" />
+
+						{/* Mock Trend Line */}
+						<path
+							d="M 14% 60% Q 29% 45% 44% 55% T 74% 40% T 89% 20%"
+							fill="none"
+							stroke="var(--primary)"
+							strokeWidth="2.5"
+							strokeDasharray="4 4"
+						/>
+						{/* Mock Dots */}
+						<circle cx="14%" cy="60%" r="3.5" fill="var(--primary)" />
+						<circle cx="29%" cy="45%" r="3.5" fill="var(--primary)" />
+						<circle cx="44%" cy="55%" r="3.5" fill="var(--primary)" />
+						<circle cx="59%" cy="30%" r="3.5" fill="var(--primary)" />
+						<circle cx="74%" cy="40%" r="3.5" fill="var(--primary)" />
+						<circle cx="89%" cy="20%" r="3.5" fill="var(--primary)" />
+					</svg>
+
+					{/* Content Call-To-Action */}
+					<div className="relative z-10 flex flex-col items-center justify-center text-center p-6 select-none">
+						<div className="icon-skeuo-raised h-12 w-12 rounded-2xl border border-slate-200/80 shadow-[inset_0_1px_0_#ffffff,0_2px_6px_rgba(0,0,0,0.03)] text-slate-400/90 flex items-center justify-center mb-3">
+							<TrendingUp className="h-5 w-5" />
+						</div>
+						<h4 className="text-sm font-normal text-slate-700 mb-1">
+							No Academic Data Yet
+						</h4>
+						<p className="text-xs text-slate-400 max-w-[260px] leading-relaxed font-normal">
+							Add your first semester grades to activate performance tracking & GPA trend analysis.
+						</p>
+					</div>
 				</div>
 			)}
 		</div>

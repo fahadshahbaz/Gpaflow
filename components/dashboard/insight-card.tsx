@@ -1,6 +1,6 @@
 "use client";
 
-import { Lightbulb, Sparkles } from "lucide-react";
+import { Brain, Lightbulb, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
 import type { Semester } from "@/types/grading";
 
@@ -154,11 +154,15 @@ export function InsightCard({ semesters, cgpa }: InsightCardProps) {
 
 			{/* Content */}
 			<div className="relative z-10 flex-1">
-				<div className="flex items-center gap-2 mb-3">
-					<Sparkles className="h-4 w-4 opacity-80" />
-					<span className="text-xs font-normal uppercase tracking-wider opacity-85">
-						Insights
-					</span>
+				<div className="flex items-start justify-between mb-3">
+					<div className="flex items-center gap-2 mt-1">
+						<span className="text-xs font-normal uppercase tracking-wider opacity-85">
+							Insights
+						</span>
+					</div>
+					<div className="h-9 w-9 rounded-xl bg-white/10 border border-white/20 backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_2px_4px_rgba(0,0,0,0.05)] text-white flex items-center justify-center flex-shrink-0 transition-transform duration-300 hover:rotate-12">
+						<Brain className="h-4.5 w-4.5" />
+					</div>
 				</div>
 
 				<p className="text-4xl font-light tracking-tight mb-1">

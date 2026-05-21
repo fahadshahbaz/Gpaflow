@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
+import { BookOpen } from "lucide-react";
 import type { Semester } from "@/types/grading";
 
 interface ActivityDotsProps {
@@ -62,6 +63,9 @@ export function ActivityDots({ semesters }: ActivityDotsProps) {
 		<div className="card-skeuo rounded-[32px] p-6 h-full">
 			<div className="flex items-start justify-between mb-4">
 				<h3 className="text-lg font-semibold text-slate-800">Subjects</h3>
+				<div className="icon-skeuo-raised h-9 w-9 rounded-xl border border-slate-200/80 shadow-[inset_0_1px_0_#ffffff,0_2px_4px_rgba(0,0,0,0.02)] text-slate-400/90 flex items-center justify-center flex-shrink-0">
+					<BookOpen className="h-4.5 w-4.5" />
+				</div>
 			</div>
 
 			{/* Big Number */}

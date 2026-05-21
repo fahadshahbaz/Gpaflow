@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, Pencil, TrendingDown, TrendingUp, X } from "lucide-react";
+import { Award, Calendar, Check, GraduationCap, Pencil, TrendingDown, TrendingUp, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useCallback, useMemo, useState, useTransition } from "react";
 import { updateTargetGpa } from "@/lib/supabase/auth";
@@ -75,6 +75,9 @@ export function StatsCards({
 							<h3 className="text-sm font-normal text-slate-500">
 								Cumulative GPA
 							</h3>
+							<div className="icon-skeuo-raised h-9 w-9 rounded-xl border border-slate-200/80 shadow-[inset_0_1px_0_#ffffff,0_2px_4px_rgba(0,0,0,0.02)] text-slate-400/90 flex items-center justify-center flex-shrink-0">
+								<GraduationCap className="h-4.5 w-4.5" />
+							</div>
 						</div>
 						<div className="flex items-end gap-3 mb-4">
 							<span className="text-5xl font-light text-slate-800 tracking-tight">
@@ -122,9 +125,14 @@ export function StatsCards({
 			<div className="col-span-6 md:col-span-3 lg:col-span-2">
 				<div className="card-skeuo rounded-[32px] p-6 h-full flex flex-col justify-between">
 					<div>
-						<h3 className="text-sm font-normal text-slate-500 mb-2">
-							Total Credits
-						</h3>
+						<div className="flex items-center justify-between mb-2">
+							<h3 className="text-sm font-normal text-slate-500">
+								Total Credits
+							</h3>
+							<div className="icon-skeuo-raised h-9 w-9 rounded-xl border border-slate-200/80 shadow-[inset_0_1px_0_#ffffff,0_2px_4px_rgba(0,0,0,0.02)] text-slate-400/90 flex items-center justify-center flex-shrink-0">
+								<Award className="h-4.5 w-4.5" />
+							</div>
+						</div>
 						<span className="text-4xl font-light text-slate-800 tracking-tight">
 							{totalCreditHours}
 						</span>
@@ -137,7 +145,12 @@ export function StatsCards({
 			<div className="col-span-6 md:col-span-3 lg:col-span-2">
 				<div className="card-skeuo rounded-[32px] p-6 h-full flex flex-col justify-between">
 					<div>
-						<h3 className="text-sm font-normal text-slate-500 mb-2">Semesters</h3>
+						<div className="flex items-center justify-between mb-2">
+							<h3 className="text-sm font-normal text-slate-500">Semesters</h3>
+							<div className="icon-skeuo-raised h-9 w-9 rounded-xl border border-slate-200/80 shadow-[inset_0_1px_0_#ffffff,0_2px_4px_rgba(0,0,0,0.02)] text-slate-400/90 flex items-center justify-center flex-shrink-0">
+								<Calendar className="h-4.5 w-4.5" />
+							</div>
+						</div>
 						<div className="flex items-end gap-2">
 							<span className="text-4xl font-light text-slate-800 tracking-tight">
 								{semesterCount}
@@ -145,11 +158,22 @@ export function StatsCards({
 							<span className="text-lg text-slate-400 font-normal mb-1">/ 8</span>
 						</div>
 					</div>
-					<div className="mt-3 h-2.5 bg-slate-100/90 rounded-full shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.06),0_1px_0_rgba(255,255,255,0.8)] border border-slate-200/20 p-[1px] overflow-hidden">
-						<div
-							className="h-full bg-slate-400 rounded-full shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_1px_2px_rgba(0,0,0,0.15)] transition-all duration-500"
-							style={{ width: `${(semesterCount / 8) * 100}%` }}
-						/>
+					{/* 8-segment hardware LED indicator bar */}
+					<div className="flex gap-1 mt-3">
+						{Array.from({ length: 8 }, (_, i) => {
+							const isLit = i < semesterCount;
+							return (
+								<div
+									key={i}
+									className={`h-3 flex-1 rounded-sm border transition-all duration-500 ${
+										isLit
+											? "bg-gradient-to-br from-emerald-400 to-emerald-500 border-emerald-500/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_1.5px_3px_rgba(16,185,129,0.3)]"
+											: "bg-slate-100/95 border-slate-200/50 shadow-[inset_0_1px_2px_rgba(0,0,0,0.04),0_1px_0_rgba(255,255,255,0.7)]"
+									}`}
+									title={`Semester ${i + 1}`}
+								/>
+							);
+						})}
 					</div>
 				</div>
 			</div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
+import { Award } from "lucide-react";
 import type { Semester } from "@/types/grading";
 
 interface GradeProgressProps {
@@ -60,16 +61,21 @@ export function GradeProgress({ semesters }: GradeProgressProps) {
 		<div className="card-skeuo rounded-[32px] p-6 h-full flex flex-col justify-between">
 			<div>
 				<div className="flex items-start justify-between mb-4">
-					<h3 className="text-lg font-semibold text-slate-800">
-						Grade Distribution
-					</h3>
-					{totalSubjects > 0 && (
-						<div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-emerald-200/50 bg-emerald-50/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.6),0_1.5px_3px_rgba(0,0,0,0.03)]">
-							<span className="text-xs font-normal text-emerald-600">
-								{topGradePercentage}% A's
-							</span>
-						</div>
-					)}
+					<div>
+						<h3 className="text-lg font-semibold text-slate-800">
+							Grade Distribution
+						</h3>
+						{totalSubjects > 0 && (
+							<div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-emerald-200/50 bg-emerald-50/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.6),0_1.5px_3px_rgba(0,0,0,0.03)] mt-1.5">
+								<span className="text-xs font-normal text-emerald-600">
+									{topGradePercentage}% A's
+								</span>
+							</div>
+						)}
+					</div>
+					<div className="icon-skeuo-raised h-9 w-9 rounded-xl border border-slate-200/80 shadow-[inset_0_1px_0_#ffffff,0_2px_4px_rgba(0,0,0,0.02)] text-slate-400/90 flex items-center justify-center flex-shrink-0">
+						<Award className="h-4.5 w-4.5" />
+					</div>
 				</div>
 
 				{/* Big Number */}
