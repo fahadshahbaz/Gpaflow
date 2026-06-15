@@ -9,14 +9,14 @@ export default function AuthLayout({
 	return (
 		<main className="min-h-screen bg-white flex flex-col lg:flex-row font-sans">
 			{/* Left Column - Auth Form */}
-			<div className="w-full lg:w-1/2 flex flex-col justify-between p-6 sm:p-10 md:p-16 min-h-screen bg-white">
+			<div className="w-full lg:w-1/2 flex flex-col justify-between p-6 sm:p-8 md:p-10 min-h-screen bg-white">
 				{/* Top Logo */}
 				<div className="flex justify-start">
 					<Logo href="/" variant="skeuomorphic" />
 				</div>
 
 				{/* Form Content Wrapper */}
-				<div className="w-full max-w-[420px] mx-auto my-auto py-10">
+				<div className="w-full max-w-[420px] mx-auto my-auto py-4 sm:py-6">
 					{children}
 				</div>
 
@@ -90,7 +90,9 @@ export default function AuthLayout({
 								</span>
 							</h3>
 							<p className="text-blue-100/80 text-base font-light leading-relaxed text-justify">
-								GPAFlow provides a beautiful, state-of-the-art predictive dashboard to visualize semesters, track progression, and automate your degree planning down to the decimal.
+								GPAFlow provides a beautiful, state-of-the-art predictive
+								dashboard to visualize semesters, track progression, and
+								automate your degree planning down to the decimal.
 							</p>
 						</div>
 
@@ -101,12 +103,27 @@ export default function AuthLayout({
 							<div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-px bg-white/5" />
 							<div className="absolute inset-x-0 bottom-0 h-px bg-white/10" />
 
-							<svg className="w-full h-full overflow-visible" viewBox="0 0 500 100">
+							<svg
+								className="w-full h-full overflow-visible"
+								viewBox="0 0 500 100"
+							>
 								<title>GPA Trajectory Flow</title>
 								<defs>
 									{/* Glow Filter for the main trend line */}
-									<filter id="lineGlow" x="-20%" y="-20%" width="140%" height="140%">
-										<feDropShadow dx="0" dy="4" stdDeviation="6" floodColor="#93c5fd" floodOpacity="0.4" />
+									<filter
+										id="lineGlow"
+										x="-20%"
+										y="-20%"
+										width="140%"
+										height="140%"
+									>
+										<feDropShadow
+											dx="0"
+											dy="4"
+											stdDeviation="6"
+											floodColor="#93c5fd"
+											floodOpacity="0.4"
+										/>
 									</filter>
 									{/* Gradient for the path */}
 									<linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
@@ -129,14 +146,41 @@ export default function AuthLayout({
 								{/* Glow Dots along the path */}
 								<circle cx="15" cy="80" r="4" fill="#93c5fd" />
 								<circle cx="240" cy="45" r="4" fill="#ffffff" />
-								
+
 								{/* Active end point */}
 								<circle cx="465" cy="20" r="6" fill="#ffffff" />
 
 								{/* Floating Text Markers */}
-								<text x="15" y="96" fill="rgba(255,255,255,0.4)" fontSize="8" fontFamily="monospace" fontWeight="bold">SEM 1</text>
-								<text x="240" y="62" fill="rgba(255,255,255,0.6)" fontSize="8" fontFamily="monospace" fontWeight="bold">SEM 2</text>
-								<text x="435" y="38" fill="#ffffff" fontSize="9" fontFamily="monospace" fontWeight="extrabold">3.92 CGPA</text>
+								<text
+									x="15"
+									y="96"
+									fill="rgba(255,255,255,0.4)"
+									fontSize="8"
+									fontFamily="monospace"
+									fontWeight="bold"
+								>
+									SEM 1
+								</text>
+								<text
+									x="240"
+									y="62"
+									fill="rgba(255,255,255,0.6)"
+									fontSize="8"
+									fontFamily="monospace"
+									fontWeight="bold"
+								>
+									SEM 2
+								</text>
+								<text
+									x="435"
+									y="38"
+									fill="#ffffff"
+									fontSize="9"
+									fontFamily="monospace"
+									fontWeight="extrabold"
+								>
+									3.92 CGPA
+								</text>
 							</svg>
 						</div>
 
@@ -154,4 +198,3 @@ export default function AuthLayout({
 		</main>
 	);
 }
-
