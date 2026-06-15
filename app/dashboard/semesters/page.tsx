@@ -32,7 +32,7 @@ export default async function SemestersPage() {
 			</div>
 
 			{/* Semester List */}
-			<div className="bg-white rounded-3xl p-6 card-shadow">
+			<div className="rounded-3xl bg-[#f8fafc] border border-slate-200/60 shadow-[inset_0_1.5px_3.5px_rgba(0,0,0,0.04)] p-6">
 				<div className="mb-6">
 					<h2 className="text-lg font-semibold text-gray-900">
 						Academic Records

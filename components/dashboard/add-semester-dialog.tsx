@@ -54,7 +54,7 @@ export function AddSemesterDialog({
 		return (
 			<Button
 				disabled
-				className="bg-gray-200 text-gray-400 font-medium px-4 h-9 rounded-xl opacity-60"
+				className="bg-slate-100 text-slate-400 border border-slate-200/60 font-extrabold px-4 h-9 rounded-xl opacity-50 flex items-center justify-center text-xs"
 				title="Maximum of 8 semesters reached"
 			>
 				<Plus className="mr-1.5 h-4 w-4" />
@@ -66,7 +66,7 @@ export function AddSemesterDialog({
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
-				<Button className="bg-primary hover:bg-primary-600 text-primary-foreground font-medium px-4 h-9 rounded-xl">
+				<Button className="btn-skeuo-primary h-9 px-4 rounded-xl flex items-center justify-center text-xs font-extrabold cursor-pointer">
 					<Plus className="mr-1.5 h-4 w-4" />
 					New Semester
 				</Button>
@@ -89,7 +89,7 @@ export function AddSemesterDialog({
 							placeholder="e.g. Semester 1, Fall 2024"
 							value={name}
 							onChange={(e) => setName(e.target.value)}
-							className="bg-secondary/50 border-input h-11 rounded-xl text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20"
+							className="w-full rounded-xl bg-slate-50 border border-slate-200 px-4 py-3 h-11 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/10 transition-all shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.06)]"
 							disabled={loading}
 						/>
 						<AnimatePresence>
@@ -113,14 +113,14 @@ export function AddSemesterDialog({
 							variant="ghost"
 							onClick={() => setOpen(false)}
 							disabled={loading}
-							className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 h-10 px-4 rounded-xl"
+							className="btn-skeuo-white h-10 px-4 rounded-xl text-xs font-bold cursor-pointer"
 						>
 							Cancel
 						</Button>
 						<Button
 							type="submit"
 							disabled={loading || !name.trim()}
-							className="bg-primary hover:bg-primary-600 text-primary-foreground font-medium h-10 px-5 rounded-xl disabled:opacity-50"
+							className="btn-skeuo-primary h-10 px-5 rounded-xl text-xs font-extrabold cursor-pointer disabled:opacity-50"
 						>
 							{loading ? (
 								<span className="flex items-center gap-2">

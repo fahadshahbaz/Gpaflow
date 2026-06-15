@@ -2,14 +2,13 @@
 
 import {
 	BookOpen,
-	ChevronDown,
 	ChevronRight,
-	ChevronUp,
 	MoreVertical,
 	Pencil,
 	Plus,
 	Trash2,
 } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -45,20 +44,12 @@ export function SemesterList({ semesters, university }: SemesterListProps) {
 		subject: Subject;
 		semesterId: string;
 	} | null>(null);
-	const [expandedSemesters, setExpandedSemesters] = useState<Set<string>>(
-		new Set(),
+	const [activeSemesterId, setActiveSemesterId] = useState<string | null>(
+		semesters[0]?.id || null,
 	);
 
 	const toggleExpanded = (semesterId: string) => {
-		setExpandedSemesters((prev) => {
-			const next = new Set(prev);
-			if (next.has(semesterId)) {
-				next.delete(semesterId);
-			} else {
-				next.add(semesterId);
-			}
-			return next;
-		});
+		setActiveSemesterId((prev) => (prev === semesterId ? null : semesterId));
 	};
 
 	if (semesters.length === 0) {
@@ -79,191 +70,220 @@ export function SemesterList({ semesters, university }: SemesterListProps) {
 
 	return (
 		<>
-			<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
-				{semesters.map((semester, index) => (
-					<div
-						key={semester.id}
-						className="bg-gray-50/50 rounded-2xl p-4 hover:bg-gray-50 transition-colors"
-					>
-						{/* Header */}
-						<div className="flex items-center justify-between mb-4">
-							<div className="flex items-center gap-3">
-								<div className="h-10 w-10 rounded-xl bg-white card-shadow flex items-center justify-center">
-									<span className="text-sm font-semibold text-gray-600">
-										{index + 1}
-									</span>
-								</div>
-								<div>
-									<h4 className="text-sm font-semibold text-gray-900">
-										{semester.name}
-									</h4>
-									<p className="text-xs text-gray-500">{semester.year}</p>
-								</div>
-							</div>
-							<DropdownMenu>
-								<DropdownMenuTrigger asChild>
-									<button
-										type="button"
-										className="h-8 w-8 rounded-full hover:bg-gray-100 flex items-center justify-center text-gray-400"
-										aria-label="More options"
-									>
-										<MoreVertical className="h-4 w-4" />
-									</button>
-								</DropdownMenuTrigger>
-								<DropdownMenuContent
-									align="end"
-									className="bg-white border-gray-200 min-w-[140px] rounded-xl shadow-lg"
-								>
-									<DropdownMenuItem
-										onClick={() => setEditingSemester(semester)}
-										className="text-gray-700 hover:text-gray-900 hover:bg-gray-50 cursor-pointer text-sm rounded-lg"
-									>
-										<Pencil className="h-4 w-4 mr-2 text-gray-400" />
-										Edit
-									</DropdownMenuItem>
-									<DropdownMenuItem
-										onClick={() => setDeletingSemester(semester)}
-										className="text-destructive hover:text-destructive-700 hover:bg-destructive-50 cursor-pointer text-sm rounded-lg"
-									>
-										<Trash2 className="h-4 w-4 mr-2" />
-										Delete
-									</DropdownMenuItem>
-								</DropdownMenuContent>
-							</DropdownMenu>
-						</div>
+			<div className="space-y-3">
+				{semesters.map((semester, index) => {
+					const isCurrentExpanded = activeSemesterId === semester.id;
 
-						{/* Stats Row */}
-						<div className="flex items-center gap-2 mb-4">
-							<span className="px-3 py-1.5 rounded-full bg-primary-50 text-primary-600 text-xs font-semibold">
-								{semester.sgpa.toFixed(2)} SGPA
-							</span>
-							<span className="px-3 py-1.5 rounded-full bg-gray-100 text-gray-600 text-xs font-medium">
-								{semester.total_credit_hours} Credits
-							</span>
-						</div>
-
-						{/* Subjects */}
-						{semester.subjects.length === 0 ? (
-							<div className="py-4 text-center bg-white rounded-xl">
-								<p className="text-sm text-gray-500 mb-2">No subjects yet</p>
-								<AddSubjectDialog
-									semesterId={semester.id}
-									semesterName={semester.name}
-									university={university}
-									trigger={
-										<Button
-											variant="ghost"
-											size="sm"
-											className="text-primary hover:text-primary-700 hover:bg-primary-50 h-8 text-xs"
-										>
-											Add subject
-											<ChevronRight className="h-3.5 w-3.5 ml-1" />
-										</Button>
+					return (
+						<div
+							key={semester.id}
+							className="card-skeuo rounded-2xl overflow-hidden mb-3"
+						>
+							{/* Accordion Trigger Header */}
+							<div
+								onClick={() => toggleExpanded(semester.id)}
+								onKeyDown={(e) => {
+									if (e.key === "Enter" || e.key === " ") {
+										toggleExpanded(semester.id);
 									}
-								/>
-							</div>
-						) : (
-							<div className="space-y-2">
-								{(expandedSemesters.has(semester.id)
-									? semester.subjects
-									: semester.subjects.slice(0, 4)
-								).map((subject) => (
-									<div
-										key={subject.id}
-										className="flex items-center justify-between rounded-xl bg-white px-3 py-2.5 text-sm group/subject card-shadow"
-									>
-										<span className="text-gray-700 truncate flex-1 font-medium">
-											{subject.name}
+								}}
+								role="button"
+								tabIndex={0}
+								className="flex items-center justify-between p-4 cursor-pointer hover:bg-slate-50/50 transition-colors select-none"
+							>
+								<div className="flex items-center gap-3">
+									{/* Tactile Inset Number Circle */}
+									<div className="h-9 w-9 rounded-xl icon-skeuo-inset flex items-center justify-center">
+										<span className="text-xs font-bold text-gray-500">
+											{index + 1}
 										</span>
-										<div className="flex items-center gap-2">
-											<span className="text-primary font-semibold text-sm">
-												{subject.letter_grade}
-											</span>
-											<span className="text-gray-400 text-xs">
-												{subject.credit_hours}ch
-											</span>
-											<DropdownMenu>
-												<DropdownMenuTrigger asChild>
-													<button
-														type="button"
-														className="h-6 w-6 rounded-full hover:bg-gray-100 flex items-center justify-center text-gray-400 opacity-0 group-hover/subject:opacity-100 transition-opacity"
-														aria-label="Subject options"
-													>
-														<MoreVertical className="h-3.5 w-3.5" />
-													</button>
-												</DropdownMenuTrigger>
-												<DropdownMenuContent
-													align="end"
-													className="bg-white border-gray-200 min-w-[110px] rounded-xl shadow-lg"
-												>
-													<DropdownMenuItem
-														onClick={() =>
-															setEditingSubject({
-																subject,
-																semesterId: semester.id,
-															})
-														}
-														className="text-gray-700 hover:text-gray-900 hover:bg-gray-50 cursor-pointer text-xs rounded-lg"
-													>
-														<Pencil className="h-3.5 w-3.5 mr-2 text-gray-400" />
-														Edit
-													</DropdownMenuItem>
-													<DropdownMenuItem
-														onClick={() =>
-															setDeletingSubject({
-																subject,
-																semesterId: semester.id,
-															})
-														}
-														className="text-destructive hover:text-destructive-700 hover:bg-destructive-50 cursor-pointer text-xs rounded-lg"
-													>
-														<Trash2 className="h-3.5 w-3.5 mr-2" />
-														Delete
-													</DropdownMenuItem>
-												</DropdownMenuContent>
-											</DropdownMenu>
-										</div>
 									</div>
-								))}
+									<div>
+										<h4 className="text-sm font-bold text-gray-900">
+											{semester.name}
+										</h4>
+										<p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">
+											{semester.year}
+										</p>
+									</div>
+								</div>
 
-								{semester.subjects.length > 4 && (
-									<button
-										type="button"
-										onClick={() => toggleExpanded(semester.id)}
-										className="w-full text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-xl py-2 text-xs font-medium flex items-center justify-center gap-1 transition-colors"
-									>
-										{expandedSemesters.has(semester.id) ? (
-											<>
-												<ChevronUp className="h-3.5 w-3.5" />
-												Show less
-											</>
-										) : (
-											<>
-												<ChevronDown className="h-3.5 w-3.5" />+
-												{semester.subjects.length - 4} more
-											</>
-										)}
-									</button>
-								)}
+								<div className="flex items-center gap-3">
+									{/* Tactile Badges */}
+									<span className="px-3 py-1.5 rounded-xl icon-skeuo-raised text-blue-600 text-xs font-bold">
+										{semester.sgpa.toFixed(2)} SGPA
+									</span>
+									<span className="px-2.5 py-1.5 rounded-xl icon-skeuo-inset text-gray-500 text-xs font-medium hidden sm:inline">
+										{semester.total_credit_hours} Credits
+									</span>
 
-								<AddSubjectDialog
-									semesterId={semester.id}
-									semesterName={semester.name}
-									university={university}
-									trigger={
-										<button
-											type="button"
-											className="w-full text-muted-foreground hover:text-primary hover:bg-primary-50 rounded-xl py-2.5 text-xs font-medium flex items-center justify-center gap-1 transition-colors border-2 border-dashed border-input hover:border-primary-200"
+									{/* Options Dropdown */}
+									<DropdownMenu>
+										<DropdownMenuTrigger asChild>
+											<button
+												type="button"
+												className="h-8 w-8 rounded-full hover:bg-slate-200/50 flex items-center justify-center text-gray-400 cursor-pointer"
+												aria-label="More options"
+												onClick={(e) => e.stopPropagation()}
+											>
+												<MoreVertical className="h-4 w-4" />
+											</button>
+										</DropdownMenuTrigger>
+										<DropdownMenuContent
+											align="end"
+											className="bg-white border-gray-200 min-w-[140px] rounded-xl shadow-lg z-50"
 										>
-											<Plus className="h-3.5 w-3.5" />
-											Add Subject
-										</button>
-									}
-								/>
+											<DropdownMenuItem
+												onClick={(e) => {
+													e.stopPropagation();
+													setEditingSemester(semester);
+												}}
+												className="text-gray-700 hover:text-gray-900 hover:bg-gray-50 cursor-pointer text-sm rounded-lg"
+											>
+												<Pencil className="h-4 w-4 mr-2 text-gray-400" />
+												Edit
+											</DropdownMenuItem>
+											<DropdownMenuItem
+												onClick={(e) => {
+													e.stopPropagation();
+													setDeletingSemester(semester);
+												}}
+												className="text-destructive hover:text-destructive-700 hover:bg-destructive-50 cursor-pointer text-sm rounded-lg"
+											>
+												<Trash2 className="h-4 w-4 mr-2" />
+												Delete
+											</DropdownMenuItem>
+										</DropdownMenuContent>
+									</DropdownMenu>
+
+									{/* Expand/Collapse Chevron Indicator */}
+									<ChevronRight
+										className={`h-4.5 w-4.5 text-gray-400 transition-transform duration-300 ${
+											isCurrentExpanded ? "rotate-90" : ""
+										}`}
+									/>
+								</div>
 							</div>
-						)}
-					</div>
-				))}
+
+							{/* Collapsible Panel Body */}
+							<AnimatePresence initial={false}>
+								{isCurrentExpanded && (
+									<motion.div
+										initial={{ height: 0, opacity: 0 }}
+										animate={{ height: "auto", opacity: 1 }}
+										exit={{ height: 0, opacity: 0 }}
+										transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+										className="overflow-hidden"
+									>
+										<div className="p-4 border-t border-slate-100/90 bg-slate-50/20 space-y-2.5">
+											{semester.subjects.length === 0 ? (
+												<div className="py-8 text-center bg-white rounded-xl border border-slate-150 shadow-[0_2px_8px_rgba(15,23,42,0.01)]">
+													<p className="text-sm text-gray-500 mb-3">
+														No subjects added to this semester yet
+													</p>
+													<AddSubjectDialog
+														semesterId={semester.id}
+														semesterName={semester.name}
+														university={university}
+														trigger={
+															<Button
+																variant="ghost"
+																size="sm"
+																className="text-primary hover:text-primary-700 hover:bg-primary-50 h-8 text-xs font-bold"
+															>
+																Add subject
+																<ChevronRight className="h-3.5 w-3.5 ml-1" />
+															</Button>
+														}
+													/>
+												</div>
+											) : (
+												<div className="space-y-2">
+													{semester.subjects.map((subject) => (
+														<div
+															key={subject.id}
+															className="flex items-center justify-between rounded-xl bg-slate-50/50 border border-slate-200/50 px-4 py-3 text-sm group/subject hover:bg-slate-50 transition-colors shadow-[inset_0_1px_0_#ffffff]"
+														>
+															<span className="text-gray-700 truncate flex-1 font-semibold">
+																{subject.name}
+															</span>
+															<div className="flex items-center gap-3">
+																<span className="px-2.5 py-1 rounded-lg icon-skeuo-raised text-blue-650 font-extrabold text-xs">
+																	{subject.letter_grade}
+																</span>
+																<span className="text-gray-400 font-bold text-xs uppercase tracking-wider">
+																	{subject.credit_hours} CH
+																</span>
+																<DropdownMenu>
+																	<DropdownMenuTrigger asChild>
+																		<button
+																			type="button"
+																			className="h-6 w-6 rounded-full hover:bg-gray-200 flex items-center justify-center text-gray-400 opacity-0 group-hover/subject:opacity-100 transition-opacity cursor-pointer"
+																			aria-label="Subject options"
+																			onClick={(e) => e.stopPropagation()}
+																		>
+																			<MoreVertical className="h-3.5 w-3.5" />
+																		</button>
+																	</DropdownMenuTrigger>
+																	<DropdownMenuContent
+																		align="end"
+																		className="bg-white border-gray-200 min-w-[110px] rounded-xl shadow-lg z-50"
+																	>
+																		<DropdownMenuItem
+																			onClick={(e) => {
+																				e.stopPropagation();
+																				setEditingSubject({
+																					subject,
+																					semesterId: semester.id,
+																				});
+																			}}
+																			className="text-gray-700 hover:text-gray-900 hover:bg-gray-50 cursor-pointer text-xs rounded-lg"
+																		>
+																			<Pencil className="h-3.5 w-3.5 mr-2 text-gray-400" />
+																			Edit
+																		</DropdownMenuItem>
+																		<DropdownMenuItem
+																			onClick={(e) => {
+																				e.stopPropagation();
+																				setDeletingSubject({
+																					subject,
+																					semesterId: semester.id,
+																				});
+																			}}
+																			className="text-destructive hover:text-destructive-700 hover:bg-destructive-50 cursor-pointer text-xs rounded-lg"
+																		>
+																			<Trash2 className="h-3.5 w-3.5 mr-2" />
+																			Delete
+																		</DropdownMenuItem>
+																	</DropdownMenuContent>
+																</DropdownMenu>
+															</div>
+														</div>
+													))}
+
+													<AddSubjectDialog
+														semesterId={semester.id}
+														semesterName={semester.name}
+														university={university}
+														trigger={
+															<button
+																type="button"
+																className="w-full text-slate-500 hover:text-blue-600 hover:bg-blue-50/20 rounded-xl py-2.5 text-xs font-bold flex items-center justify-center gap-1 transition-all border border-dashed border-slate-200 hover:border-blue-400/50 cursor-pointer"
+															>
+																<Plus className="h-3.5 w-3.5" />
+																Add Subject
+															</button>
+														}
+													/>
+												</div>
+											)}
+										</div>
+									</motion.div>
+								)}
+							</AnimatePresence>
+						</div>
+					);
+				})}
 			</div>
 
 			{/* Semester Dialogs */}

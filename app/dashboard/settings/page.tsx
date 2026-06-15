@@ -45,39 +45,39 @@ export default function SettingsPage() {
 					{/* Header Skeleton */}
 					<div className="text-center mb-8">
 						<div className="flex justify-center mb-4">
-							<div className="h-14 w-14 rounded-2xl bg-gray-200 animate-pulse" />
+							<div className="h-14 w-14 rounded-2xl bg-slate-200/60 animate-pulse" />
 						</div>
-						<div className="h-7 w-48 mx-auto mb-2 bg-gray-200 rounded-xl animate-pulse" />
-						<div className="h-4 w-56 mx-auto bg-gray-200 rounded-xl animate-pulse" />
+						<div className="h-7 w-48 mx-auto mb-2 bg-slate-200/60 rounded-xl animate-pulse" />
+						<div className="h-4 w-56 mx-auto bg-slate-200/60 rounded-xl animate-pulse" />
 					</div>
 
 					{/* Card Skeleton */}
-					<div className="rounded-2xl bg-white border border-gray-200 overflow-hidden card-shadow">
+					<div className="rounded-2xl card-skeuo overflow-hidden">
 						{/* Avatar Section */}
-						<div className="p-6 border-b border-gray-100 flex items-center gap-4">
-							<div className="h-16 w-16 rounded-2xl bg-gray-200 animate-pulse" />
+						<div className="p-6 border-b border-slate-100 flex items-center gap-4">
+							<div className="h-16 w-16 rounded-2xl bg-slate-200/60 animate-pulse" />
 							<div>
-								<div className="h-5 w-32 mb-2 bg-gray-200 rounded-lg animate-pulse" />
-								<div className="h-4 w-48 bg-gray-200 rounded-lg animate-pulse" />
+								<div className="h-5 w-32 mb-2 bg-slate-200/60 rounded-lg animate-pulse" />
+								<div className="h-4 w-48 bg-slate-200/60 rounded-lg animate-pulse" />
 							</div>
 						</div>
 
 						{/* Form Section */}
 						<div className="p-6 space-y-6">
 							<div>
-								<div className="h-4 w-28 mb-3 bg-gray-200 rounded-lg animate-pulse" />
-								<div className="h-12 bg-gray-200 rounded-xl animate-pulse" />
-								<div className="h-3 w-48 mt-2 bg-gray-200 rounded-lg animate-pulse" />
+								<div className="h-4 w-28 mb-3 bg-slate-200/60 rounded-lg animate-pulse" />
+								<div className="h-12 bg-slate-200/60 rounded-xl animate-pulse" />
+								<div className="h-3 w-48 mt-2 bg-slate-200/60 rounded-lg animate-pulse" />
 							</div>
 							<div>
-								<div className="h-4 w-28 mb-3 bg-gray-200 rounded-lg animate-pulse" />
-								<div className="h-12 bg-gray-200 rounded-xl animate-pulse" />
+								<div className="h-4 w-28 mb-3 bg-slate-200/60 rounded-lg animate-pulse" />
+								<div className="h-12 bg-slate-200/60 rounded-xl animate-pulse" />
 							</div>
-							<div className="h-12 bg-gray-200 rounded-xl animate-pulse" />
+							<div className="h-12 bg-slate-200/60 rounded-xl animate-pulse" />
 						</div>
 					</div>
 
-					<div className="h-4 w-64 mx-auto mt-6 bg-gray-200 rounded-lg animate-pulse" />
+					<div className="h-4 w-64 mx-auto mt-6 bg-slate-200/60 rounded-lg animate-pulse" />
 				</div>
 			</div>
 		);
@@ -88,8 +88,8 @@ export default function SettingsPage() {
 			<div className="w-full max-w-lg">
 				{/* Header */}
 				<div className="text-center mb-8">
-					<div className="inline-flex items-center justify-center h-14 w-14 rounded-2xl bg-blue-50 border border-blue-100 mb-4">
-						<Settings className="h-7 w-7 text-blue-500" />
+					<div className="h-14 w-14 rounded-2xl icon-skeuo-raised text-blue-500 mb-4 inline-flex items-center justify-center bg-white">
+						<Settings className="h-7 w-7" />
 					</div>
 					<h1 className="text-2xl font-bold text-gray-900">Account Settings</h1>
 					<p className="text-sm text-gray-500 mt-2">
@@ -98,21 +98,21 @@ export default function SettingsPage() {
 				</div>
 
 				{/* Settings Card */}
-				<div className="rounded-2xl bg-white border border-gray-200 overflow-hidden card-shadow">
+				<div className="rounded-2xl card-skeuo overflow-hidden">
 					{/* Avatar Section */}
-					<div className="p-6 border-b border-gray-100 flex items-center gap-4">
-						<div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
-							<span className="text-2xl font-bold text-white">
+					<div className="p-6 border-b border-slate-100/90 bg-slate-50/20 flex items-center gap-4">
+						<div className="h-16 w-16 rounded-2xl icon-skeuo-raised bg-gradient-to-b from-blue-500 to-blue-600 flex items-center justify-center text-white border border-blue-400/30">
+							<span className="text-2xl font-bold">
 								{userName?.charAt(0)?.toUpperCase() ||
 									userEmail?.charAt(0)?.toUpperCase() ||
 									"U"}
 							</span>
 						</div>
 						<div>
-							<p className="text-gray-900 font-semibold">
+							<p className="text-gray-900 font-bold">
 								{userName || "Set your name"}
 							</p>
-							<p className="text-sm text-gray-500">{userEmail}</p>
+							<p className="text-sm text-gray-400 font-medium">{userEmail}</p>
 						</div>
 					</div>
 
@@ -120,14 +120,16 @@ export default function SettingsPage() {
 					<div className="p-6 space-y-6">
 						{/* Email Field (Read-only) */}
 						<div>
-							<span className="flex items-center gap-2 text-xs font-medium text-gray-500 mb-3">
+							<span className="flex items-center gap-2 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
 								<Mail className="h-3.5 w-3.5" />
 								Email Address
 							</span>
-							<div className="rounded-xl bg-gray-50 border border-gray-200 px-4 py-3.5">
-								<span className="text-sm text-gray-500">{userEmail}</span>
+							<div className="rounded-xl widget-skeuo-inset px-4 py-3">
+								<span className="text-sm text-slate-500 font-semibold">
+									{userEmail}
+								</span>
 							</div>
-							<p className="text-xs text-gray-400 mt-2">
+							<p className="text-[10px] text-gray-400 font-medium mt-2">
 								Email address cannot be changed
 							</p>
 						</div>
@@ -137,7 +139,7 @@ export default function SettingsPage() {
 							<div className="mb-5">
 								<label
 									htmlFor="name"
-									className="flex items-center gap-2 text-xs font-medium text-gray-500 mb-3"
+									className="flex items-center gap-2 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 cursor-pointer"
 								>
 									<User className="h-3.5 w-3.5" />
 									Display Name
@@ -148,21 +150,25 @@ export default function SettingsPage() {
 									name="name"
 									defaultValue={userName}
 									placeholder="Enter your display name"
-									className="w-full rounded-xl bg-gray-50 border border-gray-200 px-4 py-3.5 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
+									className="w-full rounded-xl bg-slate-50 border border-slate-200 px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/10 transition-all shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.06)]"
 								/>
 							</div>
 
 							{/* Status Messages */}
 							{state.error && (
-								<div className="rounded-xl bg-red-50 border border-red-100 px-4 py-3 mb-5">
-									<p className="text-xs text-red-600">{state.error}</p>
+								<div className="rounded-xl bg-rose-50 border border-rose-100 p-3.5 mb-5 animate-in fade-in slide-in-from-top-1 duration-200">
+									<p className="text-xs font-medium text-rose-650">
+										{state.error}
+									</p>
 								</div>
 							)}
 
 							{state.success && (
-								<div className="rounded-xl bg-green-50 border border-green-100 px-4 py-3 mb-5 flex items-center gap-2">
-									<Check className="h-4 w-4 text-green-500" />
-									<p className="text-xs text-green-600">{state.success}</p>
+								<div className="rounded-xl bg-emerald-50 border border-emerald-100 p-3.5 mb-5 flex items-center gap-2 animate-in fade-in slide-in-from-top-1 duration-200">
+									<Check className="h-4 w-4 text-emerald-500" />
+									<p className="text-xs font-medium text-emerald-650">
+										{state.success}
+									</p>
 								</div>
 							)}
 
@@ -170,7 +176,7 @@ export default function SettingsPage() {
 							<button
 								type="submit"
 								disabled={isPending}
-								className="w-full flex items-center justify-center gap-2 rounded-xl bg-blue-500 hover:bg-blue-600 disabled:bg-blue-300 disabled:cursor-not-allowed px-4 py-3.5 text-sm font-semibold text-white transition-colors"
+								className="btn-skeuo-primary w-full h-11 flex items-center justify-center gap-2 rounded-xl text-sm font-extrabold text-white cursor-pointer"
 							>
 								{isPending ? (
 									<>
@@ -186,7 +192,7 @@ export default function SettingsPage() {
 				</div>
 
 				{/* Footer Note */}
-				<p className="text-center text-xs text-gray-400 mt-6">
+				<p className="text-center text-xs text-gray-400 mt-6 font-medium">
 					Changes will be reflected across the application
 				</p>
 			</div>
