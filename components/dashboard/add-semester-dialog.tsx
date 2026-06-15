@@ -66,7 +66,7 @@ export function AddSemesterDialog({
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
-				<Button className="btn-skeuo-primary h-9 px-4 rounded-xl flex items-center justify-center text-xs font-extrabold cursor-pointer">
+				<Button variant="skeuoPrimary" className="h-9 px-4 rounded-xl flex items-center justify-center text-xs font-extrabold cursor-pointer">
 					<Plus className="mr-1.5 h-4 w-4" />
 					New Semester
 				</Button>
@@ -89,15 +89,15 @@ export function AddSemesterDialog({
 							placeholder="e.g. Semester 1, Fall 2024"
 							value={name}
 							onChange={(e) => setName(e.target.value)}
-							className="w-full rounded-xl bg-slate-50 border border-slate-200 px-4 py-3 h-11 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/10 transition-all shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.06)]"
+							className="w-full rounded-xl bg-slate-50 border border-slate-200 px-4 py-3 h-11 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/10 transition-colors shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.06)]"
 							disabled={loading}
 						/>
 						<AnimatePresence>
 							{error && (
 								<motion.div
-									initial={{ opacity: 0, y: -4 }}
-									animate={{ opacity: 1, y: 0 }}
-									exit={{ opacity: 0, y: -4 }}
+									initial={{ opacity: 0, transform: "translateY(-4px)" }}
+									animate={{ opacity: 1, transform: "translateY(0px)" }}
+									exit={{ opacity: 0, transform: "translateY(-4px)" }}
 									transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
 								>
 									<FieldError className="mt-2 text-destructive text-sm">
@@ -110,17 +110,18 @@ export function AddSemesterDialog({
 					<DialogFooter className="gap-2 pt-2">
 						<Button
 							type="button"
-							variant="ghost"
+							variant="skeuoWhite"
 							onClick={() => setOpen(false)}
 							disabled={loading}
-							className="btn-skeuo-white h-10 px-4 rounded-xl text-xs font-bold cursor-pointer"
+							className="h-10 px-4 rounded-xl text-xs font-bold cursor-pointer"
 						>
 							Cancel
 						</Button>
 						<Button
 							type="submit"
+							variant="skeuoPrimary"
 							disabled={loading || !name.trim()}
-							className="btn-skeuo-primary h-10 px-5 rounded-xl text-xs font-extrabold cursor-pointer disabled:opacity-50"
+							className="h-10 px-5 rounded-xl text-xs font-extrabold cursor-pointer disabled:opacity-50"
 						>
 							{loading ? (
 								<span className="flex items-center gap-2">

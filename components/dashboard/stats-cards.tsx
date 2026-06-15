@@ -126,7 +126,7 @@ export function StatsCards({
 						</div>
 						<div className="h-3 bg-slate-100/90 rounded-full shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.06),0_1px_0_rgba(255,255,255,0.8)] border border-slate-200/20 p-[1px] overflow-hidden">
 							<div
-								className="h-full bg-gradient-to-r from-primary to-primary-600 rounded-full shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_1px_2px_rgba(0,0,0,0.15)] transition-all duration-500"
+								className="h-full bg-gradient-to-r from-primary to-primary-600 rounded-full shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_1px_2px_rgba(0,0,0,0.15)] transition-[width] duration-300 ease-out"
 								style={{ width: `${percentageToTarget}%` }}
 							/>
 						</div>
@@ -182,7 +182,7 @@ export function StatsCards({
 							return (
 								<div
 									key={i}
-									className={`h-3 flex-1 rounded-sm border transition-all duration-500 ${
+									className={`h-3 flex-1 rounded-sm border transition-[background-color,box-shadow,border-color] duration-300 ease-out ${
 										isLit
 											? "bg-gradient-to-br from-emerald-400 to-emerald-500 border-emerald-500/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_1.5px_3px_rgba(16,185,129,0.3)]"
 											: "bg-slate-100/95 border-slate-200/50 shadow-[inset_0_1px_2px_rgba(0,0,0,0.04),0_1px_0_rgba(255,255,255,0.7)]"

@@ -80,9 +80,7 @@ export default function AuthLayout({
 					{/* Center Area - Typographic Hero & Floating Transparent Graph */}
 					<div className="my-auto space-y-8 max-w-2xl w-full relative z-10">
 						<div className="space-y-6">
-							<span className="inline-flex items-center text-[10px] font-bold tracking-widest text-blue-200 uppercase bg-white/10 px-3.5 py-1.5 rounded-full border border-white/10 w-fit">
-								The Student Operating System
-							</span>
+
 							<h3 className="text-4xl sm:text-5xl font-extrabold text-white leading-[1.15] tracking-tight">
 								Master your academic <br />
 								<span className="text-transparent bg-clip-text bg-linear-to-r from-blue-200 to-sky-200">

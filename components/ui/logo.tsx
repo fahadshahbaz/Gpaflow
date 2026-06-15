@@ -30,7 +30,7 @@ export function Logo({ size = "md", href, variant = "default" }: LogoProps) {
 
 	const logoIcon = (
 		<div
-			className={`flex ${s.container} items-center justify-center bg-gradient-to-b from-blue-500 to-blue-600 border border-blue-400/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_3px_6px_rgba(59,130,246,0.25)] group-hover:from-blue-450 group-hover:to-blue-550 transition-all duration-300 active:scale-95`}
+			className={`flex ${s.container} items-center justify-center bg-gradient-to-b from-blue-500 to-blue-600 border border-blue-400/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_3px_6px_rgba(59,130,246,0.25)] group-hover:from-blue-450 group-hover:to-blue-550 transition-[background-image,transform] duration-200 ease-out active:scale-[0.97]`}
 		>
 			<GraduationCap className={`${s.icon} text-white`} />
 		</div>
@@ -51,7 +51,7 @@ export function Logo({ size = "md", href, variant = "default" }: LogoProps) {
 		return (
 			<Link
 				href={href}
-				className="flex items-center gap-2.5 group active:scale-[0.98] transition-all duration-300"
+				className="flex items-center gap-2.5 group active:scale-[0.97] transition-[transform] duration-200 ease-out"
 			>
 				{content}
 			</Link>

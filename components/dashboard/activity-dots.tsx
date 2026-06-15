@@ -103,7 +103,7 @@ export function ActivityDots({ semesters }: ActivityDotsProps) {
 								{Array.from({ length: maxSubjects }, (_, dotIndex) => (
 									<div
 										key={dotIndex}
-										className={`h-3 w-3 rounded-full transition-all duration-300 ${getDotStyles(semesterIndex, dotIndex, semester.subjects)}`}
+										className={`h-3 w-3 rounded-full transition-[transform,box-shadow] duration-200 ease-out ${getDotStyles(semesterIndex, dotIndex, semester.subjects)}`}
 										title={
 											dotIndex < semester.subjects
 												? `Subject ${dotIndex + 1}`

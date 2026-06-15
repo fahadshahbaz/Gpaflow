@@ -82,15 +82,15 @@ export function EditSemesterDialog({
 							placeholder="e.g. Semester 1, Fall 2024"
 							value={name}
 							onChange={(e) => setName(e.target.value)}
-							className="bg-secondary/50 border-input h-11 rounded-xl text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
+							className="bg-secondary/50 border-input h-11 rounded-xl text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 transition-colors"
 							disabled={loading}
 						/>
 						<AnimatePresence>
 							{error && (
 								<motion.div
-									initial={{ opacity: 0, y: -4 }}
-									animate={{ opacity: 1, y: 0 }}
-									exit={{ opacity: 0, y: -4 }}
+									initial={{ opacity: 0, transform: "translateY(-4px)" }}
+									animate={{ opacity: 1, transform: "translateY(0px)" }}
+									exit={{ opacity: 0, transform: "translateY(-4px)" }}
 									transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
 								>
 									<FieldError className="mt-2 text-destructive text-sm">

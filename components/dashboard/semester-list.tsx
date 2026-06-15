@@ -45,7 +45,7 @@ export function SemesterList({ semesters, university }: SemesterListProps) {
 		semesterId: string;
 	} | null>(null);
 	const [activeSemesterId, setActiveSemesterId] = useState<string | null>(
-		semesters[0]?.id || null,
+		null,
 	);
 
 	const toggleExpanded = (semesterId: string) => {
@@ -268,7 +268,7 @@ export function SemesterList({ semesters, university }: SemesterListProps) {
 														trigger={
 															<button
 																type="button"
-																className="w-full text-slate-500 hover:text-blue-600 hover:bg-blue-50/20 rounded-xl py-2.5 text-xs font-bold flex items-center justify-center gap-1 transition-all border border-dashed border-slate-200 hover:border-blue-400/50 cursor-pointer"
+																className="w-full text-slate-500 hover:text-blue-600 hover:bg-blue-50/20 rounded-xl py-2.5 text-xs font-bold flex items-center justify-center gap-1 transition-colors duration-200 ease-out border border-dashed border-slate-200 hover:border-blue-400/50 cursor-pointer"
 															>
 																<Plus className="h-3.5 w-3.5" />
 																Add Subject

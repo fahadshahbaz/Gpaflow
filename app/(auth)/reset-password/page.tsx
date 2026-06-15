@@ -49,7 +49,7 @@ export default function ResetPasswordPage() {
 							type={showPass ? "text" : "password"}
 							required
 							minLength={6}
-							className="block w-full rounded-xl border border-slate-200 bg-slate-50/70 pl-4 pr-11 py-3 text-sm text-gray-900 placeholder-slate-400 shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.06)] focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/10 focus:outline-none transition-all duration-200"
+							className="block w-full rounded-xl border border-slate-200 bg-slate-50/70 pl-4 pr-11 py-3 text-sm text-gray-900 placeholder-slate-400 shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.06)] focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/10 focus:outline-none transition-colors duration-200"
 							placeholder="Minimum 6 characters"
 						/>
 						<button
@@ -81,7 +81,7 @@ export default function ResetPasswordPage() {
 							type={showConf ? "text" : "password"}
 							required
 							minLength={6}
-							className="block w-full rounded-xl border border-slate-200 bg-slate-50/70 pl-4 pr-11 py-3 text-sm text-gray-900 placeholder-slate-400 shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.06)] focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/10 focus:outline-none transition-all duration-200"
+							className="block w-full rounded-xl border border-slate-200 bg-slate-50/70 pl-4 pr-11 py-3 text-sm text-gray-900 placeholder-slate-400 shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.06)] focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/10 focus:outline-none transition-colors duration-200"
 							placeholder="Re-enter new password"
 						/>
 						<button
@@ -102,7 +102,7 @@ export default function ResetPasswordPage() {
 				<button
 					type="submit"
 					disabled={pending}
-					className="w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-b from-blue-500 to-blue-600 border border-blue-400/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_3px_8px_rgba(59,130,246,0.25)] py-3 text-sm font-bold text-white hover:from-blue-450 hover:to-blue-550 active:scale-[0.97] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+					className="w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-b from-blue-500 to-blue-600 border border-blue-400/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_3px_8px_rgba(59,130,246,0.25)] py-3 text-sm font-bold text-white hover:from-blue-450 hover:to-blue-550 active:scale-[0.97] transition-[transform,colors] duration-200 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
 				>
 					{pending ? (
 						<>

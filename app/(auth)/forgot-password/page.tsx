@@ -53,7 +53,7 @@ export default function ForgotPasswordPage() {
 						type="email"
 						required
 						defaultValue=""
-						className="block w-full rounded-xl border border-slate-200 bg-slate-50/70 px-4 py-3 text-sm text-gray-900 placeholder-slate-400 shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.06)] focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/10 focus:outline-none transition-all duration-200"
+						className="block w-full rounded-xl border border-slate-200 bg-slate-50/70 px-4 py-3 text-sm text-gray-900 placeholder-slate-400 shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.06)] focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/10 focus:outline-none transition-colors duration-200"
 						placeholder="fahad@example.com"
 					/>
 				</div>
@@ -62,7 +62,7 @@ export default function ForgotPasswordPage() {
 				<button
 					type="submit"
 					disabled={pending}
-					className="w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-b from-blue-500 via-blue-600 to-blue-700 py-3 px-4 text-sm font-extrabold text-white border-t border-x border-blue-400/40 border-b-[3px] border-blue-700 shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_4px_10px_rgba(37,99,235,0.3)] hover:brightness-105 transition-all duration-150 active:translate-y-[2px] active:border-b-[1px] active:shadow-[inset_0_2px_4px_rgba(0,0,0,0.2),0_1px_2px_rgba(37,99,235,0.15)] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+					className="w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-b from-blue-500 via-blue-600 to-blue-700 py-3 px-4 text-sm font-extrabold text-white border-t border-x border-blue-400/40 border-b-[3px] border-blue-700 shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_4px_10px_rgba(37,99,235,0.3)] hover:brightness-105 transition-[transform,brightness] duration-150 active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
 				>
 					{pending ? (
 						<>

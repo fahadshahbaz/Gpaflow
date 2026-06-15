@@ -52,7 +52,7 @@ export default function SignupPage() {
 						type="text"
 						required
 						defaultValue=""
-						className="block w-full rounded-xl border border-slate-200 bg-slate-50/70 px-4 py-2.5 text-sm text-gray-900 placeholder-slate-400 shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.06)] focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/10 focus:outline-none transition-all duration-200"
+						className="block w-full rounded-xl border border-slate-200 bg-slate-50/70 px-4 py-2.5 text-sm text-gray-900 placeholder-slate-400 shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.06)] focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/10 focus:outline-none transition-colors duration-200"
 						placeholder="Fahad Shahbaz"
 					/>
 					{state.fieldErrors?.name && (
@@ -76,7 +76,7 @@ export default function SignupPage() {
 						type="email"
 						required
 						defaultValue=""
-						className="block w-full rounded-xl border border-slate-200 bg-slate-50/70 px-4 py-2.5 text-sm text-gray-900 placeholder-slate-400 shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.06)] focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/10 focus:outline-none transition-all duration-200"
+						className="block w-full rounded-xl border border-slate-200 bg-slate-50/70 px-4 py-2.5 text-sm text-gray-900 placeholder-slate-400 shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.06)] focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/10 focus:outline-none transition-colors duration-200"
 						placeholder="fahad@example.com"
 					/>
 					{state.fieldErrors?.email && (
@@ -100,7 +100,7 @@ export default function SignupPage() {
 							name="password"
 							type={showPassword ? "text" : "password"}
 							required
-							className="block w-full rounded-xl border border-slate-200 bg-slate-50/70 pl-4 pr-11 py-2.5 text-sm text-gray-900 placeholder-slate-400 shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.06)] focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/10 focus:outline-none transition-all duration-200"
+							className="block w-full rounded-xl border border-slate-200 bg-slate-50/70 pl-4 pr-11 py-2.5 text-sm text-gray-900 placeholder-slate-400 shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.06)] focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/10 focus:outline-none transition-colors duration-200"
 							placeholder="Create a password"
 						/>
 						<button
@@ -156,7 +156,7 @@ export default function SignupPage() {
 				<button
 					type="submit"
 					disabled={pending}
-					className="w-full flex items-center justify-center gap-2 rounded-xl bg-linear-to-b from-blue-500 via-blue-600 to-blue-700 py-2.5 px-4 text-sm font-extrabold text-white border-t border-x border-blue-700 border-b-[3px] border-blue-700 shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_4px_10px_rgba(37,99,235,0.3)] hover:brightness-105 transition-all duration-150 active:translate-y-0.5 active:border-b active:shadow-[inset_0_2px_4px_rgba(0,0,0,0.2),0_1px_2px_rgba(37,99,235,0.15)] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+					className="w-full flex items-center justify-center gap-2 rounded-xl bg-linear-to-b from-blue-500 via-blue-600 to-blue-700 py-2.5 px-4 text-sm font-extrabold text-white border-t border-x border-blue-700 border-b-[3px] border-blue-700 shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_4px_10px_rgba(37,99,235,0.3)] hover:brightness-105 transition-[transform,brightness] duration-150 active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
 				>
 					{pending ? (
 						<>
@@ -183,7 +183,7 @@ export default function SignupPage() {
 			<form action={signInWithGoogle} className="w-full">
 				<button
 					type="submit"
-					className="w-full flex items-center justify-center gap-2.5 rounded-xl border border-slate-200/80 bg-linear-gradient(180deg,#fff_0%,#f8fafc_100%) py-2.5 px-4 text-xs font-bold text-slate-700 shadow-[inset_0_1px_0_#ffffff,0_2px_4px_rgba(0,0,0,0.06)] hover:bg-slate-50 hover:border-slate-350 transition-all duration-200 active:scale-[0.96] cursor-pointer"
+					className="w-full flex items-center justify-center gap-2.5 rounded-xl border border-slate-200/80 bg-linear-gradient(180deg,#fff_0%,#f8fafc_100%) py-2.5 px-4 text-xs font-bold text-slate-700 shadow-[inset_0_1px_0_#ffffff,0_2px_4px_rgba(0,0,0,0.06)] hover:bg-slate-50 hover:border-slate-350 transition-[transform,colors] duration-200 active:scale-[0.97] cursor-pointer"
 				>
 					<GoogleIcon />
 					Continue with Google
