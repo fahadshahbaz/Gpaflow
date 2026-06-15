@@ -16,7 +16,7 @@ export default function AuthLayout({
 				</div>
 
 				{/* Form Content Wrapper */}
-				<div className="w-full max-w-[420px] mx-auto my-auto py-4 sm:py-6">
+				<div className="w-full max-w-105 mx-auto my-auto py-4 sm:py-6">
 					{children}
 				</div>
 
@@ -42,7 +42,7 @@ export default function AuthLayout({
 			{/* Right Column - Premium Academic Dashboard Mockup */}
 			<div className="hidden lg:flex w-1/2 p-6 bg-slate-50 justify-center items-center min-h-screen relative overflow-hidden">
 				{/* Vibrant Royal Blue/Sky Blue Main Panel */}
-				<div className="w-full h-full rounded-[2.5rem] bg-gradient-to-br from-blue-700 via-blue-600 to-sky-600 relative overflow-hidden flex flex-col justify-between p-12 text-white border border-blue-500/30 shadow-[inset_0_4px_12px_rgba(255,255,255,0.22),inset_0_-4px_12px_rgba(0,0,0,0.3),0_20px_50px_rgba(29,78,216,0.15)]">
+				<div className="w-full h-full rounded-[2.5rem] bg-linear-to-br from-blue-700 via-blue-600 to-sky-600 relative overflow-hidden flex flex-col justify-between p-12 text-white border border-blue-500/30 shadow-[inset_0_4px_12px_rgba(255,255,255,0.22),inset_0_-4px_12px_rgba(0,0,0,0.3),0_20px_50px_rgba(29,78,216,0.15)]">
 					{/* Glowing decorative nodes */}
 					<div className="absolute inset-0 opacity-15 pointer-events-none">
 						<div className="absolute top-[-10%] left-[-10%] w-[70%] h-[70%] rounded-full bg-white blur-[120px]" />
@@ -85,7 +85,7 @@ export default function AuthLayout({
 							</span>
 							<h3 className="text-4xl sm:text-5xl font-extrabold text-white leading-[1.15] tracking-tight">
 								Master your academic <br />
-								<span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-sky-200">
+								<span className="text-transparent bg-clip-text bg-linear-to-r from-blue-200 to-sky-200">
 									trajectory.
 								</span>
 							</h3>
@@ -97,7 +97,7 @@ export default function AuthLayout({
 						</div>
 
 						{/* Minimal line graph without bg color */}
-						<div className="relative w-full h-[140px] pt-4 select-none">
+						<div className="relative w-full h-35 pt-4 select-none">
 							{/* Horizontal grid lines */}
 							<div className="absolute inset-x-0 top-0 h-px bg-white/10" />
 							<div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-px bg-white/5" />
@@ -185,7 +185,7 @@ export default function AuthLayout({
 						</div>
 
 						{/* Soft decorative divider line */}
-						<div className="w-24 h-1 bg-gradient-to-r from-blue-300/40 to-transparent rounded-full" />
+						<div className="w-24 h-1 bg-linear-to-r from-blue-300/40 to-transparent rounded-full" />
 					</div>
 
 					{/* Bottom Text / Info */}
