@@ -44,9 +44,7 @@ export function SemesterList({ semesters, university }: SemesterListProps) {
 		subject: Subject;
 		semesterId: string;
 	} | null>(null);
-	const [activeSemesterId, setActiveSemesterId] = useState<string | null>(
-		null,
-	);
+	const [activeSemesterId, setActiveSemesterId] = useState<string | null>(null);
 
 	const toggleExpanded = (semesterId: string) => {
 		setActiveSemesterId((prev) => (prev === semesterId ? null : semesterId));

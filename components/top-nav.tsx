@@ -131,7 +131,7 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 									onClick={() => setShowDropdown(!showDropdown)}
 									className="flex items-center gap-2 rounded-full pl-1 pr-3 h-10 bg-white border border-slate-200/80 shadow-[0_2px_4px_rgba(0,0,0,0.04),inset_0_1px_0_#ffffff] hover:border-slate-300 transition-[border-color,transform] duration-200 ease-out active:scale-[0.97] cursor-pointer"
 								>
-									<div className="h-8 w-8 rounded-full bg-gradient-to-b from-blue-400 to-blue-600 flex items-center justify-center border border-blue-500/25 shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_2px_4px_rgba(37,99,235,0.2)]">
+									<div className="h-8 w-8 rounded-full bg-gradient-to-b from-blue-400 to-blue-600 flex items-center justify-center border border-blue-500/15 shadow-[0_2px_4px_rgba(37,99,235,0.1)] flex-shrink-0 overflow-hidden">
 										<span className="text-xs font-bold text-white tracking-wide">
 											{userName?.charAt(0).toUpperCase() ||
 												userEmail?.charAt(0).toUpperCase() ||

@@ -1,6 +1,6 @@
 "use client";
 
-import { Brain, Lightbulb, Sparkles } from "lucide-react";
+import { Brain, Lightbulb } from "lucide-react";
 import { useEffect, useState } from "react";
 import type { Semester } from "@/types/grading";
 

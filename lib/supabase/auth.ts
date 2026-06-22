@@ -2,6 +2,7 @@
 
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { cache } from "react";
 import { createClient } from "@/lib/supabase/server";
 import { authSchema, signUpSchema } from "@/lib/validations/auth";
 
@@ -113,13 +114,13 @@ export async function signInWithGoogle() {
 	}
 }
 
-export async function getUser() {
+export const getUser = cache(async () => {
 	const supabase = await createClient();
 	const {
 		data: { user },
 	} = await supabase.auth.getUser();
 	return user;
-}
+});
 
 export async function forgotPassword(
 	_prevState: AuthState,

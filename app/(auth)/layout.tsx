@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Logo } from "@/components/ui/logo";
 
 export default function AuthLayout({
@@ -11,38 +10,19 @@ export default function AuthLayout({
 			{/* Left Column - Auth Form */}
 			<div className="w-full lg:w-1/2 flex flex-col justify-between p-6 sm:p-8 md:p-10 min-h-screen bg-white">
 				{/* Top Logo */}
-				<div className="flex justify-start">
-					<Logo href="/" variant="skeuomorphic" />
+				<div className="flex items-center justify-start h-fit">
+					<Logo href="/" />
 				</div>
 
 				{/* Form Content Wrapper */}
 				<div className="w-full max-w-105 mx-auto my-auto py-4 sm:py-6">
 					{children}
 				</div>
-
-				{/* Footer */}
-				<div className="flex flex-col sm:flex-row justify-between items-center text-xs text-slate-400 gap-3 border-t border-slate-100/90 shadow-[inset_0_1px_0_#ffffff] pt-6">
-					<p>© {new Date().getFullYear()} GPAFlow Enterprises LTD.</p>
-					<div className="flex gap-4">
-						<Link
-							href="/privacy"
-							className="hover:text-slate-600 transition-colors font-medium"
-						>
-							Privacy Policy
-						</Link>
-						<Link
-							href="/terms"
-							className="hover:text-slate-600 transition-colors font-medium"
-						>
-							Terms of Service
-						</Link>
-					</div>
-				</div>
 			</div>
 			{/* Right Column - Premium Academic Dashboard Mockup */}
 			<div className="hidden lg:flex w-1/2 p-6 bg-slate-50 justify-center items-center min-h-screen relative overflow-hidden">
 				{/* Vibrant Royal Blue/Sky Blue Main Panel */}
-				<div className="w-full h-full rounded-[2.5rem] bg-linear-to-br from-blue-700 via-blue-600 to-sky-600 relative overflow-hidden flex flex-col justify-between p-12 text-white border border-blue-500/30 shadow-[inset_0_4px_12px_rgba(255,255,255,0.22),inset_0_-4px_12px_rgba(0,0,0,0.3),0_20px_50px_rgba(29,78,216,0.15)]">
+				<div className="w-full h-full rounded-[2.5rem] bg-linear-to-br from-blue-700 via-blue-600 to-sky-600 relative overflow-hidden flex flex-col justify-between p-12 text-white shadow-[inset_0_4px_12px_rgba(255,255,255,0.22),inset_0_-4px_12px_rgba(0,0,0,0.3),0_20px_50px_rgba(29,78,216,0.15)]">
 					{/* Glowing decorative nodes */}
 					<div className="absolute inset-0 opacity-15 pointer-events-none">
 						<div className="absolute top-[-10%] left-[-10%] w-[70%] h-[70%] rounded-full bg-white blur-[120px]" />
@@ -80,7 +60,6 @@ export default function AuthLayout({
 					{/* Center Area - Typographic Hero & Floating Transparent Graph */}
 					<div className="my-auto space-y-8 max-w-2xl w-full relative z-10">
 						<div className="space-y-6">
-
 							<h3 className="text-4xl sm:text-5xl font-extrabold text-white leading-[1.15] tracking-tight">
 								Master your academic <br />
 								<span className="text-transparent bg-clip-text bg-linear-to-r from-blue-200 to-sky-200">
@@ -181,16 +160,9 @@ export default function AuthLayout({
 								</text>
 							</svg>
 						</div>
-
-						{/* Soft decorative divider line */}
-						<div className="w-24 h-1 bg-linear-to-r from-blue-300/40 to-transparent rounded-full" />
 					</div>
 
-					{/* Bottom Text / Info */}
-					<div className="relative z-10 flex items-center justify-between text-xs text-blue-100/80 border-t border-white/10 pt-6">
-						<span>Powered by Supabase Integration</span>
-						<span>v1.2.0 Stable</span>
-					</div>
+
 				</div>
 			</div>
 		</main>

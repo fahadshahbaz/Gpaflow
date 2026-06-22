@@ -1,7 +1,7 @@
 "use client";
 
-import { useMemo } from "react";
 import { BookOpen } from "lucide-react";
+import { useMemo } from "react";
 import type { Semester } from "@/types/grading";
 
 interface ActivityDotsProps {
@@ -42,18 +42,24 @@ export function ActivityDots({ semesters }: ActivityDotsProps) {
 		}
 
 		const intensity = (semesterIndex + 1) / activity.semesters.length;
-		let gradientClass = "from-emerald-400 to-emerald-600 border border-emerald-600/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_1.5px_3px_rgba(16,185,129,0.25)]";
+		let gradientClass =
+			"from-emerald-400 to-emerald-600 border border-emerald-600/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_1.5px_3px_rgba(16,185,129,0.25)]";
 
 		if (intensity > 0.8) {
-			gradientClass = "from-emerald-400 to-emerald-600 border border-emerald-600/35 shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_2px_4px_rgba(16,185,129,0.3)]";
+			gradientClass =
+				"from-emerald-400 to-emerald-600 border border-emerald-600/35 shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_2px_4px_rgba(16,185,129,0.3)]";
 		} else if (intensity > 0.6) {
-			gradientClass = "from-emerald-400 to-emerald-500 border border-emerald-500/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_1.5px_3px_rgba(16,185,129,0.25)]";
+			gradientClass =
+				"from-emerald-400 to-emerald-500 border border-emerald-500/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_1.5px_3px_rgba(16,185,129,0.25)]";
 		} else if (intensity > 0.4) {
-			gradientClass = "from-emerald-400/80 to-emerald-500/90 border border-emerald-500/25 shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_1.5px_2.5px_rgba(16,185,129,0.2)]";
+			gradientClass =
+				"from-emerald-400/80 to-emerald-500/90 border border-emerald-500/25 shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_1.5px_2.5px_rgba(16,185,129,0.2)]";
 		} else if (intensity > 0.2) {
-			gradientClass = "from-emerald-300/85 to-emerald-400 border border-emerald-400/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_1px_2px_rgba(16,185,129,0.15)]";
+			gradientClass =
+				"from-emerald-300/85 to-emerald-400 border border-emerald-400/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_1px_2px_rgba(16,185,129,0.15)]";
 		} else {
-			gradientClass = "from-emerald-300/50 to-emerald-400/60 border border-emerald-300/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.2),0_0.5px_1.5px_rgba(16,185,129,0.1)]";
+			gradientClass =
+				"from-emerald-300/50 to-emerald-400/60 border border-emerald-300/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.2),0_0.5px_1.5px_rgba(16,185,129,0.1)]";
 		}
 
 		return `bg-gradient-to-br hover:scale-125 hover:shadow-[0_0_8px_rgba(16,185,129,0.5)] ${gradientClass}`;
@@ -64,7 +70,9 @@ export function ActivityDots({ semesters }: ActivityDotsProps) {
 			<div className="flex items-start justify-between mb-4">
 				<div>
 					<h3 className="text-lg font-semibold text-slate-800">Subjects</h3>
-					<p className="text-sm text-slate-500 font-normal">Semester-wise subject breakdown</p>
+					<p className="text-sm text-slate-500 font-normal">
+						Semester-wise subject breakdown
+					</p>
 				</div>
 				<div className="icon-skeuo-raised h-9 w-9 rounded-xl border border-slate-200/80 shadow-[inset_0_1px_0_#ffffff,0_2px_4px_rgba(0,0,0,0.02)] text-slate-400/90 flex items-center justify-center flex-shrink-0">
 					<BookOpen className="h-4.5 w-4.5" />
@@ -77,10 +85,14 @@ export function ActivityDots({ semesters }: ActivityDotsProps) {
 					{activity.total}
 				</span>
 				<div className="mb-1">
-					<span className="text-sm text-slate-400 font-normal">total subjects</span>
+					<span className="text-sm text-slate-400 font-normal">
+						total subjects
+					</span>
 				</div>
 				<div className="text-right mb-1 ml-auto">
-					<p className="text-xs text-slate-400 font-normal leading-tight">avg per semester</p>
+					<p className="text-xs text-slate-400 font-normal leading-tight">
+						avg per semester
+					</p>
 					<p className="text-sm font-normal text-emerald-600 leading-tight mt-0.5">
 						{activity.avgPerSemester}
 					</p>
@@ -127,7 +139,9 @@ export function ActivityDots({ semesters }: ActivityDotsProps) {
 						<div className="h-2.5 w-2.5 rounded-full bg-emerald-500/20 border border-emerald-500/10" />
 						<div className="h-2.5 w-2.5 rounded-full bg-emerald-500/60 border border-emerald-500/10" />
 						<div className="h-2.5 w-2.5 rounded-full bg-emerald-500 shadow-[0_0_4px_rgba(16,185,129,0.4)]" />
-						<span className="text-xs text-slate-400 font-normal ml-1">Recent semesters</span>
+						<span className="text-xs text-slate-400 font-normal ml-1">
+							Recent semesters
+						</span>
 					</div>
 					<div className="flex items-center gap-1.5">
 						<div className="h-2.5 w-2.5 rounded-full bg-slate-100 border border-slate-200/50 shadow-[inset_0_1px_1.5px_rgba(0,0,0,0.05)]" />

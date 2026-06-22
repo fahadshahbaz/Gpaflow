@@ -1,5 +1,6 @@
 "use client";
 
+import { TrendingUp } from "lucide-react";
 import { useMemo, useState } from "react";
 import {
 	Area,
@@ -11,7 +12,6 @@ import {
 	XAxis,
 	YAxis,
 } from "recharts";
-import { TrendingUp, Award } from "lucide-react";
 import type { Semester } from "@/types/grading";
 
 interface GPATrendChartProps {
@@ -98,28 +98,60 @@ export function GPATrendChart({
 									onMouseLeave={() => setHoveredIndex(null)}
 								>
 									<defs>
-										<linearGradient id="activeBarGradient" x1="0" y1="0" x2="0" y2="1">
-											<stop offset="0%" stopColor="var(--primary)" stopOpacity={1} />
-											<stop offset="100%" stopColor="#1d4ed8" stopOpacity={0.95} />
+										<linearGradient
+											id="activeBarGradient"
+											x1="0"
+											y1="0"
+											x2="0"
+											y2="1"
+										>
+											<stop
+												offset="0%"
+												stopColor="var(--primary)"
+												stopOpacity={1}
+											/>
+											<stop
+												offset="100%"
+												stopColor="#1d4ed8"
+												stopOpacity={0.95}
+											/>
 										</linearGradient>
-										<linearGradient id="fadedBarGradient" x1="0" y1="0" x2="0" y2="1">
+										<linearGradient
+											id="fadedBarGradient"
+											x1="0"
+											y1="0"
+											x2="0"
+											y2="1"
+										>
 											<stop offset="0%" stopColor="#e2e8f0" stopOpacity={0.4} />
-											<stop offset="100%" stopColor="#cbd5e1" stopOpacity={0.2} />
+											<stop
+												offset="100%"
+												stopColor="#cbd5e1"
+												stopOpacity={0.2}
+											/>
 										</linearGradient>
-										<linearGradient id="connectorGradient" x1="0" y1="0" x2="0" y2="1">
-											<stop offset="0%" stopColor="var(--primary)" stopOpacity={0.08} />
-											<stop offset="100%" stopColor="var(--primary)" stopOpacity={0.00} />
+										<linearGradient
+											id="connectorGradient"
+											x1="0"
+											y1="0"
+											x2="0"
+											y2="1"
+										>
+											<stop
+												offset="0%"
+												stopColor="var(--primary)"
+												stopOpacity={0.08}
+											/>
+											<stop
+												offset="100%"
+												stopColor="var(--primary)"
+												stopOpacity={0.0}
+											/>
 										</linearGradient>
 									</defs>
 
-									<XAxis
-										dataKey="name"
-										hide={true}
-									/>
-									<YAxis
-										hide={true}
-										domain={[0, 4.1]}
-									/>
+									<XAxis dataKey="name" hide={true} />
+									<YAxis hide={true} domain={[0, 4.1]} />
 
 									<Tooltip
 										cursor={false}
@@ -131,16 +163,26 @@ export function GPATrendChart({
 													<div className="flex flex-col items-center select-none pointer-events-none transition-all duration-150 animate-fade-in">
 														{/* Floating Pill */}
 														<div className="bg-slate-900/95 text-slate-100 border border-slate-800 rounded-full px-4 py-1.5 shadow-[0_12px_30px_rgba(15,23,42,0.25)] flex items-center gap-2.5 text-[11px] font-medium backdrop-blur-md">
-															<span className="text-white font-bold">{data.semester}</span>
-															<span className="h-3 w-[1px] bg-slate-800" />
-															<span className="flex items-center gap-1">
-																<span className="text-slate-400 font-normal">SGPA:</span>
-																<span className="text-primary-foreground font-semibold">{data.sgpa.toFixed(2)}</span>
+															<span className="text-white font-bold">
+																{data.semester}
 															</span>
 															<span className="h-3 w-[1px] bg-slate-800" />
 															<span className="flex items-center gap-1">
-																<span className="text-slate-400 font-normal">CGPA:</span>
-																<span className="text-slate-200 font-semibold">{data.cgpa.toFixed(2)}</span>
+																<span className="text-slate-400 font-normal">
+																	SGPA:
+																</span>
+																<span className="text-primary-foreground font-semibold">
+																	{data.sgpa.toFixed(2)}
+																</span>
+															</span>
+															<span className="h-3 w-[1px] bg-slate-800" />
+															<span className="flex items-center gap-1">
+																<span className="text-slate-400 font-normal">
+																	CGPA:
+																</span>
+																<span className="text-slate-200 font-semibold">
+																	{data.cgpa.toFixed(2)}
+																</span>
 															</span>
 														</div>
 														{/* Hollow pointer dot */}
@@ -166,12 +208,8 @@ export function GPATrendChart({
 									/>
 
 									{/* Histogram bars */}
-									<Bar
-										dataKey="sgpa"
-										radius={[4, 4, 0, 0]}
-										maxBarSize={48}
-									>
-										{chartData.map((entry, index) => {
+									<Bar dataKey="sgpa" radius={[4, 4, 0, 0]} maxBarSize={48}>
+										{chartData.map((_entry, index) => {
 											const isHovered = hoveredIndex === index;
 											const isLatest = index === chartData.length - 1;
 
@@ -237,10 +275,14 @@ export function GPATrendChart({
 										opacity: hoveredIndex !== null ? (isHovered ? 1 : 0.3) : 1,
 									}}
 								>
-									<span className={`text-[10px] font-bold ${isLatest ? "text-primary" : "text-slate-400"}`}>
+									<span
+										className={`text-[10px] font-bold ${isLatest ? "text-primary" : "text-slate-400"}`}
+									>
 										{item.name}
 									</span>
-									<span className={`text-xs mt-0.5 font-semibold ${isLatest ? "text-primary font-bold" : "text-slate-600 font-medium"}`}>
+									<span
+										className={`text-xs mt-0.5 font-semibold ${isLatest ? "text-primary font-bold" : "text-slate-600 font-medium"}`}
+									>
 										{item.sgpa.toFixed(2)}
 									</span>
 								</div>
@@ -254,19 +296,70 @@ export function GPATrendChart({
 					{/* Mock Background Grid Lines */}
 					<div className="absolute inset-0 grid grid-cols-6 grid-rows-4 opacity-[0.06] pointer-events-none">
 						{Array.from({ length: 24 }).map((_, i) => (
-							<div key={i} className="border-r border-b border-slate-400 border-dashed" />
+							<div
+								key={i}
+								className="border-r border-b border-slate-400 border-dashed"
+							/>
 						))}
 					</div>
 
 					{/* Faint Mock Chart Path */}
-					<svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" preserveAspectRatio="none">
+					<svg
+						className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none"
+						preserveAspectRatio="none"
+						role="img"
+						aria-label="Decorative Mock Chart Path"
+					>
+						<title>Decorative Mock Chart Path</title>
 						{/* Mock bars */}
-						<rect x="10%" y="60%" width="8%" height="40%" fill="var(--primary)" rx="3" />
-						<rect x="25%" y="45%" width="8%" height="55%" fill="var(--primary)" rx="3" />
-						<rect x="40%" y="55%" width="8%" height="45%" fill="var(--primary)" rx="3" />
-						<rect x="55%" y="30%" width="8%" height="70%" fill="var(--primary)" rx="3" />
-						<rect x="70%" y="40%" width="8%" height="60%" fill="var(--primary)" rx="3" />
-						<rect x="85%" y="20%" width="8%" height="80%" fill="var(--primary)" rx="3" />
+						<rect
+							x="10%"
+							y="60%"
+							width="8%"
+							height="40%"
+							fill="var(--primary)"
+							rx="3"
+						/>
+						<rect
+							x="25%"
+							y="45%"
+							width="8%"
+							height="55%"
+							fill="var(--primary)"
+							rx="3"
+						/>
+						<rect
+							x="40%"
+							y="55%"
+							width="8%"
+							height="45%"
+							fill="var(--primary)"
+							rx="3"
+						/>
+						<rect
+							x="55%"
+							y="30%"
+							width="8%"
+							height="70%"
+							fill="var(--primary)"
+							rx="3"
+						/>
+						<rect
+							x="70%"
+							y="40%"
+							width="8%"
+							height="60%"
+							fill="var(--primary)"
+							rx="3"
+						/>
+						<rect
+							x="85%"
+							y="20%"
+							width="8%"
+							height="80%"
+							fill="var(--primary)"
+							rx="3"
+						/>
 
 						{/* Mock Trend Line */}
 						<path
@@ -294,7 +387,8 @@ export function GPATrendChart({
 							No Academic Data Yet
 						</h4>
 						<p className="text-xs text-slate-400 max-w-[260px] leading-relaxed font-normal">
-							Add your first semester grades to activate performance tracking & GPA trend analysis.
+							Add your first semester grades to activate performance tracking &
+							GPA trend analysis.
 						</p>
 					</div>
 				</div>
@@ -302,4 +396,3 @@ export function GPATrendChart({
 		</div>
 	);
 }
-

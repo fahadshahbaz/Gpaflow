@@ -2,6 +2,7 @@
 
 import { ArrowRight, Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Logo } from "@/components/ui/logo";
@@ -21,13 +22,20 @@ export default function HomePage() {
 
 	return (
 		<main className="relative min-h-screen bg-[#f8fafc] overflow-x-hidden selection:bg-blue-100 font-sans flex flex-col justify-between">
-			
 			{/* Ambient Light & repeating Dot Grid Background */}
 			<div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-				<svg className="absolute inset-0 w-full h-full opacity-[0.9]" xmlns="http://www.w3.org/2000/svg">
+				<svg
+					className="absolute inset-0 w-full h-full opacity-[0.9]"
+					xmlns="http://www.w3.org/2000/svg"
+				>
 					<title>Dot Grid Background</title>
 					<defs>
-						<pattern id="dotGrid" width="36" height="36" patternUnits="userSpaceOnUse">
+						<pattern
+							id="dotGrid"
+							width="36"
+							height="36"
+							patternUnits="userSpaceOnUse"
+						>
 							<circle cx="2" cy="2" r="1.2" fill="#cbd5e1" />
 						</pattern>
 						<linearGradient id="gridFade" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -42,7 +50,12 @@ export default function HomePage() {
 						</mask>
 					</defs>
 					{/* Render grid from top to bottom with vertical fade mask */}
-					<rect width="100%" height="100%" fill="url(#dotGrid)" mask="url(#gridMask)" />
+					<rect
+						width="100%"
+						height="100%"
+						fill="url(#dotGrid)"
+						mask="url(#gridMask)"
+					/>
 				</svg>
 
 				<div className="absolute inset-0 bg-noise opacity-[0.015] mix-blend-overlay" />
@@ -207,9 +220,12 @@ function AcademicIllustration() {
 			{/* Ambient glows */}
 			<div className="absolute inset-0 bg-gradient-to-tr from-blue-400/10 via-sky-300/5 to-transparent rounded-full blur-[80px] pointer-events-none" />
 
-			<img
+			<Image
 				src="/study.svg"
 				alt="Academic Study Illustration"
+				width={420}
+				height={320}
+				priority
 				className="w-full h-auto object-contain relative z-10"
 			/>
 		</div>

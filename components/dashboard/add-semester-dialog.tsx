@@ -66,7 +66,10 @@ export function AddSemesterDialog({
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
-				<Button variant="skeuoPrimary" className="h-9 px-4 rounded-xl flex items-center justify-center text-xs font-extrabold cursor-pointer">
+				<Button
+					variant="skeuoPrimary"
+					className="h-9 px-4 rounded-xl flex items-center justify-center text-xs font-extrabold cursor-pointer"
+				>
 					<Plus className="mr-1.5 h-4 w-4" />
 					New Semester
 				</Button>

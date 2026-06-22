@@ -9,9 +9,15 @@ interface MarqueeProps {
 	className?: string;
 }
 
-export function Marquee({ children, speed = 30, className = "" }: MarqueeProps) {
+export function Marquee({
+	children,
+	speed = 30,
+	className = "",
+}: MarqueeProps) {
 	return (
-		<div className={`flex w-full overflow-hidden whitespace-nowrap ${className}`}>
+		<div
+			className={`flex w-full overflow-hidden whitespace-nowrap ${className}`}
+		>
 			<motion.div
 				className="flex shrink-0 items-center justify-around gap-12 px-6 min-w-full"
 				animate={{ x: ["0%", "-100%"] }}

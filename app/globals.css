@@ -11,7 +11,6 @@
 	}
 }
 
-
 :root {
 	--font-sans: "Inter", system-ui, sans-serif;
 	--font-mono: "Geist Mono", monospace;
@@ -345,11 +344,7 @@
 
 	&:active {
 		background:
-			linear-gradient(
-				180deg,
-				rgba(0, 0, 0, 0.08) 0%,
-				rgba(0, 0, 0, 0.08) 100%
-			),
+			linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.08) 100%),
 			var(--color-primary-700);
 		box-shadow:
 			inset 0 2.5px 5px rgba(0, 0, 0, 0.25),
@@ -429,11 +424,7 @@
 
 	&:active {
 		background:
-			linear-gradient(
-				180deg,
-				rgba(0, 0, 0, 0.1) 0%,
-				rgba(0, 0, 0, 0.1) 100%
-			),
+			linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%),
 			#141414;
 		box-shadow: inset 0 2.5px 4px rgba(0, 0, 0, 0.5);
 		transform: translateY(0.75px) scale(0.98);

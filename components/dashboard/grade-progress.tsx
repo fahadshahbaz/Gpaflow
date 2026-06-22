@@ -1,7 +1,7 @@
 "use client";
 
-import { useMemo } from "react";
 import { Award } from "lucide-react";
+import { useMemo } from "react";
 import type { Semester } from "@/types/grading";
 
 interface GradeProgressProps {
