@@ -122,10 +122,12 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 	return (
 		<div
 			className={cn(
-				"fixed left-0 right-0 px-6 z-50 transition-[transform] duration-350 ease-out",
-				hidden && "-translate-y-[calc(100%+2rem)]",
+				"fixed left-0 right-0 px-4 sm:px-6 z-50 transition-transform duration-500 ease-out",
+				hidden ? "-translate-y-[calc(100%+2rem)]" : "translate-y-0"
 			)}
-			style={{ top: "calc(1rem + var(--banner-offset, 0px))" }}
+			style={{
+				top: "calc(1rem + var(--banner-offset, 0px))",
+			}}
 		>
 			<header className="max-w-[1600px] mx-auto w-full relative">
 				<div className="h-[60px] flex items-center justify-between shrink-0">
@@ -137,7 +139,7 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 						{/* Desktop Navigation */}
 						<nav
 							ref={tabsRef}
-							className="t-tabs flex items-center gap-1.5 bg-slate-100/90 border border-slate-200/50 shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_2px_8px_rgba(0,0,0,0.03)] backdrop-blur-md rounded-full p-1"
+							className="t-tabs flex items-center gap-1.5 transition-all duration-500 ease-out rounded-full p-1 bg-slate-100/90 backdrop-blur-md border border-slate-200/50 shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_2px_8px_rgba(0,0,0,0.03)]"
 						>
 							<span
 								ref={pillRef}
@@ -166,7 +168,7 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 						</nav>
 
 						{/* Profile Dropdown Container */}
-						<div className="flex items-center bg-slate-100/90 border border-slate-200/50 backdrop-blur-md rounded-full p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_2px_8px_rgba(0,0,0,0.03)] h-12">
+						<div className="flex items-center transition-all duration-500 ease-out rounded-full p-1 h-12 bg-slate-100/90 backdrop-blur-md border border-slate-200/50 shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_2px_8px_rgba(0,0,0,0.03)]">
 							{/* Profile Dropdown */}
 							<div className="relative" ref={dropdownRef}>
 								<button
@@ -202,9 +204,6 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 											<div className="px-4.5 py-4 border-b border-slate-100 bg-slate-50/40">
 												<p className="text-sm font-extrabold text-slate-800 leading-tight">
 													{userName || "User"}
-												</p>
-												<p className="text-xs font-normal text-slate-400 truncate mt-1">
-													{userEmail}
 												</p>
 											</div>
 											<div className="p-1.5 space-y-0.5">

@@ -1,12 +1,13 @@
 "use client";
 
 import { ArrowRight, Menu, X } from "lucide-react";
-import { AnimatePresence, motion } from "motion/react";
+import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Logo } from "@/components/ui/logo";
 import { Marquee } from "@/components/ui/marquee";
+import { cn } from "@/lib/utils";
 
 export default function HomePage() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -64,10 +65,14 @@ export default function HomePage() {
 
 			{/* Floating Glassmorphic Navigation */}
 			<header className="fixed top-4 left-0 right-0 z-50 px-4 sm:px-6">
-				<motion.div
-					layout
-					transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-					className="max-w-3xl mx-auto bg-white/75 backdrop-blur-xl border border-slate-200/50 rounded-2xl shadow-[0_8px_30px_rgba(15,23,42,0.03),inset_0_1px_0_#ffffff] px-4 py-3 overflow-hidden"
+				<div
+					className={cn(
+						"t-acc max-w-3xl mx-auto bg-white/75 backdrop-blur-xl border border-slate-200/50 rounded-2xl px-4 py-3 overflow-hidden transition-all duration-300 ease-out",
+						isOpen
+							? "shadow-[0_24px_48px_-12px_rgba(15,23,42,0.15),0_12px_24px_-8px_rgba(15,23,42,0.1),inset_0_1px_0_#ffffff] translate-y-1"
+							: "shadow-[0_8px_30px_rgba(15,23,42,0.03),inset_0_1px_0_#ffffff]",
+					)}
+					data-open={isOpen}
 				>
 					<div className="flex items-center justify-between">
 						<Logo size="sm" href="/" />
@@ -90,26 +95,27 @@ export default function HomePage() {
 						<button
 							type="button"
 							onClick={() => setIsOpen(!isOpen)}
-							className="flex sm:hidden h-9 w-9 items-center justify-center rounded-xl btn-skeuo-white text-slate-650"
+							className="t-acc-head flex sm:hidden h-9 w-9 items-center justify-center rounded-xl btn-skeuo-white text-slate-650"
+							aria-expanded={isOpen}
 						>
-							{isOpen ? (
-								<X className="h-4.5 w-4.5" />
-							) : (
-								<Menu className="h-4.5 w-4.5" />
-							)}
+							<div
+								className="t-icon-swap h-4.5 w-4.5"
+								data-state={isOpen ? "b" : "a"}
+							>
+								<span className="t-icon" data-icon="a">
+									<Menu className="h-4.5 w-4.5" />
+								</span>
+								<span className="t-icon" data-icon="b">
+									<X className="h-4.5 w-4.5" />
+								</span>
+							</div>
 						</button>
 					</div>
 
 					{/* Mobile Menu Drawer (Inline Expansion) */}
-					<AnimatePresence initial={false}>
-						{isOpen && (
-							<motion.div
-								initial={{ opacity: 0, height: 0 }}
-								animate={{ opacity: 1, height: "auto" }}
-								exit={{ opacity: 0, height: 0 }}
-								transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-								className="sm:hidden overflow-hidden mt-3.5 pt-3.5 border-t border-slate-100/90"
-							>
+					<div className="t-acc-panel sm:hidden">
+						<div className="t-acc-panel-inner">
+							<div className="mt-3.5 pt-3.5 border-t border-slate-100/90">
 								<div className="flex items-center justify-between gap-3 pt-0.5">
 									<Link
 										href="/login"
@@ -126,10 +132,10 @@ export default function HomePage() {
 										Get Started
 									</Link>
 								</div>
-							</motion.div>
-						)}
-					</AnimatePresence>
-				</motion.div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</header>
 
 			{/* Main Hero Section */}

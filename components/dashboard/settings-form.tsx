@@ -31,63 +31,35 @@ export function SettingsForm({ initialName, initialEmail }: SettingsFormProps) {
 	}, [state.success, router]);
 
 	return (
-		<div className="w-full max-w-lg">
-			{/* Header */}
-			<div className="text-center mb-8">
-				<div className="h-14 w-14 rounded-2xl icon-skeuo-raised text-blue-500 mb-4 inline-flex items-center justify-center bg-white">
-					<Settings className="h-7 w-7" />
-				</div>
-				<h1 className="text-2xl font-bold text-gray-900">Account Settings</h1>
-				<p className="text-sm text-gray-500 mt-2">
-					Manage your profile information
-				</p>
-			</div>
-
+		<div className="w-full max-w-xl mx-auto">
 			{/* Settings Card */}
-			<div className="rounded-2xl card-skeuo overflow-hidden">
-				{/* Avatar Section */}
-				<div className="p-6 border-b border-slate-100/90 bg-slate-50/20 flex items-center gap-4">
-					<div className="h-16 w-16 rounded-2xl bg-gradient-to-b from-blue-500 to-blue-600 flex items-center justify-center text-white border border-blue-500/20 shadow-[0_4px_12px_rgba(59,130,246,0.15)] flex-shrink-0 overflow-hidden">
-						<span className="text-2xl font-bold">
+			<div className="bg-white border border-slate-200/60 shadow-sm rounded-2xl overflow-hidden">
+				{/* Avatar / Profile Header */}
+				<div className="p-8 border-b border-slate-100 flex items-center gap-5">
+					<div className="h-20 w-20 rounded-full bg-gradient-to-b from-blue-500 to-blue-600 flex items-center justify-center text-white border border-blue-500/20 shadow-sm flex-shrink-0 overflow-hidden">
+						<span className="text-3xl font-bold">
 							{userName?.charAt(0)?.toUpperCase() ||
 								initialEmail?.charAt(0)?.toUpperCase() ||
 								"U"}
 						</span>
 					</div>
 					<div>
-						<p className="text-gray-900 font-bold">
-							{userName || "Set your name"}
-						</p>
-						<p className="text-sm text-gray-400 font-medium">{initialEmail}</p>
+						<h1 className="text-2xl font-bold text-slate-900">
+							{userName || "Your Profile"}
+						</h1>
+						<p className="text-sm text-slate-500 mt-1">{initialEmail}</p>
 					</div>
 				</div>
 
 				{/* Form Section */}
-				<div className="p-6 space-y-6">
-					{/* Email Field (Read-only) */}
-					<div>
-						<span className="flex items-center gap-2 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
-							<Mail className="h-3.5 w-3.5" />
-							Email Address
-						</span>
-						<div className="rounded-xl widget-skeuo-inset px-4 py-3">
-							<span className="text-sm text-slate-500 font-semibold">
-								{initialEmail}
-							</span>
-						</div>
-						<p className="text-[10px] text-gray-400 font-medium mt-2">
-							Email address cannot be changed
-						</p>
-					</div>
-
-					{/* Name Field (Editable) */}
-					<form action={formAction}>
-						<div className="mb-5">
+				<div className="p-8">
+					<form action={formAction} className="space-y-6">
+						{/* Name Field */}
+						<div>
 							<label
 								htmlFor="name"
-								className="flex items-center gap-2 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 cursor-pointer"
+								className="block text-sm font-semibold text-slate-700 mb-2 cursor-pointer"
 							>
-								<User className="h-3.5 w-3.5" />
 								Display Name
 							</label>
 							<input
@@ -96,51 +68,61 @@ export function SettingsForm({ initialName, initialEmail }: SettingsFormProps) {
 								name="name"
 								defaultValue={userName}
 								placeholder="Enter your display name"
-								className="w-full rounded-xl bg-slate-50 border border-slate-200 px-4 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/10 transition-all shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.06)]"
+								className="w-full rounded-xl bg-slate-50 border border-slate-200 px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/20 transition-all"
 							/>
+						</div>
+
+						{/* Email Field (Read-only) */}
+						<div>
+							<label className="block text-sm font-semibold text-slate-700 mb-2">
+								Email Address
+							</label>
+							<div className="w-full rounded-xl bg-slate-50 border border-slate-200 px-4 py-3 text-sm text-slate-500 opacity-80 cursor-not-allowed">
+								{initialEmail}
+							</div>
+							<p className="text-xs text-slate-400 font-medium mt-2">
+								Email address cannot be changed
+							</p>
 						</div>
 
 						{/* Status Messages */}
 						{state.error && (
-							<div className="rounded-xl bg-rose-50 border border-rose-100 p-3.5 mb-5 animate-in fade-in slide-in-from-top-1 duration-200">
-								<p className="text-xs font-medium text-rose-650">
+							<div className="rounded-xl bg-rose-50 border border-rose-100 p-3.5 animate-in fade-in slide-in-from-top-1 duration-200">
+								<p className="text-sm font-medium text-rose-600">
 									{state.error}
 								</p>
 							</div>
 						)}
 
 						{state.success && (
-							<div className="rounded-xl bg-emerald-50 border border-emerald-100 p-3.5 mb-5 flex items-center gap-2 animate-in fade-in slide-in-from-top-1 duration-200">
+							<div className="rounded-xl bg-emerald-50 border border-emerald-100 p-3.5 flex items-center gap-2 animate-in fade-in slide-in-from-top-1 duration-200">
 								<Check className="h-4 w-4 text-emerald-500" />
-								<p className="text-xs font-medium text-emerald-650">
+								<p className="text-sm font-medium text-emerald-600">
 									{state.success}
 								</p>
 							</div>
 						)}
 
 						{/* Submit Button */}
-						<button
-							type="submit"
-							disabled={isPending}
-							className="btn-skeuo-primary w-full h-11 flex items-center justify-center gap-2 rounded-xl text-sm font-extrabold text-white cursor-pointer"
-						>
-							{isPending ? (
-								<>
-									<Loader2 className="h-4 w-4 animate-spin" />
-									Updating...
-								</>
-							) : (
-								"Save Changes"
-							)}
-						</button>
+						<div className="pt-2">
+							<button
+								type="submit"
+								disabled={isPending}
+								className="w-full h-11 flex items-center justify-center gap-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold shadow-sm hover:shadow transition-all disabled:opacity-70 disabled:cursor-not-allowed"
+							>
+								{isPending ? (
+									<>
+										<Loader2 className="h-4 w-4 animate-spin" />
+										Saving...
+									</>
+								) : (
+									"Save Changes"
+								)}
+							</button>
+						</div>
 					</form>
 				</div>
 			</div>
-
-			{/* Footer Note */}
-			<p className="text-center text-xs text-gray-400 mt-6 font-medium">
-				Changes will be reflected across the application
-			</p>
 		</div>
 	);
 }
