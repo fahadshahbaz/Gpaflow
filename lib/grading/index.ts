@@ -31,4 +31,4 @@ export function getUniversityGradingEngine(
 }
 
 // Re-export individual engines for direct access if needed
-export { numlEngine as numl, gcwufEngine as gcwuf };
+export { gcwufEngine as gcwuf, numlEngine as numl };

@@ -5,9 +5,8 @@ import {
 	ChevronDown,
 	LayoutDashboard,
 	LogOut,
-	Menu,
+	Plus,
 	Settings,
-	X,
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
@@ -36,6 +35,8 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 	const lastScrollY = useRef(0);
 	const dropdownRef = useRef<HTMLDivElement>(null);
 	const mobileMenuRef = useRef<HTMLDivElement>(null);
+	const tabsRef = useRef<HTMLElement>(null);
+	const pillRef = useRef<HTMLSpanElement>(null);
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -74,6 +75,50 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 		};
 	}, []);
 
+	useEffect(() => {
+		const container = tabsRef.current;
+		if (!container || !pillRef.current) return;
+
+		const updatePill = (immediate = false) => {
+			const activeTab = container.querySelector<HTMLElement>(
+				'[aria-selected="true"]',
+			);
+			if (!activeTab || !pillRef.current) return;
+
+			if (immediate) {
+				pillRef.current.style.transition = "none";
+			}
+			pillRef.current.style.transform = `translateX(${activeTab.offsetLeft}px)`;
+			pillRef.current.style.width = `${activeTab.offsetWidth}px`;
+			pillRef.current.style.height = `${activeTab.offsetHeight}px`;
+			pillRef.current.style.top = `${activeTab.offsetTop}px`;
+			if (immediate) {
+				void pillRef.current.offsetHeight; // force reflow
+				pillRef.current.style.transition = "";
+			}
+		};
+
+		updatePill(true);
+		const observer = new ResizeObserver(() => updatePill(true));
+		observer.observe(container);
+
+		return () => observer.disconnect();
+	}, []);
+
+	useEffect(() => {
+		const container = tabsRef.current;
+		if (!container || !pillRef.current) return;
+		const activeTab = container.querySelector<HTMLElement>(
+			'[aria-selected="true"]',
+		);
+		if (!activeTab) return;
+
+		pillRef.current.style.transform = `translateX(${activeTab.offsetLeft}px)`;
+		pillRef.current.style.width = `${activeTab.offsetWidth}px`;
+		pillRef.current.style.height = `${activeTab.offsetHeight}px`;
+		pillRef.current.style.top = `${activeTab.offsetTop}px`;
+	}, [pathname]);
+
 	return (
 		<div
 			className={cn(
@@ -90,32 +135,30 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 					{/* Right Section - Grouped Navigation & Profile */}
 					<div className="hidden md:flex items-center gap-4">
 						{/* Desktop Navigation */}
-						<nav className="flex items-center gap-1.5 bg-slate-100/90 border border-slate-200/50 shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_2px_8px_rgba(0,0,0,0.03)] backdrop-blur-md rounded-full p-1">
+						<nav
+							ref={tabsRef}
+							className="t-tabs flex items-center gap-1.5 bg-slate-100/90 border border-slate-200/50 shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_2px_8px_rgba(0,0,0,0.03)] backdrop-blur-md rounded-full p-1"
+						>
+							<span
+								ref={pillRef}
+								className="t-tabs-pill bg-white rounded-full border border-slate-200/80 shadow-[0_2px_4px_rgba(0,0,0,0.04),inset_0_1px_0_#ffffff]"
+								aria-hidden="true"
+							/>
 							{navItems.map((item) => {
 								const isActive = pathname === item.href;
 								return (
 									<Link
 										key={item.href}
 										href={item.href}
+										role="tab"
+										aria-selected={isActive}
 										className={cn(
-											"flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-normal transition-colors duration-200 ease-out relative",
+											"t-tab flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-normal",
 											isActive
 												? "text-slate-800"
 												: "text-slate-500 hover:text-slate-800",
 										)}
 									>
-										{isActive && (
-											<motion.div
-												layoutId="activeTab"
-												className="absolute inset-0 bg-white rounded-full border border-slate-200/80 shadow-[0_2px_4px_rgba(0,0,0,0.04),inset_0_1px_0_#ffffff]"
-												transition={{
-													type: "spring",
-													stiffness: 400,
-													damping: 30,
-												}}
-												style={{ zIndex: -1 }}
-											/>
-										)}
 										{item.title}
 									</Link>
 								);
@@ -191,70 +234,63 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 					</div>
 
 					{/* Mobile Menu Dropdown */}
-					<div className="relative md:hidden" ref={mobileMenuRef}>
-						<button
-							type="button"
-							onClick={() => setShowMobileMenu(!showMobileMenu)}
-							className="h-9 w-9 flex items-center justify-center rounded-full bg-slate-100/70 border border-slate-200/50 text-slate-650 hover:bg-slate-200/60 shadow-[inset_0_1px_0_#ffffff,0_2px_4px_rgba(0,0,0,0.03)] hover:text-slate-800 transition-colors cursor-pointer"
+					<div className="relative md:hidden w-10 h-10" ref={mobileMenuRef}>
+						<div
+							className={cn(
+								"t-morph absolute top-0 right-0 bg-white border border-slate-200/80 shadow-[0_16px_36px_-8px_rgba(0,0,0,0.08),0_4px_12px_-2px_rgba(0,0,0,0.03),inset_0_1px_0_#ffffff] z-[100]",
+							)}
+							data-open={showMobileMenu}
 						>
-							{showMobileMenu ? (
-								<X className="h-4.5 w-4.5" />
-							) : (
-								<Menu className="h-4.5 w-4.5" />
-							)}
-						</button>
-
-						<AnimatePresence>
-							{showMobileMenu && (
-								<motion.div
-									initial={{ opacity: 0, scale: 0.97, y: 4 }}
-									animate={{ opacity: 1, scale: 1, y: 0 }}
-									exit={{ opacity: 0, scale: 0.97, y: 4 }}
-									style={{ originX: 1, originY: 0 }}
-									transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-									className="absolute right-0 mt-3 w-48 rounded-[1.25rem] bg-white border border-slate-200/80 shadow-[0_16px_36px_-8px_rgba(0,0,0,0.08),0_4px_12px_-2px_rgba(0,0,0,0.03),inset_0_1px_0_#ffffff] py-1.5 z-[100] overflow-hidden backdrop-blur-md"
-								>
-									<div className="p-1.5 space-y-0.5">
-										{navItems.map((item) => {
-											const isActive = pathname === item.href;
-											return (
-												<Link
-													key={item.href}
-													href={item.href}
-													onClick={() => setShowMobileMenu(false)}
-													className={cn(
-														"flex items-center gap-3 px-3.5 py-2.5 text-sm font-normal rounded-xl transition-colors duration-200 ease-out mx-0.5 hover:bg-blue-50/70 hover:text-blue-700 border border-transparent hover:border-blue-200/70 hover:shadow-[0_4px_10px_rgba(37,99,235,0.04),inset_0_1px_0_#ffffff]",
-														isActive
-															? "text-blue-700 bg-blue-50/80 border-blue-200/50 shadow-[0_2px_4px_rgba(37,99,235,0.02),inset_0_1px_0_#ffffff]"
-															: "text-slate-600 hover:text-slate-800",
-													)}
-												>
-													<item.icon
-														className={cn(
-															"h-4 w-4 text-slate-400 group-hover:text-blue-650 transition-colors",
-															isActive && "text-blue-650",
-														)}
-													/>
-													{item.title}
-												</Link>
-											);
-										})}
-									</div>
-									<div className="border-t border-slate-100 p-1.5">
-										<form action={signOut}>
-											<button
-												type="submit"
+							<div className="t-morph-menu flex flex-col justify-between p-1.5 h-full">
+								<div className="space-y-0.5">
+									{navItems.map((item) => {
+										const isActive = pathname === item.href;
+										return (
+											<Link
+												key={item.href}
+												href={item.href}
 												onClick={() => setShowMobileMenu(false)}
-												className="group flex w-full items-center gap-3 px-3.5 py-2.5 text-sm font-normal text-rose-500 rounded-xl transition-colors duration-200 ease-out hover:bg-rose-50/85 hover:text-rose-700 border border-transparent hover:border-rose-200/70 hover:shadow-[0_4px_10px_rgba(244,63,94,0.04),inset_0_1px_0_#ffffff] cursor-pointer"
+												className={cn(
+													"flex items-center gap-3 px-3.5 py-2.5 text-sm font-normal rounded-xl transition-colors duration-200 ease-out mx-0.5 hover:bg-blue-50/70 hover:text-blue-700 border border-transparent hover:border-blue-200/70 hover:shadow-[0_4px_10px_rgba(37,99,235,0.04),inset_0_1px_0_#ffffff]",
+													isActive
+														? "text-blue-700 bg-blue-50/80 border-blue-200/50 shadow-[0_2px_4px_rgba(37,99,235,0.02),inset_0_1px_0_#ffffff]"
+														: "text-slate-600 hover:text-slate-800",
+												)}
 											>
-												<LogOut className="h-4 w-4 text-rose-450 group-hover:text-rose-650 transition-colors" />
-												Sign out
-											</button>
-										</form>
-									</div>
-								</motion.div>
-							)}
-						</AnimatePresence>
+												<item.icon
+													className={cn(
+														"h-4 w-4 text-slate-400 group-hover:text-blue-650 transition-colors",
+														isActive && "text-blue-650",
+													)}
+												/>
+												{item.title}
+											</Link>
+										);
+									})}
+								</div>
+								<div className="border-t border-slate-100 mt-1 pt-1">
+									<form action={signOut}>
+										<button
+											type="submit"
+											onClick={() => setShowMobileMenu(false)}
+											className="group flex w-full items-center gap-3 px-3.5 py-2 text-sm font-normal text-rose-500 rounded-xl transition-colors duration-200 ease-out hover:bg-rose-50/85 hover:text-rose-700 border border-transparent hover:border-rose-200/70 hover:shadow-[0_4px_10px_rgba(244,63,94,0.04),inset_0_1px_0_#ffffff] cursor-pointer"
+										>
+											<LogOut className="h-4 w-4 text-rose-450 group-hover:text-rose-650 transition-colors" />
+											Sign out
+										</button>
+									</form>
+								</div>
+							</div>
+
+							<button
+								type="button"
+								onClick={() => setShowMobileMenu(!showMobileMenu)}
+								className="t-morph-plus text-slate-650 hover:text-slate-800"
+								aria-expanded={showMobileMenu}
+							>
+								<Plus className="h-5 w-5" />
+							</button>
+						</div>
 					</div>
 				</div>
 			</header>

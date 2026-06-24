@@ -161,8 +161,6 @@ export default function AuthLayout({
 							</svg>
 						</div>
 					</div>
-
-
 				</div>
 			</div>
 		</main>
