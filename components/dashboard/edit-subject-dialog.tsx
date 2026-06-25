@@ -284,17 +284,18 @@ export function EditSubjectDialog({
 					<DialogFooter className="gap-2 pt-2">
 						<Button
 							type="button"
-							variant="ghost"
+							variant="skeuoWhite"
 							onClick={() => onOpenChange(false)}
 							disabled={loading}
-							className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 h-9 px-4 rounded-xl"
+							className="h-9 px-4 rounded-xl text-xs font-bold cursor-pointer"
 						>
 							Cancel
 						</Button>
 						<Button
 							type="submit"
+							variant="skeuoPrimary"
 							disabled={loading || !name.trim() || !marks || !creditHours}
-							className="bg-primary hover:bg-primary-600 text-primary-foreground font-medium h-9 px-4 rounded-xl disabled:opacity-50"
+							className="h-9 px-4 rounded-xl text-xs font-extrabold cursor-pointer disabled:opacity-50"
 						>
 							{loading ? (
 								<span className="flex items-center gap-2">

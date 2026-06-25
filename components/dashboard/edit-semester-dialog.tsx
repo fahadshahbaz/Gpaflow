@@ -103,17 +103,18 @@ export function EditSemesterDialog({
 					<DialogFooter className="gap-3">
 						<Button
 							type="button"
-							variant="ghost"
+							variant="skeuoWhite"
 							onClick={() => onOpenChange(false)}
 							disabled={loading}
-							className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 h-11 px-5 rounded-xl"
+							className="h-11 px-5 rounded-xl text-xs font-bold cursor-pointer"
 						>
 							Cancel
 						</Button>
 						<Button
 							type="submit"
+							variant="skeuoPrimary"
 							disabled={loading || !name.trim() || name === currentName}
-							className="bg-primary hover:bg-primary-600 text-primary-foreground font-medium h-11 px-6 rounded-xl transition-all disabled:opacity-50"
+							className="h-11 px-6 rounded-xl text-xs font-extrabold cursor-pointer disabled:opacity-50"
 						>
 							{loading ? "Saving..." : "Save Changes"}
 						</Button>

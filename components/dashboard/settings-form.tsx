@@ -1,6 +1,7 @@
 "use client";
 
 import { Check, Loader2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useActionState, useEffect } from "react";
 import { type AuthState, updateUserName } from "@/lib/supabase/auth";
@@ -99,20 +100,21 @@ export function SettingsForm({ initialName, initialEmail }: SettingsFormProps) {
 
 						{/* Submit Button */}
 						<div className="pt-2">
-							<button
+							<Button
 								type="submit"
+								variant="skeuoPrimary"
 								disabled={isPending}
-								className="w-full h-11 flex items-center justify-center gap-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold shadow-sm hover:shadow transition-all disabled:opacity-70 disabled:cursor-not-allowed"
+								className="w-full h-11 rounded-xl text-sm font-bold cursor-pointer"
 							>
 								{isPending ? (
 									<>
-										<Loader2 className="h-4 w-4 animate-spin" />
+										<Loader2 className="h-4 w-4 animate-spin mr-2" />
 										Saving...
 									</>
 								) : (
 									"Save Changes"
 								)}
-							</button>
+							</Button>
 						</div>
 					</form>
 				</div>

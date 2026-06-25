@@ -6,20 +6,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Logo } from "@/components/ui/logo";
-import { Marquee } from "@/components/ui/marquee";
 import { cn } from "@/lib/utils";
 
 export default function HomePage() {
 	const [isOpen, setIsOpen] = useState(false);
-
-	const supportedSystems = [
-		"Standard 4.0 GPA",
-		"NUML Scale",
-		"GCWUF Scale",
-		"WAM 100",
-		"Percentage System",
-		"Letter Grades",
-	];
 
 	return (
 		<main className="relative min-h-screen bg-[#f8fafc] overflow-x-hidden selection:bg-blue-100 font-sans flex flex-col justify-between">
@@ -33,7 +23,7 @@ export default function HomePage() {
 			<header className="fixed top-4 left-0 right-0 z-50 px-4 sm:px-6">
 				<div
 					className={cn(
-						"t-acc max-w-md sm:max-w-3xl mx-auto bg-white/75 backdrop-blur-xl border border-slate-200/50 rounded-2xl px-4 py-3 overflow-hidden transition-all duration-300 ease-out",
+						"t-acc max-w-md sm:max-w-3xl mx-auto bg-white border border-slate-200/50 rounded-2xl px-4 py-3 overflow-hidden transition-[box-shadow,translate,transform] duration-300 ease-out",
 						isOpen
 							? "shadow-[0_24px_48px_-12px_rgba(15,23,42,0.15),0_12px_24px_-8px_rgba(15,23,42,0.1),inset_0_1px_0_#ffffff] translate-y-1"
 							: "shadow-[0_8px_30px_rgba(15,23,42,0.03),inset_0_1px_0_#ffffff]",
@@ -155,33 +145,21 @@ export default function HomePage() {
 				</div>
 			</section>
 
-			{/* Subtly Integrated Fading Marquee */}
-			<div className="relative z-10 py-5 w-full mt-auto bg-transparent overflow-hidden border-t border-slate-200/30">
-				<div
-					className="relative w-full"
-					style={{
-						WebkitMaskImage:
-							"linear-gradient(to right, transparent, black 15%, black 85%, transparent)",
-						maskImage:
-							"linear-gradient(to right, transparent, black 15%, black 85%, transparent)",
-					}}
-				>
-					<Marquee
-						speed={35}
-						className="text-slate-500/60 font-extrabold text-xs tracking-wide"
+			{/* Minimal No-Background Footer */}
+			<footer className="relative z-10 w-full py-6 mt-auto bg-transparent text-center text-xs text-slate-400 font-medium">
+				<p>
+					© {new Date().getFullYear()} GPAFlow. Made by{" "}
+					<a
+						href="https://fahadshahbaz.dev"
+						target="_blank"
+						rel="noopener noreferrer"
+						className="hover:text-slate-700 transition-colors duration-200 underline underline-offset-2"
 					>
-						{supportedSystems.map((system, idx) => (
-							<div
-								key={`${system}-${idx}`}
-								className="px-6 flex items-center gap-2"
-							>
-								<div className="h-1 w-1 rounded-full bg-blue-500/30" />
-								{system}
-							</div>
-						))}
-					</Marquee>
-				</div>
-			</div>
+						Fahad
+					</a>
+					.
+				</p>
+			</footer>
 		</main>
 	);
 }

@@ -136,17 +136,18 @@ export function SemesterList({ semesters, university }: SemesterListProps) {
 													e.stopPropagation();
 													setEditingSemester(semester);
 												}}
-												className="text-gray-700 hover:text-gray-900 hover:bg-gray-50 cursor-pointer text-sm rounded-lg"
+												className="cursor-pointer text-sm rounded-lg"
 											>
 												<Pencil className="h-4 w-4 mr-2 text-gray-400" />
 												Edit
 											</DropdownMenuItem>
 											<DropdownMenuItem
+												variant="destructive"
 												onClick={(e) => {
 													e.stopPropagation();
 													setDeletingSemester(semester);
 												}}
-												className="text-destructive hover:text-destructive-700 hover:bg-destructive-50 cursor-pointer text-sm rounded-lg"
+												className="cursor-pointer text-sm rounded-lg"
 											>
 												<Trash2 className="h-4 w-4 mr-2" />
 												Delete
@@ -235,12 +236,13 @@ export function SemesterList({ semesters, university }: SemesterListProps) {
 																					semesterId: semester.id,
 																				});
 																			}}
-																			className="text-gray-700 hover:text-gray-900 hover:bg-gray-50 cursor-pointer text-xs rounded-lg"
+																			className="cursor-pointer text-xs rounded-lg"
 																		>
 																			<Pencil className="h-3.5 w-3.5 mr-2 text-gray-400" />
 																			Edit
 																		</DropdownMenuItem>
 																		<DropdownMenuItem
+																			variant="destructive"
 																			onClick={(e) => {
 																				e.stopPropagation();
 																				setDeletingSubject({
@@ -248,7 +250,7 @@ export function SemesterList({ semesters, university }: SemesterListProps) {
 																					semesterId: semester.id,
 																				});
 																			}}
-																			className="text-destructive hover:text-destructive-700 hover:bg-destructive-50 cursor-pointer text-xs rounded-lg"
+																			className="cursor-pointer text-xs rounded-lg"
 																		>
 																			<Trash2 className="h-3.5 w-3.5 mr-2" />
 																			Delete

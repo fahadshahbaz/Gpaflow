@@ -130,11 +130,11 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 				top: "calc(1rem + var(--banner-offset, 0px))",
 			}}
 		>
-			<header className="max-w-[1600px] mx-auto w-full relative">
+			<header className="max-w-400 mx-auto w-full relative">
 				<div
 					ref={mobileMenuRef}
 					className={cn(
-						"t-acc w-full max-w-md mx-auto md:max-w-none bg-white/75 md:bg-transparent backdrop-blur-xl md:backdrop-blur-none border border-slate-200/50 md:border-transparent rounded-2xl md:rounded-none transition-all duration-300 ease-out flex flex-col md:flex-row md:items-center md:justify-between md:h-[60px] overflow-hidden md:overflow-visible",
+						"t-acc w-full max-w-md mx-auto md:max-w-none bg-white md:bg-transparent md:backdrop-blur-none border border-slate-200/50 md:border-transparent rounded-2xl md:rounded-none transition-[background-color,border-color,border-radius,box-shadow,translate,transform] duration-300 ease-out flex flex-col md:flex-row md:items-center md:justify-between md:h-15 overflow-hidden md:overflow-visible",
 						isMobileOpen
 							? "shadow-[0_24px_48px_-12px_rgba(15,23,42,0.15),0_12px_24px_-8px_rgba(15,23,42,0.1),inset_0_1px_0_#ffffff] translate-y-1"
 							: "shadow-[0_8px_30px_rgba(15,23,42,0.03),inset_0_1px_0_#ffffff] md:shadow-none"
@@ -142,7 +142,7 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 					data-open={isMobileOpen}
 				>
 					{/* Top Row: Logo & Mobile Trigger always visible on mobile, Full Row on Desktop */}
-					<div className="h-[60px] flex items-center justify-between shrink-0 w-full px-4 md:px-0">
+					<div className="h-15 flex items-center justify-between shrink-0 w-full px-4 md:px-0">
 						{/* Logo */}
 						<Logo size="sm" href="/dashboard" />
 
@@ -151,11 +151,11 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 							{/* Desktop Navigation */}
 							<nav
 								ref={tabsRef}
-								className="t-tabs flex items-center gap-1.5 transition-all duration-500 ease-out rounded-full p-1 bg-slate-100/90 backdrop-blur-md border border-slate-200/50 shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_2px_8px_rgba(0,0,0,0.03)]"
+								className="t-tabs flex items-center gap-1.5 transition-all duration-500 ease-out rounded-full p-1 bg-slate-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_2px_8px_rgba(0,0,0,0.03)]"
 							>
 								<span
 									ref={pillRef}
-									className="t-tabs-pill bg-white rounded-full border border-slate-200/80 shadow-[0_2px_4px_rgba(0,0,0,0.04),inset_0_1px_0_#ffffff]"
+									className="t-tabs-pill bg-white rounded-full shadow-[0_2px_4px_rgba(0,0,0,0.04),inset_0_1px_0_#ffffff]"
 									aria-hidden="true"
 								/>
 								{navItems.map((item) => {
@@ -181,15 +181,15 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 							</nav>
 
 							{/* Profile Dropdown Container */}
-							<div className="flex items-center transition-all duration-500 ease-out rounded-full p-1 h-12 bg-slate-100/90 backdrop-blur-md border border-slate-200/50 shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_2px_8px_rgba(0,0,0,0.03)]">
+							<div className="flex items-center transition-all duration-500 ease-out rounded-full p-1 h-12 bg-slate-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_2px_8px_rgba(0,0,0,0.03)]">
 								{/* Profile Dropdown */}
 								<div className="relative" ref={dropdownRef}>
 									<button
 										type="button"
 										onClick={() => setShowDropdown(!showDropdown)}
-										className="flex items-center gap-2 rounded-full pl-1 pr-3 h-10 bg-white border border-slate-200/80 shadow-[0_2px_4px_rgba(0,0,0,0.04),inset_0_1px_0_#ffffff] hover:border-slate-300 transition-[border-color,transform] duration-200 ease-out active:scale-[0.97] cursor-pointer"
+										className="flex items-center gap-2 rounded-full pl-1 pr-3 h-10 bg-white shadow-[0_2px_4px_rgba(0,0,0,0.04),inset_0_1px_0_#ffffff] transition-[transform] duration-200 ease-out active:scale-[0.97] cursor-pointer"
 									>
-										<div className="h-8 w-8 rounded-full bg-gradient-to-b from-blue-400 to-blue-600 flex items-center justify-center border border-blue-500/15 shadow-[0_2px_4px_rgba(37,99,235,0.1)] flex-shrink-0 overflow-hidden">
+										<div className="h-8 w-8 rounded-full bg-linear-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-[0_2px_4px_rgba(37,99,235,0.1)] shrink-0 overflow-hidden">
 											<span className="text-xs font-bold text-white tracking-wide">
 												{userName?.charAt(0).toUpperCase() ||
 													userEmail?.charAt(0).toUpperCase() ||
@@ -212,7 +212,7 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 												exit={{ opacity: 0, scale: 0.97, y: 4 }}
 												style={{ originX: 1, originY: 0 }}
 												transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-												className="absolute right-0 mt-3 w-64 rounded-[1.25rem] bg-white border border-slate-200/80 shadow-[0_16px_36px_-8px_rgba(0,0,0,0.08),0_4px_12px_-2px_rgba(0,0,0,0.03),inset_0_1px_0_#ffffff] pb-2 z-[100] overflow-hidden backdrop-blur-md"
+												className="absolute right-0 mt-3 w-64 rounded-[1.25rem] bg-white border border-slate-200/80 shadow-[0_16px_36px_-8px_rgba(0,0,0,0.08),0_4px_12px_-2px_rgba(0,0,0,0.03),inset_0_1px_0_#ffffff] pb-2 z-[100] overflow-hidden"
 											>
 												<div className="px-4.5 py-4 border-b border-slate-100 bg-slate-50/40">
 													<p className="text-sm font-extrabold text-slate-800 leading-tight">
@@ -224,17 +224,17 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 														href="/dashboard/settings"
 														prefetch={true}
 														onClick={() => setShowDropdown(false)}
-														className="group flex items-center gap-3 px-3.5 py-2.5 text-sm font-normal text-slate-600 rounded-xl transition-colors duration-200 ease-out hover:bg-blue-50/70 hover:text-blue-700 border border-transparent hover:border-blue-200/70 hover:shadow-[0_4px_10px_rgba(37,99,235,0.04),inset_0_1px_0_#ffffff]"
+														className="group flex items-center gap-3 px-3.5 py-2.5 text-sm font-normal text-slate-600 hover:text-slate-800 hover:bg-slate-50 rounded-xl transition-colors duration-200 ease-out"
 													>
-														<Settings className="h-4 w-4 text-slate-400 group-hover:text-blue-650 transition-colors" />
+														<Settings className="h-4 w-4 text-slate-400 group-hover:text-slate-600 transition-colors" />
 														Settings
 													</Link>
 													<form action={signOut}>
 														<button
 															type="submit"
-															className="group flex w-[calc(100%-1px)] items-center gap-3 px-3.5 py-2.5 text-sm font-normal text-rose-500 rounded-xl transition-colors duration-200 ease-out hover:bg-rose-50/85 hover:text-rose-700 border border-transparent hover:border-rose-200/70 hover:shadow-[0_4px_10px_rgba(244,63,94,0.04),inset_0_1px_0_#ffffff] cursor-pointer"
+															className="group flex w-[calc(100%-1px)] items-center gap-3 px-3.5 py-2.5 text-sm font-normal text-rose-500 hover:text-rose-600 hover:bg-rose-50/50 rounded-xl transition-colors duration-200 ease-out cursor-pointer"
 														>
-															<LogOut className="h-4 w-4 text-rose-450 group-hover:text-rose-650 transition-colors" />
+															<LogOut className="h-4 w-4 text-rose-450 group-hover:text-rose-600 transition-colors" />
 															Sign Out
 														</button>
 													</form>
@@ -276,16 +276,16 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 											prefetch={true}
 											onClick={() => setIsMobileOpen(false)}
 											className={cn(
-												"group flex items-center gap-3 px-3.5 py-2.5 text-sm font-normal rounded-xl transition-colors duration-200 ease-out mx-0.5 hover:bg-blue-50/70 hover:text-blue-700 border border-transparent hover:border-blue-200/70 hover:shadow-[0_4px_10px_rgba(37,99,235,0.04),inset_0_1px_0_#ffffff]",
+												"group flex items-center gap-3 px-3.5 py-2.5 text-sm font-normal rounded-xl transition-colors duration-200 ease-out mx-0.5",
 												isActive
-													? "text-blue-700 bg-blue-50/80 border-blue-200/50 shadow-[0_2px_4px_rgba(37,99,235,0.02),inset_0_1px_0_#ffffff]"
-													: "text-slate-600 hover:text-slate-800",
+													? "text-blue-700 bg-blue-50/80"
+													: "text-slate-600 hover:text-slate-800 hover:bg-slate-50",
 											)}
 										>
 											<item.icon
 												className={cn(
-													"h-4 w-4 text-slate-400 group-hover:text-blue-650 transition-colors",
-													isActive && "text-blue-650",
+													"h-4 w-4 text-slate-400 group-hover:text-slate-600 transition-colors",
+													isActive && "text-blue-600",
 												)}
 											/>
 											{item.title}
@@ -297,9 +297,9 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 										<button
 											type="submit"
 											onClick={() => setIsMobileOpen(false)}
-											className="group flex w-full items-center gap-3 px-3.5 py-2.5 text-sm font-normal text-rose-500 rounded-xl transition-colors duration-200 ease-out hover:bg-rose-50/85 hover:text-rose-700 border border-transparent hover:border-rose-200/70 hover:shadow-[0_4px_10px_rgba(244,63,94,0.04),inset_0_1px_0_#ffffff] cursor-pointer"
+											className="group flex w-full items-center gap-3 px-3.5 py-2.5 text-sm font-normal text-rose-500 hover:text-rose-600 hover:bg-rose-50/50 rounded-xl transition-colors duration-200 ease-out cursor-pointer"
 										>
-											<LogOut className="h-4 w-4 text-rose-450 group-hover:text-rose-650 transition-colors" />
+											<LogOut className="h-4 w-4 text-rose-450 group-hover:text-rose-600 transition-colors" />
 											Sign out
 										</button>
 									</form>

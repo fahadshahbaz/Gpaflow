@@ -160,7 +160,7 @@ export function GPATrendChart({
 											if (active && payload && payload.length) {
 												const data = payload[0].payload as ChartDataPoint;
 												return (
-													<div className="flex flex-col items-center select-none pointer-events-none transition-all duration-150 animate-fade-in">
+													<div className="flex flex-col items-center select-none pointer-events-none transition-all duration-150 animate-fade-in -translate-x-1/2">
 														{/* Floating Pill */}
 														<div className="bg-slate-900/95 text-slate-100 border border-slate-800 rounded-full px-4 py-1.5 shadow-[0_12px_30px_rgba(15,23,42,0.25)] flex items-center gap-2.5 text-[11px] font-medium backdrop-blur-md">
 															<span className="text-white font-bold">
@@ -195,16 +195,6 @@ export function GPATrendChart({
 											}
 											return null;
 										}}
-									/>
-
-									{/* Connecting shaded area region underneath */}
-									<Area
-										type="linear"
-										dataKey="sgpa"
-										stroke="transparent"
-										fill="url(#connectorGradient)"
-										activeDot={false}
-										dot={false}
 									/>
 
 									{/* Histogram bars */}
@@ -257,6 +247,17 @@ export function GPATrendChart({
 											);
 										})}
 									</Bar>
+
+									{/* Connecting shaded area region underneath */}
+									<Area
+										type="linear"
+										dataKey="sgpa"
+										stroke="transparent"
+										fill="url(#connectorGradient)"
+										activeDot={false}
+										dot={false}
+										tooltipType="none"
+									/>
 								</ComposedChart>
 							</ResponsiveContainer>
 						</div>

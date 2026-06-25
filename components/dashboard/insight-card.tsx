@@ -155,7 +155,7 @@ export function InsightCard({ semesters, cgpa }: InsightCardProps) {
 							Insights
 						</span>
 					</div>
-					<div className="h-9 w-9 rounded-xl bg-white/10 border border-white/20 backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_2px_4px_rgba(0,0,0,0.05)] text-white flex items-center justify-center flex-shrink-0 transition-transform duration-300 hover:rotate-12">
+					<div className="h-9 w-9 rounded-xl bg-white/20 border border-white/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_2px_4px_rgba(0,0,0,0.05)] text-white flex items-center justify-center flex-shrink-0 transition-transform duration-300 hover:rotate-12">
 						<Brain className="h-4.5 w-4.5" />
 					</div>
 				</div>

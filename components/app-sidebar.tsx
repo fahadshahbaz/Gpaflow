@@ -50,7 +50,7 @@ export function AppSidebar({ userName, userEmail }: AppSidebarProps) {
 					<motion.div
 						whileHover={{ scale: 1.05 }}
 						whileTap={{ scale: 0.98 }}
-						className="flex h-10 w-10 aspect-square items-center justify-center rounded-full bg-gradient-to-br from-primary to-destructive shadow-lg shadow-primary/20"
+						className="flex h-10 w-10 aspect-square items-center justify-center rounded-full bg-linear-to-br from-primary to-destructive shadow-lg shadow-primary/20"
 					>
 						<GraduationCap className="h-5 w-5 text-primary-foreground" />
 					</motion.div>
@@ -116,7 +116,7 @@ export function AppSidebar({ userName, userEmail }: AppSidebarProps) {
 				{/* Stats Mini Card */}
 				<SidebarGroup className="mt-6">
 					<SidebarGroupContent>
-						<div className="rounded-2xl bg-gradient-to-br from-primary/10 to-destructive/10 border border-primary/20 p-4">
+						<div className="rounded-2xl bg-linear-to-br from-primary/10 to-destructive/10 border border-primary/20 p-4">
 							<div className="flex items-center gap-2 mb-3">
 								<Award className="h-4 w-4 text-primary" />
 								<span className="text-xs font-semibold text-foreground">
@@ -129,7 +129,7 @@ export function AppSidebar({ userName, userEmail }: AppSidebarProps) {
 									<span className="text-primary font-semibold">3.48</span>
 								</div>
 								<div className="h-1.5 bg-secondary rounded-full overflow-hidden">
-									<div className="h-full w-[87%] bg-gradient-to-r from-primary to-destructive rounded-full" />
+									<div className="h-full w-[87%] bg-linear-to-br from-primary to-destructive rounded-full" />
 								</div>
 								<p className="text-[10px] text-gray-500">87% to 4.0 target</p>
 							</div>
@@ -141,7 +141,7 @@ export function AppSidebar({ userName, userEmail }: AppSidebarProps) {
 			<SidebarFooter className="p-4">
 				<div className="rounded-2xl bg-[#1a1a1a] border border-[#2a2a2a] p-4">
 					<div className="flex items-center gap-3 mb-4">
-						<div className="h-9 w-9 rounded-full bg-gradient-to-br from-gray-700 to-gray-600 flex items-center justify-center text-xs font-bold text-white">
+						<div className="h-9 w-9 rounded-full bg-linear-to-br from-gray-700 to-gray-600 flex items-center justify-center text-xs font-bold text-white">
 							{userName?.charAt(0).toUpperCase() ||
 								userEmail?.charAt(0).toUpperCase()}
 						</div>

@@ -20,11 +20,11 @@ const buttonVariants = cva(
 					"bg-destructive/10 hover:bg-destructive/20 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/20 text-destructive focus-visible:border-destructive/40 dark:hover:bg-destructive/30",
 				link: "text-primary underline-offset-4 hover:underline",
 				skeuoPrimary:
-					"btn-skeuo-primary text-white hover:text-white border-transparent hover:border-transparent active:scale-[0.98]",
+					"btn-skeuo-primary text-white hover:text-white",
 				skeuoWhite:
-					"btn-skeuo-white text-gray-900 dark:btn-skeuo-dark dark:text-gray-100 border-transparent hover:border-transparent active:scale-[0.98]",
+					"btn-skeuo-white text-gray-900 dark:btn-skeuo-dark dark:text-gray-100",
 				skeuoGlass:
-					"btn-skeuo-glass text-gray-800 dark:text-gray-100 border-transparent hover:border-transparent active:scale-[0.98]",
+					"btn-skeuo-glass text-gray-800 dark:text-gray-100",
 			},
 			size: {
 				default:
@@ -76,7 +76,7 @@ function Button({
 			data-slot="button"
 			data-variant={variant}
 			data-size={size}
-			whileTap={{ scale: 0.98 }}
+			whileTap={{ scale: 0.96 }}
 			transition={{ type: "spring", stiffness: 400, damping: 25 }}
 			className={cn(buttonVariants({ variant, size, className }))}
 			{...props}

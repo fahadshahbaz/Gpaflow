@@ -45,11 +45,9 @@
 	--muted: #f1f5f9;
 	--muted-foreground: #6b7280;
 
-	/* Accent - Blue (Interactive) */
-	--accent: #eff6ff;
-	/* Blue-50 equivalent for hover backgrounds */
-	--accent-foreground: #1d4ed8;
-	/* Blue-700 equivalent for hover text */
+	/* Accent - Gray (Interactive) */
+	--accent: #f1f5f9;
+	--accent-foreground: #0f172a;
 
 	/* Success - Green */
 	--success: #22c55e;
@@ -404,17 +402,11 @@
 	.t-acc-panel-inner {
 		overflow: hidden;
 		opacity: 0;
-		filter: blur(2px);
-		transition:
-			opacity var(--acc-collapse) var(--acc-ease),
-			filter var(--acc-collapse) var(--acc-ease);
+		transition: opacity var(--acc-collapse) var(--acc-ease);
 	}
 	.t-acc[data-open="true"] .t-acc-panel-inner {
 		opacity: 1;
-		filter: blur(0);
-		transition:
-			opacity var(--acc-expand) var(--acc-ease),
-			filter var(--acc-expand) var(--acc-ease);
+		transition: opacity var(--acc-expand) var(--acc-ease);
 	}
 	.t-acc-chevron {
 		display: inline-flex;
