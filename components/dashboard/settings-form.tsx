@@ -69,9 +69,9 @@ export function SettingsForm({ initialName, initialEmail }: SettingsFormProps) {
 
 						{/* Email Field (Read-only) */}
 						<div>
-							<label className="block text-sm font-semibold text-slate-700 mb-2">
+							<span className="block text-sm font-semibold text-slate-700 mb-2">
 								Email Address
-							</label>
+							</span>
 							<div className="w-full rounded-xl bg-slate-50 border border-slate-200 px-4 py-3 text-sm text-slate-500 opacity-80 cursor-not-allowed">
 								{initialEmail}
 							</div>

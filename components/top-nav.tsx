@@ -277,6 +277,7 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 								onClick={() => setIsMobileOpen(!isMobileOpen)}
 								className="flex h-10 w-10 items-center justify-center rounded-xl text-slate-650 hover:text-slate-900 hover:bg-slate-100/50 transition-all duration-200 active:scale-90 cursor-pointer"
 								aria-expanded={isMobileOpen}
+								aria-label="Toggle navigation menu"
 							>
 								{isMobileOpen ? (
 									<X className="h-5 w-5 animate-in fade-in zoom-in-75 duration-150" />
