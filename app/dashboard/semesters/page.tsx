@@ -18,7 +18,7 @@ export default async function SemestersPage() {
 		(user.user_metadata?.university as UniversitySlug) || "numl";
 
 	return (
-		<div className="max-w-[1600px] mx-auto px-6 py-8">
+		<div className="max-w-[1600px] mx-auto px-4 sm:px-6 py-8">
 			{/* Page Header */}
 			<div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-8">
 				<div>
@@ -33,7 +33,7 @@ export default async function SemestersPage() {
 			</div>
 
 			{/* Semester List */}
-			<div className="rounded-3xl bg-[#f8fafc] border border-slate-200/60 shadow-[inset_0_1.5px_3.5px_rgba(0,0,0,0.04)] p-6">
+			<div className="rounded-3xl bg-[#f8fafc] border border-slate-200/60 shadow-[inset_0_1.5px_3.5px_rgba(0,0,0,0.04)] p-4 sm:p-6">
 				<div className="mb-6">
 					<h2 className="text-lg font-semibold text-gray-900">
 						Academic Records

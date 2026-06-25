@@ -96,7 +96,7 @@ export function StatsCards({
 							</span>
 							{gpaChange !== null && (
 								<div
-									className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-normal border shadow-[inset_0_1px_0_rgba(255,255,255,0.6),0_1.5px_3px_rgba(0,0,0,0.03)] mb-0.5 ${
+									className={`flex items-center gap-1 px-1.5 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-normal border shadow-[inset_0_1px_0_rgba(255,255,255,0.6),0_1.5px_3px_rgba(0,0,0,0.03)] mb-0.5 ${
 										gpaChange >= 0
 											? "bg-emerald-50/80 border-emerald-200/50 text-emerald-600"
 											: "bg-rose-50/80 border-rose-200/50 text-rose-600"
@@ -135,7 +135,7 @@ export function StatsCards({
 			</div>
 
 			{/* Credit Hours */}
-			<div className="col-span-6 md:col-span-3 lg:col-span-2">
+			<div className="col-span-6 md:col-span-6 lg:col-span-2">
 				<div className="card-skeuo rounded-[32px] p-6 h-full flex flex-col justify-between">
 					<div>
 						<div className="flex items-center justify-between mb-3">
@@ -157,7 +157,7 @@ export function StatsCards({
 			</div>
 
 			{/* Semesters */}
-			<div className="col-span-6 md:col-span-3 lg:col-span-2">
+			<div className="col-span-6 md:col-span-6 lg:col-span-2">
 				<div className="card-skeuo rounded-[32px] p-6 h-full flex flex-col justify-between">
 					<div>
 						<div className="flex items-center justify-between mb-3">
@@ -203,7 +203,7 @@ export function StatsCards({
 						<div className="flex items-center gap-2">
 							{semesterCount > 0 && !isEditing && (
 								<span
-									className={`px-2.5 py-1 rounded-full text-xs font-normal border shadow-[inset_0_1px_0_rgba(255,255,255,0.6),0_1.5px_3px_rgba(0,0,0,0.03)] ${
+									className={`px-1.5 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-normal border shadow-[inset_0_1px_0_rgba(255,255,255,0.6),0_1.5px_3px_rgba(0,0,0,0.03)] ${
 										isTargetMet
 											? "bg-emerald-50/80 border-emerald-200/50 text-emerald-600"
 											: "bg-amber-50/80 border-amber-200/50 text-amber-600"

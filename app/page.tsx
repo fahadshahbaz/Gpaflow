@@ -23,51 +23,17 @@ export default function HomePage() {
 
 	return (
 		<main className="relative min-h-screen bg-[#f8fafc] overflow-x-hidden selection:bg-blue-100 font-sans flex flex-col justify-between">
-			{/* Ambient Light & repeating Dot Grid Background */}
+			{/* Ambient Light Background */}
 			<div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-				<svg
-					className="absolute inset-0 w-full h-full opacity-[0.9]"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					<title>Dot Grid Background</title>
-					<defs>
-						<pattern
-							id="dotGrid"
-							width="36"
-							height="36"
-							patternUnits="userSpaceOnUse"
-						>
-							<circle cx="2" cy="2" r="1.2" fill="#cbd5e1" />
-						</pattern>
-						<linearGradient id="gridFade" x1="0%" y1="0%" x2="0%" y2="100%">
-							<stop offset="0%" stopColor="white" stopOpacity="0.9" />
-							<stop offset="15%" stopColor="white" stopOpacity="0.9" />
-							<stop offset="50%" stopColor="white" stopOpacity="0.4" />
-							<stop offset="85%" stopColor="white" stopOpacity="0.9" />
-							<stop offset="100%" stopColor="white" stopOpacity="0.9" />
-						</linearGradient>
-						<mask id="gridMask">
-							<rect width="100%" height="100%" fill="url(#gridFade)" />
-						</mask>
-					</defs>
-					{/* Render grid from top to bottom with vertical fade mask */}
-					<rect
-						width="100%"
-						height="100%"
-						fill="url(#dotGrid)"
-						mask="url(#gridMask)"
-					/>
-				</svg>
-
-				<div className="absolute inset-0 bg-noise opacity-[0.015] mix-blend-overlay" />
-				<div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[80vw] h-[50vh] rounded-full bg-gradient-to-b from-blue-200/35 via-blue-100/5 to-transparent blur-[110px]" />
+				<div className="absolute inset-0 bg-noise opacity-[0.015] mix-blend-overlay hidden sm:block" />
+				<div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[80vw] h-[50vh] rounded-full bg-gradient-to-b from-blue-200/35 via-blue-100/5 to-transparent blur-[60px] sm:blur-[110px]" />
 			</div>
 
 			{/* Floating Glassmorphic Navigation */}
 			<header className="fixed top-4 left-0 right-0 z-50 px-4 sm:px-6">
 				<div
 					className={cn(
-						"t-acc max-w-3xl mx-auto bg-white/75 backdrop-blur-xl border border-slate-200/50 rounded-2xl px-4 py-3 overflow-hidden transition-all duration-300 ease-out",
+						"t-acc max-w-md sm:max-w-3xl mx-auto bg-white/75 backdrop-blur-xl border border-slate-200/50 rounded-2xl px-4 py-3 overflow-hidden transition-all duration-300 ease-out",
 						isOpen
 							? "shadow-[0_24px_48px_-12px_rgba(15,23,42,0.15),0_12px_24px_-8px_rgba(15,23,42,0.1),inset_0_1px_0_#ffffff] translate-y-1"
 							: "shadow-[0_8px_30px_rgba(15,23,42,0.03),inset_0_1px_0_#ffffff]",
@@ -95,7 +61,7 @@ export default function HomePage() {
 						<button
 							type="button"
 							onClick={() => setIsOpen(!isOpen)}
-							className="t-acc-head flex sm:hidden h-9 w-9 items-center justify-center rounded-xl btn-skeuo-white text-slate-650"
+							className="t-acc-head flex sm:hidden h-9 w-9 items-center justify-center rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100/50 transition-all duration-200 active:scale-90 cursor-pointer"
 							aria-expanded={isOpen}
 						>
 							<div

@@ -2,7 +2,7 @@
 
 import { Check, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useActionState, useEffect, useState } from "react";
+import { useActionState, useEffect } from "react";
 import { type AuthState, updateUserName } from "@/lib/supabase/auth";
 
 interface SettingsFormProps {
@@ -12,16 +12,10 @@ interface SettingsFormProps {
 
 export function SettingsForm({ initialName, initialEmail }: SettingsFormProps) {
 	const router = useRouter();
-	const [userName, setUserName] = useState(initialName);
 	const [state, formAction, isPending] = useActionState<AuthState, FormData>(
 		updateUserName,
 		{},
 	);
-
-	// Sync local state when server props update (e.g. after router.refresh)
-	useEffect(() => {
-		setUserName(initialName);
-	}, [initialName]);
 
 	// Refresh server components to update layouts (like TopNav) on success
 	useEffect(() => {
@@ -35,24 +29,24 @@ export function SettingsForm({ initialName, initialEmail }: SettingsFormProps) {
 			{/* Settings Card */}
 			<div className="bg-white border border-slate-200/60 shadow-sm rounded-2xl overflow-hidden">
 				{/* Avatar / Profile Header */}
-				<div className="p-8 border-b border-slate-100 flex items-center gap-5">
+				<div className="p-6 sm:p-8 border-b border-slate-100 flex flex-col sm:flex-row items-center sm:items-start gap-5 text-center sm:text-left">
 					<div className="h-20 w-20 rounded-full bg-gradient-to-b from-blue-500 to-blue-600 flex items-center justify-center text-white border border-blue-500/20 shadow-sm flex-shrink-0 overflow-hidden">
 						<span className="text-3xl font-bold">
-							{userName?.charAt(0)?.toUpperCase() ||
+							{initialName?.charAt(0)?.toUpperCase() ||
 								initialEmail?.charAt(0)?.toUpperCase() ||
 								"U"}
 						</span>
 					</div>
 					<div>
 						<h1 className="text-2xl font-bold text-slate-900">
-							{userName || "Your Profile"}
+							{initialName || "Your Profile"}
 						</h1>
 						<p className="text-sm text-slate-500 mt-1">{initialEmail}</p>
 					</div>
 				</div>
 
 				{/* Form Section */}
-				<div className="p-8">
+				<div className="p-6 sm:p-8">
 					<form action={formAction} className="space-y-6">
 						{/* Name Field */}
 						<div>
@@ -66,7 +60,7 @@ export function SettingsForm({ initialName, initialEmail }: SettingsFormProps) {
 								type="text"
 								id="name"
 								name="name"
-								defaultValue={userName}
+								defaultValue={initialName}
 								placeholder="Enter your display name"
 								className="w-full rounded-xl bg-slate-50 border border-slate-200 px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/20 transition-all"
 							/>

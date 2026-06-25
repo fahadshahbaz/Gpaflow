@@ -87,9 +87,9 @@ export function SemesterList({ semesters, university }: SemesterListProps) {
 								}}
 								role="button"
 								tabIndex={0}
-								className="flex items-center justify-between p-4 cursor-pointer hover:bg-slate-50/50 transition-colors select-none"
+								className="flex items-center justify-between p-3 sm:p-4 cursor-pointer hover:bg-slate-50/50 transition-colors select-none"
 							>
-								<div className="flex items-center gap-3">
+								<div className="flex items-center gap-2 sm:gap-3">
 									{/* Tactile Inset Number Circle */}
 									<div className="h-9 w-9 rounded-xl icon-skeuo-inset flex items-center justify-center">
 										<span className="text-xs font-bold text-gray-500">
@@ -97,7 +97,7 @@ export function SemesterList({ semesters, university }: SemesterListProps) {
 										</span>
 									</div>
 									<div>
-										<h4 className="text-sm font-bold text-gray-900">
+										<h4 className="text-xs sm:text-sm font-bold text-gray-900 whitespace-nowrap">
 											{semester.name}
 										</h4>
 										<p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">
@@ -106,9 +106,9 @@ export function SemesterList({ semesters, university }: SemesterListProps) {
 									</div>
 								</div>
 
-								<div className="flex items-center gap-3">
+								<div className="flex items-center gap-1.5 sm:gap-3">
 									{/* Tactile Badges */}
-									<span className="px-3 py-1.5 rounded-xl icon-skeuo-raised text-blue-600 text-xs font-bold">
+									<span className="px-1.5 sm:px-3 py-0.5 sm:py-1.5 rounded-lg sm:rounded-xl icon-skeuo-raised text-blue-600 text-[10px] sm:text-xs font-bold">
 										{semester.sgpa.toFixed(2)} SGPA
 									</span>
 									<span className="px-2.5 py-1.5 rounded-xl icon-skeuo-inset text-gray-500 text-xs font-medium hidden sm:inline">
@@ -285,16 +285,16 @@ export function SemesterList({ semesters, university }: SemesterListProps) {
 			</div>
 
 			{/* Semester Dialogs */}
-			{editingSemester && (
+			{editingSemester ? (
 				<EditSemesterDialog
 					semesterId={editingSemester.id}
 					currentName={editingSemester.name}
 					open={!!editingSemester}
 					onOpenChange={(open) => !open && setEditingSemester(null)}
 				/>
-			)}
+			) : null}
 
-			{deletingSemester && (
+			{deletingSemester ? (
 				<DeleteSemesterDialog
 					semesterId={deletingSemester.id}
 					semesterName={deletingSemester.name}
@@ -302,10 +302,10 @@ export function SemesterList({ semesters, university }: SemesterListProps) {
 					open={!!deletingSemester}
 					onOpenChange={(open) => !open && setDeletingSemester(null)}
 				/>
-			)}
+			) : null}
 
 			{/* Subject Dialogs */}
-			{editingSubject && (
+			{editingSubject ? (
 				<EditSubjectDialog
 					subject={editingSubject.subject}
 					semesterId={editingSubject.semesterId}
@@ -313,9 +313,9 @@ export function SemesterList({ semesters, university }: SemesterListProps) {
 					open={!!editingSubject}
 					onOpenChange={(open) => !open && setEditingSubject(null)}
 				/>
-			)}
+			) : null}
 
-			{deletingSubject && (
+			{deletingSubject ? (
 				<DeleteSubjectDialog
 					subjectId={deletingSubject.subject.id}
 					subjectName={deletingSubject.subject.name}
@@ -323,7 +323,7 @@ export function SemesterList({ semesters, university }: SemesterListProps) {
 					open={!!deletingSubject}
 					onOpenChange={(open) => !open && setDeletingSubject(null)}
 				/>
-			)}
+			) : null}
 		</>
 	);
 }

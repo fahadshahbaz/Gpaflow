@@ -25,8 +25,10 @@ async function getUserUniversity(): Promise<UniversitySlug> {
 
 export const getSemesters = cache(
 	async (userId: string): Promise<Semester[]> => {
-		const supabase = await createClient();
-		const university = await getUserUniversity();
+		const [supabase, university] = await Promise.all([
+			createClient(),
+			getUserUniversity(),
+		]);
 		const engine = getUniversityGradingEngine(university);
 
 		const { data: semesters, error } = await supabase
@@ -105,8 +107,10 @@ export async function getDashboardStats(
 	userId: string,
 	targetGpa = 3.5,
 ): Promise<DashboardStats> {
-	const semesters = await getSemesters(userId);
-	const university = await getUserUniversity();
+	const [semesters, university] = await Promise.all([
+		getSemesters(userId),
+		getUserUniversity(),
+	]);
 	const engine = getUniversityGradingEngine(university);
 
 	const cgpa = engine.calculateCGPA(
