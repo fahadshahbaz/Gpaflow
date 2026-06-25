@@ -1,5 +1,4 @@
 import { Analytics } from "@vercel/analytics/next";
-import { MotionConfig } from "motion/react";
 import type { Metadata } from "next";
 import { Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
@@ -32,7 +31,7 @@ export default function RootLayout({
 	return (
 		<html lang="en" className={inter.variable}>
 			<body className={`${inter.className} ${geistMono.variable} antialiased`}>
-				<MotionConfig reducedMotion="user">{children}</MotionConfig>
+				{children}
 				<Analytics />
 			</body>
 		</html>

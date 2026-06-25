@@ -1,6 +1,5 @@
 import { redirect } from "next/navigation";
 import { ActivityDots } from "@/components/dashboard/activity-dots";
-import { DashboardSkeletonContent } from "@/components/dashboard/dashboard-skeleton";
 import { GPATrendChart } from "@/components/dashboard/gpa-trend-chart";
 import { GradeProgress } from "@/components/dashboard/grade-progress";
 import { InsightCard } from "@/components/dashboard/insight-card";

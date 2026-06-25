@@ -27,10 +27,7 @@ interface ChartDataPoint {
 	credits: number;
 }
 
-export function GPATrendChart({
-	semesters,
-	targetGpa = 3.5,
-}: GPATrendChartProps) {
+export function GPATrendChart({ semesters }: GPATrendChartProps) {
 	const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
 	const chartData = useMemo<ChartDataPoint[]>(() => {

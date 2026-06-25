@@ -1,9 +1,9 @@
 "use client";
 
 import { Check, Loader2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useActionState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
 import { type AuthState, updateUserName } from "@/lib/supabase/auth";
 
 interface SettingsFormProps {

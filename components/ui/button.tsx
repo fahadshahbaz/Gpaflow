@@ -22,8 +22,7 @@ const buttonVariants = cva(
 				skeuoPrimary: "btn-skeuo-primary text-white hover:text-white",
 				skeuoWhite:
 					"btn-skeuo-white text-gray-900 dark:btn-skeuo-dark dark:text-gray-100",
-				skeuoGlass:
-					"btn-skeuo-glass text-gray-800 dark:text-gray-100",
+				skeuoGlass: "btn-skeuo-glass text-gray-800 dark:text-gray-100",
 			},
 			size: {
 				default:

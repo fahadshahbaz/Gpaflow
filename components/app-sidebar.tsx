@@ -10,7 +10,6 @@ import {
 	Target,
 	TrendingUp,
 } from "lucide-react";
-import { motion } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -47,13 +46,9 @@ export function AppSidebar({ userName, userEmail }: AppSidebarProps) {
 		<Sidebar className="border-r border-[#2a2a2a] bg-[#0f0f0f]">
 			<SidebarHeader className="border-b border-[#2a2a2a] p-5">
 				<Link href="/dashboard" className="flex items-center gap-3 h-fit">
-					<motion.div
-						whileHover={{ scale: 1.05 }}
-						whileTap={{ scale: 0.98 }}
-						className="flex h-10 w-10 aspect-square items-center justify-center rounded-full bg-linear-to-br from-primary to-destructive shadow-lg shadow-primary/20"
-					>
+					<div className="flex h-10 w-10 aspect-square items-center justify-center rounded-full bg-linear-to-br from-primary to-destructive shadow-lg shadow-primary/20 transition-transform duration-200 hover:scale-105 active:scale-98">
 						<GraduationCap className="h-5 w-5 text-primary-foreground" />
-					</motion.div>
+					</div>
 					<div>
 						<span className="text-lg font-bold text-white tracking-tight">
 							GPA Flow
@@ -94,15 +89,7 @@ export function AppSidebar({ userName, userEmail }: AppSidebarProps) {
 													{item.title}
 												</span>
 												{isActive && (
-													<motion.div
-														layoutId="active-pill"
-														className="absolute inset-0 bg-primary/10 rounded-xl border border-primary/20 -z-10"
-														transition={{
-															type: "spring",
-															stiffness: 400,
-															damping: 30,
-														}}
-													/>
+													<div className="absolute inset-0 bg-primary/10 rounded-xl border border-primary/20 -z-10 animate-in fade-in-0 zoom-in-[0.97] duration-150 ease-out" />
 												)}
 											</Link>
 										</SidebarMenuButton>
@@ -153,15 +140,13 @@ export function AppSidebar({ userName, userEmail }: AppSidebarProps) {
 						</div>
 					</div>
 					<form action={signOut}>
-						<motion.button
-							whileHover={{ scale: 1.02 }}
-							whileTap={{ scale: 0.98 }}
+						<button
 							type="submit"
-							className="flex w-full items-center justify-center gap-2 rounded-xl bg-secondary/10 px-3 py-2.5 text-xs font-medium text-muted-foreground hover:text-destructive hover:bg-destructive-500/10 transition-colors border border-border"
+							className="flex w-full items-center justify-center gap-2 rounded-xl bg-secondary/10 px-3 py-2.5 text-xs font-medium text-muted-foreground hover:text-destructive hover:bg-destructive-500/10 transition-all duration-150 active:scale-[0.98] border border-border cursor-pointer"
 						>
 							<LogOut className="h-3.5 w-3.5" />
 							Sign Out
-						</motion.button>
+						</button>
 					</form>
 				</div>
 			</SidebarFooter>

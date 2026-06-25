@@ -1,7 +1,6 @@
 "use client";
 
 import { ArrowRight, Menu, X } from "lucide-react";
-import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -98,12 +97,7 @@ export default function HomePage() {
 			<section className="relative flex-1 flex flex-col justify-center px-4 sm:px-8 pt-32 pb-16 z-10 max-w-5xl mx-auto w-full">
 				<div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center mt-4">
 					{/* Left Typography Column */}
-					<motion.div
-						initial={{ opacity: 0, y: 15 }}
-						animate={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-						className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left mx-auto lg:mx-0 max-w-xl lg:max-w-none"
-					>
+					<div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left mx-auto lg:mx-0 max-w-xl lg:max-w-none animate-in fade-in-0 slide-in-from-bottom-4 duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
 						<h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-[-0.03em] leading-[1.05] mb-5 text-balance">
 							Track, calculate, and forecast your{" "}
 							<span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-sky-500">
@@ -131,17 +125,12 @@ export default function HomePage() {
 								View Dashboard
 							</Link>
 						</div>
-					</motion.div>
+					</div>
 
 					{/* Right Custom Vector Art Illustration Column */}
-					<motion.div
-						initial={{ opacity: 0, scale: 0.96, y: 15 }}
-						animate={{ opacity: 1, scale: 1, y: 0 }}
-						transition={{ duration: 0.6, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-						className="lg:col-span-5 w-full max-w-105 mx-auto lg:mx-0 lg:ml-auto"
-					>
+					<div className="lg:col-span-5 w-full max-w-105 mx-auto lg:mx-0 lg:ml-auto animate-in fade-in-0 zoom-in-95 slide-in-from-bottom-4 duration-600 delay-100 ease-[cubic-bezier(0.16,1,0.3,1)] fill-mode-both">
 						<AcademicIllustration />
-					</motion.div>
+					</div>
 				</div>
 			</section>
 

@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation";
 import { AddSemesterDialog } from "@/components/dashboard/add-semester-dialog";
 import { SemesterList } from "@/components/dashboard/semester-list";
-import { SemestersSkeletonContent } from "@/components/dashboard/semesters-skeleton";
 import { getUser } from "@/lib/supabase/auth";
 import { getSemesters } from "@/lib/supabase/queries";
 import type { UniversitySlug } from "@/types/grading";

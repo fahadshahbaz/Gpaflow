@@ -9,14 +9,14 @@ Most GPA calculators are "one-and-done." You enter marks, get a result, and it's
 - **Track Trends:** Visualize your SGPA/CGPA progress across 8 semesters with interactive charts.
 - **Smart Predictions:** Know exactly what grades you need in the next semester to hit your target CGPA.
 - **Persistent Data:** Your records are synced and secured via Supabase, accessible anytime, anywhere.
-- **Modern UI:** Built with glassmorphism, fluid animations (`motion/react`), and a mobile-first philosophy.
+- **Modern UI:** Built with glassmorphism, fluid native CSS transitions, and a mobile-first philosophy.
 
 ## Tech Stack
 We use the latest tools to ensure the dashboard is fast and reliable:
 - **Core:** Next.js (App Router) + React 19
 - **Database:** Supabase (PostgreSQL)
 - **Styling:** Tailwind CSS v4
-- **Animations:** `motion/react`
+- **Animations:** Native CSS & Tailwind CSS v4
 - **Tooling:** BiomeJS (Linting/Formatting)
 
 ## Getting Started

@@ -12,7 +12,7 @@ import {
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Logo } from "@/components/ui/logo";
 import { signOut } from "@/lib/supabase/auth";
 import { cn } from "@/lib/utils";
@@ -48,15 +48,18 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 		}
 	};
 
-	const closeDropdown = () => {
-		if (showDropdown) {
-			setShowDropdown(false);
-			setIsDropdownClosing(true);
-			setTimeout(() => {
-				setIsDropdownClosing(false);
-			}, 150);
-		}
-	};
+	const closeDropdown = useCallback(() => {
+		setShowDropdown((prev) => {
+			if (prev) {
+				setIsDropdownClosing(true);
+				setTimeout(() => {
+					setIsDropdownClosing(false);
+				}, 150);
+				return false;
+			}
+			return prev;
+		});
+	}, []);
 	const lastScrollY = useRef(0);
 	const dropdownRef = useRef<HTMLDivElement>(null);
 	const mobileMenuRef = useRef<HTMLDivElement>(null);
@@ -81,7 +84,7 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 
 		window.addEventListener("scroll", handleScroll, { passive: true });
 		return () => window.removeEventListener("scroll", handleScroll);
-	}, []);
+	}, [closeDropdown]);
 
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
@@ -98,7 +101,7 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 		return () => {
 			document.removeEventListener("mousedown", handleClickOutside);
 		};
-	}, []);
+	}, [closeDropdown]);
 
 	useEffect(() => {
 		const container = tabsRef.current;
@@ -142,7 +145,7 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 		pillRef.current.style.width = `${activeTab.offsetWidth}px`;
 		pillRef.current.style.height = `${activeTab.offsetHeight}px`;
 		pillRef.current.style.top = `${activeTab.offsetTop}px`;
-	}, [pathname]);
+	}, []);
 
 	return (
 		<div
@@ -161,7 +164,7 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 						"t-acc w-full max-w-md mx-auto md:max-w-none bg-white md:bg-transparent md:backdrop-blur-none border border-slate-200/50 md:border-transparent rounded-2xl md:rounded-none transition-[background-color,border-color,border-radius,box-shadow,translate,transform] duration-300 ease-out flex flex-col md:flex-row md:items-center md:justify-between md:h-15 overflow-hidden md:overflow-visible",
 						isMobileOpen
 							? "shadow-[0_24px_48px_-12px_rgba(15,23,42,0.15),0_12px_24px_-8px_rgba(15,23,42,0.1),inset_0_1px_0_#ffffff] translate-y-1"
-							: "shadow-[0_8px_30px_rgba(15,23,42,0.03),inset_0_1px_0_#ffffff] md:shadow-none"
+							: "shadow-[0_8px_30px_rgba(15,23,42,0.03),inset_0_1px_0_#ffffff] md:shadow-none",
 					)}
 					data-open={isMobileOpen}
 				>
@@ -323,11 +326,11 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 											Sign out
 										</button>
 									</form>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
 			</header>
 		</div>
 	);
