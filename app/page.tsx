@@ -112,16 +112,16 @@ export default function HomePage() {
 						initial={{ opacity: 0, y: 15 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-						className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left mx-auto lg:mx-0"
+						className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left mx-auto lg:mx-0 max-w-xl lg:max-w-none"
 					>
-						<h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-[-0.03em] leading-[1.05] mb-5">
+						<h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-[-0.03em] leading-[1.05] mb-5 text-balance">
 							Track, calculate, and forecast your{" "}
 							<span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-sky-500">
 								GPA.
 							</span>
 						</h1>
 
-						<p className="text-base sm:text-lg text-slate-500 font-medium max-w-md mb-8 leading-relaxed mx-auto lg:mx-0">
+						<p className="text-base sm:text-lg text-slate-500 font-medium max-w-md mb-8 leading-relaxed mx-auto lg:mx-0 text-pretty">
 							Calculate semester grades, set target goals, and simulate future
 							scenarios to manage your academic progress with precision.
 						</p>
@@ -129,14 +129,14 @@ export default function HomePage() {
 						<div className="flex flex-col sm:flex-row items-center gap-3.5 w-full sm:w-auto">
 							<Link
 								href="/signup"
-								className="btn-skeuo-primary group h-12 px-6 flex items-center justify-center gap-2 text-sm font-bold rounded-xl w-full sm:w-auto"
+								className="btn-skeuo-primary group h-12 px-6 flex items-center justify-center gap-2 text-sm font-bold rounded-xl w-full max-w-[280px] sm:w-auto"
 							>
 								Start Tracking
 								<ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
 							</Link>
 							<Link
 								href="/login"
-								className="btn-skeuo-white h-12 px-6 flex items-center justify-center text-sm font-bold text-slate-700 rounded-xl w-full sm:w-auto"
+								className="btn-skeuo-white h-12 px-6 flex items-center justify-center text-sm font-bold text-slate-700 rounded-xl w-full max-w-[280px] sm:w-auto"
 							>
 								View Dashboard
 							</Link>
