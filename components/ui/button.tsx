@@ -5,7 +5,7 @@ import type * as React from "react";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-	"focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 rounded-md border border-transparent bg-clip-padding text-sm font-medium focus-visible:ring-[3px] aria-invalid:ring-[3px] [&_svg:not([class*='size-'])]:size-4 inline-flex items-center justify-center whitespace-nowrap transition-colors duration-200 hover:duration-0 disabled:transition-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none shrink-0 [&_svg]:shrink-0 outline-none group/button select-none",
+	"focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 rounded-md border border-transparent bg-clip-padding text-sm font-medium focus-visible:ring-[3px] aria-invalid:ring-[3px] [&_svg:not([class*='size-'])]:size-4 inline-flex items-center justify-center whitespace-nowrap transition-[background-color,border-color,text-decoration-color,fill,stroke,transform,opacity] duration-200 hover:duration-0 active:scale-[0.96] disabled:transition-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none shrink-0 [&_svg]:shrink-0 outline-none group/button select-none",
 	{
 		variants: {
 			variant: {
@@ -19,8 +19,7 @@ const buttonVariants = cva(
 				destructive:
 					"bg-destructive/10 hover:bg-destructive/20 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/20 text-destructive focus-visible:border-destructive/40 dark:hover:bg-destructive/30",
 				link: "text-primary underline-offset-4 hover:underline",
-				skeuoPrimary:
-					"btn-skeuo-primary text-white hover:text-white",
+				skeuoPrimary: "btn-skeuo-primary text-white hover:text-white",
 				skeuoWhite:
 					"btn-skeuo-white text-gray-900 dark:btn-skeuo-dark dark:text-gray-100",
 				skeuoGlass:
@@ -47,15 +46,13 @@ const buttonVariants = cva(
 	},
 );
 
-import { motion } from "motion/react";
-
 function Button({
 	className,
 	variant = "default",
 	size = "default",
 	asChild = false,
 	...props
-}: React.ComponentProps<typeof motion.button> &
+}: React.ComponentProps<"button"> &
 	VariantProps<typeof buttonVariants> & {
 		asChild?: boolean;
 	}) {
@@ -72,12 +69,10 @@ function Button({
 	}
 
 	return (
-		<motion.button
+		<button
 			data-slot="button"
 			data-variant={variant}
 			data-size={size}
-			whileTap={{ scale: 0.96 }}
-			transition={{ type: "spring", stiffness: 400, damping: 25 }}
 			className={cn(buttonVariants({ variant, size, className }))}
 			{...props}
 		/>

@@ -2,13 +2,13 @@
 
 import {
 	BookOpen,
+	ChevronDown,
 	ChevronRight,
 	MoreVertical,
 	Pencil,
 	Plus,
 	Trash2,
 } from "lucide-react";
-import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -75,7 +75,8 @@ export function SemesterList({ semesters, university }: SemesterListProps) {
 					return (
 						<div
 							key={semester.id}
-							className="card-skeuo rounded-2xl overflow-hidden mb-3"
+							className="t-acc card-skeuo rounded-2xl overflow-hidden mb-3"
+							data-open={isCurrentExpanded}
 						>
 							{/* Accordion Trigger Header */}
 							<div
@@ -156,25 +157,13 @@ export function SemesterList({ semesters, university }: SemesterListProps) {
 									</DropdownMenu>
 
 									{/* Expand/Collapse Chevron Indicator */}
-									<ChevronRight
-										className={`h-4.5 w-4.5 text-gray-400 transition-transform duration-300 ${
-											isCurrentExpanded ? "rotate-90" : ""
-										}`}
-									/>
+									<ChevronDown className="t-acc-chevron h-4.5 w-4.5 text-gray-400" />
 								</div>
 							</div>
 
 							{/* Collapsible Panel Body */}
-							<AnimatePresence initial={false}>
-								{isCurrentExpanded && (
-									<motion.div
-										initial={{ height: 0, opacity: 0 }}
-										animate={{ height: "auto", opacity: 1 }}
-										exit={{ height: 0, opacity: 0 }}
-										transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-										className="overflow-hidden"
-									>
-										<div className="p-4 border-t border-slate-100/90 bg-slate-50/20 space-y-2.5">
+							<div className="t-acc-panel">
+								<div className="t-acc-panel-inner p-4 border-t border-slate-100/90 bg-slate-50/20 space-y-2.5">
 											{semester.subjects.length === 0 ? (
 												<div className="py-8 text-center bg-white rounded-xl border border-slate-150 shadow-[0_2px_8px_rgba(15,23,42,0.01)]">
 													<p className="text-sm text-gray-500 mb-3">
@@ -277,10 +266,8 @@ export function SemesterList({ semesters, university }: SemesterListProps) {
 													/>
 												</div>
 											)}
-										</div>
-									</motion.div>
-								)}
-							</AnimatePresence>
+								</div>
+							</div>
 						</div>
 					);
 				})}

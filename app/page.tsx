@@ -16,7 +16,7 @@ export default function HomePage() {
 			{/* Ambient Light Background */}
 			<div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
 				<div className="absolute inset-0 bg-noise opacity-[0.015] mix-blend-overlay hidden sm:block" />
-				<div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[80vw] h-[50vh] rounded-full bg-gradient-to-b from-blue-200/35 via-blue-100/5 to-transparent blur-[60px] sm:blur-[110px]" />
+				<div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[80vw] h-[50vh] rounded-full bg-linear-to-b from-blue-200/35 via-blue-100/5 to-transparent blur-[60px] sm:blur-[110px]" />
 			</div>
 
 			{/* Floating Glassmorphic Navigation */}
@@ -106,7 +106,7 @@ export default function HomePage() {
 					>
 						<h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-[-0.03em] leading-[1.05] mb-5 text-balance">
 							Track, calculate, and forecast your{" "}
-							<span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-sky-500">
+							<span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-sky-500">
 								GPA.
 							</span>
 						</h1>
@@ -119,14 +119,14 @@ export default function HomePage() {
 						<div className="flex flex-col sm:flex-row items-center gap-3.5 w-full sm:w-auto">
 							<Link
 								href="/signup"
-								className="btn-skeuo-primary group h-12 px-6 flex items-center justify-center gap-2 text-sm font-bold rounded-xl w-full max-w-[280px] sm:w-auto"
+								className="btn-skeuo-primary group h-12 px-6 flex items-center justify-center gap-2 text-sm font-bold rounded-xl w-full max-w-70 sm:w-auto"
 							>
 								Start Tracking
 								<ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
 							</Link>
 							<Link
 								href="/login"
-								className="btn-skeuo-white h-12 px-6 flex items-center justify-center text-sm font-bold text-slate-700 rounded-xl w-full max-w-[280px] sm:w-auto"
+								className="btn-skeuo-white h-12 px-6 flex items-center justify-center text-sm font-bold text-slate-700 rounded-xl w-full max-w-70 sm:w-auto"
 							>
 								View Dashboard
 							</Link>
@@ -138,7 +138,7 @@ export default function HomePage() {
 						initial={{ opacity: 0, scale: 0.96, y: 15 }}
 						animate={{ opacity: 1, scale: 1, y: 0 }}
 						transition={{ duration: 0.6, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-						className="lg:col-span-5 w-full max-w-[420px] mx-auto lg:mx-0 lg:ml-auto"
+						className="lg:col-span-5 w-full max-w-105 mx-auto lg:mx-0 lg:ml-auto"
 					>
 						<AcademicIllustration />
 					</motion.div>
@@ -168,7 +168,7 @@ function AcademicIllustration() {
 	return (
 		<div className="relative w-full flex items-center justify-center">
 			{/* Ambient glows */}
-			<div className="absolute inset-0 bg-gradient-to-tr from-blue-400/10 via-sky-300/5 to-transparent rounded-full blur-[80px] pointer-events-none" />
+			<div className="absolute inset-0 bg-linear-to-tr from-blue-400/10 via-sky-300/5 to-transparent rounded-full blur-[80px] pointer-events-none" />
 
 			<Image
 				src="/study.svg"

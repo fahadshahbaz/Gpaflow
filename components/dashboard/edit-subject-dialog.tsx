@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "motion/react";
+
 import { useEffect, useMemo, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -231,55 +231,40 @@ export function EditSubjectDialog({
 						</Field>
 					</div>
 
-					<AnimatePresence>
-						{gradePreview && (
-							<motion.div
-								initial={{ opacity: 0, y: -10 }}
-								animate={{ opacity: 1, y: 0 }}
-								exit={{ opacity: 0, y: -10 }}
-								transition={{ duration: 0.2 }}
-								className="p-3 rounded-xl bg-primary-50 border border-primary-100"
-							>
-								<p className="text-xs text-primary uppercase tracking-wider mb-2 font-medium">
-									Grade Preview
-								</p>
-								<div className="flex items-center justify-between">
-									<div className="flex items-center gap-3">
-										<Badge className="bg-primary text-primary-foreground border-0 px-2.5 py-1 text-base font-semibold">
-											{gradePreview.letterGrade}
-										</Badge>
-										<div>
-											<p className="text-xl font-bold text-gray-900">
-												{gradePreview.gradePoint.toFixed(2)}
-											</p>
-											<p className="text-xs text-gray-500">Grade Points</p>
-										</div>
-									</div>
-									<div className="text-right">
-										<p className="text-base font-medium text-gray-700">
-											{gradePreview.percentage}%
+					{gradePreview && (
+						<div className="p-3 rounded-xl bg-primary-50 border border-primary-100 animate-in fade-in slide-in-from-top-2 duration-200">
+							<p className="text-xs text-primary uppercase tracking-wider mb-2 font-medium">
+								Grade Preview
+							</p>
+							<div className="flex items-center justify-between">
+								<div className="flex items-center gap-3">
+									<Badge className="bg-primary text-primary-foreground border-0 px-2.5 py-1 text-base font-semibold">
+										{gradePreview.letterGrade}
+									</Badge>
+									<div>
+										<p className="text-xl font-bold text-gray-900">
+											{gradePreview.gradePoint.toFixed(2)}
 										</p>
-										<p className="text-xs text-gray-500">Percentage</p>
+										<p className="text-xs text-gray-500">Grade Points</p>
 									</div>
 								</div>
-							</motion.div>
-						)}
-					</AnimatePresence>
+								<div className="text-right">
+									<p className="text-base font-medium text-gray-700">
+										{gradePreview.percentage}%
+									</p>
+									<p className="text-xs text-gray-500">Percentage</p>
+								</div>
+							</div>
+						</div>
+					)}
 
-					<AnimatePresence>
-						{error && (
-							<motion.div
-								initial={{ opacity: 0, y: -4 }}
-								animate={{ opacity: 1, y: 0 }}
-								exit={{ opacity: 0, y: -4 }}
-								transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-							>
-								<FieldError className="text-destructive text-sm">
-									{error}
-								</FieldError>
-							</motion.div>
-						)}
-					</AnimatePresence>
+					{error && (
+						<div className="animate-in fade-in slide-in-from-top-1 duration-150">
+							<FieldError className="text-destructive text-sm">
+								{error}
+							</FieldError>
+						</div>
+					)}
 
 					<DialogFooter className="gap-2 pt-2">
 						<Button
