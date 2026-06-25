@@ -9,7 +9,7 @@ import {
 	Settings,
 	X,
 } from "lucide-react";
-import { AnimatePresence, motion } from "motion/react";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -31,8 +31,32 @@ interface TopNavProps {
 export function TopNav({ userName, userEmail }: TopNavProps) {
 	const pathname = usePathname();
 	const [showDropdown, setShowDropdown] = useState(false);
+	const [isDropdownClosing, setIsDropdownClosing] = useState(false);
 	const [isMobileOpen, setIsMobileOpen] = useState(false);
 	const [hidden, setHidden] = useState(false);
+
+	const toggleDropdown = () => {
+		if (showDropdown) {
+			setShowDropdown(false);
+			setIsDropdownClosing(true);
+			setTimeout(() => {
+				setIsDropdownClosing(false);
+			}, 150);
+		} else {
+			setIsDropdownClosing(false);
+			setShowDropdown(true);
+		}
+	};
+
+	const closeDropdown = () => {
+		if (showDropdown) {
+			setShowDropdown(false);
+			setIsDropdownClosing(true);
+			setTimeout(() => {
+				setIsDropdownClosing(false);
+			}, 150);
+		}
+	};
 	const lastScrollY = useRef(0);
 	const dropdownRef = useRef<HTMLDivElement>(null);
 	const mobileMenuRef = useRef<HTMLDivElement>(null);
@@ -46,7 +70,7 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 
 			if (scrollingDown && currentScrollY > 60) {
 				setHidden(true);
-				setShowDropdown(false);
+				closeDropdown();
 				setIsMobileOpen(false);
 			} else if (!scrollingDown) {
 				setHidden(false);
@@ -63,7 +87,7 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 		const handleClickOutside = (event: MouseEvent) => {
 			const target = event.target as Node;
 			if (dropdownRef.current && !dropdownRef.current.contains(target)) {
-				setShowDropdown(false);
+				closeDropdown();
 			}
 			if (mobileMenuRef.current && !mobileMenuRef.current.contains(target)) {
 				setIsMobileOpen(false);
@@ -182,14 +206,13 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 
 							{/* Profile Dropdown Container */}
 							<div className="flex items-center transition-all duration-500 ease-out rounded-full p-1 h-12 bg-slate-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_2px_8px_rgba(0,0,0,0.03)]">
-								{/* Profile Dropdown */}
 								<div className="relative" ref={dropdownRef}>
 									<button
 										type="button"
-										onClick={() => setShowDropdown(!showDropdown)}
+										onClick={toggleDropdown}
 										className="flex items-center gap-2 rounded-full pl-1 pr-3 h-10 bg-white shadow-[0_2px_4px_rgba(0,0,0,0.04),inset_0_1px_0_#ffffff] transition-[transform] duration-200 ease-out active:scale-[0.97] cursor-pointer"
 									>
-										<div className="h-8 w-8 rounded-full bg-linear-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-[0_2px_4px_rgba(37,99,235,0.1)] shrink-0 overflow-hidden">
+										<div className="h-8 w-8 rounded-full bg-gradient-to-b from-blue-400 to-blue-600 flex items-center justify-center shadow-[0_2px_4px_rgba(37,99,235,0.1)] flex-shrink-0 overflow-hidden">
 											<span className="text-xs font-bold text-white tracking-wide">
 												{userName?.charAt(0).toUpperCase() ||
 													userEmail?.charAt(0).toUpperCase() ||
@@ -204,49 +227,46 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 										/>
 									</button>
 
-									<AnimatePresence>
-										{showDropdown && (
-											<motion.div
-												initial={{ opacity: 0, scale: 0.97, y: 4 }}
-												animate={{ opacity: 1, scale: 1, y: 0 }}
-												exit={{ opacity: 0, scale: 0.97, y: 4 }}
-												style={{ originX: 1, originY: 0 }}
-												transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-												className="absolute right-0 mt-3 w-64 rounded-[1.25rem] bg-white border border-slate-200/80 shadow-[0_16px_36px_-8px_rgba(0,0,0,0.08),0_4px_12px_-2px_rgba(0,0,0,0.03),inset_0_1px_0_#ffffff] pb-2 z-[100] overflow-hidden"
-											>
-												<div className="px-4.5 py-4 border-b border-slate-100 bg-slate-50/40">
-													<p className="text-sm font-extrabold text-slate-800 leading-tight">
-														{userName || "User"}
-													</p>
-												</div>
-												<div className="p-1.5 space-y-0.5">
-													<Link
-														href="/dashboard/settings"
-														prefetch={true}
-														onClick={() => setShowDropdown(false)}
-														className="group flex items-center gap-3 px-3.5 py-2.5 text-sm font-normal text-slate-600 hover:text-slate-800 hover:bg-slate-50 rounded-xl transition-colors duration-200 ease-out"
+									{(showDropdown || isDropdownClosing) && (
+										<div
+											data-origin="top-right"
+											className={cn(
+												"t-dropdown absolute right-0 mt-3 w-64 rounded-[1.25rem] bg-white border border-slate-200/80 shadow-[0_16px_36px_-8px_rgba(0,0,0,0.08),0_4px_12px_-2px_rgba(0,0,0,0.03),inset_0_1px_0_#ffffff] pb-2 z-[100] overflow-hidden",
+												showDropdown && "is-open",
+												isDropdownClosing && "is-closing",
+											)}
+										>
+											<div className="px-4.5 py-4 border-b border-slate-100 bg-slate-50/40">
+												<p className="text-sm font-extrabold text-slate-800 leading-tight">
+													{userName || "User"}
+												</p>
+											</div>
+											<div className="p-1.5 space-y-0.5">
+												<Link
+													href="/dashboard/settings"
+													prefetch={true}
+													onClick={closeDropdown}
+													className="group flex items-center gap-3 px-3.5 py-2.5 text-sm font-normal text-slate-600 hover:text-slate-800 hover:bg-slate-50 rounded-xl transition-colors duration-200 ease-out"
+												>
+													<Settings className="h-4 w-4 text-slate-400 group-hover:text-slate-600 transition-colors" />
+													Settings
+												</Link>
+												<form action={signOut}>
+													<button
+														type="submit"
+														className="group flex w-[calc(100%-1px)] items-center gap-3 px-3.5 py-2.5 text-sm font-normal text-rose-500 hover:text-rose-600 hover:bg-rose-50/50 rounded-xl transition-colors duration-200 ease-out cursor-pointer"
 													>
-														<Settings className="h-4 w-4 text-slate-400 group-hover:text-slate-600 transition-colors" />
-														Settings
-													</Link>
-													<form action={signOut}>
-														<button
-															type="submit"
-															className="group flex w-[calc(100%-1px)] items-center gap-3 px-3.5 py-2.5 text-sm font-normal text-rose-500 hover:text-rose-600 hover:bg-rose-50/50 rounded-xl transition-colors duration-200 ease-out cursor-pointer"
-														>
-															<LogOut className="h-4 w-4 text-rose-450 group-hover:text-rose-600 transition-colors" />
-															Sign Out
-														</button>
-													</form>
-												</div>
-											</motion.div>
-										)}
-									</AnimatePresence>
+														<LogOut className="h-4 w-4 text-rose-450 group-hover:text-rose-600 transition-colors" />
+														Sign Out
+													</button>
+												</form>
+											</div>
+										</div>
+									)}
 								</div>
 							</div>
 						</div>
 
-						{/* Mobile Menu Trigger Button */}
 						<div className="md:hidden flex items-center">
 							<button
 								type="button"
