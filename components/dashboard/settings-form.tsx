@@ -1,10 +1,9 @@
 "use client";
 
-import { Check, Loader2, Mail, Settings, User } from "lucide-react";
+import { Check, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useActionState, useEffect, useState } from "react";
 import { type AuthState, updateUserName } from "@/lib/supabase/auth";
-import { cn } from "@/lib/utils";
 
 interface SettingsFormProps {
 	initialName: string;
@@ -14,7 +13,6 @@ interface SettingsFormProps {
 export function SettingsForm({ initialName, initialEmail }: SettingsFormProps) {
 	const router = useRouter();
 	const [userName, setUserName] = useState(initialName);
-	const [isLoaded, setIsLoaded] = useState(false);
 	const [state, formAction, isPending] = useActionState<AuthState, FormData>(
 		updateUserName,
 		{},
@@ -25,13 +23,6 @@ export function SettingsForm({ initialName, initialEmail }: SettingsFormProps) {
 		setUserName(initialName);
 	}, [initialName]);
 
-	// Trigger skeleton reveal on mount
-	useEffect(() => {
-		requestAnimationFrame(() => {
-			setIsLoaded(true);
-		});
-	}, []);
-
 	// Refresh server components to update layouts (like TopNav) on success
 	useEffect(() => {
 		if (state.success) {
@@ -41,125 +32,95 @@ export function SettingsForm({ initialName, initialEmail }: SettingsFormProps) {
 
 	return (
 		<div className="w-full max-w-xl mx-auto">
-			<div
-				className={cn("t-skel", isLoaded && "is-revealed")}
-				data-state={isLoaded ? "ready" : "loading"}
-			>
-				{/* The Skeleton */}
-				<div className="t-skel-skeleton is-pulsing bg-white border border-slate-200/60 shadow-sm rounded-2xl overflow-hidden">
-					<div className="p-8 border-b border-slate-100 flex items-center gap-5">
-						<div className="h-20 w-20 rounded-full bg-slate-200/60 flex-shrink-0" />
-						<div className="space-y-2">
-							<div className="h-7 w-48 bg-slate-200/60 rounded-md" />
-							<div className="h-4 w-32 bg-slate-200/60 rounded-md" />
-						</div>
+			{/* Settings Card */}
+			<div className="bg-white border border-slate-200/60 shadow-sm rounded-2xl overflow-hidden">
+				{/* Avatar / Profile Header */}
+				<div className="p-8 border-b border-slate-100 flex items-center gap-5">
+					<div className="h-20 w-20 rounded-full bg-gradient-to-b from-blue-500 to-blue-600 flex items-center justify-center text-white border border-blue-500/20 shadow-sm flex-shrink-0 overflow-hidden">
+						<span className="text-3xl font-bold">
+							{userName?.charAt(0)?.toUpperCase() ||
+								initialEmail?.charAt(0)?.toUpperCase() ||
+								"U"}
+						</span>
 					</div>
-					<div className="p-8 space-y-6">
-						<div>
-							<div className="h-4 w-28 mb-3 bg-slate-200/60 rounded-md" />
-							<div className="h-12 w-full bg-slate-200/60 rounded-xl" />
-						</div>
-						<div>
-							<div className="h-4 w-28 mb-3 bg-slate-200/60 rounded-md" />
-							<div className="h-12 w-full bg-slate-200/60 rounded-xl" />
-							<div className="h-3 w-40 mt-3 bg-slate-200/60 rounded-md" />
-						</div>
-						<div className="pt-2">
-							<div className="h-11 w-full bg-slate-200/60 rounded-xl" />
-						</div>
+					<div>
+						<h1 className="text-2xl font-bold text-slate-900">
+							{userName || "Your Profile"}
+						</h1>
+						<p className="text-sm text-slate-500 mt-1">{initialEmail}</p>
 					</div>
 				</div>
 
-				{/* The Actual Content */}
-				<div className="t-skel-content bg-white border border-slate-200/60 shadow-sm rounded-2xl overflow-hidden">
-					{/* Avatar / Profile Header */}
-					<div className="p-8 border-b border-slate-100 flex items-center gap-5">
-						<div className="h-20 w-20 rounded-full bg-gradient-to-b from-blue-500 to-blue-600 flex items-center justify-center text-white border border-blue-500/20 shadow-sm flex-shrink-0 overflow-hidden">
-							<span className="text-3xl font-bold">
-								{userName?.charAt(0)?.toUpperCase() ||
-									initialEmail?.charAt(0)?.toUpperCase() ||
-									"U"}
-							</span>
-						</div>
+				{/* Form Section */}
+				<div className="p-8">
+					<form action={formAction} className="space-y-6">
+						{/* Name Field */}
 						<div>
-							<h1 className="text-2xl font-bold text-slate-900">
-								{userName || "Your Profile"}
-							</h1>
-							<p className="text-sm text-slate-500 mt-1">{initialEmail}</p>
+							<label
+								htmlFor="name"
+								className="block text-sm font-semibold text-slate-700 mb-2 cursor-pointer"
+							>
+								Display Name
+							</label>
+							<input
+								type="text"
+								id="name"
+								name="name"
+								defaultValue={userName}
+								placeholder="Enter your display name"
+								className="w-full rounded-xl bg-slate-50 border border-slate-200 px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/20 transition-all"
+							/>
 						</div>
-					</div>
 
-					{/* Form Section */}
-					<div className="p-8">
-						<form action={formAction} className="space-y-6">
-							{/* Name Field */}
-							<div>
-								<label
-									htmlFor="name"
-									className="block text-sm font-semibold text-slate-700 mb-2 cursor-pointer"
-								>
-									Display Name
-								</label>
-								<input
-									type="text"
-									id="name"
-									name="name"
-									defaultValue={userName}
-									placeholder="Enter your display name"
-									className="w-full rounded-xl bg-slate-50 border border-slate-200 px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500/20 transition-all"
-								/>
+						{/* Email Field (Read-only) */}
+						<div>
+							<label className="block text-sm font-semibold text-slate-700 mb-2">
+								Email Address
+							</label>
+							<div className="w-full rounded-xl bg-slate-50 border border-slate-200 px-4 py-3 text-sm text-slate-500 opacity-80 cursor-not-allowed">
+								{initialEmail}
 							</div>
+							<p className="text-xs text-slate-400 font-medium mt-2">
+								Email address cannot be changed
+							</p>
+						</div>
 
-							{/* Email Field (Read-only) */}
-							<div>
-								<label className="block text-sm font-semibold text-slate-700 mb-2">
-									Email Address
-								</label>
-								<div className="w-full rounded-xl bg-slate-50 border border-slate-200 px-4 py-3 text-sm text-slate-500 opacity-80 cursor-not-allowed">
-									{initialEmail}
-								</div>
-								<p className="text-xs text-slate-400 font-medium mt-2">
-									Email address cannot be changed
+						{/* Status Messages */}
+						{state.error && (
+							<div className="rounded-xl bg-rose-50 border border-rose-100 p-3.5 animate-in fade-in slide-in-from-top-1 duration-200">
+								<p className="text-sm font-medium text-rose-600">
+									{state.error}
 								</p>
 							</div>
+						)}
 
-							{/* Status Messages */}
-							{state.error && (
-								<div className="rounded-xl bg-rose-50 border border-rose-100 p-3.5 animate-in fade-in slide-in-from-top-1 duration-200">
-									<p className="text-sm font-medium text-rose-600">
-										{state.error}
-									</p>
-								</div>
-							)}
-
-							{state.success && (
-								<div className="rounded-xl bg-emerald-50 border border-emerald-100 p-3.5 flex items-center gap-2 animate-in fade-in slide-in-from-top-1 duration-200">
-									<Check className="h-4 w-4 text-emerald-500" />
-									<p className="text-sm font-medium text-emerald-600">
-										{state.success}
-									</p>
-								</div>
-							)}
-
-							{/* Submit Button */}
-							<div className="pt-2">
-								<button
-									type="submit"
-									disabled={isPending}
-									className="w-full h-11 flex items-center justify-center gap-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold shadow-sm hover:shadow transition-all disabled:opacity-70 disabled:cursor-not-allowed"
-								>
-									{isPending ? (
-										<>
-											<Loader2 className="h-4 w-4 animate-spin" />
-											Saving...
-										</>
-									) : (
-										"Save Changes"
-									)}
-								</button>
+						{state.success && (
+							<div className="rounded-xl bg-emerald-50 border border-emerald-100 p-3.5 flex items-center gap-2 animate-in fade-in slide-in-from-top-1 duration-200">
+								<Check className="h-4 w-4 text-emerald-500" />
+								<p className="text-sm font-medium text-emerald-600">
+									{state.success}
+								</p>
 							</div>
-						</form>
-					</div>
+						)}
+
+						{/* Submit Button */}
+						<div className="pt-2">
+							<button
+								type="submit"
+								disabled={isPending}
+								className="w-full h-11 flex items-center justify-center gap-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold shadow-sm hover:shadow transition-all disabled:opacity-70 disabled:cursor-not-allowed"
+							>
+								{isPending ? (
+									<>
+										<Loader2 className="h-4 w-4 animate-spin" />
+										Saving...
+									</>
+								) : (
+									"Save Changes"
+								)}
+							</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
