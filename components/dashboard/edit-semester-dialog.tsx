@@ -57,7 +57,7 @@ export function EditSemesterDialog({
 
 	return (
 		<Dialog open={open} onOpenChange={onOpenChange}>
-			<DialogContent className="bg-white border-gray-200 sm:max-w-[425px] rounded-2xl">
+			<DialogContent className="bg-white border-gray-200 sm:max-w-106.25 rounded-2xl">
 				<DialogHeader>
 					<div className="flex items-center gap-3">
 						<div className="h-10 w-10 rounded-xl bg-primary-50 border border-primary-100 flex items-center justify-center">

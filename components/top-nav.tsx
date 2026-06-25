@@ -133,6 +133,7 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 		return () => observer.disconnect();
 	}, []);
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: must re-run on pathname change to reposition the sliding pill
 	useEffect(() => {
 		const container = tabsRef.current;
 		if (!container || !pillRef.current) return;
@@ -145,7 +146,7 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 		pillRef.current.style.width = `${activeTab.offsetWidth}px`;
 		pillRef.current.style.height = `${activeTab.offsetHeight}px`;
 		pillRef.current.style.top = `${activeTab.offsetTop}px`;
-	}, []);
+	}, [pathname]);
 
 	return (
 		<div
