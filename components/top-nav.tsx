@@ -123,7 +123,7 @@ export function TopNav({ userName, userEmail }: TopNavProps) {
 		<div
 			className={cn(
 				"fixed left-0 right-0 px-4 sm:px-6 z-50 transition-transform duration-500 ease-out",
-				hidden ? "-translate-y-[calc(100%+2rem)]" : "translate-y-0"
+				hidden ? "-translate-y-[calc(100%+2rem)]" : "translate-y-0",
 			)}
 			style={{
 				top: "calc(1rem + var(--banner-offset, 0px))",
