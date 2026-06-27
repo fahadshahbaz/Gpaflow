@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { Logo } from "@/components/ui/logo";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 export function Navigation() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -13,7 +14,7 @@ export function Navigation() {
 		<header className="fixed top-4 left-0 right-0 z-50 px-4 sm:px-6">
 			<div
 				className={cn(
-					"t-acc max-w-md sm:max-w-3xl mx-auto bg-white border border-slate-200/50 rounded-2xl px-4 py-3 overflow-hidden transition-[box-shadow,translate,transform] duration-300 ease-out",
+					"t-acc max-w-md sm:max-w-3xl mx-auto bg-white border border-slate-200/50 rounded-2xl px-4 py-2 overflow-hidden transition-[box-shadow,translate,transform] duration-300 ease-out",
 					isOpen
 						? "shadow-[0_24px_48px_-12px_rgba(15,23,42,0.15),0_12px_24px_-8px_rgba(15,23,42,0.1),inset_0_1px_0_#ffffff] translate-y-1"
 						: "shadow-[0_8px_30px_rgba(15,23,42,0.03),inset_0_1px_0_#ffffff]",
@@ -30,12 +31,13 @@ export function Navigation() {
 						>
 							Log in
 						</Link>
-						<Link
-							href="/signup"
-							className="btn-skeuo-primary h-9 px-5 flex items-center justify-center text-xs font-bold rounded-xl"
+						<Button
+							asChild
+							variant="skeuoPrimary"
+							className="font-bold cursor-pointer rounded-lg px-5 py-3 h-auto text-xs"
 						>
-							Get Started
-						</Link>
+							<Link href="/signup">Get Started</Link>
+						</Button>
 					</div>
 
 					<button
@@ -71,13 +73,15 @@ export function Navigation() {
 								>
 									Log in
 								</Link>
-								<Link
-									href="/signup"
-									onClick={() => setIsOpen(false)}
-									className="flex-1 btn-skeuo-primary h-10 flex items-center justify-center text-xs font-bold rounded-xl"
+								<Button
+									asChild
+									variant="skeuoPrimary"
+									className="flex-1 font-bold cursor-pointer h-10 rounded-lg"
 								>
-									Get Started
-								</Link>
+									<Link href="/signup" onClick={() => setIsOpen(false)}>
+										Get Started
+									</Link>
+								</Button>
 							</div>
 						</div>
 					</div>
