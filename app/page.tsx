@@ -1,7 +1,7 @@
 import { AmbientBackground } from "@/components/landing/ambient-background";
-import { Navigation } from "@/components/landing/navigation";
-import { Hero } from "@/components/landing/hero";
 import { Footer } from "@/components/landing/footer";
+import { Hero } from "@/components/landing/hero";
+import { Navigation } from "@/components/landing/navigation";
 
 export default function HomePage() {
 	return (

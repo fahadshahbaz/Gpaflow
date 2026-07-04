@@ -10,7 +10,6 @@ export default function NotFound() {
 	return (
 		<main className="min-h-screen bg-[#f5f5f5] flex items-center justify-center px-6">
 			<div className="text-center max-w-md">
-
 				{/* 404 Text */}
 				<h1 className="text-8xl font-bold text-gray-900 mb-4 tracking-tight">
 					4<span className="text-blue-500">0</span>4

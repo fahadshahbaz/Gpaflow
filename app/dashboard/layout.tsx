@@ -28,7 +28,7 @@ export default async function DashboardLayout({
 	const isGraduated = stats.semesterCount >= 8 && stats.cgpa >= 2.0;
 
 	return (
-		<div className="min-h-screen bg-[#f5f5f5]">
+		<div className="min-h-screen bg-background text-foreground">
 			{isGraduated && (
 				<GraduationBanner userName={userName} cgpa={stats.cgpa} />
 			)}
