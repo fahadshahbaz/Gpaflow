@@ -145,7 +145,7 @@ export function InsightCard({ semesters, cgpa }: InsightCardProps) {
 
 	return (
 		<div
-			className={`relative overflow-hidden rounded-[32px] bg-gradient-to-br ${insight.gradient} border border-white/20 p-6 text-white h-full flex flex-col shadow-[inset_0_2.5px_0_rgba(255,255,255,0.22),inset_0_-2.5px_0_rgba(0,0,0,0.06),0_8px_30px_rgba(15,23,42,0.04)]`}
+			className={`relative overflow-hidden rounded-[32px] bg-gradient-to-br ${insight.gradient} border border-white/15 p-6 text-white h-full flex flex-col shadow-[inset_0_1px_0_rgba(255,255,255,0.2),0_1px_2px_rgba(0,0,0,0.05),0_8px_24px_rgba(0,0,0,0.02)]`}
 		>
 			{/* Content */}
 			<div className="relative z-10 mb-4">
@@ -155,7 +155,7 @@ export function InsightCard({ semesters, cgpa }: InsightCardProps) {
 							Insights
 						</span>
 					</div>
-					<div className="h-9 w-9 rounded-xl bg-white/20 border border-white/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_2px_4px_rgba(0,0,0,0.05)] text-white flex items-center justify-center flex-shrink-0 transition-transform duration-300 hover:rotate-12">
+					<div className="h-9 w-9 rounded-xl bg-white/15 border border-white/10 text-white flex items-center justify-center flex-shrink-0 transition-transform duration-300 hover:rotate-12">
 						<Brain className="h-4.5 w-4.5" />
 					</div>
 				</div>
