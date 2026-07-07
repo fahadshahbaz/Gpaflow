@@ -32,7 +32,7 @@ export const UNIVERSITIES: Record<UniversitySlug, University> = {
 	},
 	gcuf_eng: {
 		id: "gcuf_eng",
-		name: "GCUF (Engineering / Pharm-D)",
+		name: "GCUF (Engineering)",
 		slug: "gcuf_eng",
 		fullName: "GC University Faisalabad",
 		description: "Undergrad engineering. Pass >= 55% only.",

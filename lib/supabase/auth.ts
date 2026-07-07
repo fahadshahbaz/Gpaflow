@@ -40,10 +40,12 @@ export async function signUp(
 	}
 
 	const supabase = await createClient();
+	const siteUrl = await getSiteUrl();
 	const { data, error } = await supabase.auth.signUp({
 		email: result.data.email,
 		password: result.data.password,
 		options: {
+			emailRedirectTo: `${siteUrl}/api/auth/callback`,
 			data: {
 				name: result.data.name,
 			},
