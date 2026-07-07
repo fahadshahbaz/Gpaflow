@@ -88,8 +88,13 @@ export default function OnboardingPage() {
 						>
 							<div className="flex items-start justify-between">
 								<div>
-									<h3 className="text-lg font-semibold text-gray-900">
+									<h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
 										{uni.name}
+										{uni.id?.startsWith("gcuf_") && (
+											<span className="text-[10px] font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">
+												Undergrad Only
+											</span>
+										)}
 									</h3>
 									<p className="text-sm text-gray-500 mt-0.5">{uni.fullName}</p>
 									<p className="text-sm text-gray-400 mt-2">

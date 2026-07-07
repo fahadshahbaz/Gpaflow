@@ -1,4 +1,4 @@
-export type UniversitySlug = "numl" | "gcwuf";
+export type UniversitySlug = "numl" | "gcwuf" | "gcuf_arts" | "gcuf_eng";
 
 export interface University {
 	id: string;
@@ -23,15 +23,32 @@ export const UNIVERSITIES: Record<UniversitySlug, University> = {
 		fullName: "GC University for Women Faisalabad",
 		description: "Quality points table system",
 	},
+	gcuf_arts: {
+		id: "gcuf_arts",
+		name: "GCUF (Arts / General)",
+		slug: "gcuf_arts",
+		fullName: "GC University Faisalabad",
+		description: "Undergrad general / arts. Decimal marks round UP.",
+	},
+	gcuf_eng: {
+		id: "gcuf_eng",
+		name: "GCUF (Engineering / Pharm-D)",
+		slug: "gcuf_eng",
+		fullName: "GC University Faisalabad",
+		description: "Undergrad engineering. Pass >= 55% only.",
+	},
 };
 
 export type LetterGrade =
 	| "A+"
 	| "A"
+	| "A-"
 	| "B+"
 	| "B"
+	| "B-"
 	| "C+"
 	| "C"
+	| "C-"
 	| "D+"
 	| "D"
 	| "F";

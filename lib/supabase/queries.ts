@@ -16,7 +16,12 @@ async function getUserUniversity(): Promise<UniversitySlug> {
 	const user = await getUser();
 	const university = user?.user_metadata?.university;
 
-	if (university === "gcwuf" || university === "numl") {
+	if (
+		university === "gcwuf" ||
+		university === "numl" ||
+		university === "gcuf_arts" ||
+		university === "gcuf_eng"
+	) {
 		return university;
 	}
 

@@ -26,6 +26,12 @@ export function Navigation() {
 
 					<div className="hidden sm:flex items-center gap-3">
 						<Link
+							href="/supported-universities"
+							className="text-sm font-bold text-slate-500 hover:text-slate-900 transition-colors px-3 py-1.5"
+						>
+							Universities
+						</Link>
+						<Link
 							href="/login"
 							className="text-sm font-bold text-slate-500 hover:text-slate-900 transition-colors px-3 py-1.5"
 						>
@@ -64,7 +70,14 @@ export function Navigation() {
 				{/* Mobile Menu Drawer (Inline Expansion) */}
 				<div className="t-acc-panel sm:hidden">
 					<div className="t-acc-panel-inner">
-						<div className="mt-3.5 pt-3.5 border-t border-slate-100/90">
+						<div className="mt-3.5 pt-3.5 border-t border-slate-100/90 space-y-3">
+							<Link
+								href="/supported-universities"
+								onClick={() => setIsOpen(false)}
+								className="block text-center py-2 text-sm font-bold text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-xl transition-all"
+							>
+								Supported Universities
+							</Link>
 							<div className="flex items-center justify-between gap-3 pt-0.5">
 								<Link
 									href="/login"
