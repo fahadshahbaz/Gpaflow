@@ -183,7 +183,7 @@ export default function SupportedUniversitiesPage() {
 								</div>
 
 								{/* Collapsible Content */}
-								<div className="t-acc-panel">
+								<div className="t-acc-panel overflow-hidden">
 									<div className="t-acc-panel-inner p-4 sm:p-6 border-t border-slate-100/90 bg-slate-50/20 space-y-6">
 										{/* Rules Grid */}
 										<div className="grid grid-cols-1 sm:grid-cols-3 gap-4">

@@ -401,6 +401,7 @@
 	}
 	.t-acc-panel-inner {
 		overflow: hidden;
+		min-height: 0;
 		opacity: 0;
 		transition: opacity var(--acc-collapse) var(--acc-ease);
 	}
