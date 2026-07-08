@@ -171,11 +171,11 @@ export default function SupportedUniversitiesPage() {
 									<div className="space-y-1 pr-4">
 										<h2 className="text-base font-semibold text-slate-900 flex items-center gap-2">
 											{uni.name}
-											{uni.isNew && (
+											{uni.isNew ? (
 												<span className="text-[9px] font-bold text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded-md border border-blue-100 uppercase tracking-wider">
 													New
 												</span>
-											)}
+											) : null}
 										</h2>
 										<p className="text-xs text-slate-400">{uni.description}</p>
 									</div>
