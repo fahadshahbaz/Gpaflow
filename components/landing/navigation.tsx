@@ -24,19 +24,21 @@ export function Navigation() {
 				<div className="flex items-center justify-between">
 					<Logo size="sm" href="/" />
 
-					<div className="hidden sm:flex items-center gap-3">
-						<Link
-							href="/supported-universities"
-							className="text-sm font-bold text-slate-500 hover:text-slate-900 transition-colors px-3 py-1.5"
-						>
-							Universities
-						</Link>
-						<Link
-							href="/login"
-							className="text-sm font-bold text-slate-500 hover:text-slate-900 transition-colors px-3 py-1.5"
-						>
-							Log in
-						</Link>
+					<div className="hidden sm:flex items-center gap-5">
+						<div className="flex items-center gap-1.5">
+							<Link
+								href="/supported-universities"
+								className="text-sm font-bold text-slate-500 hover:text-slate-900 transition-colors px-2 py-1.5"
+							>
+								Universities
+							</Link>
+							<Link
+								href="/login"
+								className="text-sm font-bold text-slate-500 hover:text-slate-900 transition-colors px-2 py-1.5"
+							>
+								Log in
+							</Link>
+						</div>
 						<Button
 							asChild
 							variant="skeuoPrimary"

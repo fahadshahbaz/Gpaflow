@@ -147,14 +147,15 @@ export default function SupportedUniversitiesPage() {
 
 				{/* Accordion List */}
 				<div className="space-y-4 border-t border-slate-100 pt-8">
-					{POLICIES.map((uni) => {
+					{POLICIES.map((uni, idx) => {
 						const isOpen = openSlug === uni.slug;
 
 						return (
 							<article
 								key={uni.slug}
 								data-open={isOpen ? "true" : "false"}
-								className="t-acc card-skeuo rounded-2xl overflow-hidden mb-3"
+								className="t-acc t-stagger-item card-skeuo rounded-2xl overflow-hidden mb-3"
+								style={{ animationDelay: `${idx * 40}ms` }}
 							>
 								{/* Trigger Header */}
 								<div
