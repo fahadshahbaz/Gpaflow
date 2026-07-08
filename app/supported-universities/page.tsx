@@ -154,13 +154,19 @@ export default function SupportedUniversitiesPage() {
 							<article
 								key={uni.slug}
 								data-open={isOpen ? "true" : "false"}
-								className="t-acc bg-white border border-slate-200/60 rounded-2xl overflow-hidden shadow-sm"
+								className="t-acc card-skeuo rounded-2xl overflow-hidden mb-3"
 							>
-								{/* Trigger Button */}
-								<button
-									type="button"
+								{/* Trigger Header */}
+								<div
 									onClick={() => toggleAccordion(uni.slug)}
-									className="w-full flex items-center justify-between p-6 text-left cursor-pointer"
+									onKeyDown={(e) => {
+										if (e.key === "Enter" || e.key === " ") {
+											toggleAccordion(uni.slug);
+										}
+									}}
+									role="button"
+									tabIndex={0}
+									className="flex items-center justify-between p-4 sm:p-5 cursor-pointer select-none"
 								>
 									<div className="space-y-1 pr-4">
 										<h2 className="text-base font-semibold text-slate-900 flex items-center gap-2">
@@ -173,77 +179,71 @@ export default function SupportedUniversitiesPage() {
 										</h2>
 										<p className="text-xs text-slate-400">{uni.description}</p>
 									</div>
-									<span className="t-acc-chevron text-slate-400">
-										<ChevronDown className="h-5 w-5" />
-									</span>
-								</button>
+									<ChevronDown className="t-acc-chevron h-4.5 w-4.5 text-gray-400" />
+								</div>
 
 								{/* Collapsible Content */}
 								<div className="t-acc-panel">
-									<div className="t-acc-panel-inner">
-										<div className="border-t border-slate-100 p-6 bg-slate-50/30 space-y-6">
-											{/* Rules Grid */}
-											<div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-												<div className="bg-white border border-slate-100 rounded-xl p-4 shadow-[0_1px_2px_rgba(0,0,0,0.01)]">
-													<span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block mb-1">
-														Passing Mark
-													</span>
-													<span className="text-sm font-medium text-slate-800">
-														{uni.passMark}
-													</span>
-												</div>
-												<div className="bg-white border border-slate-100 rounded-xl p-4 shadow-[0_1px_2px_rgba(0,0,0,0.01)]">
-													<span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block mb-1">
-														Rounding Policy
-													</span>
-													<span className="text-sm font-medium text-slate-800">
-														{uni.rounding}
-													</span>
-												</div>
-												<div className="bg-white border border-slate-100 rounded-xl p-4 shadow-[0_1px_2px_rgba(0,0,0,0.01)]">
-													<span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block mb-1">
-														Engine Strategy
-													</span>
-													<span className="text-sm font-medium text-slate-800">
-														{uni.calculation}
-													</span>
-												</div>
-											</div>
-
-											{/* Grade Table */}
-											<div className="space-y-3">
-												<span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block pl-1">
-													Grade Point Equivalents
+									<div className="t-acc-panel-inner p-4 sm:p-6 border-t border-slate-100/90 bg-slate-50/20 space-y-6">
+										{/* Rules Grid */}
+										<div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+											<div className="bg-white border border-slate-100 rounded-xl p-4 shadow-[0_1px_2px_rgba(0,0,0,0.01)]">
+												<span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block mb-1">
+													Passing Mark
 												</span>
-												<div className="bg-white border border-slate-100 rounded-xl overflow-hidden shadow-[0_1px_2px_rgba(0,0,0,0.01)]">
-													<table className="w-full text-left text-xs border-collapse">
-														<thead>
-															<tr className="bg-slate-50 border-b border-slate-100 text-slate-400 font-semibold uppercase tracking-wider">
-																<th className="py-2.5 px-4">Grade</th>
-																<th className="py-2.5 px-4">Marks Range</th>
-																<th className="py-2.5 px-4">
-																	Grade Point (GP)
-																</th>
+												<span className="text-sm font-medium text-slate-800">
+													{uni.passMark}
+												</span>
+											</div>
+											<div className="bg-white border border-slate-100 rounded-xl p-4 shadow-[0_1px_2px_rgba(0,0,0,0.01)]">
+												<span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block mb-1">
+													Rounding Policy
+												</span>
+												<span className="text-sm font-medium text-slate-800">
+													{uni.rounding}
+												</span>
+											</div>
+											<div className="bg-white border border-slate-100 rounded-xl p-4 shadow-[0_1px_2px_rgba(0,0,0,0.01)]">
+												<span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block mb-1">
+													Engine Strategy
+												</span>
+												<span className="text-sm font-medium text-slate-800">
+													{uni.calculation}
+												</span>
+											</div>
+										</div>
+
+										{/* Grade Table */}
+										<div className="space-y-3">
+											<span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block pl-1">
+												Grade Point Equivalents
+											</span>
+											<div className="bg-white border border-slate-100 rounded-xl overflow-hidden shadow-[0_1px_2px_rgba(0,0,0,0.01)]">
+												<table className="w-full text-left text-xs border-collapse">
+													<thead>
+														<tr className="bg-slate-50 border-b border-slate-100 text-slate-400 font-semibold uppercase tracking-wider">
+															<th className="py-2.5 px-4">Grade</th>
+															<th className="py-2.5 px-4">Marks Range</th>
+															<th className="py-2.5 px-4">Grade Point (GP)</th>
+														</tr>
+													</thead>
+													<tbody className="divide-y divide-slate-100 text-slate-700">
+														{uni.gradeTable.map((row) => (
+															<tr
+																key={row.grade}
+																className="hover:bg-slate-50/20"
+															>
+																<td className="py-2 px-4 font-semibold text-slate-900">
+																	{row.grade}
+																</td>
+																<td className="py-2 px-4">{row.marks}</td>
+																<td className="py-2 px-4 font-mono tabular-nums">
+																	{row.gp}
+																</td>
 															</tr>
-														</thead>
-														<tbody className="divide-y divide-slate-100 text-slate-700">
-															{uni.gradeTable.map((row) => (
-																<tr
-																	key={row.grade}
-																	className="hover:bg-slate-50/20"
-																>
-																	<td className="py-2 px-4 font-semibold text-slate-900">
-																		{row.grade}
-																	</td>
-																	<td className="py-2 px-4">{row.marks}</td>
-																	<td className="py-2 px-4 font-mono tabular-nums">
-																		{row.gp}
-																	</td>
-																</tr>
-															))}
-														</tbody>
-													</table>
-												</div>
+														))}
+													</tbody>
+												</table>
 											</div>
 										</div>
 									</div>
