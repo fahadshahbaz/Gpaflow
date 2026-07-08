@@ -184,66 +184,70 @@ export default function SupportedUniversitiesPage() {
 
 								{/* Collapsible Content */}
 								<div className="t-acc-panel overflow-hidden">
-									<div className="t-acc-panel-inner p-4 sm:p-6 border-t border-slate-100/90 bg-slate-50/20 space-y-6">
-										{/* Rules Grid */}
-										<div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-											<div className="bg-white border border-slate-100 rounded-xl p-4 shadow-[0_1px_2px_rgba(0,0,0,0.01)]">
-												<span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block mb-1">
-													Passing Mark
-												</span>
-												<span className="text-sm font-medium text-slate-800">
-													{uni.passMark}
-												</span>
+									<div className="t-acc-panel-inner">
+										<div className="p-4 sm:p-6 border-t border-slate-100/90 bg-slate-50/20 space-y-6">
+											{/* Rules Grid */}
+											<div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+												<div className="bg-white border border-slate-100 rounded-xl p-4 shadow-[0_1px_2px_rgba(0,0,0,0.01)]">
+													<span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block mb-1">
+														Passing Mark
+													</span>
+													<span className="text-sm font-medium text-slate-800">
+														{uni.passMark}
+													</span>
+												</div>
+												<div className="bg-white border border-slate-100 rounded-xl p-4 shadow-[0_1px_2px_rgba(0,0,0,0.01)]">
+													<span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block mb-1">
+														Rounding Policy
+													</span>
+													<span className="text-sm font-medium text-slate-800">
+														{uni.rounding}
+													</span>
+												</div>
+												<div className="bg-white border border-slate-100 rounded-xl p-4 shadow-[0_1px_2px_rgba(0,0,0,0.01)]">
+													<span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block mb-1">
+														Engine Strategy
+													</span>
+													<span className="text-sm font-medium text-slate-800">
+														{uni.calculation}
+													</span>
+												</div>
 											</div>
-											<div className="bg-white border border-slate-100 rounded-xl p-4 shadow-[0_1px_2px_rgba(0,0,0,0.01)]">
-												<span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block mb-1">
-													Rounding Policy
-												</span>
-												<span className="text-sm font-medium text-slate-800">
-													{uni.rounding}
-												</span>
-											</div>
-											<div className="bg-white border border-slate-100 rounded-xl p-4 shadow-[0_1px_2px_rgba(0,0,0,0.01)]">
-												<span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block mb-1">
-													Engine Strategy
-												</span>
-												<span className="text-sm font-medium text-slate-800">
-													{uni.calculation}
-												</span>
-											</div>
-										</div>
 
-										{/* Grade Table */}
-										<div className="space-y-3">
-											<span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block pl-1">
-												Grade Point Equivalents
-											</span>
-											<div className="bg-white border border-slate-100 rounded-xl overflow-hidden shadow-[0_1px_2px_rgba(0,0,0,0.01)]">
-												<table className="w-full text-left text-xs border-collapse">
-													<thead>
-														<tr className="bg-slate-50 border-b border-slate-100 text-slate-400 font-semibold uppercase tracking-wider">
-															<th className="py-2.5 px-4">Grade</th>
-															<th className="py-2.5 px-4">Marks Range</th>
-															<th className="py-2.5 px-4">Grade Point (GP)</th>
-														</tr>
-													</thead>
-													<tbody className="divide-y divide-slate-100 text-slate-700">
-														{uni.gradeTable.map((row) => (
-															<tr
-																key={row.grade}
-																className="hover:bg-slate-50/20"
-															>
-																<td className="py-2 px-4 font-semibold text-slate-900">
-																	{row.grade}
-																</td>
-																<td className="py-2 px-4">{row.marks}</td>
-																<td className="py-2 px-4 font-mono tabular-nums">
-																	{row.gp}
-																</td>
+											{/* Grade Table */}
+											<div className="space-y-3">
+												<span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block pl-1">
+													Grade Point Equivalents
+												</span>
+												<div className="bg-white border border-slate-100 rounded-xl overflow-hidden shadow-[0_1px_2px_rgba(0,0,0,0.01)]">
+													<table className="w-full text-left text-xs border-collapse">
+														<thead>
+															<tr className="bg-slate-50 border-b border-slate-100 text-slate-400 font-semibold uppercase tracking-wider">
+																<th className="py-2.5 px-4">Grade</th>
+																<th className="py-2.5 px-4">Marks Range</th>
+																<th className="py-2.5 px-4">
+																	Grade Point (GP)
+																</th>
 															</tr>
-														))}
-													</tbody>
-												</table>
+														</thead>
+														<tbody className="divide-y divide-slate-100 text-slate-700">
+															{uni.gradeTable.map((row) => (
+																<tr
+																	key={row.grade}
+																	className="hover:bg-slate-50/20"
+																>
+																	<td className="py-2 px-4 font-semibold text-slate-900">
+																		{row.grade}
+																	</td>
+																	<td className="py-2 px-4">{row.marks}</td>
+																	<td className="py-2 px-4 font-mono tabular-nums">
+																		{row.gp}
+																	</td>
+																</tr>
+															))}
+														</tbody>
+													</table>
+												</div>
 											</div>
 										</div>
 									</div>
