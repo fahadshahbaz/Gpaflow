@@ -1,7 +1,10 @@
-# GPAFlow 📈
+<div align="center">
+  <img src="public/favicon.png" alt="GPAFlow logo" width="80" height="80" />
+  <h1>GPAFlow</h1>
+  <p>A high-performance, persistent academic dashboard built to track, calculate, and forecast your academic journey over 4 years.</p>
+</div>
 
-**Stop using complicated spreadsheets.** GPAFlow is a high-performance, persistent academic dashboard built to track your academic journey over 4 years, not just calculate it once.
-
+<br />
 
 ## Why GPAFlow?
 Most GPA calculators are "one-and-done." You enter marks, get a result, and it's gone. GPAFlow is different it's your long-term academic companion.
